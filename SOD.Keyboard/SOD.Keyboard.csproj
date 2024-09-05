@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="InputSimulatorStandard" Version="1.0.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
+    <PackageReference Include="ReactiveUI" Version="20.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SOD.Core\SOD.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="BackSpaceKey.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="EngKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="EnterKey.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Keyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="LetterKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="NumberKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="RusKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="SymbolKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="UpperLowerKey.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+
+</Project>

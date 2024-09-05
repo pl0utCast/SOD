@@ -1,0 +1,25 @@
+﻿<UserControl
+    x:Class="SOD.Keyboard.UpperLowerKey"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SOD.Keyboard"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}, Path=ToUpperLower}">
+        <Button.Resources>
+            <Style BasedOn="{StaticResource KeyboardButtonTool}" TargetType="Button">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}, Path=IsUpper}" Value="True">
+                        <Setter Property="Background" Value="Orange" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Button.Resources>
+        <materialDesign:PackIcon
+            Width="30"
+            Height="30"
+            Kind="AppleKeyboardShift" />
+    </Button>
+</UserControl>

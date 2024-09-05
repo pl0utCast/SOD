@@ -1,0 +1,72 @@
+﻿<UserControl
+    x:Class="SOD.Keyboard.RusKeyboard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SOD.Keyboard"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid x:Name="KeyGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Button Content="й" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="ц" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="у" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="к" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="е" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="н" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="г" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="ш" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="щ" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="з" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="х" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="ъ" Style="{StaticResource KeyboardButtonSymbol}" />
+            <local:BackSpaceKey />
+        </StackPanel>
+        <StackPanel
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Button Content="ф" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="ы" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="в" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="а" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="п" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="р" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="о" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="л" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="д" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="ж" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="э" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="э" Style="{StaticResource KeyboardButtonSymbol}" />
+            <local:EnterKey />
+
+        </StackPanel>
+        <StackPanel
+            Grid.Row="2"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <local:UpperLowerKey />
+            <Button Content="я" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="ч" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="с" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="м" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="и" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="т" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="ь" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="б" Style="{StaticResource KeyboardButtonSymbol}" />
+            <Button Content="ю" Style="{StaticResource KeyboardButtonSymbol}" />
+            <local:UpperLowerKey />
+        </StackPanel>
+
+    </Grid>
+</UserControl>
