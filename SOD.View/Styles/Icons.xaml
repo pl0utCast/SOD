@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <BitmapImage x:Key="TestingIcon" UriSource="pack://application:,,,/SOD.View;component/Resources/testIcon.png" />
+    <BitmapImage x:Key="ReportsIcon" UriSource="pack://application:,,,/SOD.View;component/Resources/reportIcon.gif" />
+    <BitmapImage x:Key="SettingsIcon" UriSource="pack://application:,,,/SOD.View;component/Resources/settingsicon.png" />
+    <BitmapImage x:Key="HelpIcon" UriSource="pack://application:,,,/SOD.View;component/Resources/helpicon.png" />
+    <BitmapImage x:Key="PowerIcon" UriSource="pack://application:,,,/SOD.View;component/Resources/powerIcon.png" />
+    <BitmapImage x:Key="ValveIcon" UriSource="pack://application:,,,/SOD.View;component/Resources/valveIcon.png" />
+    <BitmapImage x:Key="ErrorIcon" UriSource="pack://application:,,,/SOD.View;component/Resources/error.png" />
+    <BitmapImage x:Key="BlueBackgroundTheme" UriSource="pack://application:,,,/SOD.View;component/Resources/blue_background.jpg" />
+</ResourceDictionary>

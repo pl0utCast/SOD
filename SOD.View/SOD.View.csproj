@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\icon.ico" />
+    <None Remove="Resources\intro-logo_eng.png" />
+    <None Remove="Resources\REVALVE BY PKTBA splash EN.png" />
+    <None Remove="Resources\REVALVE BY PKTBA splash.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="akavache" Version="10.0.1" />
+    <PackageReference Include="Ninject" Version="3.3.6" />
+    <PackageReference Include="ReactiveUI" Version="20.1.1" />
+    <PackageReference Include="ReactiveUI.WPF" Version="20.1.1" />
+	<PackageReference Include="SciChart" Version="6.3.0.13476" />
+	<PackageReference Include="SciChart.DirectX" Version="6.3.0.13476" />
+  </ItemGroup>
+
+  <ItemGroup>
+  	<ProjectReference Include="..\SOD.App\SOD.App.csproj" />
+  	<ProjectReference Include="..\SOD.Dialogs\SOD.Dialogs.csproj" />
+  	<ProjectReference Include="..\SOD.Keyboard\SOD.Keyboard.csproj" />
+  	<ProjectReference Include="..\SOD.LocalizationService\SOD.LocalizationService.csproj" />
+  	<ProjectReference Include="..\SOD.Navigation\SOD.Navigation.csproj" />
+  	<ProjectReference Include="..\SOD.UserService\SOD.UserService.csproj" />
+  	<ProjectReference Include="..\SOD.ViewModels\SOD.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\icon.ico" />
+    <Resource Include="Resources\intro-logo_eng.png" />
+    <Resource Include="Resources\REVALVE BY PKTBA splash EN.png" />
+    <Resource Include="Resources\REVALVE BY PKTBA splash.png" />
+  </ItemGroup>
+</Project>

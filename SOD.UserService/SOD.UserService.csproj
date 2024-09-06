@@ -4,11 +4,11 @@
     <TargetFramework>net8.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
-    <PackageReference Include="ReactiveUI.Validation" Version="4.0.9" />
+    <ProjectReference Include="..\SOD.Core\SOD.Core.csproj" />
   </ItemGroup>
 
 </Project>

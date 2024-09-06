@@ -1,0 +1,293 @@
+﻿<UserControl
+    x:Class="SOD.View.Testing.CRSBench.FuncionalityTestingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lc="clr-namespace:SOD.LocalizationService;assembly=SOD.LocalizationService"
+    xmlns:local="clr-namespace:SOD.View.Testing.CRSBench"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+    xmlns:sensorsVm="clr-namespace:SOD.ViewModels.Testing.CRSBench.Sensors;assembly=SOD.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="PressureAxisStyle" TargetType="{x:Type s:NumericAxis}">
+            <Setter Property="MajorGridLineStyle">
+                <Setter.Value>
+                    <Style TargetType="Line">
+                        <Setter Property="Stroke" Value="Gray" />
+                        <Setter Property="Opacity" Value="1" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TickTextBrush" Value="Black" />
+        </Style>
+
+        <Style x:Key="TimeAxisStyle" TargetType="{x:Type s:TimeSpanAxis}">
+            <Setter Property="MajorGridLineStyle">
+                <Setter.Value>
+                    <Style TargetType="Line">
+                        <Setter Property="Stroke" Value="Gray" />
+                        <Setter Property="Opacity" Value="0.6" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TickTextBrush" Value="Black" />
+
+        </Style>
+        <Style x:Key="scrollbarStyle" TargetType="s:SciChartScrollbar">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Opacity="0.2" Color="White" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="GripsLength" Value="40" />
+            <Setter Property="GripsThickness" Value="20" />
+            <Setter Property="ViewportStyle">
+                <Setter.Value>
+                    <Style TargetType="Control">
+                        <Setter Property="Opacity" Value="0" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="NonSelectedAreaStyle">
+                <Setter.Value>
+                    <Style TargetType="Path">
+                        <Setter Property="Fill" Value="Gray" />
+                        <Setter Property="Opacity" Value="0.3" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <StackPanel
+            x:Name="topSp"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <materialDesign:Card Margin="2" Padding="5">
+                <StackPanel
+                    MinWidth="120"
+                    Margin="5"
+                    VerticalAlignment="Center">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="16"
+                        Opacity="0.6"
+                        Text="{lc:Localization Testing.CRSBench.OpenPressure}" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="30"
+                        Text="{Binding OpenPressure}" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="14"
+                        Text="{Binding OpenPressurePercent, StringFormat=\{0\} %}" />
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Margin="2" Padding="5">
+                <StackPanel
+                    MinWidth="120"
+                    Margin="5"
+                    VerticalAlignment="Center">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="16"
+                        Opacity="0.6"
+                        Text="{lc:Localization Testing.CRSBench.ClosePressure}" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="30"
+                        Text="{Binding ClosePressure}" />
+                    <TextBlock HorizontalAlignment="Center" FontSize="14" />
+                </StackPanel>
+            </materialDesign:Card>
+
+            <ItemsControl ItemsSource="{Binding Sensors}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.Resources>
+                    <DataTemplate DataType="{x:Type sensorsVm:PressureSensorViewModel}">
+                        <local:SensorView
+                            Height="{Binding ElementName=topSp, Path=ActualHeight}"
+                            SensorName="{lc:Localization Testing.CRSBench.Pressure}"
+                            ViewModel="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type sensorsVm:LeakageSensorViewModel}">
+                        <local:SensorView
+                            Height="{Binding ElementName=topSp, Path=ActualHeight}"
+                            SensorName="{lc:Localization Testing.CRSBench.Leakage}"
+                            ViewModel="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />
+                    </DataTemplate>
+                </ItemsControl.Resources>
+            </ItemsControl>
+            <local:TemperatureSensorsView DataContext="{Binding TemperatureSensors}" ViewModel="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />
+        </StackPanel>
+        <materialDesign:Card
+            Grid.Row="1"
+            Margin="5,5,10,5"
+            Padding="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="90*" />
+                    <RowDefinition Height="10*" />
+                </Grid.RowDefinitions>
+                <s:SciChartSurface
+                    x:Name="sciChartSurface"
+                    Annotations="{s:AnnotationsBinding Annotations}"
+                    Background="White"
+                    MouseLeftButtonDown="sciChartSurface_MouseLeftButtonUp"
+                    RenderableSeries="{s:SeriesBinding PressureSeries}"
+                    TouchDown="sciChartSurface_TouchDown"
+                    XAxes="{s:AxesBinding XAxes}"
+                    YAxes="{s:AxesBinding YAxes}" />
+                <s:SciChartOverview
+                    x:Name="sciChartOverview"
+                    Grid.Row="1"
+                    Margin="60,0,20,0"
+                    Background="White"
+                    DataSeries="{Binding PressureSerie}"
+                    ParentSurface="{Binding Source={x:Reference Name=sciChartSurface}}"
+                    ScrollbarStyle="{StaticResource scrollbarStyle}"
+                    SelectedRange="{Binding ElementName=sciChartSurface, Path=XAxis.VisibleRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <s:SciChartOverview.RenderableSeriesStyle>
+                        <Style TargetType="s:FastMountainRenderableSeries">
+                            <Setter Property="Fill" Value="White" />
+                            <Setter Property="DataSeries" Value="{Binding ElementName=sciChartOverview, Path=DataSeries}" />
+                            <Setter Property="Stroke" Value="Red" />
+                        </Style>
+                    </s:SciChartOverview.RenderableSeriesStyle>
+                </s:SciChartOverview>
+            </Grid>
+
+        </materialDesign:Card>
+
+        <!--
+            s:RenderSurfaceExtensions.RenderSurfaceType="HighQuality"
+            s:VisualXcceleratorEngine.DowngradeWithoutException="False"
+            s:VisualXcceleratorEngine.EnableImpossibleMode="True"
+            s:VisualXcceleratorEngine.FallbackType="{x:Type s:HighQualityRenderSurface}"
+            s:VisualXcceleratorEngine.IsEnabled="True"
+        -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button
+                Width="100"
+                Height="100"
+                Margin="2"
+                HorizontalAlignment="Left"
+                Command="{Binding StartTest}">
+                <Button.Style>
+                    <Style BasedOn="{StaticResource MaterialDesignFlatButton}" TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsRunTest}" Value="False">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <StackPanel>
+                                            <materialDesign:PackIcon
+                                                Width="60"
+                                                Height="60"
+                                                HorizontalAlignment="Center"
+                                                Kind="Play" />
+                                            <TextBlock HorizontalAlignment="Center" Text="{lc:Localization Testing.CRSBench.Start}" />
+                                        </StackPanel>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsRunTest}" Value="True">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <StackPanel>
+                                            <materialDesign:PackIcon
+                                                Width="60"
+                                                Height="60"
+                                                HorizontalAlignment="Center"
+                                                Kind="Stop" />
+                                            <TextBlock HorizontalAlignment="Center" Text="{lc:Localization Testing.CRSBench.Stop}" />
+                                        </StackPanel>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button
+                Height="100"
+                Margin="2"
+                HorizontalAlignment="Left"
+                Command="{Binding GoParameters}"
+                Style="{StaticResource MaterialDesignFlatButton}">
+                <StackPanel>
+                    <materialDesign:PackIcon
+                        Width="60"
+                        Height="60"
+                        HorizontalAlignment="Center"
+                        Kind="PlaylistEdit" />
+                    <TextBlock HorizontalAlignment="Center" Text="{lc:Localization Testing.CRSBench.Parameters}" />
+                </StackPanel>
+            </Button>
+            <Button
+                Height="100"
+                Margin="2"
+                HorizontalAlignment="Left"
+                Command="{Binding Result}"
+                Style="{StaticResource MaterialDesignFlatButton}">
+                <StackPanel>
+                    <materialDesign:PackIcon
+                        Width="60"
+                        Height="60"
+                        HorizontalAlignment="Center"
+                        Kind="CheckboxMarkedOutline" />
+                    <TextBlock HorizontalAlignment="Center" Text="{lc:Localization Testing.CRSBench.Result}" />
+                </StackPanel>
+            </Button>
+            <StackPanel VerticalAlignment="Center">
+                <StackPanel Margin="0,5" Orientation="Horizontal">
+                    <ToggleButton
+                        Width="40"
+                        Height="40"
+                        VerticalAlignment="Center"
+                        IsChecked="{Binding IsSelectOpenPoint}"
+                        Style="{StaticResource MaterialDesignActionAccentToggleButton}">
+                        <ToggleButton.Content>
+                            <materialDesign:PackIcon Kind="VectorPoint" />
+                        </ToggleButton.Content>
+                    </ToggleButton>
+                    <TextBlock
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="{lc:Localization Testing.CRSBench.SelectOpenPoint}" />
+                </StackPanel>
+                <StackPanel Margin="0,5" Orientation="Horizontal">
+                    <ToggleButton
+                        Width="40"
+                        Height="40"
+                        VerticalAlignment="Center"
+                        IsChecked="{Binding IsSelectClosePoint}"
+                        Style="{StaticResource MaterialDesignActionAccentToggleButton}">
+                        <ToggleButton.Content>
+                            <materialDesign:PackIcon Kind="VectorPoint" />
+                        </ToggleButton.Content>
+                    </ToggleButton>
+                    <TextBlock
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="{lc:Localization Testing.CRSBench.SelectClosePoint}" />
+                </StackPanel>
+            </StackPanel>
+
+
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JsonNet.PrivateSettersContractResolvers" Version="1.0.0" />
+    <PackageReference Include="MemBus" Version="4.0.1" />
+    <PackageReference Include="Ninject" Version="3.3.6" />
+    <PackageReference Include="NLua" Version="1.7.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SOD.Core\SOD.Core.csproj" />
+    <ProjectReference Include="..\SOD.Dialogs\SOD.Dialogs.csproj" />
+    <ProjectReference Include="..\SOD.LocalizationService\SOD.LocalizationService.csproj" />
+    <ProjectReference Include="..\SOD.Localization\SOD.Localization.csproj" />
+  </ItemGroup>
+
+</Project>

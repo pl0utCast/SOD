@@ -1,0 +1,138 @@
+﻿<UserControl
+    x:Class="SOD.View.Controls.PropertyView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controlsVM="clr-namespace:SOD.ViewModels.Controls;assembly=SOD.ViewModels"
+    xmlns:converters="clr-namespace:SOD.View.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SOD.View.Controls"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:TranslatePrefixConverter x:Key="TranslatePrefixConverter"/>
+    </UserControl.Resources>
+    <ContentPresenter Content="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:PropertyView}}, Path=DataContext}">
+        <ContentPresenter.Resources>
+            <DataTemplate DataType="{x:Type controlsVM:UnitValueViewModel}">
+                <local:UnitValueView
+                    Margin="10"
+                    VerticalAlignment="Top">
+                    <local:UnitValueView.FieldName>
+                            <MultiBinding Converter="{StaticResource TranslatePrefixConverter}">
+                                <Binding Path="Prefix"/>
+                                <Binding Path="Name"/>
+                            </MultiBinding>
+                    </local:UnitValueView.FieldName>
+                </local:UnitValueView>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type controlsVM:PressureClassViewModel}">
+                <local:NamedComboBox
+                    Margin="10"
+                    VerticalAlignment="Top">
+                    <local:NamedComboBox.FieldName>
+                        <MultiBinding Converter="{StaticResource TranslatePrefixConverter}">
+                            <Binding Path="Prefix"/>
+                            <Binding Path="Name"/>
+                        </MultiBinding>
+                    </local:NamedComboBox.FieldName>
+                </local:NamedComboBox>
+
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type controlsVM:NpsViewModel}">
+                <local:NamedComboBox
+                    Margin="10"
+                    VerticalAlignment="Top">
+                    <local:NamedComboBox.FieldName>
+                        <MultiBinding Converter="{StaticResource TranslatePrefixConverter}">
+                            <Binding Path="Prefix"/>
+                            <Binding Path="Name"/>
+                        </MultiBinding>
+                    </local:NamedComboBox.FieldName>
+                </local:NamedComboBox>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type controlsVM:StringValueViewModel}">
+                <local:SimpleValueView
+                    Margin="10"
+                    VerticalAlignment="Top">
+                    <local:SimpleValueView.FieldName>
+                        <MultiBinding Converter="{StaticResource TranslatePrefixConverter}">
+                            <Binding Path="Prefix"/>
+                            <Binding Path="Name"/>
+                        </MultiBinding>
+                    </local:SimpleValueView.FieldName>
+                </local:SimpleValueView>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type controlsVM:DoubleValueViewModel}">
+                <local:SimpleValueView
+                    Margin="10"
+                    VerticalAlignment="Top">
+                    <local:SimpleValueView.FieldName>
+                        <MultiBinding Converter="{StaticResource TranslatePrefixConverter}">
+                            <Binding Path="Prefix"/>
+                            <Binding Path="Name"/>
+                        </MultiBinding>
+                    </local:SimpleValueView.FieldName>
+                </local:SimpleValueView>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type controlsVM:IntegerValueViewModel}">
+                <local:SimpleValueView
+                    Margin="10"
+                    VerticalAlignment="Top">
+                    <local:SimpleValueView.FieldName>
+                        <MultiBinding Converter="{StaticResource TranslatePrefixConverter}">
+                            <Binding Path="Prefix"/>
+                            <Binding Path="Name"/>
+                        </MultiBinding>
+                    </local:SimpleValueView.FieldName>
+                </local:SimpleValueView>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type controlsVM:EditableComboBoxViewModel}">
+                <local:EditableComboBox
+                    Margin="10"
+                    VerticalAlignment="Top"
+                    ItemsSource="{Binding Items}"
+                    Selected="{Binding SelectedValue, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                    <local:EditableComboBox.Hint>
+                        <MultiBinding Converter="{StaticResource TranslatePrefixConverter}">
+                            <Binding Path="Prefix"/>
+                            <Binding Path="Name"/>
+                        </MultiBinding>
+                    </local:EditableComboBox.Hint>
+                </local:EditableComboBox>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type controlsVM:SealTypeValueViewModel}">
+                <ComboBox
+                    Margin="10"
+                    VerticalAlignment="Top"
+                    FontSize="24"
+                    ItemsSource="{Binding Source={converters:SealTypeConverter}, Path=Types}"
+                    SelectedValue="{Binding Value, Converter={converters:SealTypeConverter}}"
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                    <materialDesign:HintAssist.Hint>
+                        <MultiBinding Converter="{StaticResource TranslatePrefixConverter}">
+                            <Binding Path="Prefix"/>
+                            <Binding Path="Name"/>
+                        </MultiBinding>
+                    </materialDesign:HintAssist.Hint>
+                </ComboBox>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type controlsVM:TestMediumValueViewModel}">
+                <ComboBox
+                    Margin="10"
+                    VerticalAlignment="Top"
+                    FontSize="24"
+                    ItemsSource="{Binding Source={converters:TestMediumTypeConverter}, Path=Types}"
+                    SelectedValue="{Binding Value, Converter={converters:TestMediumTypeConverter}}"
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                    <materialDesign:HintAssist.Hint>
+                        <MultiBinding Converter="{StaticResource TranslatePrefixConverter}">
+                            <Binding Path="Prefix"/>
+                            <Binding Path="Name"/>
+                        </MultiBinding>
+                    </materialDesign:HintAssist.Hint>
+                </ComboBox>
+            </DataTemplate>
+        </ContentPresenter.Resources>
+    </ContentPresenter>
+</UserControl>

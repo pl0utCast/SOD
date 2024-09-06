@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MemBus" Version="4.0.1" />
+    <PackageReference Include="ReactiveUI" Version="20.1.1" />
+    <PackageReference Include="ReactiveUI.WPF" Version="20.1.1" />
+	  <PackageReference Include="SciChart" Version="6.3.0.13476" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SOD.App\SOD.App.csproj" />
+    <ProjectReference Include="..\SOD.Core\SOD.Core.csproj" />
+    <ProjectReference Include="..\SOD.Dialogs\SOD.Dialogs.csproj" />
+    <ProjectReference Include="..\SOD.Keyboard\SOD.Keyboard.csproj" />
+    <ProjectReference Include="..\SOD.Navigation\SOD.Navigation.csproj" />
+    <ProjectReference Include="..\SOD.UserService\SOD.UserService.csproj" />
+  </ItemGroup>
+
+</Project>

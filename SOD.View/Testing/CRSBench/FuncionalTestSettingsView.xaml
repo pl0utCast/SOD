@@ -1,0 +1,48 @@
+﻿<UserControl
+    x:Class="SOD.View.Testing.CRSBench.FuncionalTestSettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:SOD.View.Controls"
+    xmlns:converters="clr-namespace:SOD.View.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lc="clr-namespace:SOD.LocalizationService;assembly=SOD.LocalizationService"
+    xmlns:local="clr-namespace:SOD.View.Testing.CRSBench"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <StackPanel>
+        <ComboBox
+            Height="60"
+            materialDesign:HintAssist.Hint="{lc:Localization Testing.CRSBench.TestSettings.Ambient}"
+            FontSize="24"
+            ItemsSource="{Binding Source={converters:MediumTypeConverter}, Path=Types}"
+            SelectedValue="{Binding Medium, Converter={converters:MediumTypeConverter}}"
+            Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+        <ComboBox
+            Height="60"
+            materialDesign:HintAssist.Hint="{lc:Localization Testing.CRSBench.TestSettings.PressureSensor}"
+            DisplayMemberPath="Name"
+            FontSize="24"
+            ItemsSource="{Binding PressureSensors}"
+            SelectedValue="{Binding PressureSensor}"
+            Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+        <ComboBox
+            Height="60"
+            materialDesign:HintAssist.Hint="{lc:Localization Testing.CRSBench.TestSettings.Standart}"
+            DisplayMemberPath="Name"
+            FontSize="24"
+            ItemsSource="{Binding Standarts}"
+            SelectedValue="{Binding Standart}"
+            Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+
+
+        <controls:UnitValueView
+            DataContext="{Binding SetPressure}"
+            FieldName="{lc:Localization Testing.CRSBench.TestSettings.ExpectedSetPressure}"
+            Visibility="{Binding ElementName=useSetPressureValueCb, Path=IsChecked, Converter={StaticResource InverseBoolToVisConverter}}" />
+        <StackPanel Margin="0,5" Orientation="Horizontal">
+            <ToggleButton x:Name="useSetPressureValueCb" IsChecked="{Binding UseValveSetPressure, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock FontSize="16" Text="{lc:Localization Testing.CRSBench.TestSettings.UseValveSetPressure}" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

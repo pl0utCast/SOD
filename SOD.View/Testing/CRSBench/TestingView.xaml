@@ -1,0 +1,22 @@
+﻿<UserControl
+    x:Class="SOD.View.Testing.CRSBench.TestingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SOD.View.Testing.CRSBench"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:testingVm="clr-namespace:SOD.ViewModels.Testing.CRSBench;assembly=SOD.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <ContentPresenter Content="{Binding Test}">
+        <ContentPresenter.Resources>
+            <DataTemplate DataType="{x:Type testingVm:DefaultTestingViewModel}">
+                <local:DefaultTestingView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type testingVm:FuncionalityTestViewModel}">
+                <local:FuncionalityTestingView />
+            </DataTemplate>
+        </ContentPresenter.Resources>
+    </ContentPresenter>
+</UserControl>

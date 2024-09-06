@@ -1,0 +1,29 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:keyboard="clr-namespace:SOD.Keyboard;assembly=SOD.Keyboard"
+    xmlns:local="clr-namespace:SOD.View.Styles">
+    <Style
+        x:Key="KeyboardButton"
+        BasedOn="{StaticResource MaterialDesignRaisedButton}"
+        TargetType="{x:Type Button}">
+        <Setter Property="Margin" Value="5" />
+    </Style>
+    <Style
+        x:Key="KeyboardButtonSymbol"
+        BasedOn="{StaticResource KeyboardButton}"
+        TargetType="{x:Type Button}">
+        <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content}" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type keyboard:Keyboard}}, Path=EnterKey}" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+    <Style
+        x:Key="KeyboardButtonTool"
+        BasedOn="{StaticResource KeyboardButton}"
+        TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Width" Value="80" />
+    </Style>
+</ResourceDictionary>
