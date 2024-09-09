@@ -276,7 +276,7 @@ namespace SOD.ViewModels.Testing.CRSBench
         private void UpdateSensors()
         {
             yPressureAxis.AxisTitle = localizationService["Testing.CRSBench.Pressure"] +
-                " (" + UnitsNet.UnitAbbreviationsCache.Default.GetDefaultAbbreviation(typeof(PressureUnit), (int)_bench.Settings.PressureUnit) + ")";
+                " (" + UnitsNetSetup.Default.UnitAbbreviations.GetDefaultAbbreviation(typeof(PressureUnit), (int)_bench.Settings.PressureUnit) + ")";
             Sensors.Clear();
             foreach (var post in _bench.Posts)
             {

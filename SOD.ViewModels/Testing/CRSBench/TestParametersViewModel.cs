@@ -88,6 +88,7 @@ namespace SOD.ViewModels.Testing.CRSBench
                 }
 
                 SelectedTest?.Save();
+                bench.UpdatePosts();
 
                 foreach (var param in parameters)
                 {

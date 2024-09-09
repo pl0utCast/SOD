@@ -21,6 +21,8 @@
 
   <ItemGroup>
     <PackageReference Include="akavache" Version="10.0.1" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
+    <PackageReference Include="MaterialDesignThemes.Wpf" Version="1.0.1" />
     <PackageReference Include="Ninject" Version="3.3.6" />
     <PackageReference Include="ReactiveUI" Version="20.1.1" />
     <PackageReference Include="ReactiveUI.WPF" Version="20.1.1" />

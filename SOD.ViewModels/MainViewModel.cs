@@ -53,14 +53,7 @@ namespace SOD.ViewModels
 
             IsAuth = true;
             navigationService.NavigateTo("Testing");
-            if (testBenchService.GetTestBench().Type == BenchesType.MultiPost)
-            {
-                navigationService.NavigateTo("MultiPostTest");
-            }
-            else if (testBenchService.GetTestBench().Type == BenchesType.CRS)
-            {
-                navigationService.NavigateTo("CRSTest");
-            }
+            navigationService.NavigateTo("CRSTest");
 
             Enter = ReactiveCommand.Create(() =>
             {
@@ -68,14 +61,7 @@ namespace SOD.ViewModels
                 {
                     IsAuth = true;
                     navigationService.NavigateTo("Testing");
-                    if (testBenchService.GetTestBench().Type == BenchesType.MultiPost)
-                    {
-                        navigationService.NavigateTo("MultiPostTest");
-                    }
-                    else if (testBenchService.GetTestBench().Type == BenchesType.CRS)
-                    {
-                        navigationService.NavigateTo("CRSTest");
-                    }
+                    navigationService.NavigateTo("CRSTest");
                 }
                 else
                 {

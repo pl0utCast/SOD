@@ -42,19 +42,17 @@ namespace SOD.App.Benches
             this.localizationService = localizationService;
             LoadSettings();
         }
-        
+
         public ITestBench GetTestBench()
         {
             switch (Settings.BenchType)
             {
                 case BenchesType.CRS:
+                    if (crsBench == null)
                     {
-                        if (crsBench == null)
-                        {
-                            crsBench = new CRSBench.Bench(_settingsService, _sensorService, _testingService, _bus, _reportService, localizationService);
-                        }
-                        return crsBench;
+                        crsBench = new CRSBench.Bench(_settingsService, _sensorService, _testingService, _bus, _reportService, localizationService);
                     }
+                    return crsBench;
                 default: return null;
             }
         }
@@ -63,7 +61,7 @@ namespace SOD.App.Benches
 
         public void LoadSettings()
         {
-           Settings = _settingsService.GetSettings<Settings>(SETTINGS_KEY, new Settings());
+            Settings = _settingsService.GetSettings<Settings>(SETTINGS_KEY, new Settings());
         }
 
         public void SaveSettings()

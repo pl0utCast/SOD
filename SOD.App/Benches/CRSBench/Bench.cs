@@ -40,7 +40,8 @@ namespace SOD.App.Benches.CRSBench
             _reportService = reportService;
             _localizationService = localizationService;
             Settings = settingsService?.GetSettings<Settings>(settingsKey, new Settings());
-            
+
+            UpdatePosts();
             UpdateReport();
 
             bus.Subscribe<App.Messages.Reports.ReportSaveMessage>(m =>
@@ -129,6 +130,21 @@ namespace SOD.App.Benches.CRSBench
             registrationTimer?.Dispose();
             currentTest?.Stop();
             currentTest?.CalculateResult();
+        }
+
+        public void UpdatePosts()
+        {
+            posts.Clear();
+            var post = new Post(1);
+            post.IsEnable = true;
+            post.Sensors.AddRange(_sensorService.GetAllSensors()
+                                                .Where(s => s.Id == Settings.SelectedTestSettings.PressureSensorId)
+                                                .Select(s => new BenchSensor(s)));
+
+            post.Sensors.AddRange(_sensorService.GetAllSensors()
+                                                .Where(s => s.Id == Settings.SelectedTestSettings.LeakageSensorId)
+                                                .Select(s => new BenchSensor(s)));
+            posts.Add(post);
         }
 
         public void UpdateReport(Bitmap chart=null)

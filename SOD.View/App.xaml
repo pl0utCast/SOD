@@ -13,14 +13,14 @@
                 <materialDesign:BundledTheme
                     BaseTheme="Light"
                     PrimaryColor="Indigo"
-                    SecondaryColor="Lime" />
-                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />-->
+                    SecondaryColor="LightBlue" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Grey.Named.xaml" />
                 <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/Generic.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/MaterialDesignLightTheme.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/MaterialDesignLightTheme.xaml" />-->
                 <ResourceDictionary Source="pack://application:,,,/SOD.View;component/Styles/Icons.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/SOD.View;component/Styles/Keyboard.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/SOD.View;component/Styles/BorderlessButton.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/SOD.View;component/Styles/BorderlessButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

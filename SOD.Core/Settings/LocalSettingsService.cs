@@ -65,28 +65,29 @@ namespace SOD.Core.Settings
             var attributes = typeof(TSettings).GetCustomAttributes().ToArray();
             if (attributes.Count() == 0) return defaultValue;
 
-            switch (attributes[0])
+            foreach (var attribute in attributes)
             {
-                case DeviceSettingsAttribute deviceSettingsAttribute:
+                switch (attribute)
+                {
+                    case DeviceSettingsAttribute:
                     {
                         var settings = GetSettings<TSettings>(settingsKey, deviceSettingsDic);
                         if (settings == null) break;
                         return settings;
                     }
-                case SensorSettingsAttribute sensorSettingsAttribute:
+                    case SensorSettingsAttribute:
                     {
                         var settings = GetSettings<TSettings>(settingsKey, sensorSettingsDic);
                         if (settings == null) break;
                         return settings;
                     }
-                case ApplicationSettingsAttribute applicationSettingsAttribute:
+                    case ApplicationSettingsAttribute:
                     {
                         var settings = GetSettings<TSettings>(settingsKey, applicationSettingsDic);
                         if (settings == null) break;
                         return settings;
                     }
-                default:
-                    return defaultValue;
+                }
             }
             return defaultValue;
         }

@@ -11,7 +11,7 @@
     <materialDesign:Card
         Margin="2"
         Padding="5"
-        Visibility="{Binding IsEnable, Converter={StaticResource boolToVisibilityConverter}}">
+        Visibility="{Binding IsEnable, Converter={StaticResource BooleanToVisibilityConverter}}">
 
         <StackPanel VerticalAlignment="Center">
             <TextBlock
@@ -20,26 +20,26 @@
                 FontSize="16"
                 Opacity="0.6"
                 Text="{lc:Localization Testing.CRSBench.TempWater}"
-                Visibility="{Binding LiquidTemp, Converter={StaticResource notNullToVisibileConverter}}" />
+                Visibility="{Binding LiquidTemp, Converter={StaticResource NotZeroToVisibilityConverter}}" />
             <TextBlock
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="15"
                 Text="{Binding LiquidTemp}"
-                Visibility="{Binding LiquidTemp, Converter={StaticResource notNullToVisibileConverter}}" />
+                Visibility="{Binding LiquidTemp, Converter={StaticResource NotZeroToVisibilityConverter}}" />
             <TextBlock
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="16"
                 Opacity="0.6"
                 Text="{lc:Localization Testing.CRSBench.TempAir}"
-                Visibility="{Binding GasTemp, Converter={StaticResource notNullToVisibileConverter}}" />
+                Visibility="{Binding GasTemp, Converter={StaticResource NotZeroToVisibilityConverter}}" />
             <TextBlock
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="15"
                 Text="{Binding GasTemp}"
-                Visibility="{Binding GasTemp, Converter={StaticResource notNullToVisibileConverter}}" />
+                Visibility="{Binding GasTemp, Converter={StaticResource NotZeroToVisibilityConverter}}" />
         </StackPanel>
 
     </materialDesign:Card>

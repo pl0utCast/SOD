@@ -10,11 +10,11 @@ using ReactiveUI.Fody.Helpers;
 using System.Reactive.Disposables;
 using SOD.Core.Sensor;
 using SOD.App.Mediums;
+using ReactiveUI.Validation.Helpers;
 
 namespace SOD.ViewModels.Testing.CRSBench
 {
-
-    public class TestSettingsViewModel : ReactiveObject, IActivatableViewModel, IValidatableViewModel
+    public class TestSettingsViewModel : ReactiveValidationObject, IActivatableViewModel
     {
         public TestSettingsViewModel(App.Benches.CRSBench.Settings.TestSettings testSettings, IEnumerable<IStandart> standarts, IEnumerable<ISensor> sensors)
         {
@@ -38,6 +38,7 @@ namespace SOD.ViewModels.Testing.CRSBench
             Settings.PressureSensorId = PressureSensor.Id;
             Settings.MediumType = Medium;
         }
+
         [Reactive]
         public MediumType Medium { get; set; }
         public string Name { get; set; }
@@ -52,8 +53,7 @@ namespace SOD.ViewModels.Testing.CRSBench
         public ISensor PressureSensor { get; set; }
         public App.Benches.CRSBench.Settings.TestSettings Settings { get; set; }
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
-        public ValidationContext ValidationContext { get; } = new ValidationContext();
-
-        IValidationContext IValidatableViewModel.ValidationContext => throw new NotImplementedException();
+        //???????
+        //public ValidationContext ValidationContext { get; } = new ValidationContext();
     }
 }

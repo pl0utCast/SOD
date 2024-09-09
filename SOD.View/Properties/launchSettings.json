@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "SOD.View": {
+      "commandName": "Project",
+      "commandLineArgs": "-setsize 1366 768 -admin"
+    },
+    "debug": {
+      "commandName": "Project",
+      "commandLineArgs": "-setsize 1366 768"
+    },
+    "techno": {
+      "commandName": "Project",
+      "commandLineArgs": "-setsize 1366 768 -techno"
+    }
+  }
+}

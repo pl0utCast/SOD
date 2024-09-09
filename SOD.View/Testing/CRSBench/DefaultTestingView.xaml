@@ -169,7 +169,7 @@
                         HorizontalAlignment="Center"
                         Kind="Clock" />
                     <TextBlock HorizontalAlignment="Center" Text="{lc:Localization Testing.CRSBench.Exposure}" />
-                    <ProgressBar IsIndeterminate="True" Visibility="{Binding IsExposure, Converter={StaticResource boolToVisibilityConverter}}" />
+                    <ProgressBar IsIndeterminate="True" Visibility="{Binding IsExposure, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 </StackPanel>
 
             </Button>

@@ -60,16 +60,7 @@ namespace SOD.App.Testing
                 {
                     return JsonConvert.DeserializeObject<JObject>(bson.AsString).ToObject<IBranch<ITestConfig>>(serializer);
                 });
-            /*BsonMapper.Global.RegisterType<IList<IBranch<ITestConfig>>>(
-                serialize: tc =>
-                {
-                    var s = JsonConvert.SerializeObject(JArray.FromObject(tc, serializer));
-                    return s;
-                },
-                deserialize: bson =>
-                {
-                    return JsonConvert.DeserializeObject<JArray>(bson.AsString).ToObject<IList<IBranch<ITestConfig>>>(serializer);
-                });*/
+
             if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), CoreConst.DatabaseFolder)))
             {
                 Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), CoreConst.DatabaseFolder));

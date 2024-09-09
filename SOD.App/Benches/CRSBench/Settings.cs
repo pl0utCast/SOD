@@ -55,5 +55,4 @@ namespace SOD.App.Benches.CRSBench
             public bool UseRangeSetPressure { get; set; }
         }
     }
-
 }
