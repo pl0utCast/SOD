@@ -47,7 +47,7 @@ namespace SOD.View
             //dialogService.RegisterDialog("CreateNewReport", new Testing.CRSBench.Dialogs.CreateNewReport());
             //dialogService.RegisterDialog("CheckSumError", new Testing.CRSBench.Dialogs.CheckSumError());
 
-            //dialogService.RegisterDialog("IncorrectPassword", new Dialog.IncorrectPasswordView());
+            dialogService.RegisterDialog("IncorrectPassword", new Dialog.IncorrectPasswordView());
         }
     }
 }

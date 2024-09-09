@@ -57,7 +57,7 @@ namespace SOD.Core.Device.LCard
                 channelData = Marshal.AllocHGlobal(sizeof(short));
             }
             cancellationTokenSource = new CancellationTokenSource();
-            Task.Run(async ()=> await PullingLoop());
+            //Task.Run(async ()=> await PullingLoop());
         }
 
         

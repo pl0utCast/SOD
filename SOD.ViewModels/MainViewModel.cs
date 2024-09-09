@@ -25,9 +25,6 @@ namespace SOD.ViewModels
         {
             Users.AddRange(userService.GetUsers());
 
-            if (bench.Settings.HideCamera == 1) CameraVisibility = true;
-            else CameraVisibility = false;
-
             if (LocalizationExtension.LocaliztionService.CurrentCulture.Name == "ru-RU")
             {
                 Splash = "/Resources/REVALVE BY PKTBA splash.png";
@@ -38,18 +35,10 @@ namespace SOD.ViewModels
             }
 
             GoTesting = ReactiveCommand.Create(() => navigationService.NavigateTo("Testing"));
-            GoVideo = ReactiveCommand.Create(() => navigationService.NavigateTo("Videos"));
             GoValves = ReactiveCommand.Create(() => navigationService.NavigateTo("Valves"));
             GoReports = ReactiveCommand.Create(() => navigationService.NavigateTo("Reports"));
             GoSettings = ReactiveCommand.Create(() => navigationService.NavigateTo("Settings"));
             GoExits = ReactiveCommand.Create(() => navigationService.NavigateTo("Exits"));
-
-            //Таймер на изменение цвета бэкграунда
-            Observable.Timer(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1))
-                      .Subscribe(t =>
-                      {
-                          SetBackground = userService.GetBackground();
-                      });
 
             IsAuth = true;
             navigationService.NavigateTo("Testing");
@@ -97,8 +86,6 @@ namespace SOD.ViewModels
         [Reactive]
         public string Password { get; set; }
         public List<User> Users { get; set; } = new List<User>();
-        [Reactive]
-        public bool CameraVisibility { get; set; }
         public ReactiveCommand<Unit, Unit> Enter { get; set; }
         [Reactive]
         public bool IsTestRun { get; set; } = true;
@@ -108,8 +95,6 @@ namespace SOD.ViewModels
         public ReactiveCommand<Unit, Unit> GoReports { get; set; }
         public ReactiveCommand<Unit, Unit> GoSettings { get; set; }
         public ReactiveCommand<Unit, Unit> GoExits { get; set; }
-        [Reactive]
-        public string SetBackground { get; set; }
         public string Splash { get; set; }
-}
+    }
 }
