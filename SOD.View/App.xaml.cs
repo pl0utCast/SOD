@@ -64,7 +64,7 @@ namespace SOD.View
                 }
             }
 
-            Akavache.BlobCache.ApplicationName = "CRS";
+            Akavache.BlobCache.ApplicationName = "SOD";
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             App.Current.Startup += Current_Startup;
             App.Current.Exit += Current_Exit;

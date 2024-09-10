@@ -39,7 +39,6 @@
             VerticalAlignment="Center"
             materialDesign:ColorZoneAssist.Mode="Standard">
             <StackPanel Visibility="{Binding IsAuth, Converter={StaticResource BooleanToVisibilityConverter}}">
-
                 <RadioButton
                     Width="50"
                     Height="100"
@@ -56,40 +55,6 @@
                             HorizontalAlignment="Center"
                             Kind="Worker" />
                     </StackPanel>
-                </RadioButton>
-
-                <RadioButton
-                    Width="50"
-                    Height="100"
-                    Visibility="{Binding CameraVisibility, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    HorizontalAlignment="Center"
-                    Command="{Binding GoVideo}"
-                    Style="{DynamicResource MaterialDesignTabRadioButton}"
-                    ToolTip="{lc:Localization MainView.Video}">
-                    <StackPanel>
-                        <materialDesign:PackIcon
-                            Width="40"
-                            Height="40"
-                            Kind="Video" />
-                    </StackPanel>
-
-                </RadioButton>
-
-                <RadioButton
-                    Width="50"
-                    Height="100"
-                    HorizontalAlignment="Center"
-                    Command="{Binding GoValves}"
-                    IsEnabled="{Binding IsTestRun}"
-                    Style="{DynamicResource MaterialDesignTabRadioButton}"
-                    ToolTip="{lc:Localization MainView.Valve}">
-                    <StackPanel>
-                        <materialDesign:PackIcon
-                            Width="40"
-                            Height="40"
-                            Kind="PlaylistEdit" />
-                    </StackPanel>
-
                 </RadioButton>
                 <RadioButton
                     Width="50"
@@ -131,12 +96,8 @@
         </materialDesign:ColorZone>
 
         <Grid Grid.Row="1" Grid.Column="1">
-
             <ContentPresenter Content="{Binding Source={x:Static navigation:NavigationService.Instance}, Path=CurrentView}" />
-
             <materialDesign:Snackbar MessageQueue="{Binding Source={x:Static local:ShowMessageBinder.Instance}, Path=MessageQueue}" />
-            <!--<materialDesign:Snackbar MessageQueue="{Binding Source={x:Static Dialogs:DialogService.Instance}, Path=MessageQueue}" />-->
         </Grid>
-
     </Grid>
 </UserControl>

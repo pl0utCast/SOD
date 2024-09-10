@@ -40,8 +40,8 @@ namespace SOD.View
             //dialogService.RegisterDialog("CloseValve", new Testing.MultiPostBench.Test.Dialog.OpenValveManualView());
             //dialogService.RegisterDialog("ManualValidateTest", new Testing.MultiPostBench.Test.Dialog.ManualValidateTestView());
 
-            //dialogService.RegisterDialog("DeleteReportDialog", new Reports.Dialogs.DeleteReportsDialogView());
-            //dialogService.RegisterDialog("ExportReportDialog", new Reports.Dialogs.ExportReportDialogView());
+            dialogService.RegisterDialog("DeleteReportDialog", new Reports.Dialogs.DeleteReportsDialogView());
+            dialogService.RegisterDialog("ExportReportDialog", new Reports.Dialogs.ExportReportDialogView());
 
             //dialogService.RegisterDialog("CRSBenchTestResult", new Testing.CRSBench.Dialogs.TestResultView());
             //dialogService.RegisterDialog("CreateNewReport", new Testing.CRSBench.Dialogs.CreateNewReport());

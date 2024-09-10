@@ -35,7 +35,6 @@ namespace SOD.ViewModels
             }
 
             GoTesting = ReactiveCommand.Create(() => navigationService.NavigateTo("Testing"));
-            GoValves = ReactiveCommand.Create(() => navigationService.NavigateTo("Valves"));
             GoReports = ReactiveCommand.Create(() => navigationService.NavigateTo("Reports"));
             GoSettings = ReactiveCommand.Create(() => navigationService.NavigateTo("Settings"));
             GoExits = ReactiveCommand.Create(() => navigationService.NavigateTo("Exits"));

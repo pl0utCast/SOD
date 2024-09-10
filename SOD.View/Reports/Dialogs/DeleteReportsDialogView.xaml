@@ -1,0 +1,29 @@
+﻿<UserControl
+    x:Class="SOD.View.Reports.Dialogs.DeleteReportsDialogView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:SOD.View.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lc="clr-namespace:SOD.LocalizationService;assembly=SOD.LocalizationService"
+    xmlns:local="clr-namespace:SOD.View.Reports.Dialogs"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <controls:YesNoDialog
+        Height="400"
+        NoCommand="{Binding No}"
+        NoText="{lc:Localization Reports.DeleteReportsDialogView.No}"
+        YesCommand="{Binding Yes}"
+        YesText="{lc:Localization Reports.DeleteReportsDialogView.Yes}">
+        <controls:YesNoDialog.MessageContent>
+            <TextBlock
+                Margin="20"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="24"
+                Text="{lc:Localization Reports.DeleteReportsDialogView.CanDelete}"
+                TextWrapping="WrapWithOverflow" />
+        </controls:YesNoDialog.MessageContent>
+    </controls:YesNoDialog>
+</UserControl>

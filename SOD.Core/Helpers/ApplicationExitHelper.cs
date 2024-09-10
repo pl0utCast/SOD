@@ -15,7 +15,8 @@ namespace SOD.Core.Helpers
 
         public static void Exit()
         {
-            Environment.Exit(0);
+            //Environment.Exit(0);
+            System.Windows.Forms.SendKeys.SendWait("%{F4}");
         }
 
         public static void ShoutDown()
