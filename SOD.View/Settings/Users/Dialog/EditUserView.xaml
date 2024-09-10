@@ -1,0 +1,39 @@
+﻿<UserControl
+    x:Class="SOD.View.Settings.Users.Dialogs.EditUserView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:SOD.View.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lc="clr-namespace:SOD.LocalizationService;assembly=SOD.LocalizationService"
+    xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <controls:YesNoDialog
+        NoCommand="{Binding Cancel}"
+        NoText="{lc:Localization Settings.UserSettings.Cancel}"
+        YesCommand="{Binding Save}"
+        YesText="{lc:Localization Settings.UserSettings.Save}">
+        <controls:YesNoDialog.MessageContent>
+            <StackPanel>
+                <TextBox
+                    Margin="5"
+                    materialdesign:HintAssist.Hint="{lc:Localization Settings.UserSettings.FirstName}"
+                    FontSize="24"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox
+                    Margin="5"
+                    materialdesign:HintAssist.Hint="{lc:Localization Settings.UserSettings.LastName}"
+                    FontSize="24"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding SecondName, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox
+                    Margin="5"
+                    materialdesign:HintAssist.Hint="{lc:Localization Settings.UserSettings.Password}"
+                    FontSize="24"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </controls:YesNoDialog.MessageContent>
+    </controls:YesNoDialog>
+</UserControl>

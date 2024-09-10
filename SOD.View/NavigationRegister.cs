@@ -20,17 +20,11 @@ namespace SOD.View
             
             // Settings
             navigationService.RegisterRoot("Settings", "SettingsView", new Settings.SettingsView(), typeof(ViewModels.Settings.SettingsViewModel));
-            //navigationService.RegisterView("Settings", "ValveTypeSettingsView", new Settings.Valve.ValveTypeSettingsView(), typeof(ViewModels.Settings.Valve.ValveTypeSettingsViewModel));
-            //navigationService.RegisterView("Settings", "IPSettingsView", new Settings.IPSettings.IPSettingsView(), typeof(ViewModels.Settings.IPSettings.IPSettingsViewModel));
-            //navigationService.RegisterView("Settings", "EditValveTypeView", new Settings.Valve.EditValveTypeView(), typeof(ViewModels.Settings.Valve.EditValveTypeViewModel));
-            //navigationService.RegisterView("Settings", "DeviceAndSensorSettingsView", new Settings.DeviceAndSensor.DeviceSensorSettingsView(), typeof(ViewModels.Settings.DeviceAndSensor.DeviceAndSensorSettingsViewModel));
-            //navigationService.RegisterView("Settings", "ModbusTcpDeviceSettings", new Settings.DeviceAndSensor.Device.ModbusTcpDeviceSettingsView(), null);
+            navigationService.RegisterView("Settings", "IPSettingsView", new Settings.IPSettings.IPSettingsView(), typeof(ViewModels.Settings.IPSettings.IPSettingsViewModel));
+            navigationService.RegisterView("Settings", "DeviceAndSensorSettingsView", new Settings.DeviceAndSensor.DeviceSensorSettingsView(), typeof(ViewModels.Settings.DeviceAndSensor.DeviceAndSensorSettingsViewModel));
+            navigationService.RegisterView("Settings", "ModbusTcpDeviceSettings", new Settings.DeviceAndSensor.Device.ModbusTcpDeviceSettingsView(), null);
             //navigationService.RegisterView("Settings", "TestBenchSettings", new Settings.Bench.TestBenchSettingsView(), typeof(ViewModels.Settings.Bench.TestBenchSettingsViewModel));
-            //navigationService.RegisterView("Settings", "StandartsSettings", new Settings.Standarts.StandartsSettingsView(), typeof(ViewModels.Settings.Standarts.StandartsSettingsViewModel));
-            //navigationService.RegisterView("Settings", "EditStandart", new Settings.Standarts.EditStandartView(), typeof(ViewModels.Settings.Standarts.EditStandartViewModel));
-            //navigationService.RegisterView("Settings", "E14140DeviceSettings", new Settings.DeviceAndSensor.Device.E14140DeviceSettingsView(), typeof(ViewModels.Settings.DeviceAndSensor.Device.E14140DeviceSettingsViewModel));
-            //navigationService.RegisterView("Settings", "PKTBAImpulseBoardSettings", new Settings.DeviceAndSensor.Device.PKTBAImpulseBoardSettings(), typeof(ViewModels.Settings.DeviceAndSensor.Device.PKTBAImpulseBoardSettingsViewModel));
-            //navigationService.RegisterView("Settings", "UserSettings",new Settings.Users.UsersSettingsView(), typeof(ViewModels.Settings.Users.UsersSettingsViewModel));
+            navigationService.RegisterView("Settings", "UserSettings",new Settings.Users.UsersSettingsView(), typeof(ViewModels.Settings.Users.UsersSettingsViewModel));
 
             // Reports
             navigationService.RegisterRoot("Reports", "ReportsView", new Reports.ReportsView(), typeof(ViewModels.Reports.ReportsViewModel));
