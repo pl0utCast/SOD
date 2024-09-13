@@ -25,7 +25,7 @@ namespace SOD.View
             //dialogService.RegisterDialog("DeleteProperty", new Props.DeletePropView());
             //dialogService.RegisterDialog("SaveDeviceSettings", new Settings.DeviceAndSensor.Device.Dialog.SaveDeviceSettingsView());
             //dialogService.RegisterDialog("CodeBasedSensorSettings", new Settings.DeviceAndSensor.Sensors.Dialog.CodeBasedSensorSettingsView());
-            //dialogService.RegisterDialog("AddLangView", new Settings.Bench.Dialogs.AddLangView());
+            dialogService.RegisterDialog("AddLangView", new Settings.Bench.Dialogs.AddLangView());
             dialogService.RegisterDialog("EditUser", new Settings.Users.Dialogs.EditUserView());
             dialogService.RegisterDialog("DeleteUser", new Settings.Users.Dialogs.DeleteUserView());
 

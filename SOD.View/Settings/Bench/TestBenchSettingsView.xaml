@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="SOD.View.Settings.Bench.TestBenchSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:SOD.View.Controls"
+             xmlns:crsBench="clr-namespace:SOD.View.Settings.Bench.CRSBench"
+             xmlns:crsBenchViewModels="clr-namespace:SOD.ViewModels.Settings.Bench.CRSBench;assembly=SOD.ViewModels"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SOD.View.Settings.Bench"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:lc="clr-namespace:SOD.LocalizationService;assembly=SOD.LocalizationService"
+             xmlns:userService="clr-namespace:SOD.UserService;assembly=SOD.UserService"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <controls:CustomScrollViewer Grid.Row="1">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                    <controls:BackButton />
+                    <controls:SaveButton ToolTip="{lc:Localization Testing.CRSBench.Save}" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <ComboBox
+                    MinWidth="500"
+                    Margin="0,5"
+                    HorizontalAlignment="Stretch"
+                    materialDesign:HintAssist.Hint="{lc:Localization Settings.Bench.TestBenchSettingsView.CurrentLang}"
+                    DisplayMemberPath="EnglishName"
+                    FontSize="24"
+                    ItemsSource="{Binding Langs}"
+                    SelectedValue="{Binding CurrentLang}"
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                    <Button
+                    Height="50"
+                    Margin="10,0,0,0"
+                    Command="{Binding AddCulture}"
+                    Style="{StaticResource MaterialDesignFlatButton}">
+                        <materialDesign:PackIcon
+                        Width="30"
+                        Height="30"
+                        Kind="Add" />
+                    </Button>
+                    <Button
+                        Height="50"
+                        Margin="5,0,0,0"
+                        Command="{Binding DeleteCulture}"
+                        Style="{StaticResource MaterialDesignFlatButton}">
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            Kind="Delete" />
+                    </Button>
+                </StackPanel>
+                <StackPanel 
+                    Grid.Row="2"
+                    Margin="0,5"
+                    Orientation="Vertical">
+                    <StackPanel
+                        Grid.Row="1"
+                        Margin="0,5"
+                        Orientation="Horizontal">
+                        <ToggleButton IsChecked="{Binding IsEnableVirtualKeyboard}" />
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontSize="24"
+                            Text="{lc:Localization Settings.Bench.TestBenchSettingsView.UseVirtualKeyboard}" />
+                    </StackPanel>
+                </StackPanel>
+                <ContentPresenter
+                    Grid.Row="3"
+                    userService:Security.Role="Worker"
+                    Content="{Binding CurrentBench}">
+                    <ContentPresenter.Resources>
+                        <DataTemplate DataType="{x:Type crsBenchViewModels:CRSBenchSettingsViewModel}">
+                            <crsBench:CrsBenchSettingsView />
+                        </DataTemplate>
+                    </ContentPresenter.Resources>
+                </ContentPresenter>
+            </Grid>
+        </controls:CustomScrollViewer>
+    </Grid>
+</UserControl>

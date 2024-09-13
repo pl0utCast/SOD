@@ -18,7 +18,7 @@
     <PackageReference Include="NModbus.Serial" Version="3.0.81" />
     <PackageReference Include="SharpDX.DirectInput" Version="4.2.0" />
     <PackageReference Include="Spire.PDF" Version="10.8.1" />
-    <PackageReference Include="UnitsNet" Version="5.58.0" />
+    <PackageReference Include="UnitsNet" Version="4.152.0" />
     <PackageReference Include="UnitsNet.Serialization.JsonNet" Version="4.3.0" />
   </ItemGroup>
 

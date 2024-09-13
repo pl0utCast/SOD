@@ -66,107 +66,107 @@ namespace SOD.ViewModels.Testing.CRSBench
                 navigationService.GoBack();
             });
 
-            var canApply = this.WhenAnyValue(x => x.SelectedTest, x => x.SelectedPressureUnit, x => x.SelectedLeakageUnit,
-                (selectedTestIsValid, selectedPressureUnit, selectedLeakageUnit) =>
-                    selectedTestIsValid != null && selectedTestIsValid.ValidationContext.GetIsValid() && selectedPressureUnit != null && selectedLeakageUnit != null);
+            //var canApply = this.WhenAnyValue(x => x.SelectedTest, x => x.SelectedPressureUnit, x => x.SelectedLeakageUnit,
+            //    (selectedTestIsValid, selectedPressureUnit, selectedLeakageUnit) =>
+            //        selectedTestIsValid != null && selectedTestIsValid.ValidationContext.GetIsValid() && selectedPressureUnit != null && selectedLeakageUnit != null);
 
-            Apply = ReactiveCommand.CreateFromTask(async () =>
-            {
-                bench.Settings.SelectedTestSettings = SelectedTest?.Settings;
-                bench.Settings.SelectedTestSettings.LocalName = SelectedTest?.Name;
-                bench.Settings.PressureUnit = (PressureUnit)SelectedPressureUnit?.UnitType;
-                bench.Settings.LeakageUnit = (VolumeFlowUnit)SelectedLeakageUnit?.UnitType;
+            //Apply = ReactiveCommand.CreateFromTask(async () =>
+            //{
+            //    bench.Settings.SelectedTestSettings = SelectedTest?.Settings;
+            //    bench.Settings.SelectedTestSettings.LocalName = SelectedTest?.Name;
+            //    bench.Settings.PressureUnit = (PressureUnit)SelectedPressureUnit?.UnitType;
+            //    bench.Settings.LeakageUnit = (VolumeFlowUnit)SelectedLeakageUnit?.UnitType;
 
-                if (reportService.CurrentReport != null && !reportService.CurrentReport.IsSave && reportService.CurrentReport.ReportData.IsFill)
-                {
-                    var result = await dialogService.ShowDialogAsync("CreateNewReport", new YesNoDialogViewModel(dialogService));
-                    if ((bool)result)
-                    {
-                        reportService.Save(reportService.CurrentReport);
-                        bench.UpdateReport();
-                    }
-                }
+            //    if (reportService.CurrentReport != null && !reportService.CurrentReport.IsSave && reportService.CurrentReport.ReportData.IsFill)
+            //    {
+            //        var result = await dialogService.ShowDialogAsync("CreateNewReport", new YesNoDialogViewModel(dialogService));
+            //        if ((bool)result)
+            //        {
+            //            reportService.Save(reportService.CurrentReport);
+            //            bench.UpdateReport();
+            //        }
+            //    }
 
-                SelectedTest?.Save();
-                bench.UpdatePosts();
+            //    SelectedTest?.Save();
+            //    bench.UpdatePosts();
 
-                foreach (var param in parameters)
-                {
-                    var parameter = bench.Settings.Parameters.SingleOrDefault(p => p.Alias == param.Key);
-                    if (parameter != null)
-                    {
-                        parameter.Value = param.Value.GetValue();
-                    }
-                }
+            //    foreach (var param in parameters)
+            //    {
+            //        var parameter = bench.Settings.Parameters.SingleOrDefault(p => p.Alias == param.Key);
+            //        if (parameter != null)
+            //        {
+            //            parameter.Value = param.Value.GetValue();
+            //        }
+            //    }
 
-                bench.SaveSettings();
-                if (SelectedTest != null)
-                {
-                    bus.Publish(new App.Benches.CRSBench.Messages.SelectedTestMessage(SelectedTest.Type));
-                }
+            //    bench.SaveSettings();
+            //    if (SelectedTest != null)
+            //    {
+            //        bus.Publish(new App.Benches.CRSBench.Messages.SelectedTestMessage(SelectedTest.Type));
+            //    }
 
-                navigationService.GoBack();
-            }, canApply);
+            //    navigationService.GoBack();
+            //}, canApply);
 
-            this.WhenActivated(dis =>
-            {
-                //tests.Connect()
-                //    .AutoRefreshOnObservable(r => this.WhenAnyValue(x => x.SelectedValveType).Select(x => x != null))
-                //    .Filter(f => f.Item1 == SelectedValveType?.ValveType.Id)
-                //    .Transform(t => t.Item2)
-                //    .Bind(Tests)
-                //    .Subscribe()
-                //    .DisposeWith(dis);
+            //this.WhenActivated(dis =>
+            //{
+            //    //tests.Connect()
+            //    //    .AutoRefreshOnObservable(r => this.WhenAnyValue(x => x.SelectedValveType).Select(x => x != null))
+            //    //    .Filter(f => f.Item1 == SelectedValveType?.ValveType.Id)
+            //    //    .Transform(t => t.Item2)
+            //    //    .Bind(Tests)
+            //    //    .Subscribe()
+            //    //    .DisposeWith(dis);
 
-                foreach (var test in bench.Settings.Tests)
-                {
-                    foreach (var t in test.Value)
-                    {
-                        string name;
-                        TestSettingsViewModel activatableViewModel = null;
-                        var sensors = sensorService.GetAllSensors().Where(s => bench.Settings.Sensors.TryGetValue(s.Id, out var isEnable) && isEnable);
+            //    foreach (var test in bench.Settings.Tests)
+            //    {
+            //        foreach (var t in test.Value)
+            //        {
+            //            string name;
+            //            TestSettingsViewModel activatableViewModel = null;
+            //            var sensors = sensorService.GetAllSensors().Where(s => bench.Settings.Sensors.TryGetValue(s.Id, out var isEnable) && isEnable);
 
-                        if (t.Type == TestType.Strength)
-                        {
-                            if (t.Name == "Back seat test") name = localizationService["CRSBenchLocalization.BackSeatTest"];
-                            else if (t.Name == "Shell test") name = localizationService["CRSBenchLocalization.ShellTest"];
-                            else name = t.Name;
+            //            if (t.Type == TestType.Strength)
+            //            {
+            //                if (t.Name == "Back seat test") name = localizationService["CRSBenchLocalization.BackSeatTest"];
+            //                else if (t.Name == "Shell test") name = localizationService["CRSBenchLocalization.ShellTest"];
+            //                else name = t.Name;
 
-                            activatableViewModel = new TestSettingsViewModel(t, standarts.Where(s => s.ValveTypesId.Contains(test.Key) && s.SupportTests.Contains(TestType.Strength)), sensors)
-                            { Name = name, Type = t.Type, Time = t.Time };
-                            tests.Add(new Tuple<int, TestSettingsViewModel>(test.Key, activatableViewModel));
-                        }
-                        else if (t.Type == TestType.Leakage)
-                        {
-                            if (t.Name == "Seat leakage test") name = localizationService["CRSBenchLocalization.SeatLeakageTest"];
-                            else name = t.Name;
+            //                activatableViewModel = new TestSettingsViewModel(t, standarts.Where(s => s.ValveTypesId.Contains(test.Key) && s.SupportTests.Contains(TestType.Strength)), sensors)
+            //                { Name = name, Type = t.Type, Time = t.Time };
+            //                tests.Add(new Tuple<int, TestSettingsViewModel>(test.Key, activatableViewModel));
+            //            }
+            //            else if (t.Type == TestType.Leakage)
+            //            {
+            //                if (t.Name == "Seat leakage test") name = localizationService["CRSBenchLocalization.SeatLeakageTest"];
+            //                else name = t.Name;
 
-                            activatableViewModel = new LeakageTestSettingsViewModel(t, standarts.Where(s => s.ValveTypesId.Contains(test.Key) && s.SupportTests.Contains(TestType.Leakage)), sensors)
-                            { Name = name, Type = t.Type, Time = t.Time };
-                            tests.Add(new Tuple<int, TestSettingsViewModel>(test.Key, activatableViewModel));
-                        }
-                        else if (t.Type == TestType.Functional)
-                        {
-                            if (t.Name == "Set pressure test") name = localizationService["CRSBenchLocalization.SetPressureTest"];
-                            else name = t.Name;
+            //                activatableViewModel = new LeakageTestSettingsViewModel(t, standarts.Where(s => s.ValveTypesId.Contains(test.Key) && s.SupportTests.Contains(TestType.Leakage)), sensors)
+            //                { Name = name, Type = t.Type, Time = t.Time };
+            //                tests.Add(new Tuple<int, TestSettingsViewModel>(test.Key, activatableViewModel));
+            //            }
+            //            else if (t.Type == TestType.Functional)
+            //            {
+            //                if (t.Name == "Set pressure test") name = localizationService["CRSBenchLocalization.SetPressureTest"];
+            //                else name = t.Name;
 
-                            activatableViewModel = new FuncionalTestSettingsViewModel(t, standarts.Where(s => s.ValveTypesId.Contains(test.Key) && s.SupportTests.Contains(TestType.Functional)), sensors)
-                            { Name = name, Type = t.Type, Time = t.Time };
-                            tests.Add(new Tuple<int, TestSettingsViewModel>(test.Key, activatableViewModel));
-                        }
-                        activatableViewModel?.Activator.Activate().DisposeWith(dis);
-                    }
-                }
+            //                activatableViewModel = new FuncionalTestSettingsViewModel(t, standarts.Where(s => s.ValveTypesId.Contains(test.Key) && s.SupportTests.Contains(TestType.Functional)), sensors)
+            //                { Name = name, Type = t.Type, Time = t.Time };
+            //                tests.Add(new Tuple<int, TestSettingsViewModel>(test.Key, activatableViewModel));
+            //            }
+            //            activatableViewModel?.Activator.Activate().DisposeWith(dis);
+            //        }
+            //    }
 
-                SelectedTest = tests.Items.SingleOrDefault(t => t.Item2.Settings.Id == bench.Settings.SelectedTestSettings?.Id)?.Item2;
-                isSelectedTest.DisposeWith(dis);
+            //    SelectedTest = tests.Items.SingleOrDefault(t => t.Item2.Settings.Id == bench.Settings.SelectedTestSettings?.Id)?.Item2;
+            //    isSelectedTest.DisposeWith(dis);
 
-                //this.WhenAnyValue(x => x.SelectedValveType)
-                //    .Subscribe(vt => Valves.ValveTypeId = vt?.ValveType.Id)
-                //    .DisposeWith(dis);
+            //    //this.WhenAnyValue(x => x.SelectedValveType)
+            //    //    .Subscribe(vt => Valves.ValveTypeId = vt?.ValveType.Id)
+            //    //    .DisposeWith(dis);
 
-                //Valves.Activator.Activate().DisposeWith(dis);
-            });
+            //    //Valves.Activator.Activate().DisposeWith(dis);
+            //});
         }
 
         public IEnumerable<IValueViewModel> Properties => parameters.Select(kv => kv.Value);

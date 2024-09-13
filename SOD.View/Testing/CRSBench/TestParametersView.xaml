@@ -17,6 +17,7 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <converters:TranslatePrefixConverter x:Key="TranslateValvePrefixConverter"/>
+        <converters:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -61,7 +62,7 @@
                                     VerticalAlignment="Center"
                                     Foreground="Red"
                                     Kind="Asterisk"
-                                    Visibility="{Binding SelectedValveType, Converter={StaticResource nullToVisibleConverter}}" />
+                                    Visibility="{Binding SelectedValveType, Converter={StaticResource NullVisibilityConverter}}"/>
                             </StackPanel>
                             <ListBox ItemsSource="{Binding ValveTypes}" SelectedValue="{Binding SelectedValveType}">
                                 <ListBox.ItemTemplate>
@@ -97,7 +98,7 @@
                                     VerticalAlignment="Center"
                                     Foreground="Red"
                                     Kind="Asterisk"
-                                    Visibility="{Binding SelectedTest, Converter={StaticResource nullToVisibleConverter}}" />
+                                    Visibility="{Binding SelectedTest, Converter={StaticResource NullVisibilityConverter}}" />
                             </StackPanel>
                             <ListBox ItemsSource="{Binding Tests}" SelectedValue="{Binding SelectedTest}">
                                 <ListBox.ItemTemplate>
@@ -158,7 +159,7 @@
 
             </TabItem>
                     
-            <TabItem>
+            <!--<TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon
@@ -179,7 +180,7 @@
                 </TabItem.Header>
 
                 <testing:ValvesView DataContext="{Binding Valves}" />
-            </TabItem>
+            </TabItem>-->
 
             <TabItem>
                 <TabItem.Header>
