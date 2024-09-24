@@ -23,7 +23,7 @@ namespace SOD.ViewModels.Testing.CRSBench
             Standart = standarts.SingleOrDefault(s => s.Id == testSettings.StandartId);
             PressureSensors = sensors.Where(s => s is IPressureSensor);
             PressureSensor = PressureSensors.SingleOrDefault(s => s.Id == Settings.PressureSensorId);
-            Medium = Settings.MediumType;
+            //Medium = Settings.MediumType;
 
             this.WhenActivated(dis =>
             {
@@ -36,7 +36,7 @@ namespace SOD.ViewModels.Testing.CRSBench
             Settings.Time = Time;
             Settings.StandartId = Standart?.Id;
             Settings.PressureSensorId = PressureSensor.Id;
-            Settings.MediumType = Medium;
+            //Settings.MediumType = Medium;
         }
 
         [Reactive]

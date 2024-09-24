@@ -33,149 +33,149 @@ namespace SOD.App.Benches.CRSBench.Report
             {
                 FillParameters(props);
             }
-            else if (parameters[0] is string && parameters[1] is Testing.Strength.Result strenghtResult)
-            {
-                Fill((string)parameters[0], strenghtResult);
-            }
-            else if (parameters[0] is string && parameters[1] is Testing.Leakage.Result leakageResult)
-            {
-                Fill((string)parameters[0], leakageResult);
-            }
-            else if (parameters[0] is string && parameters[1] is Testing.Funcional.Result funcionalResult)
-            {
-                Fill((string)parameters[0], funcionalResult);
-            }
+            //else if (parameters[0] is string && parameters[1] is Testing.Strength.Result strenghtResult)
+            //{
+            //    Fill((string)parameters[0], strenghtResult);
+            //}
+            //else if (parameters[0] is string && parameters[1] is Testing.Leakage.Result leakageResult)
+            //{
+            //    Fill((string)parameters[0], leakageResult);
+            //}
+            //else if (parameters[0] is string && parameters[1] is Testing.Funcional.Result funcionalResult)
+            //{
+            //    Fill((string)parameters[0], funcionalResult);
+            //}
         }
 
-        private void Fill(string name, Testing.Strength.Result strenghtResult)
+        private void Fill(string name)
         {
             var test = new TestReportItem();
             test.Name = name;
-            test.Chart = strenghtResult.Chart;
-            if (LocalizationExtension.LocaliztionService.CurrentCulture.Name == "ru-RU")
-                test.QrChart = strenghtResult.QrChart;
-            test.Standart = strenghtResult.Standart;
-            test.Medium = strenghtResult.Medium.ToString();
-            foreach (var postResult in strenghtResult.PostResults)
-            {
-                var reportPost = new PostDataReport();
-                reportPost.PostNumber = postResult.PostId;
-                reportPost.SerialNumber = postResult.SerialNumber;
-                foreach (var registration in postResult.Registrations)
-                {
-                    var pressureSensor = (IPressureSensor)sensorService.GetSensor(registration.StartPressure.First().Id); 
-                    Pressure startPressure = new Pressure(0, registration.StartPressure[0].Value.Unit);
-                    Pressure stopPressure = new Pressure(0, registration.StopPressure[0].Value.Unit);
-                    Pressure dropPressure = new Pressure(0, registration.DropPressure[0].Value.Unit);
+            //test.Chart = strenghtResult.Chart;
+            //if (LocalizationExtension.LocaliztionService.CurrentCulture.Name == "ru-RU")
+            //    test.QrChart = strenghtResult.QrChart;
+            //test.Standart = strenghtResult.Standart;
+            //test.Medium = strenghtResult.Medium.ToString();
+            //foreach (var postResult in strenghtResult.PostResults)
+            //{
+            //    var reportPost = new PostDataReport();
+            //    reportPost.PostNumber = postResult.PostId;
+            //    reportPost.SerialNumber = postResult.SerialNumber;
+            //    foreach (var registration in postResult.Registrations)
+            //    {
+            //        var pressureSensor = (IPressureSensor)sensorService.GetSensor(registration.StartPressure.First().Id); 
+            //        Pressure startPressure = new Pressure(0, registration.StartPressure[0].Value.Unit);
+            //        Pressure stopPressure = new Pressure(0, registration.StopPressure[0].Value.Unit);
+            //        Pressure dropPressure = new Pressure(0, registration.DropPressure[0].Value.Unit);
 
-                    for (int i = 0; i < registration.StartPressure.Count; i++)
-                    {
-                        startPressure += registration.StartPressure[i].Value;
-                        stopPressure += registration.StopPressure[i].Value;
-                        dropPressure += registration.DropPressure[i].Value;
-                    }
-                    startPressure = startPressure / registration.StartPressure.Count;
-                    stopPressure = stopPressure / registration.StartPressure.Count;
-                    dropPressure = dropPressure / registration.StartPressure.Count;
+            //        for (int i = 0; i < registration.StartPressure.Count; i++)
+            //        {
+            //            startPressure += registration.StartPressure[i].Value;
+            //            stopPressure += registration.StopPressure[i].Value;
+            //            dropPressure += registration.DropPressure[i].Value;
+            //        }
+            //        startPressure = startPressure / registration.StartPressure.Count;
+            //        stopPressure = stopPressure / registration.StartPressure.Count;
+            //        dropPressure = dropPressure / registration.StartPressure.Count;
 
-                    var reportRegistration = new PostDataReport.Registration();
-                    reportRegistration.Time = registration.Time;
-                    reportRegistration.StartPressure = startPressure.ToString(pressureSensor.Accaury);
-                    reportRegistration.StopPressue = stopPressure.ToString(pressureSensor.Accaury);
-                    reportRegistration.DropPressure = dropPressure.ToString(pressureSensor.Accaury);
-                    reportRegistration.PressureName = pressureSensor.Name;
-                    reportRegistration.Result = registration.Result;
-                    reportPost.Registrations.Add(reportRegistration);
-                }
+            //        var reportRegistration = new PostDataReport.Registration();
+            //        reportRegistration.Time = registration.Time;
+            //        reportRegistration.StartPressure = startPressure.ToString(pressureSensor.Accaury);
+            //        reportRegistration.StopPressue = stopPressure.ToString(pressureSensor.Accaury);
+            //        reportRegistration.DropPressure = dropPressure.ToString(pressureSensor.Accaury);
+            //        reportRegistration.PressureName = pressureSensor.Name;
+            //        reportRegistration.Result = registration.Result;
+            //        reportPost.Registrations.Add(reportRegistration);
+            //    }
                 
-                test.Posts.Add(reportPost);
+            //    test.Posts.Add(reportPost);
 
-            }
+            //}
             MainData.Tests.Add(test);
         }
 
-        private void Fill(string name, Testing.Leakage.Result result)
-        {
-            var test = new TestReportItem();
-            test.Name = name;
-            test.Chart = result.Chart;
-            if (LocalizationExtension.LocaliztionService.CurrentCulture.Name == "ru-RU")
-                test.QrChart = result.QrChart;
-            test.Standart = result.Standart;
-            foreach (var postResult in result.PostResults)
-            {
-                var reportPost = new PostDataReport();
-                reportPost.PostNumber = postResult.PostId;
-                reportPost.SerialNumber = postResult.SerialNumber;
-                foreach (var registration in postResult.Registrations)
-                {
-                    var pressureSensor = (IPressureSensor)sensorService.GetSensor(registration.StartPressure.First().Id);
-                    var leakageSensor = (ILeakageSensor)sensorService.GetSensor(registration.Leakage.First().Id);
-                    Pressure startPressure = new Pressure(0, registration.StartPressure[0].Value.Unit);
-                    Pressure stopPressure = new Pressure(0, registration.StopPressure[0].Value.Unit);
-                    Pressure dropPressure = new Pressure(0, registration.DropPressure[0].Value.Unit);
+        //private void Fill(string name)
+        //{
+        //    var test = new TestReportItem();
+        //    test.Name = name;
+        //    test.Chart = result.Chart;
+        //    if (LocalizationExtension.LocaliztionService.CurrentCulture.Name == "ru-RU")
+        //        test.QrChart = result.QrChart;
+        //    test.Standart = result.Standart;
+        //    foreach (var postResult in result.PostResults)
+        //    {
+        //        var reportPost = new PostDataReport();
+        //        reportPost.PostNumber = postResult.PostId;
+        //        reportPost.SerialNumber = postResult.SerialNumber;
+        //        foreach (var registration in postResult.Registrations)
+        //        {
+        //            var pressureSensor = (IPressureSensor)sensorService.GetSensor(registration.StartPressure.First().Id);
+        //            var leakageSensor = (ILeakageSensor)sensorService.GetSensor(registration.Leakage.First().Id);
+        //            Pressure startPressure = new Pressure(0, registration.StartPressure[0].Value.Unit);
+        //            Pressure stopPressure = new Pressure(0, registration.StopPressure[0].Value.Unit);
+        //            Pressure dropPressure = new Pressure(0, registration.DropPressure[0].Value.Unit);
 
-                    for (int i = 0; i < registration.StartPressure.Count; i++)
-                    {
-                        startPressure += registration.StartPressure[i].Value;
-                        stopPressure += registration.StopPressure[i].Value;
-                        dropPressure += registration.DropPressure[i].Value;
-                    }
-                    startPressure = startPressure / registration.StartPressure.Count;
-                    stopPressure = stopPressure / registration.StartPressure.Count;
-                    dropPressure = dropPressure / registration.StartPressure.Count;
+        //            for (int i = 0; i < registration.StartPressure.Count; i++)
+        //            {
+        //                startPressure += registration.StartPressure[i].Value;
+        //                stopPressure += registration.StopPressure[i].Value;
+        //                dropPressure += registration.DropPressure[i].Value;
+        //            }
+        //            startPressure = startPressure / registration.StartPressure.Count;
+        //            stopPressure = stopPressure / registration.StartPressure.Count;
+        //            dropPressure = dropPressure / registration.StartPressure.Count;
 
-                    var reportRegistration = new PostDataReport.Registration();
-                    reportRegistration.Time = registration.Time;
-                    reportRegistration.StartPressure = startPressure.ToString(pressureSensor.Accaury);
-                    reportRegistration.StopPressue = stopPressure.ToString(pressureSensor.Accaury);
-                    reportRegistration.DropPressure = dropPressure.ToString(pressureSensor.Accaury);
-                    reportRegistration.PressureName = pressureSensor.Name;
-                    reportRegistration.LeakageTest.Leakage = registration.Leakage[0].Value.ToString(leakageSensor.Accaury);
+        //            var reportRegistration = new PostDataReport.Registration();
+        //            reportRegistration.Time = registration.Time;
+        //            reportRegistration.StartPressure = startPressure.ToString(pressureSensor.Accaury);
+        //            reportRegistration.StopPressue = stopPressure.ToString(pressureSensor.Accaury);
+        //            reportRegistration.DropPressure = dropPressure.ToString(pressureSensor.Accaury);
+        //            reportRegistration.PressureName = pressureSensor.Name;
+        //            reportRegistration.LeakageTest.Leakage = registration.Leakage[0].Value.ToString(leakageSensor.Accaury);
 
-                    var gasSensor = sensorService.GetAllSensors().SingleOrDefault(s => s.Id == bench.Settings.GasTemperatureSensorId);
-                    reportRegistration.AirTemperature = ((ITemperatureSensor)gasSensor).Temperature.ToString(gasSensor.Accaury);
+        //            var gasSensor = sensorService.GetAllSensors().SingleOrDefault(s => s.Id == bench.Settings.GasTemperatureSensorId);
+        //            reportRegistration.AirTemperature = ((ITemperatureSensor)gasSensor).Temperature.ToString(gasSensor.Accaury);
 
-                    var liquidSensor = sensorService.GetAllSensors().SingleOrDefault(s => s.Id == bench.Settings.LiquidTemperatureSensorId);
-                    reportRegistration.WaterTemperature = ((ITemperatureSensor)liquidSensor).Temperature.ToString(liquidSensor.Accaury);
+        //            //var liquidSensor = sensorService.GetAllSensors().SingleOrDefault(s => s.Id == bench.Settings.LiquidTemperatureSensorId);
+        //            //reportRegistration.WaterTemperature = ((ITemperatureSensor)liquidSensor).Temperature.ToString(liquidSensor.Accaury);
 
-                    reportRegistration.Result = registration.Result;
-                    reportPost.Registrations.Add(reportRegistration);
-                }    
-                test.Posts.Add(reportPost);
-            }
-            MainData.Tests.Add(test);
-        }
+        //            reportRegistration.Result = registration.Result;
+        //            reportPost.Registrations.Add(reportRegistration);
+        //        }    
+        //        test.Posts.Add(reportPost);
+        //    }
+        //    MainData.Tests.Add(test);
+        //}
 
-        private void Fill(string name, Testing.Funcional.Result result)
-        {
-            var test = new TestReportItem();
-            test.Name = name;
-            test.Chart = result.Chart;
-            if (LocalizationExtension.LocaliztionService.CurrentCulture.Name == "ru-RU")
-                test.QrChart = result.QrChart;
-            test.Standart = result.Standart;
-            foreach (var postResult in result.PostResults)
-            {
-                var reportPost = new PostDataReport();
-                var reportRegistration = new PostDataReport.Registration();
-                reportRegistration.FuncionalTest.OpenPressure = postResult.OpenPressure.ToString("f2");
-                reportRegistration.FuncionalTest.ClosePressure = postResult.ClosePressure.ToString("f2");
-                reportRegistration.FuncionalTest.OpenPressureAccuracy = postResult.Accuracy.ToString("f1");
-                reportRegistration.FuncionalTest.ExpectedSetPressure = postResult.ExpectedSetPressure.ToString("f2");
+        //private void Fill(string name, Testing.Funcional.Result result)
+        //{
+        //    var test = new TestReportItem();
+        //    test.Name = name;
+        //    test.Chart = result.Chart;
+        //    if (LocalizationExtension.LocaliztionService.CurrentCulture.Name == "ru-RU")
+        //        test.QrChart = result.QrChart;
+        //    test.Standart = result.Standart;
+        //    foreach (var postResult in result.PostResults)
+        //    {
+        //        var reportPost = new PostDataReport();
+        //        var reportRegistration = new PostDataReport.Registration();
+        //        reportRegistration.FuncionalTest.OpenPressure = postResult.OpenPressure.ToString("f2");
+        //        reportRegistration.FuncionalTest.ClosePressure = postResult.ClosePressure.ToString("f2");
+        //        reportRegistration.FuncionalTest.OpenPressureAccuracy = postResult.Accuracy.ToString("f1");
+        //        reportRegistration.FuncionalTest.ExpectedSetPressure = postResult.ExpectedSetPressure.ToString("f2");
 
-                var gasSensor = sensorService.GetAllSensors().SingleOrDefault(s => s.Id == bench.Settings.GasTemperatureSensorId);
-                reportRegistration.AirTemperature = ((ITemperatureSensor)gasSensor).Temperature.ToString(gasSensor.Accaury);
+        //        var gasSensor = sensorService.GetAllSensors().SingleOrDefault(s => s.Id == bench.Settings.GasTemperatureSensorId);
+        //        reportRegistration.AirTemperature = ((ITemperatureSensor)gasSensor).Temperature.ToString(gasSensor.Accaury);
 
-                var liquidSensor = sensorService.GetAllSensors().SingleOrDefault(s => s.Id == bench.Settings.LiquidTemperatureSensorId);
-                reportRegistration.WaterTemperature = ((ITemperatureSensor)liquidSensor).Temperature.ToString(liquidSensor.Accaury);
+        //        //var liquidSensor = sensorService.GetAllSensors().SingleOrDefault(s => s.Id == bench.Settings.LiquidTemperatureSensorId);
+        //        //reportRegistration.WaterTemperature = ((ITemperatureSensor)liquidSensor).Temperature.ToString(liquidSensor.Accaury);
 
-                reportRegistration.Result = postResult.Result;
-                reportPost.Registrations.Add(reportRegistration);
-                test.Posts.Add(reportPost);
-            }
-            MainData.Tests.Add(test);
-        }
+        //        reportRegistration.Result = postResult.Result;
+        //        reportPost.Registrations.Add(reportRegistration);
+        //        test.Posts.Add(reportPost);
+        //    }
+        //    MainData.Tests.Add(test);
+        //}
 
         public override List<KeyValuePair<string, object>> GetData()
         {

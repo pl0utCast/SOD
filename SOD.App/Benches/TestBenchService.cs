@@ -41,20 +41,21 @@ namespace SOD.App.Benches
             this.kernel = kernel;
             this.localizationService = localizationService;
             LoadSettings();
-        }
+			crsBench = new CRSBench.Bench(_settingsService, _sensorService, _testingService, _bus, _reportService, localizationService);
+		}
 
         public ITestBench GetTestBench()
         {
-            //switch (Settings.BenchType)
-            //{
-            //    case BenchesType.CRS:
+            switch (Settings.BenchType)
+            {
+                case BenchesType.CRS:
                     if (crsBench == null)
                     {
                         crsBench = new CRSBench.Bench(_settingsService, _sensorService, _testingService, _bus, _reportService, localizationService);
                     }
                     return crsBench;
-            //    default: return null;
-            //}
+                default: return null;
+            }
         }
 
         public Settings Settings { get; set; }

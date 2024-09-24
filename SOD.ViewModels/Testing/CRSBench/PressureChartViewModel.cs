@@ -163,21 +163,21 @@ namespace SOD.ViewModels.Testing.CRSBench
                                                 if (pressureSensor.Pressure.ToUnit(PressureUnit.Bar) > Pressure.FromBars(100) && (pressureSensor.Id == 16 || pressureSensor.Id == 17)) //при давлении больше 100 бар переключаем на второй датчик
                                                 {
                                                     bench.Settings.SelectedTestSettings.PressureSensorId = 17; //переключение на датчик давления id=17
-                                                    bench.UpdatePosts();
+                                                    //bench.UpdatePosts();
                                                     bench.SaveSettings();
 
                                                     if (PressureSeries.Count <= 1)
                                                     {
-                                                        foreach (var post in bench.Posts)
-                                                        {
-                                                            foreach (var pSensor in post.Sensors.Where(s => s.Sensor is IPressureSensor).Select(s => s.Sensor))
-                                                            {
-                                                                Application.Current.Dispatcher.Invoke((Action)delegate
-                                                                {
-                                                                    SetPressureSensor((IPressureSensor)pSensor);
-                                                                });
-                                                            }
-                                                        }
+                                                        //foreach (var post in bench.Posts)
+                                                        //{
+                                                        //    foreach (var pSensor in post.Sensors.Where(s => s.Sensor is IPressureSensor).Select(s => s.Sensor))
+                                                        //    {
+                                                        //        Application.Current.Dispatcher.Invoke((Action)delegate
+                                                        //        {
+                                                        //            SetPressureSensor((IPressureSensor)pSensor);
+                                                        //        });
+                                                        //    }
+                                                        //}
                                                     }
 
                                                     if (pressureSensor.Id == 17)
@@ -203,7 +203,7 @@ namespace SOD.ViewModels.Testing.CRSBench
                                                     {
                                                         bench.Settings.SelectedTestSettings.PressureSensorId = 16; //переключение на датчик давления id=16
 
-                                                        bench.UpdatePosts();
+                                                        //bench.UpdatePosts();
                                                         bench.SaveSettings();
                                                     }
                                                 }
@@ -222,7 +222,7 @@ namespace SOD.ViewModels.Testing.CRSBench
             if (bench.Settings.SelectedTestSettings.PressureSensorId == 16 || bench.Settings.SelectedTestSettings.PressureSensorId == 17)
             {
                 bench.Settings.SelectedTestSettings.PressureSensorId = 16; //переключение на датчик давления id=16
-                bench.UpdatePosts();
+                //bench.UpdatePosts();
                 bench.SaveSettings();
             }
 

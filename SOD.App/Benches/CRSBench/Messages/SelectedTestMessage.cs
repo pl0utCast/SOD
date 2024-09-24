@@ -7,10 +7,8 @@ namespace SOD.App.Benches.CRSBench.Messages
 {
     public class SelectedTestMessage
     {
-        public SelectedTestMessage(TestType testType)
+        public SelectedTestMessage()
         {
-            TestType = testType;
         }
-        public TestType TestType { get; set; }
     }
 }

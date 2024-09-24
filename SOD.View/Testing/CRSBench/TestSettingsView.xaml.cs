@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,16 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SOD.View.Testing.CRSBench.Dialogs
+namespace SOD.View.Testing.CRSBench
 {
-    /// <summary>
-    /// Логика взаимодействия для LeakageTestResultViewModel.xaml
-    /// </summary>
-    public partial class LeakageTestResultView : UserControl
-    {
-        public LeakageTestResultView()
-        {
-            InitializeComponent();
-        }
-    }
+	/// <summary>
+	/// Логика взаимодействия для TestSettingsView.xaml
+	/// </summary>
+	public partial class TestSettingsView : UserControl
+	{
+		public TestSettingsView()
+		{
+			InitializeComponent();
+		}
+	}
 }

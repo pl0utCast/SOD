@@ -26,8 +26,8 @@ namespace SOD.View.Converters
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            names = Enum.GetValues(typeof(TestType)).Cast<TestType>().ToDictionary(tt => tt.GetName());
-            Types = Enum.GetValues(typeof(TestType)).Cast<TestType>().Select(tt => tt.GetName()).ToList();
+            //names = Enum.GetValues(typeof(TestType)).Cast<TestType>().ToDictionary(tt => tt.GetName());
+            //Types = Enum.GetValues(typeof(TestType)).Cast<TestType>().Select(tt => tt.GetName()).ToList();
             return this;
         }
 

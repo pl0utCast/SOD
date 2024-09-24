@@ -19,17 +19,17 @@
         <StackPanel>
             <TextBlock
                 HorizontalAlignment="Center"
-                FontSize="24"
+                FontSize="22"
                 Text="Id" />
             <TextBlock
                 HorizontalAlignment="Center"
-                FontSize="24"
+                FontSize="22"
                 Text="{Binding Id}" />
         </StackPanel>
         <TextBox
             Grid.Column="1"
             materialDesign:HintAssist.Hint="{Binding Description}"
-            FontSize="24"
+            FontSize="22"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}">
             <TextBox.Text>
                 <MultiBinding Converter="{converters:ModbusRegisterValueConverter}" UpdateSourceTrigger="PropertyChanged">

@@ -17,7 +17,7 @@ namespace SOD.App.Testing
         public void StartCollectData();
         public void StartRegistration();
         public void StopRegistration();
-        public void Start(ITestBench testBench, MediumType mediumType);
+        public void Start(ITestBench testBench);
         public void Stop();
         public void CalculateResult();
         public void FillReport(Bitmap chartImage = null);

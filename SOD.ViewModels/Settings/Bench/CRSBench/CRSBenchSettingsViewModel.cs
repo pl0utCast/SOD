@@ -119,37 +119,36 @@ namespace SOD.ViewModels.Settings.Bench.CRSBench
 						temperatureSensor.Settings.Name = ChangeSensorsName[i].Name;
 						temperatureSensor.SaveSettings();
 					}
-					else
-					if (sensor is FrenqSensor frenqSensor)
-					{
-						frenqSensor.Settings.Name = ChangeSensorsName[i].Name;
-						frenqSensor.SaveSettings();
-					}
-					else if (sensor is ImpulseSensor impulseSensor)
-					{
-						impulseSensor.Settings.Name = ChangeSensorsName[i].Name;
-						impulseSensor.SaveSettings();
-					}
+					//else if (sensor is FrenqSensor frenqSensor)
+					//{
+					//	frenqSensor.Settings.Name = ChangeSensorsName[i].Name;
+					//	frenqSensor.SaveSettings();
+					//}
+					//else if (sensor is ImpulseSensor impulseSensor)
+					//{
+					//	impulseSensor.Settings.Name = ChangeSensorsName[i].Name;
+					//	impulseSensor.SaveSettings();
+					//}
 					else if (sensor is Core.Sensor.PressureSensor.CodeBased.PressureSensor codeBasedPressureSensor)
 					{
 						codeBasedPressureSensor.Settings.Name = ChangeSensorsName[i].Name;
 						codeBasedPressureSensor.SaveSettings();
 					}
-					else if (sensor is Core.Sensor.LeakageSensor.CodeBased.LeakageSensor codeBasedLeakageSensor)
-					{
-						codeBasedLeakageSensor.Settings.Name = ChangeSensorsName[i].Name;
-						codeBasedLeakageSensor.SaveSettings();
-					}
+					//else if (sensor is Core.Sensor.LeakageSensor.CodeBased.LeakageSensor codeBasedLeakageSensor)
+					//{
+					//	codeBasedLeakageSensor.Settings.Name = ChangeSensorsName[i].Name;
+					//	codeBasedLeakageSensor.SaveSettings();
+					//}
 					else if (sensor is Core.Sensor.TemperatureSensor.CodeBased.TemperatureSensor codeBasedTemperatureSensor)
 					{
 						codeBasedTemperatureSensor.Settings.Name = ChangeSensorsName[i].Name;
 						codeBasedTemperatureSensor.SaveSettings();
 					}
-					else if (sensor is Core.Sensor.LeakageSensor.MML.LeakageSensor mmleakageSensor)
-					{
-						mmleakageSensor.Settings.Name = ChangeSensorsName[i].Name;
-						mmleakageSensor.SaveSettings();
-					}
+					//else if (sensor is Core.Sensor.LeakageSensor.MML.LeakageSensor mmleakageSensor)
+					//{
+					//	mmleakageSensor.Settings.Name = ChangeSensorsName[i].Name;
+					//	mmleakageSensor.SaveSettings();
+					//}
 					i++;
 				}
 			}

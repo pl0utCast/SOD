@@ -83,12 +83,12 @@
                             SensorName="{lc:Localization Testing.CRSBench.Pressure}"
                             ViewModel="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type sensorsVm:LeakageSensorViewModel}">
+                    <!--<DataTemplate DataType="{x:Type sensorsVm:LeakageSensorViewModel}">
                         <local:SensorView
                             Height="{Binding ElementName=topSp, Path=ActualHeight}"
                             SensorName="{lc:Localization Testing.CRSBench.Leakage}"
                             ViewModel="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />
-                    </DataTemplate>
+                    </DataTemplate>-->
                 </ItemsControl.Resources>
             </ItemsControl>
             <local:TemperatureSensorsView DataContext="{Binding TemperatureSensors}" ViewModel="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />

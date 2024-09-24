@@ -30,10 +30,10 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor
                 {
                     TemperatureSensors.Add(new SensorViewModel(sensor, dialogService));
                 }
-                else if (sensor is ILeakageSensor leakageSensor)
-                {
-                    LeakageSensors.Add(new SensorViewModel(sensor, dialogService));
-                }
+                //else if (sensor is ILeakageSensor leakageSensor)
+                //{
+                //    LeakageSensors.Add(new SensorViewModel(sensor, dialogService));
+                //}
             }
             
             GoBack = ReactiveCommand.Create(() => navigationService.GoBack());
@@ -41,7 +41,7 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor
         public IEnumerable<DeviceViewModel> Devices { get; set; }
         public List<SensorViewModel> PressureSensors { get; set; } = new List<SensorViewModel>();
         public List<SensorViewModel> TemperatureSensors { get; set; } = new List<SensorViewModel>();
-        public List<SensorViewModel> LeakageSensors { get; set; } = new List<SensorViewModel>();
+        //public List<SensorViewModel> LeakageSensors { get; set; } = new List<SensorViewModel>();
         public ReactiveCommand<Unit, Unit> GoBack { get; set; }
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
         public string ViewTitle { get; set; }
