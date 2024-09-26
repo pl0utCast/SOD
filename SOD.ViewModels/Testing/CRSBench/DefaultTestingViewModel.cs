@@ -42,13 +42,11 @@ namespace SOD.ViewModels.Testing.CRSBench
 
 			bus.Subscribe<App.Benches.CRSBench.Messages.SelectedTestMessage>(m =>
 			{
-
-					IsTestResultFill = false;
-					IsSelectedTest = true;
-					UpdateChart();
-					UpdateSensors();
-					InfoMessage = localizationService["Testing.CRSBench.Step2"];
-
+				IsTestResultFill = false;
+				IsSelectedTest = true;
+				UpdateChart();
+				UpdateSensors();
+				InfoMessage = localizationService["Testing.CRSBench.Step2"];
 			});
 
 			StartTest = ReactiveCommand.Create(() =>
@@ -65,12 +63,7 @@ namespace SOD.ViewModels.Testing.CRSBench
 					if (exposureCounter > 0)
 					{
 						IsTestResultFill = true;
-						//Для shell test со стандартом API598 выводим отдельное сообщение
-						//if (_bench.CurrentTest?.TestType == App.Testing.TestType.Strength &&
-						//	_bench.Standart.Name.Replace(" ", "") == "API598") // Убираем пробелы и сравниваем с названием
-						//	InfoMessage = localizationService["Testing.CRSBench.Step6"];
-						//else
-							InfoMessage = localizationService["Testing.CRSBench.Step6_2"];
+						InfoMessage = localizationService["Testing.CRSBench.Step6_2"];
 					}
 					else
 					{
@@ -123,7 +116,7 @@ namespace SOD.ViewModels.Testing.CRSBench
 			Result = ReactiveCommand.CreateFromTask(async () =>
 			{
 				var vm = new Dialogs.TestResultViewModel(((App.Testing.Test.Test)_bench.CurrentTest).TestResult.PostResults.FirstOrDefault(), localizationService, dialogService, Observable.Return(isAddTestToReport));
-				
+
 				var result = await dialogService.ShowDialogAsync("CRSBenchTestResult", vm);
 				if (result != null)
 				{
@@ -165,31 +158,22 @@ namespace SOD.ViewModels.Testing.CRSBench
 					IsTestResultFill = false;
 				}).DisposeWith(dis);
 			});
-
 		}
 
 		private void UpdateChart()
 		{
 			PressureChart.ClearChart();
-
 			foreach (var pSensor in _bench.Sensors.Where(s => s.Sensor is IPressureSensor).Select(s => s.Sensor))
 			{
 				PressureChart.SetPressureSensor((IPressureSensor)pSensor);
 			}
-
 		}
 
 		private void UpdateSensors()
 		{
 			Sensors.Clear();
-			//foreach (var post in _bench.Posts)
-			//{
 			Sensors.AddRange(_bench.Sensors.Where(s => s.Sensor is IPressureSensor)
-								 .Select(s => new PressureSensorViewModel((IPressureSensor)s.Sensor, _bench.Settings.PressureUnit)));
-			//Sensors.AddRange(post.Sensors
-			//                     .Where(s => s.Sensor is ILeakageSensor)
-			//                     .Select(s => new LeakageSensorViewModel((ILeakageSensor)s.Sensor, _bench.Settings.LeakageUnit)));
-			//}
+										   .Select(s => new PressureSensorViewModel((IPressureSensor)s.Sensor, _bench.Settings.PressureUnit)));
 		}
 
 		[Reactive]

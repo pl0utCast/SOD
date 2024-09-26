@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SOD.App.Testing
+namespace SOD.Core.Balloons
 {
 	public enum BalloonType
 	{

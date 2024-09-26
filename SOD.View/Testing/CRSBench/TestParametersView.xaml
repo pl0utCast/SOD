@@ -95,13 +95,13 @@
                                 FontSize="20"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 materialDesign:HintAssist.Hint="{lc:Localization Testing.CRSBench.TestSettings.BalloonValue}"
-                                Text="{Binding BalloonValue}"/>
+                                Text="{Binding SelectedBalloon.BalloonVolume}"/>
                             <TextBox
                                 Margin="10 10 10 0"
                                 FontSize="20"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 materialDesign:HintAssist.Hint="{lc:Localization Testing.CRSBench.TestSettings.BalloonSN}"
-                                Text="{Binding BalloonSN}"/>
+                                Text="{Binding SelectedBalloon.SerialNumber}"/>
                         </StackPanel>
 
                         <StackPanel Margin="20" Grid.Row="1" Grid.ColumnSpan="2">

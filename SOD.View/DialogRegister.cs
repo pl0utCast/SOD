@@ -33,7 +33,7 @@ namespace SOD.View
             dialogService.RegisterDialog("ExportReportDialog", new Reports.Dialogs.ExportReportDialogView());
 
             dialogService.RegisterDialog("CRSBenchTestResult", new Testing.CRSBench.Dialogs.TestResultView());
-            //dialogService.RegisterDialog("CreateNewReport", new Testing.CRSBench.Dialogs.CreateNewReport());
+            dialogService.RegisterDialog("CreateNewReport", new Testing.CRSBench.Dialogs.CreateNewReport());
             //dialogService.RegisterDialog("CheckSumError", new Testing.CRSBench.Dialogs.CheckSumError());
 
             dialogService.RegisterDialog("IncorrectPassword", new Dialog.IncorrectPasswordView());

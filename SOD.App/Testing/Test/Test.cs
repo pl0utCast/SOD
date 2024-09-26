@@ -1,7 +1,4 @@
-﻿
-
-using SOD.App.Benches;
-using SOD.App.Mediums;
+﻿using SOD.App.Benches;
 using SOD.App.Testing.Standarts;
 using SOD.Core.Reports;
 using SOD.Core.Sensor;
@@ -19,6 +16,9 @@ namespace SOD.App.Testing.Test
 		private readonly IStandart _standart;
 		private List<Pressure> pressures = new List<Pressure>();
 		private IDisposable pressureUpdaterDisposable;
+		private List<Action> sensorValueUpdaters;
+		private ITestBench _testBench;
+		private Timer timer;
 		public Test(BaseReportData baseReportData,
 					ILocalizationService localizationService,
 					IStandart standart,
@@ -35,75 +35,77 @@ namespace SOD.App.Testing.Test
 		{
 			TestResult.Standart = _standart != null ? _standart.Name : string.Empty;
 
-			var expectedSetPressure = (Pressure)_parameters[0];
+			//var expectedSetPressure = (Pressure)_parameters[0];
 			//var slumpDiffPressure = ((Pressure)_parameters[2]).Bars;
 			//var sensitivity = (int)_parameters[3];
 
 			int slumpIndex = 0;
 			int closingIndex = 0;
 			var isSlump = false;
-			//if (pressures.Count > sensitivity)
-			//{
-			//	var data = pressures.Select(p => p.Bars).ToArray();
+			if (pressures.Count > 0)
+			{
+				var data = pressures.Select(p => p.Bars).ToArray();
+				isSlump = true;
+				slumpIndex = FindMaximum(data, 0, data.Count() - 1);
+				closingIndex = FindMinimum(data, 0, data.Count() - 1);
+				//var minDP = double.MaxValue;
+				//for (slumpIndex = 0; slumpIndex < pressures.Count && !isSlump; slumpIndex++)
+				//{
+				//	var dp = 0.0;
 
-			//	var minDP = double.MaxValue;
-			//	for (slumpIndex = sensitivity; slumpIndex < pressures.Count && !isSlump; slumpIndex++)
-			//	{
-			//		var dp = 0.0;
+				//	for (var i = 0; i < sensitivity; i++)
+				//	{
+				//		var pressure = data[slumpIndex - i];
+				//		var prevPressure = data[slumpIndex - i - 1];
 
-			//		for (var i = 0; i < sensitivity; i++)
-			//		{
-			//			var pressure = data[slumpIndex - i];
-			//			var prevPressure = data[slumpIndex - i - 1];
+				//		dp += pressure - prevPressure;
 
-			//			dp += pressure - prevPressure;
+				//		isSlump = -dp > slumpDiffPressure;
 
-			//			isSlump = -dp > slumpDiffPressure;
+				//		if (dp >= minDP) continue;
 
-			//			if (dp >= minDP) continue;
+				//		minDP = dp;
+				//		//DebugTools.DebugWrite("index = " + slumpIndex + "; ");
+				//		//DebugTools.DebugWriteLine("dp = " + dp);
+				//	}
+				//}
 
-			//			minDP = dp;
-			//			//DebugTools.DebugWrite("index = " + slumpIndex + "; ");
-			//			//DebugTools.DebugWriteLine("dp = " + dp);
-			//		}
-			//	}
+				//if (isSlump)
+				//{
+				//	slumpIndex = FindMaximum(data, slumpIndex - sensitivity, slumpIndex);
+				//	if (slumpIndex < 0) slumpIndex = 0;
 
-			//	if (isSlump)
-			//	{
-			//		slumpIndex = FindMaximum(data, slumpIndex - sensitivity, slumpIndex);
-			//		if (slumpIndex < 0) slumpIndex = 0;
+				//	var isClosed = false;
+				//	closingIndex = slumpIndex;
+				//	var minSensitivity = 50;
 
-			//		var isClosed = false;
-			//		closingIndex = slumpIndex;
-			//		var minSensitivity = 50;
+				//	for (; closingIndex < pressures.Count && !isClosed; closingIndex++)
+				//	{
+				//		var dp = 0.0;
 
-			//		for (; closingIndex < pressures.Count && !isClosed; closingIndex++)
-			//		{
-			//			var dp = 0.0;
+				//		for (var j = 1; j < minSensitivity && closingIndex + j < pressures.Count; j++)
+				//		{
+				//			var pressure = data[closingIndex + j];
+				//			var prevPressure = data[closingIndex];
 
-			//			for (var j = 1; j < minSensitivity && closingIndex + j < pressures.Count; j++)
-			//			{
-			//				var pressure = data[closingIndex + j];
-			//				var prevPressure = data[closingIndex];
+				//			dp += pressure - prevPressure;
+				//		}
 
-			//				dp += pressure - prevPressure;
-			//			}
+				//		isClosed = dp > 0F;
+				//	}
 
-			//			isClosed = dp > 0F;
-			//		}
-
-			//		var start = closingIndex - minSensitivity;
-			//		if (start < slumpIndex) start = slumpIndex;
-			//		closingIndex = FindMinimum(data, start, closingIndex);
-			//	}
-			//}
+				//	var start = closingIndex - minSensitivity;
+				//	if (start < slumpIndex) start = slumpIndex;
+				//	closingIndex = FindMinimum(data, start, closingIndex);
+				//}
+			}
 
 			var postResult = new Result.PostResult();
-			//postResult.OpenPressure = isSlump ? pressures[slumpIndex] : new Pressure(0, UnitsNet.Units.PressureUnit.Bar);
-			//postResult.ClosePressure = isSlump ? pressures[closingIndex] : new Pressure(0, UnitsNet.Units.PressureUnit.Bar);
+			postResult.OpenPressure = isSlump ? pressures[slumpIndex] : new Pressure(0, UnitsNet.Units.PressureUnit.Bar);
+			postResult.ClosePressure = isSlump ? pressures[closingIndex] : new Pressure(0, UnitsNet.Units.PressureUnit.Bar);
 			//postResult.OpenPoint = isSlump ? slumpIndex : 0;
 			//postResult.ClosePoint = isSlump ? closingIndex : 0;
-			//postResult.ExpectedSetPressure = expectedSetPressure;
+			postResult.ExpectedSetPressure = new Pressure(100, UnitsNet.Units.PressureUnit.Bar);
 			TestResult.PostResults.Add(postResult);
 		}
 
@@ -112,7 +114,7 @@ namespace SOD.App.Testing.Test
 			TestResult?.Clear();
 		}
 
-		public void FillReport(Bitmap chartImage = null)
+		public void FillReport(Bitmap chartImage)
 		{
 			if (chartImage != null)
 			{
@@ -125,7 +127,7 @@ namespace SOD.App.Testing.Test
 					}
 				}
 			}
-			_reportData?.Fill(Name, TestResult);
+			_reportData?.Fill(TestResult);
 		}
 
 		public object[] GetTestParameters()
@@ -138,18 +140,43 @@ namespace SOD.App.Testing.Test
 			if (IsRun) return;
 			IsRun = true;
 			TestResult.Clear();
-
-				var sensor = ((Benches.CRSBench.Bench)testBench).Sensors.Where(s => s.Sensor is IPressureSensor).FirstOrDefault();
-				pressureUpdaterDisposable = ((IPressureSensor)sensor?.Sensor).Subscribe(
-					pressure =>
-					{
-						pressures.Add(pressure);
-					});
-
+			_testBench = testBench;
+			var sensor = ((Benches.CRSBench.Bench)testBench).Sensors.Where(s => s.Sensor is IPressureSensor).FirstOrDefault();
+			pressureUpdaterDisposable = ((IPressureSensor)sensor?.Sensor).Subscribe(
+				pressure =>
+				{
+					pressures.Add(pressure);
+				});
 		}
 
 		public void StartCollectData()
 		{
+			sensorValueUpdaters = new List<Action>();
+			var sensor = ((Benches.CRSBench.Bench)_testBench).Sensors.Where(s => s.Sensor is IPressureSensor).FirstOrDefault();
+
+			if (sensor.Sensor is IPressureSensor pressureSensor)
+			{
+				//pressures.Add(pressureSensor.Id, new List<Pressure>());
+				sensorValueUpdaters.Add(() =>
+				{
+					pressures.Add(pressureSensor.Pressure.ToUnit(_testBench.Settings.PressureUnit));
+				});
+				/*pressureSensor.Subscribe(p =>
+				{
+					var press = p.ToUnit(_testBench.Settings.PressureUnit);
+					pressures[pressureSensor.Id].Add(press);
+				}).DisposeWith(disposables);*/
+			}
+
+			timer?.Dispose();
+			// таймер тикает каждые 100 мс
+			timer = new Timer(c =>
+				{
+					foreach (var updater in sensorValueUpdaters)
+					{
+						updater();
+					}
+				}, null, 0, 100);
 
 		}
 
@@ -198,17 +225,13 @@ namespace SOD.App.Testing.Test
 				maxIndex = i;
 				maxValue = data[i];
 			}
-
 			return maxIndex;
 		}
 
 		public Result TestResult { get; set; } = new Result();
 		public TestType TestType => TestType.Functional;
-
 		public ITestingResult Result => TestResult;
-
 		public bool IsRun { get; private set; }
 		public string Name { get; set; }
-
 	}
 }

@@ -20,7 +20,7 @@ namespace SOD.ViewModels.Testing.CRSBench
         {
             Settings = testSettings;
             Standarts = standarts;
-            Standart = standarts.SingleOrDefault(s => s.Id == testSettings.StandartId);
+            //Standart = standarts.SingleOrDefault(s => s.Id == testSettings.StandartId);
             PressureSensors = sensors.Where(s => s is IPressureSensor);
             PressureSensor = PressureSensors.SingleOrDefault(s => s.Id == Settings.PressureSensorId);
             //Medium = Settings.MediumType;
@@ -34,7 +34,7 @@ namespace SOD.ViewModels.Testing.CRSBench
         public virtual void Save()
         {
             Settings.Time = Time;
-            Settings.StandartId = Standart?.Id;
+            //Settings.StandartId = Standart?.Id;
             Settings.PressureSensorId = PressureSensor.Id;
             //Settings.MediumType = Medium;
         }
