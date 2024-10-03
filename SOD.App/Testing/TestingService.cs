@@ -126,10 +126,17 @@ namespace SOD.App.Testing
 
         public IEnumerable<LuaStandart> GetAllStandarts()
         {
-            using (var db = new LiteDatabase(dbStandartPath, BsonMapper.Global))
-            {
-                return db.GetCollection<LuaStandart>().FindAll().ToList();
-            }
+			return new List<LuaStandart>
+			{
+				new() {Id=0, Name = "ГОСТ ISO 11439" },
+                new() {Id=1, Name = "ISO 11119-3"},
+                new() {Id=2, Name = "ГОСТ 33986-2016"},
+                new() {Id=3, Name = "ГОСТ Р 51753-2001"}
+			};
+            //using (var db = new LiteDatabase(dbStandartPath, BsonMapper.Global))
+            //{
+            //    return db.GetCollection<LuaStandart>().FindAll().ToList();
+            //}
         }
 
         public IObservable<IChangeSet<LuaStandart>> ConnectToStandarts()

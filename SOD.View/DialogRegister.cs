@@ -9,7 +9,7 @@ namespace SOD.View
     {
         public static void Register(IDialogService dialogService)
         {
-            //dialogService.RegisterDialog("EditValveProperty", new Settings.Valve.Dialog.EditVavlePropertyDialog());
+            dialogService.RegisterDialog("EditBalloonProperty", new Settings.Balloon.Dialog.EditBalloonPropertyDialog());
             //dialogService.RegisterDialog("DeleteValveProperty", new Settings.Valve.Dialog.DeleteValvePropertyDialog());
             //dialogService.RegisterDialog("DeleteValveType", new Settings.Valve.Dialog.DeleteValveTypeDialog());
 
@@ -21,8 +21,8 @@ namespace SOD.View
             //dialogService.RegisterDialog("ScriptSelector", new Settings.Standarts.Dialog.ScriptSelectorView());
             //dialogService.RegisterDialog("SelectPostSensor", new Settings.Bench.ThreePostBench.Dialog.SelectPostSensorView());
             //dialogService.RegisterDialog("AddTestSettings", new Settings.Bench.ThreePostBench.Dialog.AddTestView());
-            //dialogService.RegisterDialog("EditProperty", new Props.EditPropertyView());
-            //dialogService.RegisterDialog("DeleteProperty", new Props.DeletePropView());
+            dialogService.RegisterDialog("EditProperty", new Props.EditPropertyView());
+            dialogService.RegisterDialog("DeleteProperty", new Props.DeletePropView());
             //dialogService.RegisterDialog("SaveDeviceSettings", new Settings.DeviceAndSensor.Device.Dialog.SaveDeviceSettingsView());
             dialogService.RegisterDialog("CodeBasedSensorSettings", new Settings.DeviceAndSensor.Sensors.Dialog.CodeBasedSensorSettingsView());
             dialogService.RegisterDialog("AddLangView", new Settings.Bench.Dialogs.AddLangView());

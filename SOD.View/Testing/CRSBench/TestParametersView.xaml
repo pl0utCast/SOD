@@ -33,8 +33,7 @@
             <TabItem>
                 <TabItem.Header>
                     <TextBlock 
-                        Text="ХАРАКТЕРИСТИКИ БАЛЛОНА"
-                        Margin="0,0,20,0"
+                        Text="{lc:Localization Testing.CRSBench.TestParameters.ParametersTest}"
                         FontSize="14"
                         Foreground="#616273"
                         FontWeight="Medium"
@@ -47,171 +46,185 @@
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40*" />
-                            <ColumnDefinition Width="60*" />
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
                         </Grid.ColumnDefinitions>
-                        <StackPanel Margin="15">
-                            <TextBlock
-                            Margin="0,10,0,0"
-                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                            Text="{lc:Localization Testing.CRSBench.TestSettings.BalloonType}" />
-                            <ListBox 
-                                Margin="0 10 0 0"
-                                FontSize="20"
-                                ItemsSource="{Binding Balloons}" 
-                                SelectedValue="{Binding SelectedBalloon}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <CheckBox
-                                            Margin="5,0,0,0"
-                                            FontSize="20"
-                                            IsChecked="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}">
-                                            <CheckBox.Content>
-                                                <TextBlock Text="{Binding Name, Converter={StaticResource TranslateValvePrefixConverter}}"/>
-                                            </CheckBox.Content>
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
 
-                        <StackPanel Grid.Column="1" Margin="15">
+
+                        <StackPanel>
                             <TextBlock
-                                Margin="10 10 10 0"
+                                Margin="10"
                                 Opacity="0.6"
                                 Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                                 Text="{lc:Localization Testing.CRSBench.TestSettings.Parameters}" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                                    Margin="10 20 0 10"
+                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                    Text="Тип:" />
+                                <ListBox 
+                                    Margin="10 10 0 0"
+                                    FontSize="22"
+                                    ItemsSource="{Binding Balloons}" 
+                                    SelectedValue="{Binding SelectedBalloon}">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <CheckBox
+                                                IsChecked="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}">
+                                                <CheckBox.Content>
+                                                    <TextBlock Text="{Binding Name}"/>
+                                                </CheckBox.Content>
+                                            </CheckBox>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
                             <ComboBox
-                                Margin="10 10 10 0"
+                                Margin="10"
                                 Height="50"
                                 materialDesign:HintAssist.Hint="{lc:Localization Testing.CRSBench.TestSettings.Standart}"
                                 DisplayMemberPath="Name"
-                                FontSize="20"
+                                FontSize="22"
                                 ItemsSource="{Binding Standarts}"
                                 SelectedValue="{Binding SelectedStandart}"
                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                             <TextBox
-                                Margin="10 10 10 0"
-                                FontSize="20"
+                                Margin="10"
+                                FontSize="22"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 materialDesign:HintAssist.Hint="{lc:Localization Testing.CRSBench.TestSettings.BalloonValue}"
-                                Text="{Binding SelectedBalloon.BalloonVolume}"/>
-                            <TextBox
-                                Margin="10 10 10 0"
-                                FontSize="20"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                materialDesign:HintAssist.Hint="{lc:Localization Testing.CRSBench.TestSettings.BalloonSN}"
-                                Text="{Binding SelectedBalloon.SerialNumber}"/>
+                                Text="{Binding BalloonVolume}"/>
+                            <controls:UnitValueView
+                                Margin="10"
+                                DataContext="{Binding WorkPressure}"
+                                FieldName="{lc:Localization Testing.CRSBench.TestSettings.Pressure}" />
                         </StackPanel>
 
-                        <StackPanel Margin="20" Grid.Row="1" Grid.ColumnSpan="2">
+                        <StackPanel Grid.Column="1">
                             <TextBlock
-                                Margin="10 10 0 0"
+                                Margin="10 10 0 5"
                                 Opacity="0.6"
                                 Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                                Text="{lc:Localization Testing.CRSBench.TestParameters.ParametersTest}" />
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="10 10 0 10"
-                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                                    FontSize="20" 
-                                    Text="{lc:Localization Testing.CRSBench.TestSettings.Mode}" />
-                                <RadioButton
-                                    FontSize="20"
-                                    Content="{lc:Localization Testing.CRSBench.TestSettings.ManualMode}"
-                                    IsChecked="{Binding IsModeAuto, Converter={StaticResource InvertBooleanConverter}}"
-                                    Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
-                                <RadioButton
-                                    FontSize="20" 
-                                    Content="{lc:Localization Testing.CRSBench.TestSettings.AutoMode}"
-                                    IsChecked="{Binding IsModeAuto}"
-                                    Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Visibility="{Binding IsModeAuto, Converter={StaticResource ReverseBooleanToVisibilityConverter}}">
-                                <TextBlock
-                                    Margin="10 10 0 10"
-                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                                    FontSize="20" 
-                                    Text="Тезодатчик" />
-                                <RadioButton
-                                    FontSize="20"
-                                    Content="5"
-                                    IsChecked="False"
-                                    Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
-                                <RadioButton
-                                    FontSize="20" 
-                                    Content="10"
-                                    IsChecked="True"
-                                    Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
-                                <RadioButton
-                                    FontSize="20" 
-                                    Content="30"
-                                    IsChecked="False"
-                                    Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
-                            </StackPanel>
+                                Text="Параметры испытания" />
                             <ComboBox
-                                Margin="10 10 10 0"
-                                FontSize="20"
+                                Margin="10"
+                                Height="50"
+                                FontSize="22"
                                 materialDesign:HintAssist.Hint="{lc:Localization Testing.CRSBench.TestSettings.PressureSensor}"
                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                 ItemsSource="{Binding PressureSensors}"
                                 SelectedValue="{Binding PressureSensor}"
                                 DisplayMemberPath="Name"/>
+
                             <TextBox
-                                Margin="10 15 10 0"
-                                FontSize="20"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="{Binding WorkPressure}"
-                                materialDesign:HintAssist.Hint="{lc:Localization Testing.CRSBench.TestSettings.Pressure}"/>
-                            <TextBox
-                                Margin="10 15 10 0"
-                                FontSize="20"
+                                Margin="10"
+                                FontSize="22"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 Text="{Binding ExposureTime}"
                                 materialDesign:HintAssist.Hint="{lc:Localization Testing.CRSBench.TestSettings.ExposureTime}"/>
-                            <StackPanel Orientation="Horizontal" Margin="10">
-                                <TextBox
-                                    FontSize="20"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding Deformation}"
-                                    Visibility="{Binding IsKPG4, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                    materialDesign:HintAssist.Hint="{lc:Localization Testing.CRSBench.TestSettings.FullDeformation}"/>
-                                <TextBox
-                                    FontSize="20"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding Deformation}"
-                                    Visibility="{Binding IsKPG4, Converter={StaticResource ReverseBooleanToVisibilityConverter}}"
-                                    materialDesign:HintAssist.Hint="{lc:Localization Testing.CRSBench.TestSettings.Deformation}"/>
-
-                                <ToggleButton
-                                    Content="{materialDesign:PackIcon Kind=Check, Size=21}"
-                                    IsChecked="{Binding IsConfirmed}"
-                                    Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                                    ToolTip="Подтвердите значение деформации" />
-                                <materialDesign:PackIcon
-                                    Width="10"
-                                    Height="10"
-                                    VerticalAlignment="Top"
-                                    Foreground="Red"
-                                    Kind="Asterisk"
-                                    Visibility="{Binding IsConfirmed, Converter={StaticResource ReverseBooleanToVisibilityConverter}}" />
-                            </StackPanel>
-
-                            <StackPanel 
-                                Margin="10" 
-                                Orientation="Horizontal">
-                                <TextBox
-                                    FontSize="20"
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="85*"/>
+                                    <ColumnDefinition Width="15*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBox
+                                        FontSize="22"
+                                        Margin="10"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Text="{Binding Deformation}"
+                                        Visibility="{Binding IsKPG4, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        materialDesign:HintAssist.Hint="{lc:Localization Testing.CRSBench.TestSettings.FullDeformation}"/>
+                                    <TextBox                                  
+                                        FontSize="22"
+                                        Margin="10"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Text="{Binding Deformation}"
+                                        Visibility="{Binding IsKPG4, Converter={StaticResource ReverseBooleanToVisibilityConverter}}"
+                                        materialDesign:HintAssist.Hint="{lc:Localization Testing.CRSBench.TestSettings.Deformation}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Grid.Column="1">
+                                    <ToggleButton Grid.Column="1"
+                                        Margin="10"
+                                        Content="{materialDesign:PackIcon Kind=Check, Size=20}"
+                                        IsChecked="{Binding IsConfirmed}"
+                                        Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+                                        ToolTip="Подтвердите значение допустимой деформации" />
+                                    <materialDesign:PackIcon Grid.Column="1"
+                                        Width="10"
+                                        Height="10"
+                                        VerticalAlignment="Top"
+                                        Foreground="Red"
+                                        Kind="Asterisk"
+                                        Visibility="{Binding IsConfirmed, Converter={StaticResource ReverseBooleanToVisibilityConverter}}" />
+                                </StackPanel>
+                                <TextBox Grid.Row="1"
+                                    Margin="10" 
+                                    FontSize="22"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     Text="{Binding MaxDeformation}"
                                     materialDesign:HintAssist.Hint="{lc:Localization Testing.CRSBench.TestSettings.MaxDeformation}"/>
-                                <materialDesign:PackIcon
+                                <materialDesign:PackIcon Grid.Row="1" Grid.Column="1"
+                                    Margin="10" 
                                     Width="20"
                                     Height="20"
                                     VerticalAlignment="Center"
                                     Kind="HelpCircleOutline"
                                     Visibility="{Binding SelectedValveType, Converter={StaticResource NullVisibilityConverter}}"
-                                    ToolTip="{lc:Localization Testing.CRSBench.TestSettings.DeformationToolTip}"/>                                
+                                    ToolTip="{lc:Localization Testing.CRSBench.TestSettings.DeformationToolTip}"/>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0 15 10 10">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                                    Margin="10"
+                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                    FontSize="22" 
+                                    Text="{lc:Localization Testing.CRSBench.TestSettings.Mode}" />
+                                <RadioButton
+                                    FontSize="22"
+                                    Content="{lc:Localization Testing.CRSBench.TestSettings.ManualMode}"
+                                    IsChecked="{Binding IsModeAuto, Converter={StaticResource InvertBooleanConverter}}"
+                                    Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
+                                <RadioButton
+                                    FontSize="22" 
+                                    Content="{lc:Localization Testing.CRSBench.TestSettings.AutoMode}"
+                                    IsChecked="{Binding IsModeAuto}"
+                                    Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
+                            </StackPanel>
+                            <StackPanel 
+                                Orientation="Horizontal" 
+                                Margin="0 10 10 10"
+                                Visibility="{Binding IsModeAuto, Converter={StaticResource ReverseBooleanToVisibilityConverter}}">
+                                <TextBlock
+                                    Margin="10"
+                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                    FontSize="22" 
+                                    Text="Тезодатчик" />
+                                <RadioButton
+                                    FontSize="22"
+                                    Content="{lc:Localization Testing.CRSBench.TestSettings.Tenso5}"
+                                    IsChecked="{Binding ModeTenso[0]}"
+                                    Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
+                                <RadioButton
+                                    FontSize="22" 
+                                    Content="{lc:Localization Testing.CRSBench.TestSettings.Tenso10}"
+                                    IsChecked="{Binding ModeTenso[1]}"
+                                    Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
+                                <RadioButton
+                                    FontSize="22" 
+                                    Content="{lc:Localization Testing.CRSBench.TestSettings.Tenso30}"
+                                    IsChecked="{Binding ModeTenso[2]}"
+                                    Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
                             </StackPanel>
                         </StackPanel>
                     </Grid>
@@ -221,7 +234,7 @@
             <TabItem>
                 <TabItem.Header>
                     <TextBlock 
-                        Text="{lc:Localization Testing.CRSBench.TestParameters.OtherParameters}"
+                        Text="{lc:Localization Testing.CRSBench.TestParameters.Information}"
                         Margin="0,0,20,0"
                         FontSize="14"
                         Foreground="#616273"
@@ -230,18 +243,45 @@
                 </TabItem.Header>
                 <Grid>
                     <ScrollViewer Margin="0,25,0,0" Visibility="Visible">
-                        <ItemsControl Grid.Row="1" ItemsSource="{Binding Properties}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <UniformGrid VerticalAlignment="Top" Columns="2" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <controls:PropertyView />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                        <StackPanel>
+                            <TextBlock 
+                                Text="{lc:Localization Testing.CRSBench.TestSettings.Parameters}" 
+                                Style="{StaticResource MaterialDesignHeadline5TextBlock}"/>
+                            <ItemsControl Margin="0 10 0 0" Grid.Row="1" ItemsSource="{Binding BalloonProperties}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBox
+                                            FontSize="22"
+                                            Margin="10 10 10 0"
+                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                            Text="{Binding Value}" 
+                                            materialDesign:HintAssist.Hint="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <TextBlock 
+                                Margin="0 15 10 0"
+                                Text="{lc:Localization Testing.CRSBench.TestParameters.OtherParameters}" 
+                                Style="{StaticResource MaterialDesignHeadline5TextBlock}"/>
+                            <ItemsControl Margin="0 10 0 0" Grid.Row="1" ItemsSource="{Binding Properties}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid VerticalAlignment="Top" Columns="2" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBox 
+                                            Margin="10 15 10 0"
+                                            FontSize="22"
+                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                            Text="{Binding Value}" 
+                                            materialDesign:HintAssist.Hint="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
                     </ScrollViewer>
                 </Grid>
             </TabItem>
@@ -249,20 +289,57 @@
             <!--<TabItem>
                 <TabItem.Header>
                     <TextBlock 
-                        Text="{lc:Localization Testing.CRSBench.TestParameters.ParametersTest}"
+                        Text="Режим работы"
                         Margin="0,0,20,0"
                         FontSize="14"
                         Foreground="#616273"
                         FontWeight="Medium"
                         VerticalAlignment="Center"/>
                 </TabItem.Header>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="90*" />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-
-                    <ScrollViewer Margin="0,25,0,0" Visibility="Visible">
+            <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                            Margin="10 10 0 10"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            FontSize="20" 
+                            Text="{lc:Localization Testing.CRSBench.TestSettings.Mode}" />
+                        <RadioButton
+                            FontSize="20"
+                            Content="{lc:Localization Testing.CRSBench.TestSettings.ManualMode}"
+                            IsChecked="{Binding IsModeAuto, Converter={StaticResource InvertBooleanConverter}}"
+                            Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
+                        <RadioButton
+                            FontSize="20" 
+                            Content="{lc:Localization Testing.CRSBench.TestSettings.AutoMode}"
+                            IsChecked="{Binding IsModeAuto}"
+                            Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
+                    </StackPanel>
+                    <StackPanel 
+                        Orientation="Horizontal" 
+                        Visibility="{Binding IsModeAuto, Converter={StaticResource ReverseBooleanToVisibilityConverter}}">
+                        <TextBlock
+                            Margin="10 10 0 10"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            FontSize="20" 
+                            Text="Тезодатчик" />
+                        <RadioButton
+                            FontSize="20"
+                            Content="{lc:Localization Testing.CRSBench.TestSettings.Tenso5}"
+                            IsChecked="{Binding ModeTenso[0]}"
+                            Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
+                        <RadioButton
+                            FontSize="20" 
+                            Content="{lc:Localization Testing.CRSBench.TestSettings.Tenso10}"
+                            IsChecked="{Binding ModeTenso[1]}"
+                            Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
+                        <RadioButton
+                            FontSize="20" 
+                            Content="{lc:Localization Testing.CRSBench.TestSettings.Tenso30}"
+                            IsChecked="{Binding ModeTenso[2]}"
+                            Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
+                    </StackPanel>
+                </StackPanel>-->
+                <!--<ScrollViewer Margin="0,25,0,0" Visibility="Visible">
                         <ItemsControl Grid.Row="1" ItemsSource="{Binding Properties}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -276,7 +353,6 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </ScrollViewer>
-                </Grid>
             </TabItem>-->
         </TabControl>
         <StackPanel

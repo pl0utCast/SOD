@@ -20,9 +20,9 @@ namespace SOD.App.Benches.CRSBench.Report
 		}
 		public override void Fill(params object[] parameters)
 		{
-			if (parameters[0] is Balloon balloon)
+			if (parameters[0] is List<Core.Balloons.Properties.BalloonProperty> balloonProp)
 			{
-				FillBalloon(balloon);
+				FillBalloon(balloonProp);
 			}
 			else if (parameters[0] is IEnumerable<Property> props)
 			{
@@ -120,11 +120,11 @@ namespace SOD.App.Benches.CRSBench.Report
 			return result;
 		}
 
-		private void FillBalloon(Balloon balloon)
+		private void FillBalloon(List<Core.Balloons.Properties.BalloonProperty> balloonProp)
 		{
 			TestingBalloon = new ReportBalloon();
 
-			foreach (var property in balloon.Properties)
+			foreach (var property in  balloonProp)
 			{
 				if (property.Type == PropertyType.StringList)
 				{

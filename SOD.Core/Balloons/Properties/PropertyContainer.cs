@@ -7,11 +7,11 @@ namespace SOD.Core.Balloons.Properties
 {
     public class PropertyContainer : IPropertyContainer
     {
-        public void AddProperty(BalloonProperty valveProperty)
+        public void AddProperty(BalloonProperty balloonProperty)
         {
-            if (valveProperty == null) return;
-            if (Properties.SingleOrDefault(vp => vp.Prefix == valveProperty.Prefix) != null) return;
-            Properties.Add(valveProperty);
+            if (balloonProperty == null) return;
+            if (Properties.SingleOrDefault(vp => vp.Prefix == balloonProperty.Prefix) != null) return;
+            Properties.Add(balloonProperty);
         }
 
         public void DeleteProperty(int id)

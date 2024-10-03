@@ -3,6 +3,8 @@ using SOD.Core.Settings;
 using UnitsNet;
 using UnitsNet.Units;
 using SOD.Core.Balloons;
+using SOD.Core.Balloons.Properties;
+using SOD.Core.Sensor.TensoSensor;
 
 namespace SOD.App.Benches.CRSBench
 {
@@ -12,6 +14,7 @@ namespace SOD.App.Benches.CRSBench
 		public TestSettings SelectedTestSettings { get; set; }
 		public Balloon SelectedBalloon { get; set; }
 		public PressureUnit PressureUnit { get; set; }
+		public List<BalloonProperty> BalloonProperties { get; set; } = new List<BalloonProperty>();
 		public List<Property> Parameters { get; set; } = new List<Property>();
 		public Dictionary<int, List<TestSettings>> Tests { get; set; } = new Dictionary<int, List<TestSettings>>();
 		public int? GasTemperatureSensorId { get; set; }
@@ -31,6 +34,7 @@ namespace SOD.App.Benches.CRSBench
 			public int Deformation { get; set; }
 			public int? MaxDeformation { get; set; }
 			public bool IsModeAuto { get; set; }
+			public TensoSensorType SelectedTenso { get; set; }
 			public Pressure SetPressure { get; set; } = new Pressure(0, PressureUnit.Bar);
 		}
 	}

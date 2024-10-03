@@ -96,37 +96,37 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Sensors
                         codeBasedPressureSensor.SaveSettings();
                     }
                 }
-                //else if (sensor is Core.Sensor.LeakageSensor.CodeBased.LeakageSensor codeBasedLeakageSensor)
-                //{
-                //    var vm = new Dialog.CodeBasedSensorSettingsViewModel(dialogService, () => codeBasedLeakageSensor.Flow.ToString(codeBasedLeakageSensor.Accaury), () => codeBasedLeakageSensor.Code);
-                //    vm.Id = codeBasedLeakageSensor.Id;
-                //    vm.Name = codeBasedLeakageSensor.Name;
-                //    vm.MinCode = codeBasedLeakageSensor.Settings.MinCode;
-                //    vm.MaxCode = codeBasedLeakageSensor.Settings.MaxCode;
-                //    vm.MaxValue = new Controls.UnitValueViewModel(codeBasedLeakageSensor.Settings.MaxValue);
-                //    vm.MinValue = new Controls.UnitValueViewModel(codeBasedLeakageSensor.Settings.MinValue);
-                //    vm.Accaury = codeBasedLeakageSensor.Settings.Accaury;
-                //    vm.FilterCoef = codeBasedLeakageSensor.Settings.FilterCoef;
-                //    vm.ChannelId = codeBasedLeakageSensor.Settings.ChannelId;
-                //    vm.UnitTypes = new VolumeFlow().GetUnitTypeInfo();
-                //    vm.UnitType = vm.UnitTypes.SingleOrDefault(ut => ut.UnitType.ToString() == codeBasedLeakageSensor.Settings.Unit.ToString());
-                //    vm.SensorHint = codeBasedLeakageSensor.Settings.SensorHint;
+                else if (sensor is Core.Sensor.LeakageSensor.CodeBased.LeakageSensor codeBasedLeakageSensor)
+                {
+                    var vm = new Dialog.CodeBasedSensorSettingsViewModel(dialogService, () => codeBasedLeakageSensor.Flow.ToString(codeBasedLeakageSensor.Accaury), () => codeBasedLeakageSensor.Code);
+                    vm.Id = codeBasedLeakageSensor.Id;
+                    vm.Name = codeBasedLeakageSensor.Name;
+                    vm.MinCode = codeBasedLeakageSensor.Settings.MinCode;
+                    vm.MaxCode = codeBasedLeakageSensor.Settings.MaxCode;
+                    vm.MaxValue = new Controls.UnitValueViewModel(codeBasedLeakageSensor.Settings.MaxValue);
+                    vm.MinValue = new Controls.UnitValueViewModel(codeBasedLeakageSensor.Settings.MinValue);
+                    vm.Accaury = codeBasedLeakageSensor.Settings.Accaury;
+                    vm.FilterCoef = codeBasedLeakageSensor.Settings.FilterCoef;
+                    vm.ChannelId = codeBasedLeakageSensor.Settings.ChannelId;
+                    vm.UnitTypes = new VolumeFlow().GetUnitTypeInfo();
+                    vm.UnitType = vm.UnitTypes.SingleOrDefault(ut => ut.UnitType.ToString() == codeBasedLeakageSensor.Settings.Unit.ToString());
+                    vm.SensorHint = codeBasedLeakageSensor.Settings.SensorHint;
 
-                //    if ((bool)await dialogService.ShowDialogAsync("CodeBasedSensorSettings", vm))
-                //    {
-                //        codeBasedLeakageSensor.Settings.Name = vm.Name;
-                //        codeBasedLeakageSensor.Settings.ChannelId = vm.ChannelId;
-                //        codeBasedLeakageSensor.Settings.MinCode = vm.MinCode;
-                //        codeBasedLeakageSensor.Settings.MaxCode = vm.MaxCode;
-                //        codeBasedLeakageSensor.Settings.MinValue = (VolumeFlow)vm.MinValue.GetValue();
-                //        codeBasedLeakageSensor.Settings.MaxValue = (VolumeFlow)vm.MaxValue.GetValue();
-                //        codeBasedLeakageSensor.Settings.Accaury = vm.Accaury;
-                //        codeBasedLeakageSensor.Settings.FilterCoef = vm.FilterCoef;
-                //        codeBasedLeakageSensor.Settings.Unit = (VolumeFlowUnit)vm.UnitType?.UnitType;
-                //        codeBasedLeakageSensor.Settings.SensorHint = vm.SensorHint;
-                //        codeBasedLeakageSensor.SaveSettings();
-                //    }
-                //}
+                    if ((bool)await dialogService.ShowDialogAsync("CodeBasedSensorSettings", vm))
+                    {
+                        codeBasedLeakageSensor.Settings.Name = vm.Name;
+                        codeBasedLeakageSensor.Settings.ChannelId = vm.ChannelId;
+                        codeBasedLeakageSensor.Settings.MinCode = vm.MinCode;
+                        codeBasedLeakageSensor.Settings.MaxCode = vm.MaxCode;
+                        codeBasedLeakageSensor.Settings.MinValue = (VolumeFlow)vm.MinValue.GetValue();
+                        codeBasedLeakageSensor.Settings.MaxValue = (VolumeFlow)vm.MaxValue.GetValue();
+                        codeBasedLeakageSensor.Settings.Accaury = vm.Accaury;
+                        codeBasedLeakageSensor.Settings.FilterCoef = vm.FilterCoef;
+                        codeBasedLeakageSensor.Settings.Unit = (VolumeFlowUnit)vm.UnitType?.UnitType;
+                        codeBasedLeakageSensor.Settings.SensorHint = vm.SensorHint;
+                        codeBasedLeakageSensor.SaveSettings();
+                    }
+                }
                 else if (sensor is Core.Sensor.TemperatureSensor.CodeBased.TemperatureSensor codeBasedTemperatureSensor)
                 {
                     var vm = new Dialog.CodeBasedSensorSettingsViewModel(dialogService, () => codeBasedTemperatureSensor.Temperature.ToString(codeBasedTemperatureSensor.Settings.Accaury), () => codeBasedTemperatureSensor.Code);
@@ -158,7 +158,38 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Sensors
                         codeBasedTemperatureSensor.SaveSettings();
                     }
                 }
-            });
+				else if (sensor is Core.Sensor.TensoSensor.CodeBased.TensoSensor codeBasedTensoSensor)
+				{
+					//var vm = new Dialog.CodeBasedSensorSettingsViewModel(dialogService, () => codeBasedTensoSensor.Flow.ToString(codeBasedLeakageSensor.Accaury), () => codeBasedLeakageSensor.Code);
+					//vm.Id = codeBasedLeakageSensor.Id;
+					//vm.Name = codeBasedLeakageSensor.Name;
+					//vm.MinCode = codeBasedLeakageSensor.Settings.MinCode;
+					//vm.MaxCode = codeBasedLeakageSensor.Settings.MaxCode;
+					//vm.MaxValue = new Controls.UnitValueViewModel(codeBasedLeakageSensor.Settings.MaxValue);
+					//vm.MinValue = new Controls.UnitValueViewModel(codeBasedLeakageSensor.Settings.MinValue);
+					//vm.Accaury = codeBasedLeakageSensor.Settings.Accaury;
+					//vm.FilterCoef = codeBasedLeakageSensor.Settings.FilterCoef;
+					//vm.ChannelId = codeBasedLeakageSensor.Settings.ChannelId;
+					//vm.UnitTypes = new VolumeFlow().GetUnitTypeInfo();
+					//vm.UnitType = vm.UnitTypes.SingleOrDefault(ut => ut.UnitType.ToString() == codeBasedLeakageSensor.Settings.Unit.ToString());
+					//vm.SensorHint = codeBasedLeakageSensor.Settings.SensorHint;
+
+					//if ((bool)await dialogService.ShowDialogAsync("CodeBasedSensorSettings", vm))
+					//{
+					//	codeBasedLeakageSensor.Settings.Name = vm.Name;
+					//	codeBasedLeakageSensor.Settings.ChannelId = vm.ChannelId;
+					//	codeBasedLeakageSensor.Settings.MinCode = vm.MinCode;
+					//	codeBasedLeakageSensor.Settings.MaxCode = vm.MaxCode;
+					//	codeBasedLeakageSensor.Settings.MinValue = (VolumeFlow)vm.MinValue.GetValue();
+					//	codeBasedLeakageSensor.Settings.MaxValue = (VolumeFlow)vm.MaxValue.GetValue();
+					//	codeBasedLeakageSensor.Settings.Accaury = vm.Accaury;
+					//	codeBasedLeakageSensor.Settings.FilterCoef = vm.FilterCoef;
+					//	codeBasedLeakageSensor.Settings.Unit = (VolumeFlowUnit)vm.UnitType?.UnitType;
+					//	codeBasedLeakageSensor.Settings.SensorHint = vm.SensorHint;
+					//	codeBasedLeakageSensor.SaveSettings();
+					//}
+				}
+			});
         }
         [Reactive]
         public string Name { get; set; }

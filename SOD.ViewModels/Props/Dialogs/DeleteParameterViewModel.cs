@@ -2,12 +2,13 @@
 using ReactiveUI;
 using SOD.Dialogs;
 using System.Reactive;
+using SOD.ViewModels.Controls;
 
 namespace SOD.ViewModels.Props.Dialogs
 {
-	public class DeleteParameterViewModel : ReactiveObject, IActivatableViewModel
+	public class DeleteParameterViewModel : YesNoDialogViewModel, IActivatableViewModel
 	{
-		public DeleteParameterViewModel(IDialogService dialogService)
+		public DeleteParameterViewModel(IDialogService dialogService) : base(dialogService)
 		{
 			Delete = ReactiveCommand.Create(() => dialogService.CloseAsync(true));
 			Cancel = ReactiveCommand.Create(() => dialogService.CloseAsync(false));

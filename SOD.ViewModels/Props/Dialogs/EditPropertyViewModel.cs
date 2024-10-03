@@ -16,14 +16,14 @@ using System.Reactive.Linq;
 
 namespace SOD.ViewModels.Props.Dialogs
 {
-	public class EditPropertyViewModel : ReactiveValidationObject, IActivatableViewModel
+	public class EditPropertyViewModel : YesNoDialogViewModel, IActivatableViewModel
 	{
 		private string oldName;
 		private string oldAlias;
 		private IValueViewModel oldValue;
 		private PropertyType oldType;
 
-		public EditPropertyViewModel(IDialogService dialogService, PropertyViewModel propertyViewModel, IReadOnlyList<PropertyViewModel> propertyViewModels)
+		public EditPropertyViewModel(IDialogService dialogService, PropertyViewModel propertyViewModel, IReadOnlyList<PropertyViewModel> propertyViewModels) : base(dialogService)
 		{
 			Property = propertyViewModel;
 			oldName = propertyViewModel.Name;
@@ -35,21 +35,21 @@ namespace SOD.ViewModels.Props.Dialogs
 			Type = propertyViewModel.Type;
 			Types = Enum.GetValues(typeof(PropertyType)).Cast<PropertyType>().ToList();
 
-			this.WhenActivated(dis =>
-			{
-				this.ValidationRule(x => x.Name, n => !string.IsNullOrEmpty(n), "Не может быть пустым")
-					.DisposeWith(dis);
+			//this.WhenActivated(dis =>
+			//{
+			//	//this.ValidationRule(x => x.Name, n => !string.IsNullOrEmpty(n), "Не может быть пустым")
+			//	//	.DisposeWith(dis);
 
-				var validateAlias = this.WhenAnyValue(x => x.Alias)
-					.Select(a =>
-					{
-						if (string.IsNullOrEmpty(a)) return new ValidationState(false, "Поле не должно быть пустым");
-						if (propertyViewModels.Select(p => p.Alias).Where(a => a != oldAlias).Contains(a)) return new ValidationState(false, "Данный alias уже занят");
-						return ValidationState.Valid;
-					});
-				this.ValidationRule(x => x.Alias, validateAlias)
-					.DisposeWith(dis);
-			});
+			//	var validateAlias = this.WhenAnyValue(x => x.Alias)
+			//		.Select(a =>
+			//		{
+			//			if (string.IsNullOrEmpty(a)) return new ValidationState(false, "Поле не должно быть пустым");
+			//			if (propertyViewModels.Select(p => p.Alias).Where(a => a != oldAlias).Contains(a)) return new ValidationState(false, "Данный alias уже занят");
+			//			return ValidationState.Valid;
+			//		});
+			//	//this.ValidationRule(x => x.Alias, validateAlias)
+			//	//	.DisposeWith(dis);
+			//});
 
 			Save = ReactiveCommand.Create(() =>
 			{
@@ -57,7 +57,7 @@ namespace SOD.ViewModels.Props.Dialogs
 				propertyViewModel.Alias = Alias;
 				propertyViewModel.Type = Type;
 				dialogService.CloseAsync(true);
-			}, ValidationContext.Valid);
+			}/*, ValidationContext.Valid*/);
 
 			Cancel = ReactiveCommand.Create(() =>
 			{

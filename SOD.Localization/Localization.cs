@@ -47,7 +47,8 @@ namespace SOD.Localization
             public string ValveType { get; set; } = "Виды арматуры";
             public string Standart { get; set; } = "Стандарты";
             public string DevicesAndSensors { get; set; } = "Устройства и датчики";
-            public string EditLocalizationFile { get; set; } = "Редактировать файл перевода";
+			public string BalloonSettings { get; set; } = "Свойства баллонов";
+			public string EditLocalizationFile { get; set; } = "Редактировать файл перевода";
             public string EditReportTemplate { get; set; } = "Редактировать шаблон протокола";
             public string Users { get; set; } = "Пользователи";
             public string Themes { get; set; } = "Темы";

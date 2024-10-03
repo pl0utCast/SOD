@@ -4,6 +4,7 @@ using SOD.Core.Props;
 using SOD.Dialogs;
 using SOD.UserService;
 using SOD.ViewModels.Props;
+using SOD.ViewModels.Props.Dialogs;
 using System.Collections.ObjectModel;
 using System.Reactive;
 using System.Reactive.Disposables;
@@ -30,30 +31,29 @@ namespace SOD.ViewModels.Settings.Bench.CRSBench
 				Add = ReactiveCommand.CreateFromTask(async () =>
 				{
 					var propVm = new PropertyViewModel(new Property(), dialogService);
-					//var dialogVm = new EditPropertyViewModel(dialogService, propVm, Parameters);
-					//var result = await dialogService.ShowDialogAsync("EditProperty", dialogVm);
-					//if (result is bool isAddOrEdit && isAddOrEdit)
-					//{
-					//	Parameters.Add(propVm);
-					//}
+					var dialogVm = new EditPropertyViewModel(dialogService, propVm, Parameters);
+					var result = await dialogService.ShowDialogAsync("EditProperty", dialogVm);
+					if (result is bool isAddOrEdit && isAddOrEdit)
+					{
+						Parameters.Add(propVm);
+					}
 				})
 				.DisposeWith(dis);
 
 				Edit = ReactiveCommand.Create(() =>
 				{
-					//var dialogVm = new EditPropertyViewModel(dialogService, Parameter, Parameters);
-					//dialogService.ShowDialog("EditProperty", dialogVm);
+					var dialogVm = new EditPropertyViewModel(dialogService, Parameter, Parameters);
+					dialogService.ShowDialog("EditProperty", dialogVm);
 				}, this.WhenAnyValue(x => x.Parameter).Select(p => p != null))
 				.DisposeWith(dis);
 
 				Delete = ReactiveCommand.CreateFromTask(async () =>
 				{
-					//var result = await dialogService.ShowDialogAsync("DeleteProperty", new DeleteParameterViewModel(dialogService));
-					////if (result is bool canDelete)
-					//if ((bool)result)
-					//{
-					//	Parameters.Remove(Parameter);
-					//}
+					var result = await dialogService.ShowDialogAsync("DeleteProperty", new DeleteParameterViewModel(dialogService));
+					if ((bool)result)
+					{
+						Parameters.Remove(Parameter);
+					}
 				}, this.WhenAnyValue(x => x.Parameter).Select(p => p != null))
 				.DisposeWith(dis);
 			});

@@ -122,9 +122,9 @@
                 Text="{lc:Localization Settings.Bench.CrsBenchSettingsView.UsedSensors}" />
                 </materialDesign:ColorZone>
                 <ItemsControl
-            Grid.Row="1"
-            Margin="0,5,0,0"
-            ItemsSource="{Binding Sensors}">
+                    Grid.Row="1"
+                    Margin="0,5,0,0"
+                    ItemsSource="{Binding Sensors}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Grid.Row="1" Columns="2" />

@@ -17,9 +17,12 @@
 		public string Mode { get; set; } = "Режим испытания:";
 		public string ManualMode { get; set; } = "Ручной";
 		public string AutoMode { get; set; } = "Автоматический";
-        public string Pressure { get; set; } = "Испытательное давление баллона, МПа";
+		public string Tenso5 { get; set; } = "5 кг";
+		public string Tenso10 { get; set; } = "10 кг";
+		public string Tenso30 { get; set; } = "30 кг";
+
+		public string Pressure { get; set; } = "Испытательное давление баллона";
 		public string BalloonValue { get; set; } = "Объем баллона, л";
-		public string BalloonSN { get; set; } = "Серийный номер баллона";
 		public string Parameters { get; set; } = "Параметры баллона";
 	}
 }

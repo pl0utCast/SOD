@@ -119,16 +119,18 @@ namespace SOD.App.Benches.CRSBench
 				if (TestingBalloon != null)
 				{
 					currentTest?.FillReport(chart);
-					reportData.Fill(TestingBalloon);
+					Settings.BalloonProperties.Insert(0,new Core.Balloons.Properties.BalloonProperty() { Name = _localizationService["Testing.CRSBench.TestSettings.BalloonType"], Value = Settings.SelectedBalloon.Name });
+					Settings.BalloonProperties.Insert(1,new Core.Balloons.Properties.BalloonProperty() { Name = _localizationService["Testing.CRSBench.TestSettings.BalloonValue"], Value = Settings.SelectedBalloon.BalloonVolume.ToString() });
+					reportData.Fill(Settings.BalloonProperties);
 					reportData.Fill(Settings.Parameters);
 					var report = await _reportService.CreateReportAsync(reportData, Settings.ReportPath);
 
-					foreach (var prop in TestingBalloon.Properties)
-					{
-						report.Properties.Add(prop.Prefix, prop.Value.ToString());
-					}
-					report.Properties.Add("balloon_type", TestingBalloon.BalloonType.ToString());
-					report.Properties.Add("balloon_volume", TestingBalloon.BalloonVolume.ToString());
+					//foreach (var prop in TestingBalloon.Properties)
+					//{
+					//	report.Properties.Add(prop.Prefix, prop.Value.ToString());
+					//}
+					//report.Properties.Add("balloon_type", TestingBalloon.BalloonType.ToString());
+					//report.Properties.Add("balloon_volume", TestingBalloon.BalloonVolume.ToString());
 				}
 			});
 		}

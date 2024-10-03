@@ -11,7 +11,6 @@ namespace SOD.Core.Balloons.Properties
         [BsonIgnore]
         public object Value { get; set; }
         public PropertyType Type { get; set; }
-        public string SerializedValue { get; set; }
 
         public bool Equals(BalloonProperty other)
         {

@@ -20,6 +20,8 @@ using SOD.App.Testing.Standarts;
 using SOD.Core.Sensor;
 using System.Collections.ObjectModel;
 using SOD.Core.Balloons;
+using SOD.Core.Balloons.Properties;
+using SOD.Core.Sensor.TensoSensor;
 
 namespace SOD.ViewModels.Testing.CRSBench
 {
@@ -29,6 +31,7 @@ namespace SOD.ViewModels.Testing.CRSBench
 		//private ObservableAsPropertyHelper<bool> isSelectedTest;
 		private ObservableAsPropertyHelper<bool> isKPG4;
 		private Dictionary<string, IValueViewModel> parameters = new Dictionary<string, IValueViewModel>();
+		private readonly bool[] modeTenso;
 		public TestParametersViewModel(INavigationService navigationService,
 									   IValveService valveService,
 									   ITestBenchService testBenchService,
@@ -42,33 +45,45 @@ namespace SOD.ViewModels.Testing.CRSBench
 
 			var bench = (App.Benches.CRSBench.Bench)testBenchService.GetTestBench();
 			var standarts = testingService.GetAllStandarts().ToList();
+			var testSettings = bench.Settings.SelectedTestSettings;
 			Standarts = standarts;
-			PressureUnits = new Pressure().GetUnitTypeInfo();
-			SelectedPressureUnit = PressureUnits.SingleOrDefault(u => u.UnitType.Equals(bench.Settings.PressureUnit));
+			//PressureUnits = new Pressure().GetUnitTypeInfo();
+			//SelectedPressureUnit = PressureUnits.SingleOrDefault(u => u.UnitType.Equals(testSettings.SetPressure.Unit));
 
+			WorkPressure = new Controls.UnitValueViewModel(bench.Settings.SelectedTestSettings.SetPressure);
 			foreach (BalloonType balloon in Enum.GetValues(typeof(BalloonType)))
-				Balloons.Add(new Balloon() { BalloonType = balloon, Name=balloon.ToString()});
+				Balloons.Add(new Balloon() { BalloonType = balloon, Name = localizationService["Prefixes." + balloon.ToString()] });
 
-			SelectedBalloon = bench.Settings.SelectedBalloon;
+			SelectedBalloon = Balloons.FirstOrDefault(x => x.BalloonType == bench.Settings.SelectedBalloon.BalloonType);
+			BalloonVolume = bench.Settings.SelectedBalloon.BalloonVolume;
 			SelectedStandart = standarts.SingleOrDefault(u => u.Id == bench.Settings.SelectedBalloon?.StandartId);
+			modeTenso = new bool[3];
+			modeTenso[(int)testSettings.SelectedTenso] = true;
+			
 
+			ExposureTime = testSettings.Time;
+			IsModeAuto = testSettings.IsModeAuto;
+			MaxDeformation = testSettings.MaxDeformation.ToString();
+			PressureSensors.Add(sensorService.GetAllSensors().Where(s => bench.Settings.Sensors.TryGetValue(s.Id, out var isEnable) && isEnable && s is IPressureSensor));
+			PressureSensor = PressureSensors.FirstOrDefault(x => x.Id == testSettings.PressureSensorId);
 
-			ExposureTime = bench.Settings.SelectedTestSettings.Time;
-			WorkPressure = bench.Settings.SelectedTestSettings.WorkPressure;
-			IsModeAuto = bench.Settings.SelectedTestSettings.IsModeAuto;
-			MaxDeformation = bench.Settings.SelectedTestSettings.MaxDeformation.ToString();
-			var testSet = bench.Settings.SelectedTestSettings;
-			PressureSensors.Add( sensorService.GetAllSensors().Where(s => bench.Settings.Sensors.TryGetValue(s.Id, out var isEnable) && isEnable && s is IPressureSensor));
-			PressureSensor = PressureSensors.FirstOrDefault(x => x.Id == testSet.PressureSensorId);
-
-			this.WhenAnyValue(x => x.SelectedBalloon).Subscribe(x =>
+			this.WhenAnyValue(x => x.SelectedBalloon).Subscribe(sb =>
 			{
-				IsKPG4 = x?.BalloonType == BalloonType.KPG4;
+				IsKPG4 = sb?.BalloonType == Core.Balloons.BalloonType.KPG4;
 				Deformation = IsKPG4 ? 10 : 5;
-				//BalloonSN = null;
-				//SelectedStandart = null;
-				//BalloonValue = null;
 			});
+
+			this.WhenAnyValue(x => x.MaxDeformation).Subscribe(md =>
+			{
+				var t = int.TryParse(md, out var value);
+				if (!t)
+					MaxDeformation = "";
+			});
+
+			foreach (var balloonProp in bench.Settings.BalloonProperties)
+			{
+				BalloonProperties.Add(balloonProp);
+			}
 
 			foreach (var param in bench.Settings.Parameters)
 			{
@@ -86,16 +101,25 @@ namespace SOD.ViewModels.Testing.CRSBench
 
 			Apply = ReactiveCommand.CreateFromTask(async () =>
 			{
-				bench.Settings.PressureUnit = (PressureUnit)SelectedPressureUnit?.UnitType;
+				//bench.Settings.PressureUnit = (PressureUnit)SelectedPressureUnit?.UnitType;
 				bench.Settings.SelectedBalloon = SelectedBalloon;
 				bench.Settings.SelectedBalloon.StandartId = SelectedStandart.Id;
-				bench.Settings.SelectedTestSettings.WorkPressure = WorkPressure;
-				bench.Settings.SelectedTestSettings.Deformation = Deformation;
+				bench.Settings.SelectedBalloon.BalloonVolume = BalloonVolume;
+				bench.Settings.BalloonProperties = BalloonProperties.ToList();
+
+				if (!IsModeAuto)
+				{
+					int index = Array.IndexOf(modeTenso, true);
+					testSettings.SelectedTenso = (TensoSensorType)Enum.GetValues(typeof(TensoSensorType)).GetValue(index);
+				}
+				testSettings.SetPressure = (Pressure)UnitsHelper.GetValue(WorkPressure.Value, WorkPressure.SelectedUnitInfo);
+				testSettings.Deformation = Deformation;
 				var t = int.TryParse(MaxDeformation, out var value);
-				bench.Settings.SelectedTestSettings.MaxDeformation = t ? value : null;
-				bench.Settings.SelectedTestSettings.IsModeAuto = IsModeAuto;
-				bench.Settings.SelectedTestSettings.Time = ExposureTime;
-				bench.Settings.SelectedTestSettings.PressureSensorId = PressureSensor?.Id;
+				testSettings.MaxDeformation = t ? value : null;
+				testSettings.IsModeAuto = IsModeAuto;
+				testSettings.Time = ExposureTime;
+				testSettings.PressureSensorId = PressureSensor?.Id;
+
 
 				if (reportService.CurrentReport != null && !reportService.CurrentReport.IsSave && reportService.CurrentReport.ReportData.IsFill)
 				{
@@ -108,7 +132,7 @@ namespace SOD.ViewModels.Testing.CRSBench
 				}
 				bench.TestingBalloon = SelectedBalloon;
 				bench.UpdatePosts();
-				
+
 				foreach (var param in parameters)
 				{
 					var parameter = bench.Settings.Parameters.SingleOrDefault(p => p.Alias == param.Key);
@@ -120,7 +144,7 @@ namespace SOD.ViewModels.Testing.CRSBench
 
 				bench.SaveSettings();
 
-					bus.Publish(new App.Benches.CRSBench.Messages.SelectedTestMessage());
+				bus.Publish(new App.Benches.CRSBench.Messages.SelectedTestMessage());
 
 				navigationService.GoBack();
 			}, canApply);
@@ -128,12 +152,9 @@ namespace SOD.ViewModels.Testing.CRSBench
 		}
 
 		public IEnumerable<IValueViewModel> Properties => parameters.Select(kv => kv.Value);
-		public IReadOnlyList<UnitTypeInfo> PressureUnits { get; set; }
-		[Reactive]
-		public UnitTypeInfo SelectedPressureUnit { get; set; }
-		//public IReadOnlyList<UnitTypeInfo> LeakageUnits { get; set; }
+		//public IReadOnlyList<UnitTypeInfo> PressureUnits { get; set; }
 		//[Reactive]
-		//public UnitTypeInfo SelectedLeakageUnit { get; set; }
+		//public UnitTypeInfo SelectedPressureUnit { get; set; }
 		public ObservableCollectionExtended<TestSettingsViewModel> Tests { get; set; } = new ObservableCollectionExtended<TestSettingsViewModel>();
 		[Reactive]
 		public TestSettingsViewModel SelectedTest { get; set; }
@@ -141,7 +162,6 @@ namespace SOD.ViewModels.Testing.CRSBench
 		public Balloon SelectedBalloon { get; set; }
 		public ReactiveCommand<Unit, Unit> Cancel { get; set; }
 		public ReactiveCommand<Unit, Unit> Apply { get; set; }
-		//public bool IsSelectedTest => isSelectedTest.Value;
 		public ViewModelActivator Activator { get; } = new ViewModelActivator();
 		[Reactive]
 		public List<Balloon> Balloons { get; set; } = new List<Balloon>();
@@ -149,11 +169,10 @@ namespace SOD.ViewModels.Testing.CRSBench
 		public IStandart SelectedStandart { get; set; }
 		public IEnumerable<IStandart> Standarts { get; set; }
 		[Reactive]
-		public int BalloonVolume { get; set; }
+		public double BalloonVolume { get; set; }
+		public ObservableCollection<BalloonProperty> BalloonProperties { get; set; } = new ObservableCollection<BalloonProperty>();
 		[Reactive]
-		public string BalloonSN { get; set; }
-		[Reactive]
-		public int WorkPressure { get; set; }
+		public UnitValueViewModel WorkPressure { get; set; }
 		[Reactive]
 		public int Deformation { get; set; }
 		[Reactive]
@@ -170,5 +189,12 @@ namespace SOD.ViewModels.Testing.CRSBench
 		[Reactive]
 		public ISensor PressureSensor { get; set; }
 
+		[Reactive]
+		public bool[] ModeTenso => modeTenso;
+		private TensoSensorType SelectedTenso { get; set; }
+		//public IReadOnlyList<UnitTypeInfo> LeakageUnits { get; set; }
+		//[Reactive]
+		//public UnitTypeInfo SelectedLeakageUnit { get; set; }
+		//public bool IsSelectedTest => isSelectedTest.Value;
 	}
 }

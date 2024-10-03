@@ -21,6 +21,7 @@ namespace SOD.ViewModels.Settings
             GoTestBechSettings = ReactiveCommand.Create(() => navigationService.NavigateTo("TestBenchSettings"));
             GoIPSettings = ReactiveCommand.Create(() => navigationService.NavigateTo("IPSettingsView"));
             GoDeviceSensorSettings = ReactiveCommand.Create(() => navigationService.NavigateTo("DeviceAndSensorSettingsView"));
+            GoBalloonSettings = ReactiveCommand.Create(() => navigationService.NavigateTo("BalloonSettings"));
             GoEditReportTemplate = ReactiveCommand.CreateFromTask(async() =>
             {
                 var result = await reportService.EditReportTemplate(bench.Settings.ReportPath);
@@ -35,7 +36,8 @@ namespace SOD.ViewModels.Settings
         public ReactiveCommand<Unit, Unit> GoTestBechSettings { get; set; }
         public ReactiveCommand<Unit, Unit> GoIPSettings { get; set; }
         public ReactiveCommand<Unit, Unit> GoDeviceSensorSettings { get; set; }
-        public ReactiveCommand<Unit, Unit> GoEditReportTemplate { get; set; }
+		public ReactiveCommand<Unit, Unit> GoBalloonSettings { get; set; }
+		public ReactiveCommand<Unit, Unit> GoEditReportTemplate { get; set; }
         public ReactiveCommand<Unit, Unit> GoUsers { get; set; }
     }
 }
