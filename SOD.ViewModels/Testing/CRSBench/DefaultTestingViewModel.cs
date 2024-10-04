@@ -3,6 +3,7 @@ using MemBus;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using SOD.App.Benches;
+using SOD.Core;
 using SOD.Core.Infrastructure;
 using SOD.Core.Sensor;
 using SOD.Dialogs;
@@ -174,6 +175,8 @@ namespace SOD.ViewModels.Testing.CRSBench
 			Sensors.Clear();
 			Sensors.AddRange(_bench.Sensors.Where(s => s.Sensor is IPressureSensor)
 										   .Select(s => new PressureSensorViewModel((IPressureSensor)s.Sensor, _bench.Settings.PressureUnit)));
+			Sensors.AddRange(_bench.Sensors.Where(s => s.Sensor is ITensoSensor)
+										   .Select(s => new TensoSensorViewModel((ITensoSensor)s.Sensor, _bench.Settings.TensoUnit)));
 		}
 
 		[Reactive]

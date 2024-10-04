@@ -110,6 +110,9 @@ namespace SOD.App.Benches.CRSBench
 			sensors.AddRange(_sensorService.GetAllSensors()
 										   .Where(s => s.Id == Settings.SelectedTestSettings.PressureSensorId)
 										   .Select(s => new BenchSensor(s)));
+			sensors.AddRange(_sensorService.GetAllSensors()
+										   .Where(s => s.Id == Settings.SelectedTestSettings.TensoSensorId)
+										   .Select(s => new BenchSensor(s)));
 		}
 
 		public void UpdateReport(Bitmap chart = null)
