@@ -45,8 +45,6 @@ namespace SOD.Core.Balloons.Properties
 					return "Уплотнение";
 				case PropertyType.TestMedium:
 					return "Тестовая среда";
-				case PropertyType.BalloonType:
-					return "Тип баллона";
 				default: return Enum.GetName(typeof(PropertyType), propertyType);
 			}
 		}
@@ -97,8 +95,6 @@ namespace SOD.Core.Balloons.Properties
 					return Core.Seals.SealType.Metal;
 				case PropertyType.TestMedium:
 					return Core.Seals.TestMediumType.Water;
-				case PropertyType.BalloonType:
-					return BalloonType.KPG1;
 				default: return null;
 			}
 		}

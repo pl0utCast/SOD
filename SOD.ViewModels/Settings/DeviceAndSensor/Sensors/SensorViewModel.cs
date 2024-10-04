@@ -160,35 +160,35 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Sensors
                 }
 				else if (sensor is Core.Sensor.TensoSensor.CodeBased.TensoSensor codeBasedTensoSensor)
 				{
-					//var vm = new Dialog.CodeBasedSensorSettingsViewModel(dialogService, () => codeBasedTensoSensor.Flow.ToString(codeBasedLeakageSensor.Accaury), () => codeBasedLeakageSensor.Code);
-					//vm.Id = codeBasedLeakageSensor.Id;
-					//vm.Name = codeBasedLeakageSensor.Name;
-					//vm.MinCode = codeBasedLeakageSensor.Settings.MinCode;
-					//vm.MaxCode = codeBasedLeakageSensor.Settings.MaxCode;
-					//vm.MaxValue = new Controls.UnitValueViewModel(codeBasedLeakageSensor.Settings.MaxValue);
-					//vm.MinValue = new Controls.UnitValueViewModel(codeBasedLeakageSensor.Settings.MinValue);
-					//vm.Accaury = codeBasedLeakageSensor.Settings.Accaury;
-					//vm.FilterCoef = codeBasedLeakageSensor.Settings.FilterCoef;
-					//vm.ChannelId = codeBasedLeakageSensor.Settings.ChannelId;
-					//vm.UnitTypes = new VolumeFlow().GetUnitTypeInfo();
-					//vm.UnitType = vm.UnitTypes.SingleOrDefault(ut => ut.UnitType.ToString() == codeBasedLeakageSensor.Settings.Unit.ToString());
-					//vm.SensorHint = codeBasedLeakageSensor.Settings.SensorHint;
+                    var vm = new Dialog.CodeBasedSensorSettingsViewModel(dialogService, () => codeBasedTensoSensor.Mass.ToString(codeBasedTensoSensor.Accaury), () => codeBasedTensoSensor.Code);
+                    vm.Id = codeBasedTensoSensor.Id;
+                    vm.Name = codeBasedTensoSensor.Name;
+                    vm.MinCode = codeBasedTensoSensor.Settings.MinCode;
+                    vm.MaxCode = codeBasedTensoSensor.Settings.MaxCode;
+                    vm.MaxValue = new Controls.UnitValueViewModel(codeBasedTensoSensor.Settings.MaxValue);
+                    vm.MinValue = new Controls.UnitValueViewModel(codeBasedTensoSensor.Settings.MinValue);
+                    vm.Accaury = codeBasedTensoSensor.Settings.Accaury;
+                    vm.FilterCoef = codeBasedTensoSensor.Settings.FilterCoef;
+                    vm.ChannelId = codeBasedTensoSensor.Settings.ChannelId;
+                    vm.UnitTypes = new Mass().GetUnitTypeInfo();
+                    vm.UnitType = vm.UnitTypes.SingleOrDefault(ut => ut.UnitType.ToString() == codeBasedTensoSensor.Settings.Unit.ToString());
+                    vm.SensorHint = codeBasedTensoSensor.Settings.SensorHint;
 
-					//if ((bool)await dialogService.ShowDialogAsync("CodeBasedSensorSettings", vm))
-					//{
-					//	codeBasedLeakageSensor.Settings.Name = vm.Name;
-					//	codeBasedLeakageSensor.Settings.ChannelId = vm.ChannelId;
-					//	codeBasedLeakageSensor.Settings.MinCode = vm.MinCode;
-					//	codeBasedLeakageSensor.Settings.MaxCode = vm.MaxCode;
-					//	codeBasedLeakageSensor.Settings.MinValue = (VolumeFlow)vm.MinValue.GetValue();
-					//	codeBasedLeakageSensor.Settings.MaxValue = (VolumeFlow)vm.MaxValue.GetValue();
-					//	codeBasedLeakageSensor.Settings.Accaury = vm.Accaury;
-					//	codeBasedLeakageSensor.Settings.FilterCoef = vm.FilterCoef;
-					//	codeBasedLeakageSensor.Settings.Unit = (VolumeFlowUnit)vm.UnitType?.UnitType;
-					//	codeBasedLeakageSensor.Settings.SensorHint = vm.SensorHint;
-					//	codeBasedLeakageSensor.SaveSettings();
-					//}
-				}
+                    if ((bool)await dialogService.ShowDialogAsync("CodeBasedSensorSettings", vm))
+                    {
+						codeBasedTensoSensor.Settings.Name = vm.Name;
+						codeBasedTensoSensor.Settings.ChannelId = vm.ChannelId;
+						codeBasedTensoSensor.Settings.MinCode = vm.MinCode;
+						codeBasedTensoSensor.Settings.MaxCode = vm.MaxCode;
+						codeBasedTensoSensor.Settings.MinValue = (Mass)vm.MinValue.GetValue();
+						codeBasedTensoSensor.Settings.MaxValue = (Mass)vm.MaxValue.GetValue();
+						codeBasedTensoSensor.Settings.Accaury = vm.Accaury;
+						codeBasedTensoSensor.Settings.FilterCoef = vm.FilterCoef;
+						codeBasedTensoSensor.Settings.Unit = (MassUnit)vm.UnitType?.UnitType;
+						codeBasedTensoSensor.Settings.SensorHint = vm.SensorHint;
+						codeBasedTensoSensor.SaveSettings();
+                    }
+                }
 			});
         }
         [Reactive]

@@ -73,7 +73,8 @@ namespace SOD.Localization
                 public string PressureSensors { get; set; } = "Датчики давления";
                 public string LeakageSensors { get; set; } = "Датчики протечки";
                 public string TemperatureSensors { get; set; } = "Датчики температуры";
-                public Settings.DeviceAndSensors.Device Device { get; set; } = new Settings.DeviceAndSensors.Device();
+				public string TensoSensors { get; set; } = "Тензодатчики";
+				public Settings.DeviceAndSensors.Device Device { get; set; } = new Settings.DeviceAndSensors.Device();
                 public Settings.DeviceAndSensors.Sensor Sensor { get; set; } = new Settings.DeviceAndSensors.Sensor();
             }
         }

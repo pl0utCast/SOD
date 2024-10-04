@@ -100,7 +100,15 @@ namespace SOD.Core.Sensor
                         }
                         return null;
                     }
-                default: return null;
+				case SensorType.TensoSensorCodeBased:
+					{
+						if (device is IChannelBasedDevice channelBasedDevice)
+						{
+							return new TensoSensor.CodeBased.TensoSensor(sensorConfig.Id, channelBasedDevice, _settingsService);
+						}
+						return null;
+					}
+				default: return null;
             }
         }
     }
