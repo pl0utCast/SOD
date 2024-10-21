@@ -55,7 +55,7 @@ namespace SOD.Core.Sensor.LeakageSensor.CodeBased
         {
             disposable = channelBasedDevice.DataComplite.Subscribe(dc =>
             {
-                if (dc.Id == Settings.ChannelId && dc.DataType == ChannelDataType.INT)
+                if (dc.Id == Settings.ChannelId && (dc.DataType == ChannelDataType.INT || dc.DataType == ChannelDataType.INT16))
                 {
                     time += stopwatch.Elapsed;
                     code = Convert.ToInt32(dc.Value);

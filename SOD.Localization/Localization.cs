@@ -47,7 +47,8 @@ namespace SOD.Localization
             public string ValveType { get; set; } = "Виды арматуры";
             public string Standart { get; set; } = "Стандарты";
             public string DevicesAndSensors { get; set; } = "Устройства и датчики";
-            public string EditLocalizationFile { get; set; } = "Редактировать файл перевода";
+			public string BalloonSettings { get; set; } = "Свойства баллонов";
+			public string EditLocalizationFile { get; set; } = "Редактировать файл перевода";
             public string EditReportTemplate { get; set; } = "Редактировать шаблон протокола";
             public string Users { get; set; } = "Пользователи";
             public string Themes { get; set; } = "Темы";
@@ -72,7 +73,8 @@ namespace SOD.Localization
                 public string PressureSensors { get; set; } = "Датчики давления";
                 public string LeakageSensors { get; set; } = "Датчики протечки";
                 public string TemperatureSensors { get; set; } = "Датчики температуры";
-                public Settings.DeviceAndSensors.Device Device { get; set; } = new Settings.DeviceAndSensors.Device();
+				public string TensoSensors { get; set; } = "Тензодатчики";
+				public Settings.DeviceAndSensors.Device Device { get; set; } = new Settings.DeviceAndSensors.Device();
                 public Settings.DeviceAndSensors.Sensor Sensor { get; set; } = new Settings.DeviceAndSensors.Sensor();
             }
         }

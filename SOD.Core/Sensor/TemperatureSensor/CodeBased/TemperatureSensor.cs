@@ -40,7 +40,7 @@ namespace SOD.Core.Sensor.TemperatureSensor.CodeBased
         {
             disposable = channelBasedDevice.DataComplite.Subscribe(dc =>
             {
-                if (dc.Id == Settings.ChannelId && dc.DataType == ChannelDataType.INT)
+                if (dc.Id == Settings.ChannelId && (dc.DataType == ChannelDataType.INT16) || (dc.DataType == ChannelDataType.INT))
                 {
                     Code = Convert.ToInt32(dc.Value);
                     var rawValue = this.CodeToValue(Settings.MinValue.DegreesCelsius, Settings.MaxValue.DegreesCelsius, Settings.MinCode, Settings.MaxCode, Code);

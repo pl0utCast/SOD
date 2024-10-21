@@ -10,7 +10,7 @@ using UnitsNet;
 
 namespace SOD.App.Testing
 {
-    public abstract  class BaseTest : ITesting, IDisposable
+    public abstract  class BaseTest //: ITesting, IDisposable
     {
         protected IEnumerable<IPost> _posts;
         protected Dictionary<int, List<Pressure>> pressures = new Dictionary<int,List<Pressure>>();
@@ -37,8 +37,8 @@ namespace SOD.App.Testing
         public void Start(ITestBench testBench, MediumType mediumType)
         {
             IsRun = true;
-            _posts = testBench.Posts;
-            _valve = testBench.TestingValve;
+            //_posts = testBench.Posts;
+            //_valve = testBench.TestingValve;
             _testBench = testBench;
             _mediumType = mediumType;
             registrationMarkers.Clear();
@@ -81,20 +81,20 @@ namespace SOD.App.Testing
                             pressures[pressureSensor.Id].Add(press);
                         }).DisposeWith(disposables);*/
                     }
-                    if (sensor.Sensor is ILeakageSensor leakageSensor)
-                    {
-                        leakageSensor.Reset();
-                        leakages.Add(leakageSensor.Id, new List<VolumeFlow>());
-                        sensorValueUpdaters.Add(() =>
-                        {
-                            leakages[leakageSensor.Id].Add(leakageSensor.Flow.ToUnit(_testBench.Settings.LeakageUnit));
-                        });
+                    //if (sensor.Sensor is ILeakageSensor leakageSensor)
+                    //{
+                    //    leakageSensor.Reset();
+                    //    leakages.Add(leakageSensor.Id, new List<VolumeFlow>());
+                    //    sensorValueUpdaters.Add(() =>
+                    //    {
+                    //        leakages[leakageSensor.Id].Add(leakageSensor.Flow.ToUnit(_testBench.Settings.LeakageUnit));
+                    //    });
                         /*leakageSensor.Subscribe(l =>
                         {
                             var leak = l.ToUnit(_testBench.Settings.LeakageUnit);
                             leakages[leakageSensor.Id].Add(leak);
                         }).DisposeWith(disposables);*/
-                    }
+                    //}
                 }
             }
 

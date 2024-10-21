@@ -26,7 +26,7 @@
                 HorizontalAlignment="Center"
                 Command="{Binding Edit}"
                 Content="{materialDesign:PackIcon Kind=Pencil}"
-                Style="{DynamicResource MaterialDesignFloatingActionMiniAccentButton}" />
+                Style="{StaticResource MaterialDesignFloatingActionButton}" />
             <TextBlock
                 Grid.Row="3"
                 Margin="10,0,0,10"

@@ -14,9 +14,9 @@
             <DataTemplate DataType="{x:Type testingVm:DefaultTestingViewModel}">
                 <local:DefaultTestingView />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type testingVm:FuncionalityTestViewModel}">
+            <!--<DataTemplate DataType="{x:Type testingVm:FuncionalityTestViewModel}">
                 <local:FuncionalityTestingView />
-            </DataTemplate>
+            </DataTemplate>-->
         </ContentPresenter.Resources>
     </ContentPresenter>
 </UserControl>

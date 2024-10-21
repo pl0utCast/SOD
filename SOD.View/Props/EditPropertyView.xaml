@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="SOD.View.Props.EditPropertyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SOD.View.Props"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:lc="clr-namespace:SOD.LocalizationService;assembly=SOD.LocalizationService"
+             mc:Ignorable="d">
+    <materialDesign:Card Padding="20">
+        <StackPanel>
+            <TextBox
+                Height="50"
+                materialDesign:HintAssist.Hint="{lc:Localization Props.EditPropertyView.Name}"
+                FontSize="24"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                Text="{Binding Name}" />
+            <TextBox
+                Height="50"
+                Margin="0,10,0,0"
+                materialDesign:HintAssist.Hint="Alias"
+                FontSize="24"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                Text="{Binding Alias}" />
+            <ComboBox
+                Height="50"
+                Margin="0,10,0,0"
+                materialDesign:HintAssist.Hint="{lc:Localization Props.EditPropertyView.Type}"
+                FontSize="24"
+                ItemsSource="{Binding Types}"
+                SelectedValue="{Binding Type}" />
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Width="200"
+                    Height="50"
+                    Command="{Binding Cancel}"
+                    Content="{lc:Localization Props.EditPropertyView.Cancel}"
+                    FontSize="24"
+                    Style="{StaticResource MaterialDesignFlatButton}" />
+                <Button
+                    Grid.Column="1"
+                    Width="200"
+                    Height="50"
+                    Margin="5,0,0,0"
+                    Command="{Binding Save}"
+                    Content="{lc:Localization Props.EditPropertyView.Save}"
+                    FontSize="24" />
+            </Grid>
+        </StackPanel>
+    </materialDesign:Card>
+</UserControl>

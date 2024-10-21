@@ -33,7 +33,8 @@ namespace SOD.Localization.Testing.CRSBench
         public string Start { get; set; } = "СТАРТ";
         public string Stop { get; set; } = "СТОП";
         public string Pressure { get; set; } = "Давление";
-        public string Time { get; set; } = "Время (чч:мм:сс)";
+		public string Tenso { get; set; } = "Вес";
+		public string Time { get; set; } = "Время (чч:мм:сс)";
         public string SelectOpenPoint { get; set; } = "Выбрать точку открытия";
         public string SelectClosePoint { get; set; } = "Выбрать точку закрытия";
         public string Step1 { get; set; } = "Step 1: choose armature";

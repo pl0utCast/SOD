@@ -1,13 +1,10 @@
 ﻿using SOD.Core.Sensor;
-using SOD.Core.Sensor.Frenq;
-using SOD.Core.Sensor.LeakageSensor.Impulse;
 using SOD.Core.Sensor.PressureSensor;
 using SOD.Core.Sensor.TemperatureSensor;
 using SOD.Core.Units;
 using SOD.Dialogs;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using System.Linq;
 using System.Reactive;
 using UnitsNet;
 using UnitsNet.Units;
@@ -161,7 +158,38 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Sensors
                         codeBasedTemperatureSensor.SaveSettings();
                     }
                 }
-            });
+				else if (sensor is Core.Sensor.TensoSensor.CodeBased.TensoSensor codeBasedTensoSensor)
+				{
+                    var vm = new Dialog.CodeBasedSensorSettingsViewModel(dialogService, () => codeBasedTensoSensor.Mass.ToString(codeBasedTensoSensor.Accaury), () => codeBasedTensoSensor.Code);
+                    vm.Id = codeBasedTensoSensor.Id;
+                    vm.Name = codeBasedTensoSensor.Name;
+                    vm.MinCode = codeBasedTensoSensor.Settings.MinCode;
+                    vm.MaxCode = codeBasedTensoSensor.Settings.MaxCode;
+                    vm.MaxValue = new Controls.UnitValueViewModel(codeBasedTensoSensor.Settings.MaxValue);
+                    vm.MinValue = new Controls.UnitValueViewModel(codeBasedTensoSensor.Settings.MinValue);
+                    vm.Accaury = codeBasedTensoSensor.Settings.Accaury;
+                    vm.FilterCoef = codeBasedTensoSensor.Settings.FilterCoef;
+                    vm.ChannelId = codeBasedTensoSensor.Settings.ChannelId;
+                    vm.UnitTypes = new Mass().GetUnitTypeInfo();
+                    vm.UnitType = vm.UnitTypes.SingleOrDefault(ut => ut.UnitType.ToString() == codeBasedTensoSensor.Settings.Unit.ToString());
+                    vm.SensorHint = codeBasedTensoSensor.Settings.SensorHint;
+
+                    if ((bool)await dialogService.ShowDialogAsync("CodeBasedSensorSettings", vm))
+                    {
+						codeBasedTensoSensor.Settings.Name = vm.Name;
+						codeBasedTensoSensor.Settings.ChannelId = vm.ChannelId;
+						codeBasedTensoSensor.Settings.MinCode = vm.MinCode;
+						codeBasedTensoSensor.Settings.MaxCode = vm.MaxCode;
+						codeBasedTensoSensor.Settings.MinValue = (Mass)vm.MinValue.GetValue();
+						codeBasedTensoSensor.Settings.MaxValue = (Mass)vm.MaxValue.GetValue();
+						codeBasedTensoSensor.Settings.Accaury = vm.Accaury;
+						codeBasedTensoSensor.Settings.FilterCoef = vm.FilterCoef;
+						codeBasedTensoSensor.Settings.Unit = (MassUnit)vm.UnitType?.UnitType;
+						codeBasedTensoSensor.Settings.SensorHint = vm.SensorHint;
+						codeBasedTensoSensor.SaveSettings();
+                    }
+                }
+			});
         }
         [Reactive]
         public string Name { get; set; }

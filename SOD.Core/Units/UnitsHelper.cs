@@ -25,7 +25,9 @@ namespace SOD.Core.Units
             if (AreaUnits.Units.Contains(unitType)) return AreaUnits.Units.Select(u => new UnitTypeInfo(u)).ToList();
             if (LengthUnits.Units.Contains(unitType)) return LengthUnits.Units.Select(u => new UnitTypeInfo(u)).ToList();
             if (TemperatureUnits.Units.Contains(unitType)) return TemperatureUnits.Units.Select(u => new UnitTypeInfo(u)).ToList();
-            return null;
+            if (TensoUnits.Units.Contains(unitType)) return TensoUnits.Units.Select(u => new UnitTypeInfo(u)).ToList();
+
+			return null;
         }
 
         public static IReadOnlyList<UnitTypeInfo> GetUnitTypeInfo(this IQuantity quantity)
@@ -38,7 +40,8 @@ namespace SOD.Core.Units
                 case nameof(Area): return AreaUnits.Units.Select(u => new UnitTypeInfo(u)).ToList();
                 case nameof(Length): return LengthUnits.Units.Select(u => new UnitTypeInfo(u)).ToList();
                 case nameof(Temperature): return TemperatureUnits.Units.Select(u => new UnitTypeInfo(u)).ToList();
-                default:return null;
+				case nameof(Mass): return TensoUnits.Units.Select(u => new UnitTypeInfo(u)).ToList();
+				default:return null;
             }
         }
 
@@ -114,7 +117,10 @@ namespace SOD.Core.Units
                 case nameof(TemperatureUnit):
                     type = typeof(Temperature);
                     break;
-                case nameof(DinPressureClassUnit):
+				case nameof(MassUnit):
+					type = typeof(Mass);
+					break;
+				case nameof(DinPressureClassUnit):
                     return new DinPressureClass((DinPressureClassUnit)unitTypeInfo.UnitType);
                 case nameof(AnsiPressureClassUnit):
                     return new AnsiPressureClass((AnsiPressureClassUnit)unitTypeInfo.UnitType);

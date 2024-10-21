@@ -31,6 +31,10 @@
                 userService:Security.Role="Administrator"
                 Command="{Binding GoDeviceSensorSettings}"
                 Content="{lc:Localization Settings.DevicesAndSensors}" />
+            <Button
+                userService:Security.Role="Administrator"
+                Command="{Binding GoBalloonSettings}"
+                Content="{lc:Localization Settings.BalloonSettings}" />
             <Button 
                 Command="{Binding GoEditReportTemplate}" 
                 Content="{lc:Localization Settings.EditReportTemplate}" />

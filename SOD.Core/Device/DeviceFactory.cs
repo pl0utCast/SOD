@@ -21,7 +21,7 @@ namespace SOD.Core.Device
             {
                 case DeviceType.ModbusTCP:
                     return new Modbus.ModbusTcpDevice(deviceConfig.Id, _settingsService);
-                case DeviceType.E14140:
+                //case DeviceType.E14140:
                     //if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                     //{
                     //    //return new LCard.E14140DeviceLinux(deviceConfig.Id, _settingsService);
@@ -29,11 +29,11 @@ namespace SOD.Core.Device
                     //}
                     //else
                     //{
-                        return new LCard.E14140Device(deviceConfig.Id, _settingsService);
+                        //return new LCard.E14140Device(deviceConfig.Id, _settingsService);
                         //return new LCard.E14140DeviceWindows(deviceConfig.Id, _settingsService); // для теста библиотечки
                     //}
-                case DeviceType.PKTBAImpulseBoard:
-                    return new PKTBAImpulseSensorBoard.ImpulseSensorBoardDevice(deviceConfig.Id, _settingsService);
+                //case DeviceType.PKTBAImpulseBoard:
+                //    return new PKTBAImpulseSensorBoard.ImpulseSensorBoardDevice(deviceConfig.Id, _settingsService);
                 default:
                     return null;
             }

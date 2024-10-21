@@ -50,7 +50,7 @@ namespace SOD.Core.Sensor.PressureSensor.CodeBased
         {
             disposable = channelBasedDevice.DataComplite.Subscribe(dc =>
             {
-                if (dc.Id == Settings.ChannelId && dc.DataType == ChannelDataType.INT)
+                if (dc.Id == Settings.ChannelId && (dc.DataType == ChannelDataType.INT16) || (dc.DataType == ChannelDataType.INT))
                 {
                     //Random rnd = new Random();
                     //code = rnd.Next(1560, 1620);

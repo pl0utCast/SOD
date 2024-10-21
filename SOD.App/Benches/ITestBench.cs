@@ -1,15 +1,13 @@
-﻿using SOD.Core.Valves;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SOD.Core.Balloons;
 
 namespace SOD.App.Benches
 {
     public interface ITestBench
     {
-        public BenchesType Type { get; }
-        public IEnumerable<IPost> Posts { get; }
+        //public BenchesType Type { get; }
+        //public IEnumerable<IPost> Posts { get; }
         public IBenchSettings Settings { get; }
-        public Valve TestingValve { get; set; }
+        public Balloon TestingBalloon { get; set; }
+        //public Valve TestingValve { get; set; }
     }
 }

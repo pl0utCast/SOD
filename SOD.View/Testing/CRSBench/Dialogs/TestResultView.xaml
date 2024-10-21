@@ -26,19 +26,56 @@
                 Grid.Row="1"
                 Margin="10"
                 HorizontalAlignment="Center">
-                <ContentPresenter Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TestResultView}, Path=DataContext}">
-                    <ContentPresenter.Resources>
-                        <DataTemplate DataType="{x:Type vm:StrengthTestResultViewModel}">
-                            <local:StrengthTestResultView DataContext="{Binding}" />
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type vm:LeakageTestResultViewModel}">
-                            <local:LeakageTestResultView DataContext="{Binding}" />
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type vm:FuncionalTestResultViewModel}">
-                            <local:FuncionalTestResultView DataContext="{Binding}" />
-                        </DataTemplate>
-                    </ContentPresenter.Resources>
-                </ContentPresenter>
+                <StackPanel
+    Grid.Row="1"
+    Margin="5"
+    HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" Text="{lc:Localization Testing.CRSBench.Pressure}" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="{lc:Localization Testing.CRSBench.ExpectedSetPressure}" />
+                        <TextBlock
+            Margin="5,0,0,0"
+            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+            Text="{Binding ExpectedSetPressure}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="{lc:Localization Testing.CRSBench.OpenPressure}" />
+                        <TextBlock
+            Margin="5,0,0,0"
+            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+            Text="{Binding OpenPressure}" />
+                        <TextBlock
+            Margin="5,0,0,0"
+            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+            Text="{Binding Accuracy, StringFormat=(\{0\} %)}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="{lc:Localization Testing.CRSBench.ClosePressure}" />
+                        <TextBlock
+            Margin="5,0,0,0"
+            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+            Text="{Binding ClosePressure}" />
+                    </StackPanel>
+                    <StackPanel
+        Margin="10"
+        HorizontalAlignment="Center"
+        Orientation="Horizontal">
+                        <RadioButton
+            Height="50"
+            MinWidth="200"
+            Content="{lc:Localization Testing.CRSBench.Valid}"
+            FontSize="24"
+            IsChecked="{Binding Valid}"
+            Style="{StaticResource MaterialDesignTabRadioButton}" />
+                        <RadioButton
+            Height="50"
+            MinWidth="200"
+            Content="{lc:Localization Testing.CRSBench.UnValid}"
+            FontSize="24"
+            IsChecked="{Binding UnValid}"
+            Style="{StaticResource MaterialDesignTabRadioButton}" />
+                    </StackPanel>
+                </StackPanel>
                 <StackPanel
                     Margin="0,20,0,0"
                     HorizontalAlignment="Center"

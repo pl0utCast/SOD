@@ -41,7 +41,8 @@ namespace SOD.App.Benches
             this.kernel = kernel;
             this.localizationService = localizationService;
             LoadSettings();
-        }
+			crsBench = new CRSBench.Bench(_settingsService, _sensorService, _testingService, _bus, _reportService, localizationService);
+		}
 
         public ITestBench GetTestBench()
         {

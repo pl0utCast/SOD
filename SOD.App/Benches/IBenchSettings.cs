@@ -8,6 +8,6 @@ namespace SOD.App.Benches
     public interface IBenchSettings
     {
         public PressureUnit PressureUnit { get; set; }
-        public VolumeFlowUnit LeakageUnit { get; set; }
+        //public VolumeFlowUnit LeakageUnit { get; set; }
     }
 }

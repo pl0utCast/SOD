@@ -28,5 +28,9 @@ namespace SOD.Localization
         public string customer { get; set; } = "Покупатель";
         public string order_number { get; set; } = "Номер заказа";
         public string due_date { get; set; } = "Срок выполнения";
-    }
+		public string KPG1 { get; set; } = "КПГ-1";
+		public string KPG2 { get; set; } = "КПГ-2";
+		public string KPG3 { get; set; } = "КПГ-3";
+		public string KPG4 { get; set; } = "КПГ-4";
+	}
 }

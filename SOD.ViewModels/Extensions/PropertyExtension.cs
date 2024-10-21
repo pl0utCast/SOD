@@ -1,7 +1,7 @@
-﻿using SOD.Core.CustomUnits;
+﻿using SOD.Core.Balloons.Properties;
+using SOD.Core.CustomUnits;
 using SOD.Core.Props;
 using SOD.Core.Seals;
-using SOD.Core.Valves.Properties;
 using SOD.ViewModels.Controls;
 using UnitsNet;
 
@@ -9,7 +9,7 @@ namespace SOD.ViewModels.Extensions
 {
     public static class PropertyExtension
     {
-        public static IValueViewModel GetViewModel(this ValveProperty valvePropery, params object[] param)
+        public static IValueViewModel GetViewModel(this BalloonProperty valvePropery, params object[] param)
         {
             if (valvePropery.Value is IQuantity quantity)
             {

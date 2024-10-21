@@ -19,11 +19,11 @@
         <StackPanel>
             <TextBlock
                 HorizontalAlignment="Center"
-                FontSize="24"
+                FontSize="22"
                 Text="Id" />
             <TextBlock
                 HorizontalAlignment="Center"
-                FontSize="24"
+                FontSize="22"
                 Text="{Binding Id}" />
         </StackPanel>
         <ToggleButton
