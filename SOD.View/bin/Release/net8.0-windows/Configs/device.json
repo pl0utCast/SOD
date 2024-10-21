@@ -1,0 +1,10 @@
+[
+	{
+        "Id":0,
+        "Type":"ModbusTCP"
+    },
+	{
+        "Id":1,
+        "Type":"OvenMBDevice"
+    }
+]

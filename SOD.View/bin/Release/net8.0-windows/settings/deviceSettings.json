@@ -1,0 +1,94 @@
+{
+  "ModbusTcpDevice_0": {
+    "DeviceName": "ModbusTCP",
+    "Id": 0,
+    "HostOrIp": "127.0.0.1",
+    "Port": 502,
+    "SlaveAddress": 1,
+    "Registers": [
+      {
+        "RegisterId": 0,
+        "Id": 0,
+        "DataType": 2,
+        "ByteCount": 0,
+        "Description": "Давление"
+      },
+      {
+        "RegisterId": 2,
+        "Id": 2,
+        "DataType": 2,
+        "ByteCount": 0,
+        "Description": null
+      },
+      {
+        "RegisterId": 4,
+        "Id": 4,
+        "DataType": 2,
+        "ByteCount": 0,
+        "Description": null
+      },
+      {
+        "RegisterId": 6,
+        "Id": 6,
+        "DataType": 2,
+        "ByteCount": 0,
+        "Description": null
+      },
+      {
+        "RegisterId": 8,
+        "Id": 8,
+        "DataType": 2,
+        "ByteCount": 0,
+        "Description": null
+      },
+      {
+        "RegisterId": 10,
+        "Id": 10,
+        "DataType": 2,
+        "ByteCount": 0,
+        "Description": null
+      }
+    ],
+    "ReadWriteRegisters": [
+      {
+        "RegisterId": 0,
+        "Id": 0,
+        "DataType": 2,
+        "ByteCount": 0,
+        "Description": null
+      },
+      {
+        "RegisterId": 2,
+        "Id": 2,
+        "DataType": 6,
+        "ByteCount": 0,
+        "Description": null
+      }
+    ],
+    "SensorHint": "Modbus"
+  },
+  "OvenMBDevice_Id_1": {
+    "Name": "Oven MB110-224.4ТД",
+    "SerialPort": "COM6",
+    "UsedBaudRate": 9600,
+    "RequestChannels": [
+      {
+        "Address": 62,
+        "IsEnable": true
+      },
+      {
+        "Address": 64,
+        "IsEnable": true
+      },
+      {
+        "Address": 66,
+        "IsEnable": true
+      },
+      {
+        "Address": 68,
+        "IsEnable": true
+      }
+    ],
+    "SensorHint": "Oven"
+  }
+}

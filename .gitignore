@@ -19,7 +19,7 @@ mono_crash.*
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
-[Rr]elease/
+#[Rr]elease/
 [Rr]eleases/
 x64/
 x86/
@@ -27,7 +27,7 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/
+#[Bb]in/
 [Oo]bj/
 [Oo]ut/
 [Ll]og/
@@ -359,5 +359,26 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
+*.dll
+*.deps.json
+
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+SOD.View/bin/Release/net8.0-windows/pt-BR/
+SOD.View/bin/Release/net8.0-windows/pl/
+SOD.View/bin/Release/net8.0-windows/ru/
+SOD.View/bin/Release/net8.0-windows/runtimes/
+SOD.View/bin/Release/net8.0-windows/tr/
+SOD.View/bin/Release/net8.0-windows/zh-Hans/
+SOD.View/bin/Release/net8.0-windows/zh-Hant/
+SOD.View/bin/Release/net8.0-windows/ko/
+SOD.View/bin/Release/net8.0-windows/ja/
+SOD.View/bin/Release/net8.0-windows/it/
+SOD.View/bin/Release/net8.0-windows/fr/
+SOD.View/bin/Release/net8.0-windows/es/
+SOD.View/bin/Release/net8.0-windows/de/
+SOD.View/bin/Release/net8.0-windows/cs/
+SOD.View/bin/Release/net8.0-windows/SOD.View.runtimeconfig.json
+SOD.View/bin/Release/net8.0-windows/SOD.View.exe
+SOD.View/bin/Release/net8.0-windows/settings/backup_sensorSettings.json
+SOD.View/bin/Release/net8.0-windows/settings/sensorSettingsCheckSum.json

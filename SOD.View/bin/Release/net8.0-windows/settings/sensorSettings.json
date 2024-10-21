@@ -1,0 +1,221 @@
+{
+  "CodeBasedPressureSensor_Id_0": {
+    "Name": "10 bar",
+    "ChannelId": 0,
+    "MaxCode": 7899,
+    "MinCode": 1573,
+    "MinValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 10.0
+    },
+    "Unit": "Bar",
+    "Accaury": "F1",
+    "FilterCoef": 0.9,
+    "SensorHint": ""
+  },
+  "CodeBasedPressureSensor_Id_1": {
+    "Name": "400 bar",
+    "ChannelId": 1,
+    "MaxCode": 7980,
+    "MinCode": 1576,
+    "MinValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 400.0
+    },
+    "Unit": "Bar",
+    "Accaury": "F1",
+    "FilterCoef": 0.9,
+    "SensorHint": ""
+  },
+  "CodeBasedPressureSensor_Id_2": {
+    "Name": "1000 bar",
+    "ChannelId": 9,
+    "MaxCode": 7870,
+    "MinCode": 1574,
+    "MinValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 1000.0
+    },
+    "Unit": "Bar",
+    "Accaury": "F1",
+    "FilterCoef": 0.9,
+    "SensorHint": ""
+  },
+  "CodeBasedPressureSensor_Id_3": {
+    "Name": "10 bar",
+    "ChannelId": 11,
+    "MaxCode": 7891,
+    "MinCode": 1573,
+    "MinValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 10.0
+    },
+    "Unit": "Bar",
+    "Accaury": "F2",
+    "FilterCoef": 0.9,
+    "SensorHint": ""
+  },
+  "CodeBasedPressureSensor_Id_4": {
+    "Name": "250 bar",
+    "ChannelId": 9,
+    "MaxCode": 8010,
+    "MinCode": 1613,
+    "MinValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 250.0
+    },
+    "Unit": "Bar",
+    "Accaury": "F1",
+    "FilterCoef": 0.9,
+    "SensorHint": ""
+  },
+  "CodeBasedPressureSensor_Id_5": {
+    "Name": "160 bar",
+    "ChannelId": 0,
+    "MaxCode": 3946,
+    "MinCode": -53,
+    "MinValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 160.0
+    },
+    "Unit": "Bar",
+    "Accaury": "F2",
+    "FilterCoef": 0.9,
+    "SensorHint": "Auto 1"
+  },
+  "CodeBasedPressureSensor_Id_6": {
+    "Name": "1600 bar",
+    "ChannelId": 1,
+    "MaxCode": 3946,
+    "MinCode": -53,
+    "MinValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 1600.0
+    },
+    "Unit": "Bar",
+    "Accaury": "F1",
+    "FilterCoef": 0.9,
+    "SensorHint": "Auto 2"
+  },
+  "CodeBasedPressureSensor_Id_7": {
+    "Name": "100 bar",
+    "ChannelId": 1,
+    "MaxCode": 3946,
+    "MinCode": -53,
+    "MinValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 100.0
+    },
+    "Unit": "Bar",
+    "Accaury": "F1",
+    "FilterCoef": 0.9,
+    "SensorHint": ""
+  },
+  "CodeBasedTensoSensor_Id_7": {
+    "Name": "100 Kg",
+    "ChannelId": 1,
+    "MaxCode": 3946,
+    "MinCode": -53,
+    "MinValue": {
+      "Unit": "MassUnit.Kilogram",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "MassUnit.Kilogram",
+      "Value": 100.0
+    },
+    "Unit": "Bar",
+    "Accaury": "F1",
+    "FilterCoef": 0.9,
+    "SensorHint": ""
+  },
+  "CodeBasedTensoSensor_Id_8": {
+    "Name": "500 Kg",
+    "ChannelId": 1,
+    "MaxCode": 3946,
+    "MinCode": -53,
+    "MinValue": {
+      "Unit": "MassUnit.Kilogram",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "MassUnit.Kilogram",
+      "Value": 500.0
+    },
+    "Unit": "Bar",
+    "Accaury": "F1",
+    "FilterCoef": 0.9,
+    "SensorHint": ""
+  },
+  "CodeBasedTensoSensor_Id_9": {
+    "Name": "1000 Kg",
+    "ChannelId": 1,
+    "MaxCode": 3946,
+    "MinCode": -53,
+    "MinValue": {
+      "Unit": "MassUnit.Kilogram",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "MassUnit.Kilogram",
+      "Value": 1000.0
+    },
+    "Unit": "Bar",
+    "Accaury": "F1",
+    "FilterCoef": 0.9,
+    "SensorHint": ""
+  },
+  "CodeBasedTensoSensor_Id_10": {
+    "Name": "10000 Kg",
+    "ChannelId": 1,
+    "MaxCode": 3946,
+    "MinCode": -53,
+    "MinValue": {
+      "Unit": "MassUnit.Kilogram",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "MassUnit.Kilogram",
+      "Value": 10000.0
+    },
+    "Unit": "Bar",
+    "Accaury": "F1",
+    "FilterCoef": 0.9,
+    "SensorHint": ""
+  },
+  "LastUpdate": {
+    "LastUpdateDate": "2024-06-13T16:22:55.9051933+03:00"
+  }
+}
