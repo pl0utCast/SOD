@@ -1,7 +1,31 @@
 {
-  "ModbusTcpDevice_0": {
+  "OvenMBDevice_Id_0": {
+    "Name": "Oven MB110-224.4ТД",
+    "SerialPort": "COM6",
+    "UsedBaudRate": 9600,
+    "RequestChannels": [
+      {
+        "Address": 62,
+        "IsEnable": true
+      },
+      {
+        "Address": 64,
+        "IsEnable": true
+      },
+      {
+        "Address": 66,
+        "IsEnable": true
+      },
+      {
+        "Address": 68,
+        "IsEnable": true
+      }
+    ],
+    "SensorHint": "Oven"
+  },
+  "ModbusTcpDevice_1": {
     "DeviceName": "ModbusTCP",
-    "Id": 0,
+    "Id": 1,
     "HostOrIp": "127.0.0.1",
     "Port": 502,
     "SlaveAddress": 1,
@@ -66,29 +90,5 @@
       }
     ],
     "SensorHint": "Modbus"
-  },
-  "OvenMBDevice_Id_1": {
-    "Name": "Oven MB110-224.4ТД",
-    "SerialPort": "COM6",
-    "UsedBaudRate": 9600,
-    "RequestChannels": [
-      {
-        "Address": 62,
-        "IsEnable": true
-      },
-      {
-        "Address": 64,
-        "IsEnable": true
-      },
-      {
-        "Address": 66,
-        "IsEnable": true
-      },
-      {
-        "Address": 68,
-        "IsEnable": true
-      }
-    ],
-    "SensorHint": "Oven"
   }
 }

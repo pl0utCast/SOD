@@ -1,15 +1,11 @@
-﻿using SOD.Core.Device;
-using SOD.Core.Device.LCard;
+﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+using SOD.Core.Device;
 using SOD.Core.Device.Modbus;
-using SOD.Localization.Settings.DeviceAndSensors;
+using SOD.Core.Device.OvenMBDevice;
 using SOD.Dialogs;
 using SOD.Navigation;
-using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
-using System;
-using System.Collections.Generic;
 using System.Reactive;
-using System.Text;
 
 namespace SOD.ViewModels.Settings.DeviceAndSensor.Device
 {
@@ -22,16 +18,16 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Device
             SensorHint = device.SensorHint;
             Edit = ReactiveCommand.Create(() =>
             {
-                if (device is ModbusTcpDevice modbusTcpDevice)
+                if (device is OvenMBDevice ovenMBDevice)
+                {
+                    var vm = new OvenMBDeviceSettingsViewModel(navigationService, dialogService, ovenMBDevice);
+                    navigationService.NavigateTo("OvenMBDeviceSettings", vm);
+                }
+                else if (device is ModbusTcpDevice modbusTcpDevice)
                 {
                     var vm = new ModbusTcpDeviceSettingsViewModel(navigationService, dialogService, modbusTcpDevice);
                     navigationService.NavigateTo("ModbusTcpDeviceSettings", vm);
                 }
-                //else if(device is E14140Device e14140Device)
-                //{
-                //    var vm = new E14140DeviceSettingsViewModel(e14140Device, navigationService, dialogService);
-                //    navigationService.NavigateTo("E14140DeviceSettings", vm);
-                //}
             });
         }
         [Reactive]

@@ -26,6 +26,10 @@ namespace SOD.ViewModels.Testing.CRSBench.Sensors
 						  })
 						  .DisposeWith(dis);
 			});
+
+			// Если нет никаких настроек
+			if (tensoUnit == MassUnit.Undefined) tensoUnit = MassUnit.Kilogram;
+
 			Unit = UnitAbbreviationsCache.Default.GetDefaultAbbreviation(typeof(MassUnit), (int)tensoUnit);
 			Name = sensor.Name;
 		}

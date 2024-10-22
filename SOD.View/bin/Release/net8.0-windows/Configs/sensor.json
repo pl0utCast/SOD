@@ -2,61 +2,71 @@
     {
         "Id":0,
         "DeviceId":0,
-        "Type":"PressureSensorCodeBased"
+        "Type":"TensoSensorCodeBased"
     },
     {
         "Id":1,
         "DeviceId":0,
-        "Type":"PressureSensorCodeBased"
+        "Type":"TensoSensorCodeBased"
     },
     {
         "Id":2,
         "DeviceId":0,
-        "Type":"PressureSensorCodeBased"
+        "Type":"TensoSensorCodeBased"
     },
     {
         "Id":3,
         "DeviceId":0,
-        "Type":"PressureSensorCodeBased"
+        "Type":"TensoSensorCodeBased"
     },
     {
         "Id":4,
-        "DeviceId":0,
+        "DeviceId":1,
         "Type":"PressureSensorCodeBased"
     },
     {
         "Id":5,
-        "DeviceId":0,
+        "DeviceId":1,
         "Type":"PressureSensorCodeBased"
     },
     {
         "Id":6,
-        "DeviceId":0,
+        "DeviceId":1,
         "Type":"PressureSensorCodeBased"
     },
     {
         "Id":7,
-        "DeviceId":0,
+        "DeviceId":1,
         "Type":"PressureSensorCodeBased"
     },
-	{
+    {
         "Id":8,
         "DeviceId":1,
-        "Type":"CodeBasedTensoSensor"
+        "Type":"PressureSensorCodeBased"
     },
-	{
+    {
         "Id":9,
         "DeviceId":1,
-        "Type":"CodeBasedTensoSensor"
+        "Type":"PressureSensorCodeBased"
     },
-	{
+    {
         "Id":10,
         "DeviceId":1,
-        "Type":"CodeBasedTensoSensor"
+        "Type":"PressureSensorCodeBased"
     },
-	{
+    {
         "Id":11,
         "DeviceId":1,
-        "Type":"CodeBasedTensoSensor"
+        "Type":"PressureSensorCodeBased"
+    },
+    {
+        "Id":12,
+        "DeviceId":1,
+        "Type":"TemperatureSensorCodeBased"
+    },
+    {
+        "Id":13,
+        "DeviceId":1,
+        "Type":"TemperatureSensorCodeBased"
     }
 ]

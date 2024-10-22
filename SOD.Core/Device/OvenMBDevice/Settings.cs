@@ -1,9 +1,6 @@
 ﻿using SOD.Core.Settings;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace SOD.Core.Device.PKTBAImpulseSensorBoard
+namespace SOD.Core.Device.OvenMBDevice
 {
     [DeviceSettings]
     public class Settings
@@ -31,5 +28,4 @@ namespace SOD.Core.Device.PKTBAImpulseSensorBoard
             public bool IsEnable { get; set; }
         }
     }
-
 }

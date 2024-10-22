@@ -24,6 +24,7 @@ namespace SOD.View
             navigationService.RegisterView("Settings", "DeviceAndSensorSettingsView", new Settings.DeviceAndSensor.DeviceSensorSettingsView(), typeof(ViewModels.Settings.DeviceAndSensor.DeviceAndSensorSettingsViewModel));
 			navigationService.RegisterView("Settings", "BalloonSettings", new Settings.Balloon.BalloonSettingsView(), typeof(ViewModels.Settings.Balloon.BalloonSettingsViewModel));
 			navigationService.RegisterView("Settings", "ModbusTcpDeviceSettings", new Settings.DeviceAndSensor.Device.ModbusTcpDeviceSettingsView(), null);
+            navigationService.RegisterView("Settings", "OvenMBDeviceSettings", new Settings.DeviceAndSensor.Device.OvenMBDeviceSettingsView(), typeof(ViewModels.Settings.DeviceAndSensor.Device.OvenMBDeviceSettingsViewModel));
             navigationService.RegisterView("Settings", "TestBenchSettings", new Settings.Bench.TestBenchSettingsView(), typeof(ViewModels.Settings.Bench.TestBenchSettingsViewModel));
             navigationService.RegisterView("Settings", "UserSettings",new Settings.Users.UsersSettingsView(), typeof(ViewModels.Settings.Users.UsersSettingsViewModel));
 

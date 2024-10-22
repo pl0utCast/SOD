@@ -40,7 +40,6 @@ namespace SOD.Core.Sensor
                         }
                         return null;
                     }
-
                 case SensorType.FrenqSensor:
                     {
                         if (device is IChannelBasedDevice channelBasedDevice)
@@ -57,7 +56,6 @@ namespace SOD.Core.Sensor
                         }
                         return null;
                     }
-
                 case SensorType.PressureSensorCodeBased:
                     {
                         if (device is IChannelBasedDevice channelBasedDevice)
@@ -66,7 +64,6 @@ namespace SOD.Core.Sensor
                         }
                         return null;
                     }
-
                 case SensorType.LeakageSensorCodeBased:
                     {
                         if (device is IChannelBasedDevice channelBasedDevice)
@@ -80,15 +77,6 @@ namespace SOD.Core.Sensor
                         if (device is IChannelBasedDevice channelBasedDevice)
                         {
                             return new TemperatureSensor.CodeBased.TemperatureSensor(sensorConfig.Id, channelBasedDevice, _settingsService);
-                        }
-                        return null;
-                    }
-
-                case SensorType.MMLeakageSensor:
-                    {
-                        if (device is IDiscreteInOutDevice discreteInOutDevice)
-                        {
-                            return new LeakageSensor.MML.LeakageSensor(sensorConfig.Id, discreteInOutDevice, _settingsService, _sensorService);
                         }
                         return null;
                     }

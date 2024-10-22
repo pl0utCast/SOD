@@ -3,32 +3,28 @@
     "BenchType": 0
   },
   "CRSBenchSettings": {
-    "SelectedValveTypeId": 2,
     "SelectedTestSettings": {
-      "Id": 4,
-      "Name": "Seat leakage test",
-      "LocalName": "Seat leakage test",
-      "Type": 1,
       "Time": 30,
-      "PressureSensorId": 0,
-      "LeakageSensorId": 4,
-      "StandartId": 6,
-      "MediumType": 1,
+      "PressureSensorId": 4,
+      "WorkPressure": 0,
+      "Deformation": 5,
+      "MaxDeformation": null,
+      "IsModeAuto": false,
+      "TensoSensorId": 0,
       "SetPressure": {
-        "Unit": "PressureUnit.Pascal",
-        "Value": 0.0
-      },
-      "UseValveSetPressure": false,
-      "UseRangeSetPressure": false
+        "Unit": "PressureUnit.Bar",
+        "Value": 1.0
+      }
     },
     "SelectedBalloon": {
-      "Name": "test",
+      "Name": "КПГ-1",
       "BalloonType": 0,
       "BalloonVolume": 0.0,
       "StandartId": 0
     },
     "PressureUnit": 2,
-    "LeakageUnit": 31,
+    "TensoUnit": 8,
+    "BalloonProperties": [],
     "Parameters": [
       "{\r\n  \"Id\": 0,\r\n  \"Name\": \"Сustomer\",\r\n  \"Alias\": \"customer\",\r\n  \"SerializedValue\": \"\\\"\\\"\",\r\n  \"Type\": 7\r\n}",
       "{\r\n  \"Id\": 0,\r\n  \"Name\": \"Order number\",\r\n  \"Alias\": \"order_number\",\r\n  \"SerializedValue\": \"\\\"111\\\"\",\r\n  \"Type\": 7\r\n}",
@@ -37,100 +33,78 @@
     "Tests": {
       "1": [
         {
-          "Id": 0,
-          "Name": "Shell test",
-          "LocalName": null,
-          "Type": 0,
           "Time": 120,
           "PressureSensorId": 1,
-          "LeakageSensorId": null,
-          "StandartId": 4,
-          "MediumType": 0,
+          "WorkPressure": 0,
+          "Deformation": 0,
+          "MaxDeformation": null,
+          "IsModeAuto": false,
+          "TensoSensorId": 0,
           "SetPressure": {
             "Unit": "PressureUnit.Pascal",
             "Value": 0.0
-          },
-          "UseValveSetPressure": false,
-          "UseRangeSetPressure": false
+          }
         },
         {
-          "Id": 1,
-          "Name": "Seat leakage test",
-          "LocalName": null,
-          "Type": 1,
           "Time": 180,
           "PressureSensorId": 2,
-          "LeakageSensorId": 4,
-          "StandartId": 2,
-          "MediumType": 1,
+          "WorkPressure": 0,
+          "Deformation": 0,
+          "MaxDeformation": null,
+          "IsModeAuto": false,
+          "TensoSensorId": 0,
           "SetPressure": {
             "Unit": "PressureUnit.Pascal",
             "Value": 0.0
-          },
-          "UseValveSetPressure": false,
-          "UseRangeSetPressure": false
+          }
         }
       ],
       "2": [
         {
-          "Id": 2,
-          "Name": "Shell test",
-          "LocalName": null,
-          "Type": 0,
           "Time": 10,
           "PressureSensorId": 0,
-          "LeakageSensorId": null,
-          "StandartId": 1,
-          "MediumType": 0,
+          "WorkPressure": 0,
+          "Deformation": 0,
+          "MaxDeformation": null,
+          "IsModeAuto": false,
+          "TensoSensorId": 0,
           "SetPressure": {
             "Unit": "PressureUnit.Pascal",
             "Value": 0.0
-          },
-          "UseValveSetPressure": false,
-          "UseRangeSetPressure": false
+          }
         },
         {
-          "Id": 3,
-          "Name": "Back seat test",
-          "LocalName": null,
-          "Type": 0,
           "Time": 10,
           "PressureSensorId": 0,
-          "LeakageSensorId": null,
-          "StandartId": 2,
-          "MediumType": 0,
+          "WorkPressure": 0,
+          "Deformation": 0,
+          "MaxDeformation": null,
+          "IsModeAuto": false,
+          "TensoSensorId": 0,
           "SetPressure": {
             "Unit": "PressureUnit.Pascal",
             "Value": 0.0
-          },
-          "UseValveSetPressure": false,
-          "UseRangeSetPressure": false
+          }
         },
         {
-          "Id": 4,
-          "Name": "Seat leakage test",
-          "LocalName": "Seat leakage test",
-          "Type": 1,
           "Time": 30,
           "PressureSensorId": 0,
-          "LeakageSensorId": 4,
-          "StandartId": 6,
-          "MediumType": 1,
+          "WorkPressure": 0,
+          "Deformation": 0,
+          "MaxDeformation": null,
+          "IsModeAuto": false,
+          "TensoSensorId": 0,
           "SetPressure": {
             "Unit": "PressureUnit.Pascal",
             "Value": 0.0
-          },
-          "UseValveSetPressure": false,
-          "UseRangeSetPressure": false
+          }
         }
       ]
     },
-    "GasTemperatureSensorId": 22,
-    "LiquidTemperatureSensorId": 21,
+    "GasTemperatureSensorId": 12,
+    "LiquidTemperatureSensorId": 13,
     "IsEnableGasTemperatureSensor": true,
     "IsEnableLiquidTemperatureSensor": true,
-    "HideCamera": 0,
-    "HidePtzPanel": true,
     "ManualLocation": false,
     "AutoRange": false,
     "Sensors": {
@@ -147,47 +121,10 @@
       "10": false,
       "11": false,
       "12": false,
-      "13": false,
-      "14": false,
-      "15": false,
-      "16": false,
-      "17": false,
-      "18": false,
-      "19": false,
-      "20": false,
-      "21": true,
-      "22": true,
-      "23": false,
-      "24": false,
-      "25": false,
-      "26": false,
-      "27": false,
-      "28": false,
-      "29": false,
-      "30": false,
-      "31": false,
-      "32": false,
-      "33": false,
-      "34": false,
-      "35": false,
-      "36": false,
-      "37": false,
-      "38": false,
-      "39": false,
-      "40": false
+      "13": false
     },
-    "ReportPath": "D:\\Source codes\\PKTBA.UP\\CRS.View\\bin\\Release\\net7.0-windows\\reports_template\\report_template_crsbench_vacuum.frx",
-    "UrlForQr": "",
-    "FuncionalityTestSensetive": {
-      "Unit": "PressureUnit.Bar",
-      "Value": 1.0
-    },
-    "FuncionalityTestWindowSize": 10,
-    "FuncionalityTestValidSetPressurePercent": 3.0,
-    "FuncionalTestMinimunChartSize": {
-      "Unit": "PressureUnit.Bar",
-      "Value": 5.0
-    }
+    "ReportPath": "D:\\Source codes\\SOD\\SOD.View\\bin\\Debug\\net8.0-windows\\reports_template\\report_template_crsbench_vacuum.frx",
+    "UrlForQr": ""
   },
   "TestBenchSettings": {
     "OwnerDeviceId": 0,

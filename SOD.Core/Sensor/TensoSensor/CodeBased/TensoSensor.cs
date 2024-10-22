@@ -14,7 +14,7 @@ namespace SOD.Core.Sensor.TensoSensor.CodeBased
 	{
 		private readonly IChannelBasedDevice channelBasedDevice;
 		private readonly ISettingsService _settingsService;
-		private const string SETTINGS_KEY = "CodeBasedTensoSensor_Id_";
+		private const string SETTINGS_KEY = "TensoSensorCodeBased_Id_";
 		private string SETTINGS_LAST_UPDATE_KEY = "LastUpdate";
 		private int code;
 		private IDisposable disposable;
@@ -46,9 +46,9 @@ namespace SOD.Core.Sensor.TensoSensor.CodeBased
 		{
 			disposable = channelBasedDevice.DataComplite.Subscribe(dc =>
 			{
-				if (dc.Id == Settings.ChannelId && (dc.DataType == ChannelDataType.INT16) || (dc.DataType == ChannelDataType.INT))
+				if (dc.Id == Settings.ChannelId && dc.DataType == ChannelDataType.FLOAT)
 				{
-					code = Convert.ToInt32(dc.Value);
+					code = Convert.ToInt32((float)dc.Value * 1000); // Преобразую миливольты в вольты
 					var rawValue = this.CodeToValue(Settings.MinValue.Grams, Settings.MaxValue.Grams, Settings.MinCode, Settings.MaxCode, code);
 					rawValue = filter.Filtering(rawValue); // Фильтруем значение
 
@@ -65,7 +65,6 @@ namespace SOD.Core.Sensor.TensoSensor.CodeBased
 					}
 					Notify(Mass);
 				}
-
 			});
 		}
 

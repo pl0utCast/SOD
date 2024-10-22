@@ -10,13 +10,11 @@ namespace SOD.View
         public static void Register(IDialogService dialogService)
         {
             dialogService.RegisterDialog("EditBalloonProperty", new Settings.Balloon.Dialog.EditBalloonPropertyDialog());
-            //dialogService.RegisterDialog("DeleteValveProperty", new Settings.Valve.Dialog.DeleteValvePropertyDialog());
-            //dialogService.RegisterDialog("DeleteValveType", new Settings.Valve.Dialog.DeleteValveTypeDialog());
 
             //dialogService.RegisterDialog("AddListStringItem", new Valves.Dialog.AddListStringItemView());
-            //dialogService.RegisterDialog("DeleteValve", new Valves.Dialog.DeleteValveDialog());
 
             dialogService.RegisterDialog("EditModbusTcpRegister", new Settings.DeviceAndSensor.Device.Dialog.EditModbusTcpRegisterView());
+            dialogService.RegisterDialog("EditOvenMBDeviceRegister", new Settings.DeviceAndSensor.Device.Dialog.EditOvenMBDeviceRegisterView());
             //dialogService.RegisterDialog("ValueBasedSensorSettings", new Settings.DeviceAndSensor.Sensors.Dialog.ValueBasedSensorSettingsView());
             //dialogService.RegisterDialog("ScriptSelector", new Settings.Standarts.Dialog.ScriptSelectorView());
             //dialogService.RegisterDialog("SelectPostSensor", new Settings.Bench.ThreePostBench.Dialog.SelectPostSensorView());

@@ -6,8 +6,7 @@ namespace SOD.Core.Device
 {
     public enum DeviceType
     {
-        ModbusTCP,
-        E14140,
-        PKTBAImpulseBoard
+        OvenMBDevice,
+        ModbusTCP
     }
 }

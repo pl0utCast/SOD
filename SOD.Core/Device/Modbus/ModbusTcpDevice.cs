@@ -41,7 +41,6 @@ namespace SOD.Core.Device.Modbus
 			// формируем запрос на опрашивание постоянных регистров
 			if (Settings.Registers.Count > 0)
 				queueRequest.Enqueue(CreateRequestFromMainRegisters());
-			//!!!Закомитил подключение к TCP модбасу во благо рабочего 39 адреса в мип W!!!
 			Task.Run(async () => await PoolingAsync());
 		}
 

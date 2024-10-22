@@ -9,6 +9,5 @@ namespace SOD.Core.Infrastructure
     {
         IEnumerable<IDevice> GetAllDevice();
         IDevice GetDevice(int Id);
-
     }
 }

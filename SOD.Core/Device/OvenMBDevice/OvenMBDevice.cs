@@ -1,19 +1,14 @@
 ﻿using NLog;
 using NModbus;
-using SOD.Core.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.IO.Ports;
-using System.Reactive.Subjects;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using NModbus.Serial;
 using NModbus.Utility;
+using SOD.Core.Infrastructure;
+using System.IO.Ports;
+using System.Reactive.Subjects;
 
-namespace SOD.Core.Device.PKTBAImpulseSensorBoard
+namespace SOD.Core.Device.OvenMBDevice
 {
-    public class ImpulseSensorBoardDevice : IDevice, IChannelBasedDevice
+    public class OvenMBDevice : IDevice, IChannelBasedDevice
     {
         private IModbusMaster modbusMaster;
         private DeviceStatus deviceStatus = DeviceStatus.Disconnect;
@@ -22,15 +17,15 @@ namespace SOD.Core.Device.PKTBAImpulseSensorBoard
         private Subject<IDeviceChannel> dataComplitSubject = new Subject<IDeviceChannel>();
         private CancellationTokenSource cancellationConnect;
         private readonly ISettingsService _settingsService;
-        private readonly string settingsKey = "ImpulseSensorBoard_Id_";
+        private readonly string settingsKey = "OvenMBDevice_Id_";
         private SerialPort serialPort;
-        public ImpulseSensorBoardDevice(int id, ISettingsService settingsService)
+        public OvenMBDevice(int id, ISettingsService settingsService)
         {
             Id = id;
             _settingsService = settingsService;
-            Settings = _settingsService.GetSettings(settingsKey+id, new Settings());
+            Settings = _settingsService.GetSettings(settingsKey + id, new Settings());
         }
-        
+
 
         public void Connenct()
         {
@@ -42,7 +37,7 @@ namespace SOD.Core.Device.PKTBAImpulseSensorBoard
         }
 
         public void Disconnect()
-        { 
+        {
             cancellationConnect?.Cancel();
             if (serialPort != null && serialPort.IsOpen) serialPort.Close();
         }
@@ -51,14 +46,14 @@ namespace SOD.Core.Device.PKTBAImpulseSensorBoard
 
         public void SaveSettings()
         {
-            _settingsService.SaveSettings(settingsKey+Id, Settings);
+            _settingsService.SaveSettings(settingsKey + Id, Settings);
         }
 
         private async Task PoolingAsync()
         {
             serialPort = new SerialPort();
             serialPort.BaudRate = Settings.UsedBaudRate; //9600
-            serialPort.Parity = Parity.None;
+            serialPort.Parity = Parity.Even;
             serialPort.StopBits = StopBits.One;
             serialPort.DataBits = 8;
             serialPort.ReadTimeout = 100;
@@ -73,25 +68,16 @@ namespace SOD.Core.Device.PKTBAImpulseSensorBoard
                     logger.Info($"Открыли COM порт {Settings.SerialPort}");
                     modbusMaster = new ModbusFactory().CreateRtuMaster(serialPort);
                     while (deviceStatus == DeviceStatus.Online)
-                    { 
+                    {
                         foreach (var rChannel in Settings.RequestChannels)
                         {
                             try
                             {
                                 if (rChannel.IsEnable)
                                 {
-                                    if (Settings.UseDigitalSensors)
-                                    {
-                                        var registers = modbusMaster.ReadHoldingRegisters(rChannel.Address, 0x02, 2);
-                                        double impulse = Math.Round((registers[0] * 65536 + registers[1]) / 1000.0, 3);
-                                        dataComplitSubject.OnNext(new DeviceChannel() { Id = rChannel.Address, DataType = ChannelDataType.DOUBLE, Value = impulse });
-                                    }
-                                    else
-                                    {
-                                        var registers = modbusMaster.ReadHoldingRegisters(rChannel.Address, 0x05, 2);
-                                        var impulse = ModbusUtility.GetUInt32(registers[0], registers[1]);
-                                        dataComplitSubject.OnNext(new DeviceChannel() { Id = rChannel.Address, DataType = ChannelDataType.INT, Value = impulse });
-                                    }
+                                    var registers = modbusMaster.ReadHoldingRegisters(1, rChannel.Address, 2);
+                                    var impulse = ModbusUtility.GetSingle(registers[0], registers[1]);
+                                    dataComplitSubject.OnNext(new DeviceChannel() { Id = rChannel.Address, DataType = ChannelDataType.FLOAT, Value = impulse });
                                 }
                             }
                             catch (InvalidOperationException te)
@@ -101,7 +87,7 @@ namespace SOD.Core.Device.PKTBAImpulseSensorBoard
                         }
                         await Task.Delay(1000);
                     }
-                }             
+                }
                 catch (Exception e)
                 {
                     SetStatus(DeviceStatus.Error);

@@ -19,21 +19,10 @@ namespace SOD.Core.Device
             if (deviceConfig == null) return null;
             switch (deviceConfig.Type)
             {
+                case DeviceType.OvenMBDevice:
+                    return new OvenMBDevice.OvenMBDevice(deviceConfig.Id, _settingsService);
                 case DeviceType.ModbusTCP:
                     return new Modbus.ModbusTcpDevice(deviceConfig.Id, _settingsService);
-                //case DeviceType.E14140:
-                    //if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                    //{
-                    //    //return new LCard.E14140DeviceLinux(deviceConfig.Id, _settingsService);
-                    //    return null;
-                    //}
-                    //else
-                    //{
-                        //return new LCard.E14140Device(deviceConfig.Id, _settingsService);
-                        //return new LCard.E14140DeviceWindows(deviceConfig.Id, _settingsService); // для теста библиотечки
-                    //}
-                //case DeviceType.PKTBAImpulseBoard:
-                //    return new PKTBAImpulseSensorBoard.ImpulseSensorBoardDevice(deviceConfig.Id, _settingsService);
                 default:
                     return null;
             }
