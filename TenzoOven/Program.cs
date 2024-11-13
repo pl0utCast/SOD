@@ -3,7 +3,7 @@ using NModbus.Serial;
 using NModbus.Utility;
 using System.IO.Ports;
 
-namespace BenchEmulator
+namespace TenzoOven
 {
     class Program
     {

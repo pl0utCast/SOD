@@ -32,7 +32,6 @@ namespace SOD.View
 
             dialogService.RegisterDialog("CRSBenchTestResult", new Testing.CRSBench.Dialogs.TestResultView());
             dialogService.RegisterDialog("CreateNewReport", new Testing.CRSBench.Dialogs.CreateNewReport());
-            //dialogService.RegisterDialog("CheckSumError", new Testing.CRSBench.Dialogs.CheckSumError());
 
             dialogService.RegisterDialog("IncorrectPassword", new Dialog.IncorrectPasswordView());
         }

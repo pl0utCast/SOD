@@ -53,7 +53,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TenzoOven", "TenzoOven\TenzoOven.csproj", "{BF09FE78-485A-4789-88D9-91C2614593D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TenzoOven", "TenzoOven\TenzoOven.csproj", "{BF09FE78-485A-4789-88D9-91C2614593D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeltaAs332T", "DeltaAs332T\DeltaAs332T.csproj", "{9F3F5088-B0BB-44D8-9761-5EB923AC979F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{BF09FE78-485A-4789-88D9-91C2614593D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF09FE78-485A-4789-88D9-91C2614593D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF09FE78-485A-4789-88D9-91C2614593D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F3F5088-B0BB-44D8-9761-5EB923AC979F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F3F5088-B0BB-44D8-9761-5EB923AC979F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F3F5088-B0BB-44D8-9761-5EB923AC979F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F3F5088-B0BB-44D8-9761-5EB923AC979F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

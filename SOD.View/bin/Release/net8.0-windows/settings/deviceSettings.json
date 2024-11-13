@@ -26,67 +26,46 @@
   "ModbusTcpDevice_1": {
     "DeviceName": "ModbusTCP",
     "Id": 1,
-    "HostOrIp": "127.0.0.1",
+    "HostOrIp": "192.168.1.5",
     "Port": 502,
     "SlaveAddress": 1,
     "Registers": [
       {
-        "RegisterId": 0,
-        "Id": 0,
-        "DataType": 2,
+        "RegisterId": 6096,
+        "Id": 6096,
+        "DataType": 0,
         "ByteCount": 0,
-        "Description": "Давление"
+        "Description": "Давление X3"
       },
       {
-        "RegisterId": 2,
-        "Id": 2,
-        "DataType": 2,
+        "RegisterId": 6097,
+        "Id": 6097,
+        "DataType": 0,
         "ByteCount": 0,
-        "Description": null
+        "Description": "Воздух X4"
       },
       {
-        "RegisterId": 4,
-        "Id": 4,
-        "DataType": 2,
+        "RegisterId": 6098,
+        "Id": 6098,
+        "DataType": 0,
         "ByteCount": 0,
-        "Description": null
+        "Description": "Вода X7"
       },
       {
-        "RegisterId": 6,
-        "Id": 6,
-        "DataType": 2,
+        "RegisterId": 6101,
+        "Id": 6101,
+        "DataType": 1,
         "ByteCount": 0,
-        "Description": null
-      },
-      {
-        "RegisterId": 8,
-        "Id": 8,
-        "DataType": 2,
-        "ByteCount": 0,
-        "Description": null
-      },
-      {
-        "RegisterId": 10,
-        "Id": 10,
-        "DataType": 2,
-        "ByteCount": 0,
-        "Description": null
+        "Description": "биты в crs"
       }
     ],
     "ReadWriteRegisters": [
       {
-        "RegisterId": 0,
-        "Id": 0,
-        "DataType": 2,
+        "RegisterId": 6102,
+        "Id": 6102,
+        "DataType": 1,
         "ByteCount": 0,
-        "Description": null
-      },
-      {
-        "RegisterId": 2,
-        "Id": 2,
-        "DataType": 6,
-        "ByteCount": 0,
-        "Description": null
+        "Description": "биты в плк"
       }
     ],
     "SensorHint": "Modbus"

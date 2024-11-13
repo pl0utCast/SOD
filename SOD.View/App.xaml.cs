@@ -41,7 +41,7 @@ namespace SOD.View
                     oldProc.Kill();
                 }
             }
-            //if (Process.GetProcessesByName("SOD.View").Length == 2) App.Current.Shutdown();
+            if (Process.GetProcessesByName("SOD.View").Length == 2) App.Current.Shutdown();
             // Set this code once in App.xaml.cs or application startup
             SciChartSurface.SetRuntimeLicenseKey("+5suntkQPltZ7dODAzZXB/PJb085uFn4fnrxMf3IGTmlUjPYebkn1" +
                 "PN16pAUIcDs1dqjxz0/LUYGinRFR+mAKH+X1T3iK5VlJlhzJirAIvkDEWausIe0jPZ5uw1dKesYsywwZrk4VFb" +
