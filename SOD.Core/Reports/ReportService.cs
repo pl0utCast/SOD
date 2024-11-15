@@ -37,7 +37,7 @@ namespace SOD.Core.Reports
     {
         private const string rawReportTableName = "raw_reports";
         private string dbPath = Path.Combine(Directory.GetCurrentDirectory(), CoreConst.DatabaseFolder, "reports.db");
-        private ILogger logger = LogManager.GetLogger(CoreConst.LoggerName);
+        private ILogger logger = LogManager.GetCurrentClassLogger();
         private Subject<Report> observeableReport = new Subject<Report>();
         private List<Stream> printedReport = null;
         private int pageNum = 0;

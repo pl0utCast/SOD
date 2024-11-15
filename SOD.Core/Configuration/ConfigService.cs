@@ -13,7 +13,7 @@ namespace SOD.Core.Configuration
         private readonly string configDirectory = "Configs";
         private readonly string deviceConfigFileName = "device.json";
         private readonly string sensorConfigFileName = "sensor.json";
-        private readonly ILogger logger = LogManager.GetLogger(CoreConst.LoggerName);
+        private readonly ILogger logger = LogManager.GetCurrentClassLogger();
         public ConfigService()
         {
             if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), configDirectory)))

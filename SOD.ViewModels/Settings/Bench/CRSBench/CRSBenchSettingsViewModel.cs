@@ -25,7 +25,7 @@ namespace SOD.ViewModels.Settings.Bench.CRSBench
 		private readonly IDialogService _dialogService;
 		private readonly ILocalizationService _localizationService;
 		private readonly App.Benches.CRSBench.Bench _bench;
-		private readonly string findReportLocation = Path.Combine(Directory.GetCurrentDirectory()) + @"\reports_template\report_template_crsbench_vacuum.frx";
+		private readonly string findReportLocation = Path.Combine(Directory.GetCurrentDirectory()) + @"\reports_template\report_template_sod.frx";
 		int i = 0;
 		public CRSBenchSettingsViewModel(IDialogService dialogService,
 										 ISensorService sensorService,

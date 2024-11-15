@@ -12,7 +12,7 @@ namespace SOD.Core.Device.OvenMBDevice
     {
         private IModbusMaster modbusMaster;
         private DeviceStatus deviceStatus = DeviceStatus.Disconnect;
-        private ILogger logger = LogManager.GetLogger(CoreConst.LoggerName);
+        private ILogger logger = LogManager.GetCurrentClassLogger();
         private Subject<DeviceStatus> deviceStatusSubject = new Subject<DeviceStatus>();
         private Subject<IDeviceChannel> dataComplitSubject = new Subject<IDeviceChannel>();
         private CancellationTokenSource cancellationConnect;

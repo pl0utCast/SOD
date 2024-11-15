@@ -21,7 +21,7 @@ namespace SOD.Core.Settings
 		private Dictionary<string, object> deviceSettingsDic = new Dictionary<string, object>();
 		private Dictionary<string, object> sensorSettingsDic = new Dictionary<string, object>();
 		private Dictionary<string, object> applicationSettingsDic = new Dictionary<string, object>();
-		private readonly ILogger logger = LogManager.GetLogger(CoreConst.LoggerName);
+		private readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
 		const string SettingsDeviceFileName = "deviceSettings.json";
 		const string SettingsSensorFileName = "sensorSettings.json";

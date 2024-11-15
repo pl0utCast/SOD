@@ -14,7 +14,7 @@ namespace SOD.App.Testing.Standarts
     
     public class LuaStandart : IStandart
     {
-        private readonly ILogger logger = NLog.LogManager.GetLogger(Const.LOGGER_NAME);
+        private readonly ILogger logger = LogManager.GetCurrentClassLogger();
         public LuaStandart()
         {
             

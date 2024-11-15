@@ -12,7 +12,7 @@ namespace SOD.Core.Sensor
     {
         private readonly ISettingsService _settingsService;
         private readonly IDeviceService _deviceService;
-        private readonly ILogger logger = LogManager.GetLogger(CoreConst.LoggerName);
+        private readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private readonly ISensorService _sensorService;
         public SensorFactory(ISettingsService settingsService, IDeviceService deviceService, ISensorService sensorService)
         {

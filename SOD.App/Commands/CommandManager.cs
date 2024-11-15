@@ -20,7 +20,7 @@ namespace SOD.App.Commands
         private readonly IDevice _device;
         private readonly IBus _bus;
         private CommandsFactory commandsFactory;
-        private readonly ILogger logger = LogManager.GetLogger(Const.LOGGER_NAME);
+        private readonly ILogger logger = LogManager.GetCurrentClassLogger();
         public CommandManager(IDevice device, IBus bus, ISettingsService settingsService)
         {
             _settingsService = settingsService;

@@ -11,6 +11,7 @@
     <PackageReference Include="JsonNet.PrivateSettersContractResolvers" Version="1.0.0" />
     <PackageReference Include="MemBus" Version="4.0.1" />
     <PackageReference Include="Ninject" Version="3.3.6" />
+    <PackageReference Include="NLog" Version="5.3.3" />
     <PackageReference Include="NLua" Version="1.7.3" />
   </ItemGroup>
 

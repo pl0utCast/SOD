@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/21/2020 16:03:35" ReportInfo.Modified="11/14/2024 09:03:16" ReportInfo.CreatorVersion="2024.2.14.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+
+    private void Data1_BeforePrint(object sender, EventArgs e)
+    {
+      // get a reference to the data source
+      DataSourceBase ds = Report.GetDataSource(&quot;MainData.Tests.Posts.Registrations&quot;);
+      // initialize it
+      ds.Init();
+      // enum all rows
+      while (ds.HasMoreRows)
+      {
+        if ((string)Report.GetColumnValue(&quot;MainData.Tests.Posts.Registrations.StartPressure&quot;)==String.Empty)
+        {
+          StrengthTestData.Visible=false;
+          ResultTestData.Visible=false;
+        }
+        else
+        {
+          StrengthTestData.Visible=true;
+          ResultTestData.Visible=true;
+        }
+        
+        if ((String)Report.GetColumnValue(&quot;MainData.Tests.Posts.Registrations.LeakageTest.Leakage&quot;)==String.Empty)
+        {
+          LeakageTestData.Visible=false;
+          ResultTestData.Visible=false;
+        }
+        else
+        {
+          LeakageTestData.Visible=true;
+          ResultTestData.Visible=true;
+        }
+        
+        if (((String)Report.GetColumnValue(&quot;MainData.Tests.Posts.Registrations.FuncionalTest.OpenPressure&quot;))==String.Empty)
+        {
+          FuncionalTestData.Visible=false;
+        }
+        else
+        {
+           FuncionalTestData.Visible=true;
+        }  
+        ds.Next();
+      }
+    }
+  }
+}
+</ScriptText>
+  <Styles>
+    <Style Name="Стандартный" Font="Times New Roman, 12pt"/>
+  </Styles>
+  <Dictionary>
+    <BusinessObjectDataSource Name="MainData" ReferenceName="MainData" DataType="System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]" Enabled="true">
+      <BusinessObjectDataSource Name="BusinessObjectDataSource1" Alias="Tests" DataType="System.Collections.Generic.List`1[[SOD.App.Benches.CRSBench.Report.TestReportItem, SOD.App, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" PropName="Tests" Enabled="true">
+        <Column Name="Chart" DataType="System.Drawing.Image, System.Drawing.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" BindableControl="Picture"/>
+        <BusinessObjectDataSource Name="BusinessObjectDataSource2" Alias="Posts" DataType="System.Collections.Generic.List`1[[SOD.App.Benches.CRSBench.Report.PostDataReport, SOD.App, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" PropName="Posts" Enabled="true">
+          <BusinessObjectDataSource Name="BusinessObjectDataSource3" Alias="Registrations" DataType="System.Collections.Generic.List`1[[SOD.App.Benches.CRSBench.Report.PostDataReport+Registration, SOD.App, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" PropName="Registrations" Enabled="true">
+            <Column Name="Result" DataType="System.String"/>
+            <Column Name="FuncionalTest" DataType="SOD.App.Benches.CRSBench.Report.PostDataReport+Registration+FuncionalReportTest, SOD.App, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+              <Column Name="OpenPressure" DataType="System.String"/>
+              <Column Name="ClosePressure" DataType="System.String"/>
+              <Column Name="OpenPressureAccuracy" DataType="System.String"/>
+              <Column Name="ExpectedSetPressure" DataType="System.String"/>
+            </Column>
+            <Column Name="AirTemperature" DataType="System.String"/>
+            <Column Name="WaterTemperature" DataType="System.String"/>
+          </BusinessObjectDataSource>
+        </BusinessObjectDataSource>
+        <Column Name="Standart" DataType="System.String"/>
+        <Column Name="QrChart" DataType="System.Drawing.Image, System.Drawing.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" BindableControl="Picture"/>
+      </BusinessObjectDataSource>
+      <Column Name="ReportNumber" DataType="System.Int32"/>
+      <Column Name="Date" DataType="System.DateTime"/>
+    </BusinessObjectDataSource>
+    <TableDataSource Name="Parameters" ReferenceName="Parameters.Parameters" DataType="System.Int32" Enabled="true">
+      <Column Name="customer" DataType="System.String"/>
+      <Column Name="order_number" DataType="System.String"/>
+      <Column Name="due_date" DataType="System.String"/>
+    </TableDataSource>
+    <BusinessObjectDataSource Name="Valve" ReferenceName="Valve" DataType="System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]" Enabled="true">
+      <BusinessObjectDataSource Name="BusinessObjectDataSource4" Alias="Properties" DataType="System.Int32" PropName="Properties" Enabled="true">
+        <Column Name="Name" DataType="System.String"/>
+        <Column Name="Value" DataType="System.String"/>
+      </BusinessObjectDataSource>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="Balloon" ReferenceName="Balloon" DataType="System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]" Enabled="true">
+      <BusinessObjectDataSource Name="Properties" DataType="System.Collections.Generic.List`1[[SOD.App.Benches.CRSBench.Report.ReportData+BalloonProperty, SOD.App, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+        <Column Name="Name" DataType="System.String"/>
+        <Column Name="Value" DataType="System.String"/>
+      </BusinessObjectDataSource>
+    </BusinessObjectDataSource>
+    <Parameter Name="ReportNumber" DataType="System.Int32" AsString="1"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="226.8" CanGrow="true" CanShrink="true">
+      <TextObject Name="Text3" Left="9.45" Top="94.5" Width="699.3" Height="28.35" CanGrow="true" Text="VALVE TEST REPORT" HorzAlign="Center" VertAlign="Center" Font="Arial, 16pt, style=Bold"/>
+      <TextObject Name="Text17" Left="9.45" Top="198.45" Width="699.3" Height="28.35" CanGrow="true" Text="VALVE DATA" HorzAlign="Center" VertAlign="Center" Font="Arial, 14pt, style=Bold"/>
+      <TextObject Name="Text4" Left="141.75" Top="132.3" Width="207.9" Height="18.9" Text="[Parameters.customer]" Font="Arial, 12pt"/>
+      <TextObject Name="Text50" Left="9.45" Top="132.3" Width="132.3" Height="18.9" CanGrow="true" Text="Customer" Font="Arial, 12pt"/>
+      <TextObject Name="Text56" Left="406.35" Top="18.9" Width="141.75" Height="18.9" CanGrow="true" Text="Report number" Font="Arial, 12pt"/>
+      <TextObject Name="Text54" Left="406.35" Top="37.8" Width="66.15" Height="18.9" CanGrow="true" Text="Date" Font="Arial, 12pt"/>
+      <TextObject Name="Text55" Left="481.95" Top="37.8" Width="226.8" Height="18.9" CanGrow="true" Text="[MainData.Date]" WordWrap="false" Font="Arial, 12pt"/>
+      <TextObject Name="Text6" Left="557.55" Top="18.9" Width="94.5" Height="18.9" Text="[ReportNumber]" Font="Arial, 12pt"/>
+      <TextObject Name="Text57" Left="9.45" Top="170.1" Width="132.3" Height="18.9" CanGrow="true" Text="Order number" Font="Arial, 12pt"/>
+      <TextObject Name="Text58" Left="141.75" Top="170.1" Width="226.8" Height="18.9" Text="[Parameters.order_number]" Font="Arial, 12pt"/>
+      <TextObject Name="Text59" Left="9.45" Top="151.2" Width="132.3" Height="18.9" CanGrow="true" Text="Due date" Font="Arial, 12pt"/>
+      <TextObject Name="Text60" Left="141.75" Top="151.2" Width="207.9" Height="18.9" Text="[Parameters.due_date]" Font="Arial, 12pt"/>
+      <PictureObject Name="Picture2" Left="9.45" Top="9.45" Width="264.1" Height="58.75" ImageFormat="Png" Image="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"/>
+      <TextObject Name="Text95" Left="9.45" Top="56.7" Width="699.3" Height="37.8" CanGrow="true" Text="_______________________________________________________" HorzAlign="Center" VertAlign="Center" Font="Arial, 16pt, style=Bold"/>
+    </ReportTitleBand>
+    <DataBand Name="Data2" Top="230" Width="359.1" Height="18.9" CanGrow="true" DataSource="BusinessObjectDataSource4" Columns.Count="2">
+      <TextObject Name="Text93" Left="9.45" Width="207.9" Height="18.9" CanGrow="true" CanShrink="true" Text="[Valve.Properties.Name]" Font="Arial, 12pt"/>
+      <TextObject Name="Text94" Left="217.35" Width="141.75" Height="18.9" CanGrow="true" CanShrink="true" Text="[Valve.Properties.Value]" Font="Arial, 12pt"/>
+    </DataBand>
+    <DataBand Name="Data1" Top="283.65" Width="718.2" Height="28.35" CanGrow="true" CanShrink="true" BeforePrintEvent="Data1_BeforePrint" DataSource="BusinessObjectDataSource1" KeepTogether="true" KeepDetail="true">
+      <DataHeaderBand Name="DataHeader1" Top="252.1" Width="718.2" Height="28.35" CanShrink="true">
+        <TextObject Name="Text33" Left="9.45" Width="699.3" Height="28.35" CanGrow="true" Text="TEST RESULT" HorzAlign="Center" VertAlign="Center" Font="Arial, 14pt, style=Bold"/>
+      </DataHeaderBand>
+      <DataBand Name="Data3" Top="315.2" Width="718.2" Height="37.8" CanGrow="true" CanShrink="true" KeepTogether="true" KeepDetail="true">
+        <TextObject Name="Text1" Left="9.45" Top="9.45" Width="274.05" Height="18.9" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[MainData.Tests.Name]" WordWrap="false" Font="Arial, 14pt, style=Bold"/>
+        <TextObject Name="Text44" Left="283.5" Top="9.45" Width="103.95" Height="18.9" CanGrow="true" CanShrink="true" Text="[IIf([MainData.Tests.Standart]==&quot;&quot;,&quot;&quot;,&quot;Test standart&quot;)]" Font="Arial, 12pt"/>
+        <TextObject Name="Text53" Left="387.45" Top="9.45" Width="302.4" Height="18.9" CanGrow="true" CanShrink="true" Text="[MainData.Tests.Standart]" AutoWidth="true" Font="Arial, 12pt"/>
+      </DataBand>
+      <DataBand Name="FuncionalTestData" Top="356.2" Width="718.2" Height="37.8" CanShrink="true" DataSource="BusinessObjectDataSource3">
+        <TextObject Name="Text79" Left="510.3" Width="179.55" Height="18.9" CanGrow="true" CanShrink="true" Text="Reseat pressure [MainData.Tests.Posts.Registrations.FuncionalTest.ClosePressure]" Font="Arial, 12pt"/>
+        <TextObject Name="Text80" Left="9.45" Width="85.05" Height="18.9" CanGrow="true" CanShrink="true" Text="Pressure" Font="Arial, 12pt"/>
+        <TextObject Name="Text81" Left="94.5" Width="189" Height="18.9" CanGrow="true" CanShrink="true" Text="Expected [MainData.Tests.Posts.Registrations.FuncionalTest.ExpectedSetPressure]" Font="Arial, 12pt"/>
+        <TextObject Name="Text82" Left="283.5" Width="226.8" Height="18.9" CanGrow="true" CanShrink="true" Text="Set pressure [MainData.Tests.Posts.Registrations.FuncionalTest.OpenPressure] ([MainData.Tests.Posts.Registrations.FuncionalTest.OpenPressureAccuracy] %)" Font="Arial, 12pt"/>
+        <TextObject Name="Text68" Left="9.45" Top="18.9" Width="85.05" Height="18.9" CanGrow="true" CanShrink="true" Text="Result" Font="Arial, 12pt"/>
+        <TextObject Name="Text69" Left="94.5" Top="18.9" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="[MainData.Tests.Posts.Registrations.Result]" Font="Arial, 12pt, style=Bold"/>
+      </DataBand>
+      <DataBand Name="StrengthTestData" Top="397.2" Width="718.2" Height="37.8" CanGrow="true" CanShrink="true" DataSource="BusinessObjectDataSource3">
+        <TextObject Name="Text70" Left="9.45" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="Exposure: [Row#]" Font="Arial, 12pt, style=Italic"/>
+        <TextObject Name="Text71" Left="9.45" Top="18.9" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="Pressure" Font="Arial, 12pt"/>
+        <TextObject Name="Text75" Left="179.55" Top="18.9" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="Start [MainData.Tests.Posts.Registrations.StartPressure]" Font="Arial, 12pt"/>
+        <TextObject Name="Text76" Left="349.65" Top="18.9" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="Stop [MainData.Tests.Posts.Registrations.StopPressue]" Font="Arial, 12pt"/>
+        <TextObject Name="Text96" Left="179.55" Width="444.15" Height="18.9" CanGrow="true" CanShrink="true" Text="Selected sensor: [MainData.Tests.Posts.Registrations.PressureName]" Font="Arial, 12pt"/>
+        <DataBand Name="LeakageTestData" Top="438.2" Width="718.2" Height="18.9" CanShrink="true">
+          <TextObject Name="Text89" Left="9.45" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="Leakage" Font="Arial, 12pt"/>
+          <TextObject Name="Text90" Left="179.55" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="[MainData.Tests.Posts.Registrations.LeakageTest.Leakage]" Font="Arial, 12pt"/>
+        </DataBand>
+        <DataBand Name="ResultTestData" Top="460.3" Width="718.2" Height="18.9">
+          <TextObject Name="Text91" Left="9.45" Width="85.05" Height="18.9" CanGrow="true" CanShrink="true" Text="Result" Font="Arial, 12pt"/>
+          <TextObject Name="Text92" Left="94.5" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="[MainData.Tests.Posts.Registrations.Result]" Font="Arial, 12pt, style=Bold"/>
+        </DataBand>
+      </DataBand>
+      <DataBand Name="Data4" Top="482.4" Width="718.2" Height="207.9" CanGrow="true" CanShrink="true" KeepTogether="true" KeepDetail="true">
+        <PictureObject Name="Picture1" Left="9.45" Top="18.9" Width="699.3" Height="189" DataColumn="MainData.Tests.Chart" SizeMode="StretchImage"/>
+      </DataBand>
+    </DataBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="693.5" Width="718.2" Height="96.55" PrintOnBottom="true">
+      <TextObject Name="Text13" Top="28.35" Width="94.5" Height="18.9" Text="Executer:" Font="Arial, 12pt"/>
+      <TextObject Name="Text74" Left="94.5" Top="28.35" Width="283.5" Height="18.9" Text="___________________________________" Font="Arial, 10pt"/>
+      <TextObject Name="Text14" Top="47.25" Width="94.5" Height="18.9" Text="Signature:" Font="Arial, 12pt"/>
+      <TextObject Name="Text16" Left="94.5" Top="47.25" Width="283.5" Height="18.9" Text="___________________________________" Font="Arial, 10pt"/>
+      <TextObject Name="Text47" Top="66.15" Width="94.5" Height="18.9" Text="Date:" Font="Arial, 12pt"/>
+      <TextObject Name="Text48" Left="94.5" Top="66.15" Width="94.5" Height="18.9" Text="[Date]" Font="Arial, 12pt"/>
+      <PictureObject Name="Picture3" Left="585.9" Width="94.5" Height="85.05" DataColumn="MainData.Tests.QrChart" SizeMode="StretchImage"/>
+    </ReportSummaryBand>
+    <PageFooterBand Name="PageFooter1" Top="793.25" Width="718.2" Height="66.15">
+      <TextObject Name="Text5" Left="585.9" Width="122.85" Height="18.9" CanGrow="true" Text="Page [Page#] of [TotalPages#]" Font="Arial, 10pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

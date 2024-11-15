@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/21/2020 16:03:35" ReportInfo.Modified="06/03/2024 13:32:37" ReportInfo.CreatorVersion="2021.3.1.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+
+    private void Data1_BeforePrint(object sender, EventArgs e)
+    {
+      // get a reference to the data source
+      DataSourceBase ds = Report.GetDataSource(&quot;MainData.Tests.Posts.Registrations&quot;);
+      // initialize it
+      ds.Init();
+      // enum all rows
+      while (ds.HasMoreRows)
+      {
+        if ((string)Report.GetColumnValue(&quot;MainData.Tests.Posts.Registrations.StartPressure&quot;)==String.Empty)
+        {
+          StrengthTestData.Visible=false;
+          ResultTestData.Visible=false;
+        }
+        else
+        {
+          StrengthTestData.Visible=true;
+          ResultTestData.Visible=true;
+        }
+        
+        if ((String)Report.GetColumnValue(&quot;MainData.Tests.Posts.Registrations.LeakageTest.Leakage&quot;)==String.Empty)
+        {
+          LeakageTestData.Visible=false;
+          ResultTestData.Visible=false;
+        }
+        else
+        {
+          LeakageTestData.Visible=true;
+          ResultTestData.Visible=true;
+        }
+        
+        if (((String)Report.GetColumnValue(&quot;MainData.Tests.Posts.Registrations.FuncionalTest.OpenPressure&quot;))==String.Empty)
+        {
+          FuncionalTestData.Visible=false;
+        }
+        else
+        {
+           FuncionalTestData.Visible=true;
+        }  
+        ds.Next();
+      }
+    }
+  }
+}
+</ScriptText>
+  <Styles>
+    <Style Name="Стандартный" Font="Times New Roman, 12pt"/>
+  </Styles>
+  <Dictionary>
+    <BusinessObjectDataSource Name="MainData" ReferenceName="MainData" DataType="System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]" Enabled="true">
+      <BusinessObjectDataSource Name="BusinessObjectDataSource1" Alias="Tests" DataType="System.Collections.Generic.List`1[[PKTBA.UP.CRS.App.Benches.CRSBench.Report.TestReportItem, PKTBA.UP.CRS.App, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" PropName="Tests" Enabled="true">
+        <Column Name="Name" DataType="System.String"/>
+        <Column Name="Chart" DataType="System.Drawing.Image, System.Drawing.Common, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" BindableControl="Picture"/>
+        <BusinessObjectDataSource Name="BusinessObjectDataSource2" Alias="Posts" DataType="System.Collections.Generic.List`1[[PKTBA.UP.CRS.App.Benches.CRSBench.Report.PostDataReport, PKTBA.UP.CRS.App, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" PropName="Posts" Enabled="true">
+          <Column Name="PostNumber" DataType="System.Int32"/>
+          <Column Name="SerialNumber" DataType="System.String"/>
+          <Column Name="Name" DataType="System.String"/>
+          <BusinessObjectDataSource Name="BusinessObjectDataSource3" Alias="Registrations" DataType="System.Collections.Generic.List`1[[PKTBA.UP.CRS.App.Benches.CRSBench.Report.PostDataReport+Registration, PKTBA.UP.CRS.App, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" PropName="Registrations" Enabled="true">
+            <Column Name="Time" DataType="System.TimeSpan"/>
+            <Column Name="StartPressure" DataType="System.String"/>
+            <Column Name="StopPressue" DataType="System.String"/>
+            <Column Name="DropPressure" DataType="System.String"/>
+            <Column Name="Result" DataType="System.String"/>
+            <Column Name="LeakageTest" DataType="PKTBA.UP.CRS.App.Benches.CRSBench.Report.PostDataReport+Registration+LeakageReportTest, PKTBA.UP.CRS.App, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+              <Column Name="Leakage" DataType="System.String"/>
+              <Column Name="LeakageDrops" DataType="System.String"/>
+            </Column>
+            <Column Name="FuncionalTest" DataType="PKTBA.UP.CRS.App.Benches.CRSBench.Report.PostDataReport+Registration+FuncionalReportTest, PKTBA.UP.CRS.App, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+              <Column Name="OpenPressure" DataType="System.String"/>
+              <Column Name="ClosePressure" DataType="System.String"/>
+              <Column Name="OpenPressureAccuracy" DataType="System.String"/>
+              <Column Name="ExpectedSetPressure" DataType="System.String"/>
+            </Column>
+            <Column Name="Cavity" DataType="System.String"/>
+            <Column Name="AirTemperature" DataType="System.String"/>
+            <Column Name="WaterTemperature" DataType="System.String"/>
+          </BusinessObjectDataSource>
+        </BusinessObjectDataSource>
+        <Column Name="Standart" DataType="System.String"/>
+        <Column Name="Medium" DataType="System.String"/>
+        <Column Name="QrChart" DataType="System.Drawing.Image, System.Drawing.Common, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" BindableControl="Picture"/>
+        <Column Name="CamerasDirectory" DataType="System.String"/>
+      </BusinessObjectDataSource>
+      <Column Name="ReportNumber" DataType="System.Int32"/>
+      <Column Name="Date" DataType="System.DateTime"/>
+    </BusinessObjectDataSource>
+    <TableDataSource Name="Parameters" ReferenceName="Parameters.Parameters" DataType="System.Int32" Enabled="true">
+      <Column Name="customer" DataType="System.String"/>
+      <Column Name="order_number" DataType="System.String"/>
+      <Column Name="due_date" DataType="System.String"/>
+    </TableDataSource>
+    <BusinessObjectDataSource Name="Valve" ReferenceName="Valve" DataType="System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]" Enabled="true">
+      <BusinessObjectDataSource Name="BusinessObjectDataSource4" Alias="Properties" DataType="System.Collections.Generic.List`1[[PKTBA.UP.CRS.App.Benches.CRSBench.Report.ReportData+ValveProperty, PKTBA.UP.CRS.App, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" PropName="Properties" Enabled="true">
+        <Column Name="Name" DataType="System.String"/>
+        <Column Name="Value" DataType="System.String"/>
+      </BusinessObjectDataSource>
+    </BusinessObjectDataSource>
+    <Parameter Name="ReportNumber" DataType="System.Int32"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="179.55" CanGrow="true" CanShrink="true">
+      <TextObject Name="Text3" Top="9.45" Width="718.2" Height="28.35" CanGrow="true" Text="Отчет об испытаниях клапана" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 16pt, style=Bold"/>
+      <TextObject Name="Text17" Left="9.45" Top="151.2" Width="699.3" Height="28.35" CanGrow="true" Text="ДАННЫЕ КЛАПАНА" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 14pt, style=Bold"/>
+      <TextObject Name="Text4" Left="141.75" Top="103.95" Width="207.9" Height="18.9" Text="[Parameters.customer]" Font="Times New Roman, 12pt" Style="Стандартный"/>
+      <TextObject Name="Text50" Left="9.45" Top="103.95" Width="132.3" Height="18.9" CanGrow="true" Text="Заказчик" Font="Times New Roman, 12pt" Style="Стандартный"/>
+      <TextObject Name="Text56" Left="9.45" Top="37.8" Width="141.75" Height="18.9" CanGrow="true" Text="Номер отчета" Font="Times New Roman, 12pt" Style="Стандартный"/>
+      <TextObject Name="Text54" Left="9.45" Top="56.7" Width="66.15" Height="18.9" CanGrow="true" Text="Дата" Font="Times New Roman, 12pt" Style="Стандартный"/>
+      <TextObject Name="Text55" Left="85.05" Top="56.7" Width="226.8" Height="18.9" CanGrow="true" Text="[MainData.Date]" WordWrap="false" Font="Times New Roman, 12pt" Style="Стандартный"/>
+      <TextObject Name="Text6" Left="160.65" Top="37.8" Width="94.5" Height="18.9" Text="[ReportNumber]" Font="Times New Roman, 12pt" Style="Стандартный"/>
+      <TextObject Name="Text57" Left="349.65" Top="103.95" Width="132.3" Height="18.9" CanGrow="true" Text="Номер заказа" Font="Times New Roman, 12pt" Style="Стандартный"/>
+      <TextObject Name="Text58" Left="481.95" Top="103.95" Width="226.8" Height="18.9" Text="[Parameters.order_number]" Font="Times New Roman, 12pt" Style="Стандартный"/>
+      <TextObject Name="Text59" Left="9.45" Top="122.85" Width="132.3" Height="18.9" CanGrow="true" Text="Текущая дата" Font="Times New Roman, 12pt" Style="Стандартный"/>
+      <TextObject Name="Text60" Left="141.75" Top="122.85" Width="207.9" Height="18.9" Text="[Parameters.due_date]" Font="Times New Roman, 12pt" Style="Стандартный"/>
+      <PictureObject Name="Picture2" Left="444.15" Top="9.45" Width="264.6" Height="94.5" SizeMode="StretchImage"/>
+    </ReportTitleBand>
+    <DataBand Name="Data2" Top="182.75" Width="359.1" Height="18.9" CanGrow="true" DataSource="BusinessObjectDataSource4" Columns.Count="2">
+      <TextObject Name="Text93" Left="9.45" Width="207.9" Height="18.9" CanGrow="true" CanShrink="true" Text="[Valve.Properties.Name]" Font="Times New Roman, 12pt" Style="Стандартный"/>
+      <TextObject Name="Text94" Left="217.35" Width="141.75" Height="18.9" CanGrow="true" CanShrink="true" Text="[Valve.Properties.Value]" Font="Times New Roman, 12pt" Style="Стандартный"/>
+    </DataBand>
+    <DataBand Name="Data1" Top="236.4" Width="718.2" Height="28.35" CanGrow="true" CanShrink="true" BeforePrintEvent="Data1_BeforePrint" DataSource="BusinessObjectDataSource1" KeepTogether="true" KeepDetail="true">
+      <DataHeaderBand Name="DataHeader1" Top="204.85" Width="718.2" Height="28.35" CanShrink="true">
+        <TextObject Name="Text33" Left="9.45" Width="699.3" Height="28.35" CanGrow="true" Text="РЕЗУЛЬТАТ ИСПЫТАНИЙ" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 14pt, style=Bold"/>
+      </DataHeaderBand>
+      <DataBand Name="Data3" Top="267.95" Width="718.2" Height="37.8" CanGrow="true" CanShrink="true" KeepTogether="true" KeepDetail="true">
+        <TextObject Name="Text1" Left="9.45" Top="9.45" Width="274.05" Height="18.9" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[MainData.Tests.Name]" WordWrap="false" Font="Times New Roman, 14pt, style=Bold"/>
+        <TextObject Name="Text44" Left="283.5" Top="9.45" Width="160.65" Height="18.9" CanGrow="true" CanShrink="true" Text="[IIf([MainData.Tests.Standart]==&quot;&quot;,&quot;&quot;,&quot;Стандарт испытания&quot;)]" Font="Times New Roman, 12pt" Style="Стандартный"/>
+        <TextObject Name="Text53" Left="444.15" Top="9.45" Width="245.7" Height="18.9" CanGrow="true" CanShrink="true" Text="[MainData.Tests.Standart]" AutoWidth="true" Font="Times New Roman, 12pt" Style="Стандартный"/>
+      </DataBand>
+      <DataBand Name="FuncionalTestData" Top="308.95" Width="718.2" Height="37.8" CanShrink="true" DataSource="BusinessObjectDataSource3">
+        <TextObject Name="Text79" Left="510.3" Width="179.55" Height="18.9" CanGrow="true" CanShrink="true" Text="Давление закрытия [MainData.Tests.Posts.Registrations.FuncionalTest.ClosePressure]" Font="Times New Roman, 12pt" Style="Стандартный"/>
+        <TextObject Name="Text80" Left="9.45" Width="85.05" Height="18.9" CanGrow="true" CanShrink="true" Text="Давление" Font="Times New Roman, 12pt" Style="Стандартный"/>
+        <TextObject Name="Text81" Left="94.5" Width="189" Height="18.9" CanGrow="true" CanShrink="true" Text="Ожидаемое [MainData.Tests.Posts.Registrations.FuncionalTest.ExpectedSetPressure]" Font="Times New Roman, 12pt" Style="Стандартный"/>
+        <TextObject Name="Text82" Left="283.5" Width="226.8" Height="18.9" CanGrow="true" CanShrink="true" Text="Давление открытия [MainData.Tests.Posts.Registrations.FuncionalTest.OpenPressure] ([MainData.Tests.Posts.Registrations.FuncionalTest.OpenPressureAccuracy] %)" Font="Times New Roman, 12pt" Style="Стандартный"/>
+        <TextObject Name="Text68" Left="9.45" Top="18.9" Width="85.05" Height="18.9" CanGrow="true" CanShrink="true" Text="Результат" Font="Times New Roman, 12pt" Style="Стандартный"/>
+        <TextObject Name="Text69" Left="94.5" Top="18.9" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="[MainData.Tests.Posts.Registrations.Result]" Font="Times New Roman, 12pt, style=Bold"/>
+      </DataBand>
+      <DataBand Name="StrengthTestData" Top="349.95" Width="718.2" Height="37.8" CanGrow="true" CanShrink="true" DataSource="BusinessObjectDataSource3">
+        <TextObject Name="Text38" Left="519.75" Top="18.9" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="Падение [MainData.Tests.Posts.Registrations.DropPressure]" Font="Times New Roman, 12pt" Style="Стандартный"/>
+        <TextObject Name="Text70" Left="9.45" Width="680.4" Height="18.9" CanGrow="true" CanShrink="true" Text="Выдержка: [Row#]" Font="Times New Roman, 12pt, style=Italic"/>
+        <TextObject Name="Text71" Left="9.45" Top="18.9" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="Давление" Font="Times New Roman, 12pt" Style="Стандартный"/>
+        <TextObject Name="Text75" Left="179.55" Top="18.9" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="Старт [MainData.Tests.Posts.Registrations.StartPressure]" Font="Times New Roman, 12pt" Style="Стандартный"/>
+        <TextObject Name="Text76" Left="349.65" Top="18.9" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="Стоп [MainData.Tests.Posts.Registrations.StopPressue]" Font="Times New Roman, 12pt" Style="Стандартный"/>
+        <DataBand Name="LeakageTestData" Top="390.95" Width="718.2" Height="18.9" CanShrink="true">
+          <TextObject Name="Text89" Left="9.45" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="Протечка" Font="Times New Roman, 12pt" Style="Стандартный"/>
+          <TextObject Name="Text90" Left="179.55" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="[MainData.Tests.Posts.Registrations.LeakageTest.Leakage]" Font="Times New Roman, 12pt" Style="Стандартный"/>
+        </DataBand>
+        <DataBand Name="ResultTestData" Top="413.05" Width="718.2" Height="18.9">
+          <TextObject Name="Text91" Left="9.45" Width="85.05" Height="18.9" CanGrow="true" CanShrink="true" Text="Результат" Font="Times New Roman, 12pt" Style="Стандартный"/>
+          <TextObject Name="Text92" Left="94.5" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="[MainData.Tests.Posts.Registrations.Result]" Font="Times New Roman, 12pt, style=Bold"/>
+        </DataBand>
+      </DataBand>
+      <DataBand Name="Data4" Top="435.15" Width="718.2" Height="189" CanGrow="true" CanShrink="true" KeepTogether="true" KeepDetail="true">
+        <PictureObject Name="Picture1" Left="9.45" Width="604.8" Height="189" DataColumn="MainData.Tests.Chart" SizeMode="StretchImage"/>
+      </DataBand>
+    </DataBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="627.35" Width="718.2" Height="56.7" PrintOnBottom="true">
+      <TextObject Name="Text13" Width="113.4" Height="18.9" Text="Исполнитель:" Font="Times New Roman, 12pt"/>
+      <TextObject Name="Text74" Left="113.4" Width="283.5" Height="18.9" Text="___________________________________" Font="Arial, 10pt"/>
+      <TextObject Name="Text14" Top="18.9" Width="113.4" Height="18.9" Text="Подпись:" Font="Times New Roman, 12pt"/>
+      <TextObject Name="Text16" Left="113.4" Top="18.9" Width="283.5" Height="18.9" Text="___________________________________" Font="Arial, 10pt"/>
+      <TextObject Name="Text47" Top="37.8" Width="113.4" Height="18.9" Text="Дата:" Font="Times New Roman, 12pt"/>
+      <TextObject Name="Text48" Left="113.4" Top="37.8" Width="94.5" Height="18.9" Text="[Date]" Font="Times New Roman, 12pt"/>
+    </ReportSummaryBand>
+    <PageFooterBand Name="PageFooter1" Top="687.25" Width="718.2" Height="66.15">
+      <TextObject Name="Text5" Left="585.9" Width="122.85" Height="18.9" CanGrow="true" Text="Страница [Page#] из [TotalPages#]" Font="Times New Roman, 10pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

@@ -9,10 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="C:\Users\buzunov\.nuget\packages\nlog.schema\5.3.3\contentFiles\any\any\NLog.xsd" />
+    <None Remove="NLog.config" />
     <None Remove="Resources\icon.ico" />
     <None Remove="Resources\intro-logo_eng.png" />
     <None Remove="Resources\REVALVE BY PKTBA splash EN.png" />
     <None Remove="Resources\REVALVE BY PKTBA splash.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +33,7 @@
     <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
     <PackageReference Include="MaterialDesignThemes.Wpf" Version="1.0.1" />
     <PackageReference Include="Ninject" Version="3.3.6" />
+    <PackageReference Include="NLog" Version="5.3.3" />
     <PackageReference Include="ReactiveUI" Version="20.1.1" />
     <PackageReference Include="ReactiveUI.Events.WPF" Version="15.1.1" />
     <PackageReference Include="ReactiveUI.WPF" Version="20.1.1" />

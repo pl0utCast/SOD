@@ -25,7 +25,7 @@ namespace SOD.View
     public partial class App : System.Windows.Application
     {
         private readonly Startup appStartup;
-        private readonly ILogger logger = LogManager.GetLogger(Const.LoggerName);
+        private readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private IDialogService dialogService;
         private bool oldIsOpenDialog;
         private MainWindow mainWindow;
