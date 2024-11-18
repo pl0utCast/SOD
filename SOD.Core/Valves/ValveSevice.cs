@@ -22,7 +22,6 @@ namespace SOD.Core.Valves
         private string dbPath = Path.Combine(Directory.GetCurrentDirectory(), CoreConst.DatabaseFolder, "valves.db");
         private string valveCollectionName = "Valves";
         private string valveTypeCollectionName = "ValveType";
-        private BinaryFormatter binaryFormatter = new BinaryFormatter();
         private readonly SourceList<ValveType> valveTypesReactiveList = new SourceList<ValveType>();
         private readonly SourceList<Valve> valveReactiveList = new SourceList<Valve>();
         public ValveSevice()

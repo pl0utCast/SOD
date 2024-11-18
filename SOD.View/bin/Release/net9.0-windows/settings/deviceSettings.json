@@ -56,7 +56,7 @@
         "Id": 6101,
         "DataType": 1,
         "ByteCount": 0,
-        "Description": "биты в crs"
+        "Description": "биты в SOD"
       }
     ],
     "ReadWriteRegisters": [

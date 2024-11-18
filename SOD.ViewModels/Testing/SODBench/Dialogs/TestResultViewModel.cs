@@ -10,7 +10,6 @@ using SOD.App.Benches.SODBench;
 using SOD.Core.Infrastructure;
 using SOD.LocalizationService;
 using SOD.App.Testing.Test;
-using SharpDX;
 
 namespace SOD.ViewModels.Testing.SODBench.Dialogs
 {
