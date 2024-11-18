@@ -5,7 +5,7 @@ using SciChart.Charting;
 using SciChart.Charting.Visuals;
 using SciChart.Drawing.VisualXcceleratorRasterizer;
 using SOD.App;
-using SOD.App.Benches.CRSBench;
+using SOD.App.Benches.SODBench;
 using SOD.Core.Infrastructure;
 using SOD.Dialogs;
 using SOD.Keyboard;

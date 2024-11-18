@@ -15,8 +15,8 @@ namespace SOD.View
             navigationService.RegisterRoot("Testing", "Test", new Testing.TestView(), null);
             //navigationService.RegisterView("Testing", "TestingValves", new Testing.ValvesView(), typeof(ViewModels.Testing.ValvesViewModel));
 
-            navigationService.RegisterView("Testing", "CRSTest", new Testing.CRSBench.TestingView(), typeof(ViewModels.Testing.CRSBench.TestingViewModel));
-            navigationService.RegisterView("Testing", "CRSTestParameters", new Testing.CRSBench.TestParametersView(), typeof(ViewModels.Testing.CRSBench.TestParametersViewModel));
+            navigationService.RegisterView("Testing", "SODTest", new Testing.SODBench.TestingView(), typeof(ViewModels.Testing.SODBench.TestingViewModel));
+            navigationService.RegisterView("Testing", "SODTestParameters", new Testing.SODBench.TestParametersView(), typeof(ViewModels.Testing.SODBench.TestParametersViewModel));
             
             // Settings
             navigationService.RegisterRoot("Settings", "SettingsView", new Settings.SettingsView(), typeof(ViewModels.Settings.SettingsViewModel));

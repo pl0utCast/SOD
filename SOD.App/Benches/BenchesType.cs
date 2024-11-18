@@ -6,6 +6,6 @@ namespace SOD.App.Benches
 {
     public enum BenchesType
     {
-        CRS
+        SOD
     }
 }

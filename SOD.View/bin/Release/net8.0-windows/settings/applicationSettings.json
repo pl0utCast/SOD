@@ -2,7 +2,7 @@
   "TestBenchService": {
     "BenchType": 0
   },
-  "CRSBenchSettings": {
+  "SODBenchSettings": {
     "SelectedTestSettings": {
       "Time": 30,
       "PressureSensorId": 4,

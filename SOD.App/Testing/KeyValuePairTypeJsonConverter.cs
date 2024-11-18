@@ -30,7 +30,7 @@ namespace SOD.App.Testing
                     type = Type.GetType(props.Name);
                     break;
             }
-            var val = JsonConvert.DeserializeObject(props.ToObject<string>(), type, new JsonSerializerSettings() { Converters = { new UnitsNetJsonConverter() } });
+            var val = JsonConvert.DeserializeObject(props.ToObject<string>(), type, new JsonSerializerSettings() { Converters = { new UnitsNetIQuantityJsonConverter() } });
             return new KeyValuePair<Type, object>(type, val);
         }
 
@@ -41,7 +41,7 @@ namespace SOD.App.Testing
             if (typeof(IQuantity).IsAssignableFrom(keyValuePair.Key))
             {
                 var key = keyValuePair.Key.Name;
-                var val = JsonConvert.SerializeObject(keyValuePair.Value, new JsonSerializerSettings() { Converters = { new UnitsNetJsonConverter() } });
+                var val = JsonConvert.SerializeObject(keyValuePair.Value, new JsonSerializerSettings() { Converters = { new UnitsNetIQuantityJsonConverter() } });
                 o.Add(key, val);
             }
             else

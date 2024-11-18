@@ -9,7 +9,7 @@ namespace SOD.Localization
         public ControlType ControlType { get; set; } = new ControlType();
         public SealType SealType { get; set; } = new SealType();
         public string Title { get; set; } = "Главное окно";
-        public CRSBenchLocalization CRSBenchLocalization { get; set; } = new CRSBenchLocalization();
+        public SODBenchLocalization SODBenchLocalization { get; set; } = new SODBenchLocalization();
 
         public PropsLang Props { get; set; } = new PropsLang();
         public ReportsLang Reports { get; set; } = new ReportsLang();
@@ -63,7 +63,7 @@ namespace SOD.Localization
             public Settings.Users UserSettings { get; set; } = new Settings.Users();
             public class BenchLang
             {
-                public Settings.Bench.CrsBench.CrsBenchSettingsView CrsBenchSettingsView { get; set; } = new Settings.Bench.CrsBench.CrsBenchSettingsView();
+                public Settings.Bench.SodBench.SodBenchSettingsView SodBenchSettingsView { get; set; } = new Settings.Bench.SodBench.SodBenchSettingsView();
                 public Settings.Bench.TestBenchSettingsView TestBenchSettingsView { get; set; } = new Settings.Bench.TestBenchSettingsView();
             }
 
@@ -83,7 +83,7 @@ namespace SOD.Localization
         {
             public string ValveName { get; set; } = "Имя арматуры";
             public string ClearFilters { get; set; } = "Очистить фильтр";
-            public SOD.Localization.Testing.CRSBench.CRSBench CRSBench { get; set; } = new SOD.Localization.Testing.CRSBench.CRSBench();
+            public SOD.Localization.Testing.SODBench.SODBench SODBench { get; set; } = new SOD.Localization.Testing.SODBench.SODBench();
             public Testing.Test Test { get; set; } = new Testing.Test();
         }
 

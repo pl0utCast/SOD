@@ -2,7 +2,7 @@
 using SOD.App.Benches;
 using SOD.App.Messages;
 using SOD.LocalizationService;
-using SOD.App.Benches.CRSBench;
+using SOD.App.Benches.SODBench;
 using SOD.Navigation;
 using SOD.UserService;
 using ReactiveUI;
@@ -41,7 +41,7 @@ namespace SOD.ViewModels
 
             IsAuth = true;
             navigationService.NavigateTo("Testing");
-            navigationService.NavigateTo("CRSTest");
+            navigationService.NavigateTo("SODTest");
 
             Enter = ReactiveCommand.Create(() =>
             {
@@ -49,7 +49,7 @@ namespace SOD.ViewModels
                 {
                     IsAuth = true;
                     navigationService.NavigateTo("Testing");
-                    navigationService.NavigateTo("CRSTest");
+                    navigationService.NavigateTo("SODTest");
                 }
                 else
                 {

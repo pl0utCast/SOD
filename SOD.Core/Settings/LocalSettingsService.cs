@@ -34,7 +34,7 @@ namespace SOD.Core.Settings
 				Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), SettingsDirectory));
 			}
 			serializer.Converters.Add(new TypeObjectDictonaryJsonConverter());
-			serializer.Converters.Add(new UnitsNetJsonConverter());
+			serializer.Converters.Add(new UnitsNetIQuantityJsonConverter());
 			serializer.Converters.Add(new PropertyJsonConverter());
 			// сохраняем предыдущие версии файлов
 			CreateBackup(SettingsDeviceFileName);

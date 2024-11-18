@@ -11,7 +11,7 @@ using SOD.ViewModels.Settings.DeviceAndSensor.Device;
 using System.Collections.ObjectModel;
 using System.Reactive;
 using System.Reactive.Disposables;
-using static SOD.App.Benches.CRSBench.Report.ReportData;
+using static SOD.App.Benches.SODBench.Report.ReportData;
 using BalloonProperty = SOD.Core.Balloons.Properties.BalloonProperty;
 
 namespace SOD.ViewModels.Settings.Balloon
@@ -21,7 +21,7 @@ namespace SOD.ViewModels.Settings.Balloon
 		public BalloonSettingsViewModel(IDialogService dialogService, 
 										ILocalizationService localizationService,
 										INavigationService navigationService,
-										App.Benches.CRSBench.Bench bench)
+										App.Benches.SODBench.Bench bench)
 		{
 
 			BalloonProperties.AddRange(bench.Settings.BalloonProperties);

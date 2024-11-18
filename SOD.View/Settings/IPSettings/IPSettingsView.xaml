@@ -98,7 +98,7 @@
                 Width="200"
                 Height="50"
                 FontSize="24"
-                Content="{lc:Localization Testing.CRSBench.TestParameters.Apply}"
+                Content="{lc:Localization Testing.SODBench.TestParameters.Apply}"
                 Style="{StaticResource MaterialDesignFlatButton}" 
                 Command="{Binding Apply}"/>
         </StackPanel>

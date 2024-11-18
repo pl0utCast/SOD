@@ -30,8 +30,8 @@ namespace SOD.View
             dialogService.RegisterDialog("DeleteReportDialog", new Reports.Dialogs.DeleteReportsDialogView());
             dialogService.RegisterDialog("ExportReportDialog", new Reports.Dialogs.ExportReportDialogView());
 
-            dialogService.RegisterDialog("CRSBenchTestResult", new Testing.CRSBench.Dialogs.TestResultView());
-            dialogService.RegisterDialog("CreateNewReport", new Testing.CRSBench.Dialogs.CreateNewReport());
+            dialogService.RegisterDialog("SODBenchTestResult", new Testing.SODBench.Dialogs.TestResultView());
+            dialogService.RegisterDialog("CreateNewReport", new Testing.SODBench.Dialogs.CreateNewReport());
 
             dialogService.RegisterDialog("IncorrectPassword", new Dialog.IncorrectPasswordView());
         }

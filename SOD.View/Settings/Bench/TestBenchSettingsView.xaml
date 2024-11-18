@@ -2,8 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="clr-namespace:SOD.View.Controls"
-             xmlns:crsBench="clr-namespace:SOD.View.Settings.Bench.CRSBench"
-             xmlns:crsBenchViewModels="clr-namespace:SOD.ViewModels.Settings.Bench.CRSBench;assembly=SOD.ViewModels"
+             xmlns:sodBench="clr-namespace:SOD.View.Settings.Bench.SODBench"
+             xmlns:sodBenchViewModels="clr-namespace:SOD.ViewModels.Settings.Bench.SODBench;assembly=SOD.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SOD.View.Settings.Bench"
@@ -27,7 +27,7 @@
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" Grid.Row="0">
                     <controls:BackButton />
-                    <controls:SaveButton ToolTip="{lc:Localization Testing.CRSBench.Save}" />
+                    <controls:SaveButton ToolTip="{lc:Localization Testing.SODBench.Save}" />
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -82,8 +82,8 @@
                     userService:Security.Role="Worker"
                     Content="{Binding CurrentBench}">
                     <ContentPresenter.Resources>
-                        <DataTemplate DataType="{x:Type crsBenchViewModels:CRSBenchSettingsViewModel}">
-                            <crsBench:CrsBenchSettingsView />
+                        <DataTemplate DataType="{x:Type sodBenchViewModels:SODBenchSettingsViewModel}">
+                            <sodBench:SodBenchSettingsView />
                         </DataTemplate>
                     </ContentPresenter.Resources>
                 </ContentPresenter>

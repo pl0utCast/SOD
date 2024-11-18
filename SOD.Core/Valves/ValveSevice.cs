@@ -32,7 +32,7 @@ namespace SOD.Core.Valves
                 Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), CoreConst.DatabaseFolder));
             }
             var jsonSerializeSettings = new JsonSerializerSettings();
-            jsonSerializeSettings.Converters.Add(new UnitsNetJsonConverter());
+            jsonSerializeSettings.Converters.Add(new UnitsNetIQuantityJsonConverter());
             BsonMapper.Global.RegisterType<ValveProperty>
                 (
                     serialize: (valveProperty) =>

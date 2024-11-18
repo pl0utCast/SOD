@@ -21,7 +21,7 @@ namespace SOD.App.Benches
         private readonly IReportService _reportService;
         private readonly IKernel kernel;
         private readonly ILocalizationService localizationService;
-        private CRSBench.Bench crsBench;
+        private SODBench.Bench sodBench;
         private ITestBench tempTestingBench;
         public TestBenchService(IDeviceService deviceService,
                                 ISettingsService settingsService,
@@ -41,19 +41,19 @@ namespace SOD.App.Benches
             this.kernel = kernel;
             this.localizationService = localizationService;
             LoadSettings();
-			crsBench = new CRSBench.Bench(_settingsService, _sensorService, _testingService, _bus, _reportService, localizationService);
+			sodBench = new SODBench.Bench(_settingsService, _sensorService, _testingService, _bus, _reportService, localizationService);
 		}
 
         public ITestBench GetTestBench()
         {
             switch (Settings.BenchType)
             {
-                case BenchesType.CRS:
-                    if (crsBench == null)
+                case BenchesType.SOD:
+                    if (sodBench == null)
                     {
-                        crsBench = new CRSBench.Bench(_settingsService, _sensorService, _testingService, _bus, _reportService, localizationService);
+                        sodBench = new SODBench.Bench(_settingsService, _sensorService, _testingService, _bus, _reportService, localizationService);
                     }
-                    return crsBench;
+                    return sodBench;
                 default: return null;
             }
         }

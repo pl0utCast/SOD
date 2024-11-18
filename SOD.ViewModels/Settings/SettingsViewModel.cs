@@ -12,7 +12,7 @@ namespace SOD.ViewModels.Settings
         private IDialogService dialogService;
         private ILocalizationService localizationService;
 
-        public SettingsViewModel(INavigationService navigationService, ILocalizationService localizationService, IReportService reportService, IDialogService dialogService, App.Benches.CRSBench.Bench bench)
+        public SettingsViewModel(INavigationService navigationService, ILocalizationService localizationService, IReportService reportService, IDialogService dialogService, App.Benches.SODBench.Bench bench)
         {
             this.dialogService = dialogService;
             this.localizationService = localizationService;

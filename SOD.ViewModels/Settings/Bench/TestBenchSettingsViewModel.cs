@@ -6,11 +6,11 @@ using SOD.App.Benches;
 using SOD.Core.Infrastructure;
 using SOD.Dialogs;
 using SOD.Keyboard;
-using SOD.Localization.Testing.CRSBench;
+using SOD.Localization.Testing.SODBench;
 using SOD.LocalizationService;
 using SOD.Navigation;
 using SOD.UserService;
-using SOD.ViewModels.Settings.Bench.CRSBench;
+using SOD.ViewModels.Settings.Bench.SODBench;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Reactive;
@@ -21,7 +21,7 @@ namespace SOD.ViewModels.Settings.Bench
 {
 	public class TestBenchSettingsViewModel : ReactiveObject, IActivatableViewModel
 	{
-		private CRSBench.CRSBenchSettingsViewModel crsBenchSettingsViewModel;
+		private SODBench.SODBenchSettingsViewModel sodBenchSettingsViewModel;
 		public TestBenchSettingsViewModel(
 			INavigationService navigationService,
 			ITestBenchService testBenchService,
@@ -30,7 +30,7 @@ namespace SOD.ViewModels.Settings.Bench
 			ISettingsService settingsService,
 			IDialogService dialogService,
 			ILocalizationService localizationService,
-			App.Benches.CRSBench.Bench bench,
+			App.Benches.SODBench.Bench bench,
 			IBus bus,
 			IUserService userService)
 		{
@@ -42,15 +42,15 @@ namespace SOD.ViewModels.Settings.Bench
 
 			this.WhenActivated(dis =>
 			{
-				if (crsBenchSettingsViewModel == null)
+				if (sodBenchSettingsViewModel == null)
 				{
-					var bench = (App.Benches.CRSBench.Bench)testBenchService.GetTestBench();
-					crsBenchSettingsViewModel = new CRSBench.CRSBenchSettingsViewModel(dialogService, sensorService, bench, userService, settingsService, localizationService);
-					crsBenchSettingsViewModel.Activator
+					var bench = (App.Benches.SODBench.Bench)testBenchService.GetTestBench();
+                    sodBenchSettingsViewModel = new SODBench.SODBenchSettingsViewModel(dialogService, sensorService, bench, userService, settingsService, localizationService);
+                    sodBenchSettingsViewModel.Activator
 											 .Activate()
 											 .DisposeWith(dis);
 				}
-				CurrentBench = crsBenchSettingsViewModel;
+				CurrentBench = sodBenchSettingsViewModel;
 			});
 
 
@@ -94,7 +94,7 @@ namespace SOD.ViewModels.Settings.Bench
 		[Reactive]
 		public BenchesType SelectedBench { get; set; }
 		[Reactive]
-		public CRSBenchSettingsViewModel CurrentBench { get; set; }
+		public SODBenchSettingsViewModel CurrentBench { get; set; }
 		public ReactiveCommand<Unit, Unit> GoBack { get; set; }
 		public ReactiveCommand<Unit, Unit> Save { get; set; }
 		public ReactiveCommand<Unit, Unit> AddCulture { get; set; }

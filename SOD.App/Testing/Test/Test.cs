@@ -141,7 +141,7 @@ namespace SOD.App.Testing.Test
 			IsRun = true;
 			TestResult.Clear();
 			_testBench = testBench;
-			var sensor = ((Benches.CRSBench.Bench)testBench).Sensors.Where(s => s.Sensor is IPressureSensor).FirstOrDefault();
+			var sensor = ((Benches.SODBench.Bench)testBench).Sensors.Where(s => s.Sensor is IPressureSensor).FirstOrDefault();
 			pressureUpdaterDisposable = ((IPressureSensor)sensor?.Sensor).Subscribe(
 				pressure =>
 				{
@@ -152,7 +152,7 @@ namespace SOD.App.Testing.Test
 		public void StartCollectData()
 		{
 			sensorValueUpdaters = new List<Action>();
-			var sensor = ((Benches.CRSBench.Bench)_testBench).Sensors.Where(s => s.Sensor is IPressureSensor).FirstOrDefault();
+			var sensor = ((Benches.SODBench.Bench)_testBench).Sensors.Where(s => s.Sensor is IPressureSensor).FirstOrDefault();
 
 			if (sensor.Sensor is IPressureSensor pressureSensor)
 			{

@@ -37,7 +37,7 @@ namespace SOD.App.Testing
         {
             methodicsBuilder = new ProgramMethodicsBuilder(valveService, GetAllStandarts(), bus, localizationService);
 
-            serializer.Converters.Add(new UnitsNetJsonConverter());
+            serializer.Converters.Add(new UnitsNetIQuantityJsonConverter());
             serializer.Converters.Add(new KeyValuePairTypeJsonConverter());
             serializer.Converters.Add(new TestConfigJsonConverter());
             serializer.ContractResolver = new PrivateSetterContractResolver();
