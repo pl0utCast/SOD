@@ -1,23 +1,20 @@
 ﻿using DynamicData;
+using JsonNet.PrivateSettersContractResolvers;
 using LiteDB;
 using MemBus;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SOD.Core;
-using SOD.Core.Infrastructure;
-using SOD.Core.Reports;
-using SOD.Core.Valves;
 using SOD.App.Commands;
 using SOD.App.Interfaces;
 using SOD.App.Testing.Programms;
 using SOD.App.Testing.Standarts;
+using SOD.Core;
+using SOD.Core.Balloons;
+using SOD.Core.Infrastructure;
+using SOD.Core.Reports;
 using SOD.LocalizationService;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UnitsNet.Serialization.JsonNet;
-using JsonNet.PrivateSettersContractResolvers;
 
 namespace SOD.App.Testing
 {
@@ -31,11 +28,9 @@ namespace SOD.App.Testing
         private string dbStandartPath = Path.Combine(Directory.GetCurrentDirectory(), CoreConst.DatabaseFolder, "Standarts.db");
         private Newtonsoft.Json.JsonSerializer serializer = new Newtonsoft.Json.JsonSerializer();
 
-        
-
-        public TestingService(IValveService valveService, IBus bus, ILocalizationService localizationService)
+        public TestingService(IBalloonService balloonService, IBus bus, ILocalizationService localizationService)
         {
-            methodicsBuilder = new ProgramMethodicsBuilder(valveService, GetAllStandarts(), bus, localizationService);
+            methodicsBuilder = new ProgramMethodicsBuilder(balloonService, GetAllStandarts(), bus, localizationService);
 
             serializer.Converters.Add(new UnitsNetIQuantityJsonConverter());
             serializer.Converters.Add(new KeyValuePairTypeJsonConverter());
@@ -69,7 +64,7 @@ namespace SOD.App.Testing
             standartsReactiveList.AddRange(GetAllStandarts());
 
         }
-        public ProgrammMethodics CreateProgrammMethodics(ProgrammMethodicsConfig config, Valve valve, CommandsFactory commandsFactory, BaseReportData reportData)
+        public ProgrammMethodics CreateProgrammMethodics(ProgrammMethodicsConfig config, Balloon valve, CommandsFactory commandsFactory, BaseReportData reportData)
         {
             return methodicsBuilder.Build(config, valve, commandsFactory, reportData);
         }

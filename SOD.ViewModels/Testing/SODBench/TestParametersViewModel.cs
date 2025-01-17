@@ -28,7 +28,6 @@ namespace SOD.ViewModels.Testing.SODBench
 {
 	public class TestParametersViewModel : ReactiveObject, IActivatableViewModel
 	{
-		private ObservableAsPropertyHelper<bool> isKPG4;
 		private Dictionary<string, IValueViewModel> parameters = new Dictionary<string, IValueViewModel>();
 		public TestParametersViewModel(INavigationService navigationService,
 									   ITestBenchService testBenchService,
@@ -49,10 +48,10 @@ namespace SOD.ViewModels.Testing.SODBench
 			SelectedPressureUnit = PressureUnits.SingleOrDefault(u => u.UnitType.Equals(bench.Settings.PressureUnit));
 			WorkPressure = new UnitValueViewModel(bench.Settings.SelectedTestSettings.SetPressure);
 
-			foreach (BalloonType balloon in Enum.GetValues(typeof(BalloonType)))
-				Balloons.Add(new Balloon() { BalloonType = balloon, Name = localizationService["Prefixes." + balloon.ToString()] });
+			foreach (BalloonTypes balloon in Enum.GetValues(typeof(BalloonTypes)))
+				Balloons.Add(new Balloon() { BalloonTypes = balloon, Name = localizationService["Prefixes." + balloon.ToString()] });
 
-			SelectedBalloon = Balloons.FirstOrDefault(x => x.BalloonType == bench.Settings.SelectedBalloon.BalloonType);
+			SelectedBalloon = Balloons.FirstOrDefault(x => x.BalloonTypes == bench.Settings.SelectedBalloon.BalloonTypes);
 			BalloonVolume = bench.Settings.SelectedBalloon.BalloonVolume;
 
 			ExposureTime = testSettings.Time;
@@ -70,7 +69,7 @@ namespace SOD.ViewModels.Testing.SODBench
 
 			this.WhenAnyValue(x => x.SelectedBalloon).Subscribe(sb =>
 			{
-				IsKPG4 = sb?.BalloonType == BalloonType.KPG4;
+				IsKPG4 = sb?.BalloonTypes == BalloonTypes.KPG4;
 				Deformation = IsKPG4 ? 10 : 5;
 			});
 

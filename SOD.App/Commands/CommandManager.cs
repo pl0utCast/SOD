@@ -11,6 +11,7 @@ using System.Reactive.Subjects;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SOD.Core.Balloons;
 
 namespace SOD.App.Commands
 {
@@ -28,7 +29,7 @@ namespace SOD.App.Commands
             _bus = bus;
             LoadSettings();
         }
-        public async Task ExecuteCommands(List<CommandConfig> commandConfigs, Valve testingValve, CancellationToken cancellationToken) 
+        public async Task ExecuteCommands(List<CommandConfig> commandConfigs, Balloon testingValve, CancellationToken cancellationToken) 
         {
             if (IsStarted)
             {

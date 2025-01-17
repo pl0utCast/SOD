@@ -22,7 +22,6 @@ namespace SOD.App.Testing
         public void CalculateResult();
         public void FillReport(Bitmap chartImage = null);
         public TestType TestType { get; }
-        public object[] GetTestParameters();
         public ITestingResult Result { get; }
 
     }

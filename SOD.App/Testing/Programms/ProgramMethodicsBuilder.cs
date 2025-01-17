@@ -3,26 +3,26 @@ using SOD.App.Commands;
 using SOD.App.Testing.Standarts;
 using SOD.Core.Infrastructure;
 using SOD.Core.Reports;
-using SOD.Core.Valves;
+using SOD.Core.Balloons;
 using SOD.LocalizationService;
 
 namespace SOD.App.Testing.Programms
 {
     public class ProgramMethodicsBuilder
     {
-        private readonly IValveService _valveService;
+        private readonly IBalloonService _balloonService;
         private readonly IEnumerable<IStandart> _standarts;
         private readonly IBus _bus;
         private readonly ILocalizationService localizationService;
 
-        public ProgramMethodicsBuilder(IValveService valveService, IEnumerable<IStandart> standarts, IBus bus, ILocalizationService localizationService)
+        public ProgramMethodicsBuilder(IBalloonService balloonService, IEnumerable<IStandart> standarts, IBus bus, ILocalizationService localizationService)
         {
-            _valveService = valveService;
+            _balloonService = balloonService;
             _standarts = standarts;
             _bus = bus;
             this.localizationService = localizationService;
         }
-        public ProgrammMethodics Build(ProgrammMethodicsConfig config, Valve valve, CommandsFactory commandsFactory, BaseReportData reportData)
+        public ProgrammMethodics Build(ProgrammMethodicsConfig config, Balloon balloon, CommandsFactory commandsFactory, BaseReportData reportData)
         {
             var programmMethodics = new ProgrammMethodics();
             if (config == null) throw new ArgumentNullException(nameof(config));
@@ -31,7 +31,7 @@ namespace SOD.App.Testing.Programms
             programmMethodics.CreatedDate = config.CreatedDate;
             programmMethodics.Name = config.Name;
             // делаем запрос на тип арматуры и получаем его
-            programmMethodics.ValveType = _valveService.GetValveTypes().SingleOrDefault(at => at.Id == config.ValveTypeId);
+            programmMethodics.BalloonType = _balloonService.GetBalloonTypes().SingleOrDefault(at => at.Id == config.BalloonTypeId);
             // создаём программы испытания
             foreach (var children in config.Childrens)
             {
@@ -56,14 +56,14 @@ namespace SOD.App.Testing.Programms
                     {
                         if (commandChildren is CommandConfig cc)
                         {
-                            testProgramm.Childrens.Add(commandsFactory.Create(cc, valve));
+                            testProgramm.Childrens.Add(commandsFactory.Create(cc, balloon));
                         }
                     }
                     programmMethodics.Childrens.Add(testProgramm);
                 }
                 if (children is CommandConfig commandConfig)
                 {
-                    programmMethodics.Childrens.Add(commandsFactory.Create(commandConfig, valve));
+                    programmMethodics.Childrens.Add(commandsFactory.Create(commandConfig, balloon));
                 }
             }
             return programmMethodics;

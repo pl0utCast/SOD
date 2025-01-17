@@ -1,11 +1,9 @@
 ﻿using DynamicData;
-using SOD.Core.Reports;
-using SOD.Core.Valves;
 using SOD.App.Commands;
 using SOD.App.Testing.Programms;
 using SOD.App.Testing.Standarts;
-using System;
-using System.Collections.Generic;
+using SOD.Core.Balloons;
+using SOD.Core.Reports;
 
 namespace SOD.App.Testing
 {
@@ -13,7 +11,7 @@ namespace SOD.App.Testing
     {
         public void AddOrUpdate(ProgrammMethodicsConfig config);
         public void Remove(ProgrammMethodicsConfig config);
-        public ProgrammMethodics CreateProgrammMethodics(ProgrammMethodicsConfig config, Valve valve, CommandsFactory commandsFactory, BaseReportData reportData);
+        public ProgrammMethodics CreateProgrammMethodics(ProgrammMethodicsConfig config, Balloon valve, CommandsFactory commandsFactory, BaseReportData reportData);
         public IEnumerable<ProgrammMethodicsConfig> GetAllProgrammMethodicsConfig();
 
         public void AddOrUpdate(LuaStandart standart);
@@ -22,6 +20,5 @@ namespace SOD.App.Testing
 
         public IObservable<IChangeSet<ProgrammMethodicsConfig>> ConnectToProgrammMethodics();
         public IObservable<IChangeSet<LuaStandart>> ConnectToStandarts();
-
     }
 }

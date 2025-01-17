@@ -13,7 +13,7 @@ namespace SOD.App.Benches.SODBench
 		public TestSettings SelectedTestSettings { get; set; }
 		public Balloon SelectedBalloon { get; set; }
 		public PressureUnit PressureUnit { get; set; }
-		public MassUnit TensoUnit {  get; set; }
+		public MassUnit TensoUnit { get; set; }
 		public List<BalloonProperty> BalloonProperties { get; set; } = new List<BalloonProperty>();
 		public List<Property> Parameters { get; set; } = new List<Property>();
 		public Dictionary<int, List<TestSettings>> Tests { get; set; } = new Dictionary<int, List<TestSettings>>();
@@ -25,7 +25,7 @@ namespace SOD.App.Benches.SODBench
 		public bool AutoRange { get; set; }
 		public Dictionary<int, bool> Sensors { get; set; } = new Dictionary<int, bool>();
 		public string ReportPath { get; set; }
-		public string UrlForQr { get; set; } = string.Empty;
+		//public string UrlForQr { get; set; } = string.Empty;
 		public class TestSettings
 		{
 			public int? Time { get; set; }

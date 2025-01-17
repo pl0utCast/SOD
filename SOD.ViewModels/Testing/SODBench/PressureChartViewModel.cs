@@ -159,54 +159,7 @@ namespace SOD.ViewModels.Testing.SODBench
                                             foreach (var pressureSensor in pressureSensors.ToList())
                                             {
                                                 double currentPressure = Math.Round(pressureSensor.Pressure.ToUnit(bench.Settings.PressureUnit).Value, 2);
-
-                                                if (pressureSensor.Pressure.ToUnit(PressureUnit.Bar) > Pressure.FromBars(100) && (pressureSensor.Id == 16 || pressureSensor.Id == 17)) //при давлении больше 100 бар переключаем на второй датчик
-                                                {
-                                                    bench.Settings.SelectedTestSettings.PressureSensorId = 17; //переключение на датчик давления id=17
-                                                    //bench.UpdatePosts();
-                                                    bench.SaveSettings();
-
-                                                    if (PressureSeries.Count <= 1)
-                                                    {
-                                                        //foreach (var post in bench.Posts)
-                                                        //{
-                                                        //    foreach (var pSensor in post.Sensors.Where(s => s.Sensor is IPressureSensor).Select(s => s.Sensor))
-                                                        //    {
-                                                        //        Application.Current.Dispatcher.Invoke((Action)delegate
-                                                        //        {
-                                                        //            SetPressureSensor((IPressureSensor)pSensor);
-                                                        //        });
-                                                        //    }
-                                                        //}
-                                                    }
-
-                                                    if (pressureSensor.Id == 17)
-                                                    {
-                                                        PressureSeries[1].Stroke = Colors.Blue;
-                                                        pressureSeries[pressureSensor.Id].Append(totalTime, currentPressure);
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    if (pressureSensor.Id == 20 && PressureSeries.Count > 1)
-                                                    {
-                                                        PressureSeries[1].Stroke = Colors.Blue;
-                                                        pressureSeries[pressureSensor.Id].Append(totalTime, currentPressure);
-                                                    }
-                                                    else if (pressureSensor.Id != 17)
-                                                    {
-                                                        PressureSeries[0].Stroke = Colors.Red;
-                                                        pressureSeries[pressureSensor.Id].Append(totalTime, currentPressure);
-                                                    }
-
-                                                    if (bench.Settings.SelectedTestSettings.PressureSensorId == 17)
-                                                    {
-                                                        bench.Settings.SelectedTestSettings.PressureSensorId = 16; //переключение на датчик давления id=16
-
-                                                        //bench.UpdatePosts();
-                                                        bench.SaveSettings();
-                                                    }
-                                                }
+                                                pressureSeries[pressureSensor.Id].Append(totalTime, currentPressure);
 
                                                 if (bench.Settings.AutoRange)
                                                     yPressureAxis.VisibleRange = new DoubleRange(PressureSeries[0].DataSeries.YMin.ToDouble() - Math.Abs(PressureSeries[0].DataSeries.YMin.ToDouble() * 5 / 100), PressureSeries[0].DataSeries.YMax.ToDouble() + Math.Abs(PressureSeries[0].DataSeries.YMax.ToDouble() * 5 / 100));
@@ -218,13 +171,6 @@ namespace SOD.ViewModels.Testing.SODBench
         public void StopChart()
         {
             if (!isStartChart) return;
-
-            if (bench.Settings.SelectedTestSettings.PressureSensorId == 16 || bench.Settings.SelectedTestSettings.PressureSensorId == 17)
-            {
-                bench.Settings.SelectedTestSettings.PressureSensorId = 16; //переключение на датчик давления id=16
-                //bench.UpdatePosts();
-                bench.SaveSettings();
-            }
 
             pressureUpdater?.Dispose();
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);

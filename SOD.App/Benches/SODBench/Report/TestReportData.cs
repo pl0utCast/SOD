@@ -15,7 +15,7 @@ namespace SOD.App.Benches.SODBench.Report
     public class TestReportItem
     {
         public Image Chart { get; set; }
-        public Image QrChart { get; set; }
+        //public Image QrChart { get; set; }
         public string Standart { get; set; }
         public List<PostDataReport> Posts { get; set; } = new List<PostDataReport>();
     }
@@ -26,11 +26,11 @@ namespace SOD.App.Benches.SODBench.Report
 
         public class Registration
         {
-            //public TimeSpan Time { get; set; }
-            //public string StartPressure { get; set; }
-            //public string StopPressue { get; set; }
-            //public string DropPressure { get; set; }
-            //public string PressureName { get; set; }
+            public TimeSpan Time { get; set; }
+            public string StartPressure { get; set; }
+            public string StopPressue { get; set; }
+            public string DropPressure { get; set; }
+            public string PressureName { get; set; }
             public string AirTemperature { get; set; }
             public string WaterTemperature { get; set; }
             public FuncionalReportTest FuncionalTest { get; set; } = new FuncionalReportTest();

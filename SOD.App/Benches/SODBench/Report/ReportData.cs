@@ -5,6 +5,7 @@ using SOD.Core.Reports;
 using SOD.Core.Sensor;
 using SOD.LocalizationService;
 using System.Data;
+using UnitsNet;
 
 namespace SOD.App.Benches.SODBench.Report
 {
@@ -20,9 +21,9 @@ namespace SOD.App.Benches.SODBench.Report
 		}
 		public override void Fill(params object[] parameters)
 		{
-			if (parameters[0] is List<Core.Balloons.Properties.BalloonProperty> balloonProp)
+			if (parameters[0] is Balloon balloon)
 			{
-				FillBalloon(balloonProp);
+				FillBalloon(balloon);
 			}
 			else if (parameters[0] is IEnumerable<Property> props)
 			{
@@ -34,79 +35,44 @@ namespace SOD.App.Benches.SODBench.Report
 			}
 		}
 
-		//private void Fill(string name)
-		//{
-		//    var test = new TestReportItem();
-		//test.Name = name;
-		//test.Chart = strenghtResult.Chart;
-		//if (LocalizationExtension.LocaliztionService.CurrentCulture.Name == "ru-RU")
-		//    test.QrChart = strenghtResult.QrChart;
-		//test.Standart = strenghtResult.Standart;
-		//test.Medium = strenghtResult.Medium.ToString();
-		//foreach (var postResult in strenghtResult.PostResults)
-		//{
-		//    var reportPost = new PostDataReport();
-		//    reportPost.PostNumber = postResult.PostId;
-		//    reportPost.SerialNumber = postResult.SerialNumber;
-		//    foreach (var registration in postResult.Registrations)
-		//    {
-		//        var pressureSensor = (IPressureSensor)sensorService.GetSensor(registration.StartPressure.First().Id); 
-		//        Pressure startPressure = new Pressure(0, registration.StartPressure[0].Value.Unit);
-		//        Pressure stopPressure = new Pressure(0, registration.StopPressure[0].Value.Unit);
-		//        Pressure dropPressure = new Pressure(0, registration.DropPressure[0].Value.Unit);
-
-		//        for (int i = 0; i < registration.StartPressure.Count; i++)
-		//        {
-		//            startPressure += registration.StartPressure[i].Value;
-		//            stopPressure += registration.StopPressure[i].Value;
-		//            dropPressure += registration.DropPressure[i].Value;
-		//        }
-		//        startPressure = startPressure / registration.StartPressure.Count;
-		//        stopPressure = stopPressure / registration.StartPressure.Count;
-		//        dropPressure = dropPressure / registration.StartPressure.Count;
-
-		//        var reportRegistration = new PostDataReport.Registration();
-		//        reportRegistration.Time = registration.Time;
-		//        reportRegistration.StartPressure = startPressure.ToString(pressureSensor.Accaury);
-		//        reportRegistration.StopPressue = stopPressure.ToString(pressureSensor.Accaury);
-		//        reportRegistration.DropPressure = dropPressure.ToString(pressureSensor.Accaury);
-		//        reportRegistration.PressureName = pressureSensor.Name;
-		//        reportRegistration.Result = registration.Result;
-		//        reportPost.Registrations.Add(reportRegistration);
-		//    }
-
-		//    test.Posts.Add(reportPost);
-
-		//}
-		//    MainData.Tests.Add(test);
-		//}
-
-
 		private void Fill(Testing.Test.Result result)
 		{
 			var test = new TestReportItem();
 			test.Chart = result.Chart;
-			if (LocalizationExtension.LocaliztionService.CurrentCulture.Name == "ru-RU")
-				test.QrChart = result.QrChart;
+			//if (LocalizationExtension.LocaliztionService.CurrentCulture.Name == "ru-RU")
+			//	test.QrChart = result.QrChart;
 			test.Standart = result.Standart;
 			foreach (var postResult in result.PostResults)
 			{
 				var reportPost = new PostDataReport();
-				var reportRegistration = new PostDataReport.Registration();
-				reportRegistration.FuncionalTest.OpenPressure = postResult.OpenPressure.ToString("f2");
-				reportRegistration.FuncionalTest.ClosePressure = postResult.ClosePressure.ToString("f2");
-				reportRegistration.FuncionalTest.OpenPressureAccuracy = postResult.Accuracy.ToString("f1");
-				reportRegistration.FuncionalTest.ExpectedSetPressure = postResult.ExpectedSetPressure.ToString("f2");
+				foreach (var registration in postResult.Registrations)
+				{
+					var pressureSensor = (IPressureSensor)sensorService.GetSensor(registration.StartPressure.First().Id);
+					Pressure startPressure = new Pressure(0, registration.StartPressure[0].Value.Unit);
+					Pressure stopPressure = new Pressure(0, registration.StopPressure[0].Value.Unit);
+					Pressure dropPressure = new Pressure(0, registration.DropPressure[0].Value.Unit);
 
-				var gasSensor = sensorService.GetAllSensors().SingleOrDefault(s => s.Id == bench.Settings.GasTemperatureSensorId);
-				reportRegistration.AirTemperature = ((ITemperatureSensor)gasSensor).Temperature.ToString(gasSensor.Accaury);
+					for (int i = 0; i < registration.StartPressure.Count; i++)
+					{
+						startPressure += registration.StartPressure[i].Value;
+						stopPressure += registration.StopPressure[i].Value;
+						dropPressure += registration.DropPressure[i].Value;
+					}
+					startPressure = startPressure / registration.StartPressure.Count;
+					stopPressure = stopPressure / registration.StartPressure.Count;
+					dropPressure = dropPressure / registration.StartPressure.Count;
 
-				var liquidSensor = sensorService.GetAllSensors().SingleOrDefault(s => s.Id == bench.Settings.LiquidTemperatureSensorId);
-				reportRegistration.WaterTemperature = ((ITemperatureSensor)liquidSensor).Temperature.ToString(liquidSensor.Accaury);
+					var reportRegistration = new PostDataReport.Registration();
+					reportRegistration.Time = registration.Time;
+					reportRegistration.StartPressure = startPressure.ToString(pressureSensor.Accaury);
+					reportRegistration.StopPressue = stopPressure.ToString(pressureSensor.Accaury);
+					reportRegistration.DropPressure = dropPressure.ToString(pressureSensor.Accaury);
+					reportRegistration.PressureName = pressureSensor.Name;
+					reportRegistration.Result = registration.Result;
+					reportPost.Registrations.Add(reportRegistration);
+				}
 
-				reportRegistration.Result = postResult.Result;
-				reportPost.Registrations.Add(reportRegistration);
-				test.Posts.Add(reportPost);
+                test.Posts.Add(reportPost);
 			}
 			MainData.Tests.Add(test);
 		}
@@ -120,11 +86,11 @@ namespace SOD.App.Benches.SODBench.Report
 			return result;
 		}
 
-		private void FillBalloon(List<Core.Balloons.Properties.BalloonProperty> balloonProp)
+		private void FillBalloon(Balloon balloon)
 		{
 			TestingBalloon = new ReportBalloon();
 
-			foreach (var property in  balloonProp)
+			foreach (var property in balloon.Properties)
 			{
 				if (property.Type == PropertyType.StringList)
 				{

@@ -11,6 +11,7 @@ namespace SOD.Core.Balloons.Properties
         [BsonIgnore]
         public object Value { get; set; }
         public PropertyType Type { get; set; }
+        public string SerializedValue { get; set; }
 
         public bool Equals(BalloonProperty other)
         {
@@ -18,8 +19,5 @@ namespace SOD.Core.Balloons.Properties
             if (Id == other.Id) return true;
             else return false;
         }
-
-        public override bool Equals(object obj) => Equals(obj as BalloonProperty);
-        public override int GetHashCode() => Id.GetHashCode();
     }
 }

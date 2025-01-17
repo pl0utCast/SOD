@@ -2,7 +2,7 @@
 using SOD.App.Mediums;
 using SOD.App.Testing.Standarts;
 using SOD.Core.Sensor;
-using SOD.Core.Valves;
+using SOD.Core.Balloons;
 using SOD.LocalizationService;
 using System.Drawing;
 using System.Reactive.Disposables;
@@ -21,7 +21,7 @@ namespace SOD.App.Testing
 
         protected readonly ILocalizationService localizationService;
         protected readonly object[] _parameters;
-        protected Valve _valve;
+        protected Balloon _balloon;
         protected MediumType _mediumType;
 
         private ITestBench _testBench;

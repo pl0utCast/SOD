@@ -10,7 +10,7 @@ namespace SOD.App.Testing.Programms
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime CreatedDate { get; set; }
-        public int? ValveTypeId { get; set; }
+        public int? BalloonTypeId { get; set; }
         public bool CanAddChildren => true;
 
         public IList<IBranch<ITestConfig>> Childrens { get; set; } = new List<IBranch<ITestConfig>>();
