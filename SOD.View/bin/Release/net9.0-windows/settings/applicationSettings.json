@@ -10,7 +10,7 @@
       "Deformation": 5,
       "MaxDeformation": null,
       "IsModeAuto": false,
-      "TensoSensorId": 0,
+      "TenzoSensorId": 0,
       "SetPressure": {
         "Unit": "PressureUnit.Bar",
         "Value": 1.0
@@ -23,7 +23,7 @@
       "StandartId": 0
     },
     "PressureUnit": 2,
-    "TensoUnit": 8,
+    "TenzoUnit": 8,
     "BalloonProperties": [],
     "Parameters": [
       "{\r\n  \"Id\": 0,\r\n  \"Name\": \"Сustomer\",\r\n  \"Alias\": \"customer\",\r\n  \"SerializedValue\": \"\\\"\\\"\",\r\n  \"Type\": 7\r\n}",
@@ -34,12 +34,12 @@
       "1": [
         {
           "Time": 120,
-          "PressureSensorId": 1,
+          "PressureSensorId": 4,
           "WorkPressure": 0,
           "Deformation": 0,
           "MaxDeformation": null,
           "IsModeAuto": false,
-          "TensoSensorId": 0,
+          "TenzoSensorId": 0,
           "SetPressure": {
             "Unit": "PressureUnit.Pascal",
             "Value": 0.0
@@ -47,12 +47,12 @@
         },
         {
           "Time": 180,
-          "PressureSensorId": 2,
+          "PressureSensorId": 4,
           "WorkPressure": 0,
           "Deformation": 0,
           "MaxDeformation": null,
           "IsModeAuto": false,
-          "TensoSensorId": 0,
+          "TenzoSensorId": 0,
           "SetPressure": {
             "Unit": "PressureUnit.Pascal",
             "Value": 0.0
@@ -62,12 +62,12 @@
       "2": [
         {
           "Time": 10,
-          "PressureSensorId": 0,
+          "PressureSensorId": 4,
           "WorkPressure": 0,
           "Deformation": 0,
           "MaxDeformation": null,
           "IsModeAuto": false,
-          "TensoSensorId": 0,
+          "TenzoSensorId": 0,
           "SetPressure": {
             "Unit": "PressureUnit.Pascal",
             "Value": 0.0
@@ -75,12 +75,12 @@
         },
         {
           "Time": 10,
-          "PressureSensorId": 0,
+          "PressureSensorId": 4,
           "WorkPressure": 0,
           "Deformation": 0,
           "MaxDeformation": null,
           "IsModeAuto": false,
-          "TensoSensorId": 0,
+          "TenzoSensorId": 0,
           "SetPressure": {
             "Unit": "PressureUnit.Pascal",
             "Value": 0.0
@@ -88,12 +88,12 @@
         },
         {
           "Time": 30,
-          "PressureSensorId": 0,
+          "PressureSensorId": 4,
           "WorkPressure": 0,
           "Deformation": 0,
           "MaxDeformation": null,
           "IsModeAuto": false,
-          "TensoSensorId": 0,
+          "TenzoSensorId": 0,
           "SetPressure": {
             "Unit": "PressureUnit.Pascal",
             "Value": 0.0

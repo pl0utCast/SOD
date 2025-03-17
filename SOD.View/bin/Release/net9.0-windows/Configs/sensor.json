@@ -2,22 +2,22 @@
     {
         "Id":0,
         "DeviceId":0,
-        "Type":"TensoSensorCodeBased"
+        "Type":"TenzoSensorCodeBased"
     },
     {
         "Id":1,
         "DeviceId":0,
-        "Type":"TensoSensorCodeBased"
+        "Type":"TenzoSensorCodeBased"
     },
     {
         "Id":2,
         "DeviceId":0,
-        "Type":"TensoSensorCodeBased"
+        "Type":"TenzoSensorCodeBased"
     },
     {
         "Id":3,
         "DeviceId":0,
-        "Type":"TensoSensorCodeBased"
+        "Type":"TenzoSensorCodeBased"
     },
     {
         "Id":4,

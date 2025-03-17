@@ -22,7 +22,8 @@ namespace SOD.ViewModels.Testing.SODBench
 	public class DefaultTestingViewModel : ReactiveObject, IActivatableViewModel
 	{
 		private App.Benches.SODBench.Bench _bench;
-		private IDisposable timer;
+        private ILocalizationService _localizationService;
+        private IDisposable timer;
 		private bool isAddTestToReport = false;
 		private int exposureCounter = 0;
 		public DefaultTestingViewModel(INavigationService navigationService,
@@ -33,7 +34,8 @@ namespace SOD.ViewModels.Testing.SODBench
 										ILocalizationService localizationService)
 		{
 			_bench = (App.Benches.SODBench.Bench)testBenchService.GetTestBench();
-			PressureChart = new PressureChartViewModel(localizationService, _bench);
+            _localizationService = localizationService;
+            PressureChart = new PressureChartViewModel(localizationService, _bench);
 			if (_bench.Settings.SelectedTestSettings != null /*&& _bench.TestingValve!=null*/) IsSelectedTest = true;
 			ExposureTime = "00:00:00";
 			TemperatureSensors = new TemperatureSensorsViewModel(sensorService, _bench);
@@ -174,9 +176,9 @@ namespace SOD.ViewModels.Testing.SODBench
 		{
 			Sensors.Clear();
 			Sensors.AddRange(_bench.Sensors.Where(s => s.Sensor is IPressureSensor)
-										   .Select(s => new PressureSensorViewModel((IPressureSensor)s.Sensor, _bench.Settings.PressureUnit)));
-			Sensors.AddRange(_bench.Sensors.Where(s => s.Sensor is ITensoSensor)
-										   .Select(s => new TensoSensorViewModel((ITensoSensor)s.Sensor, _bench.Settings.TensoUnit)));
+										   .Select(s => new PressureSensorViewModel((IPressureSensor)s.Sensor, _bench.Settings.PressureUnit, _localizationService)));
+			Sensors.AddRange(_bench.Sensors.Where(s => s.Sensor is ITenzoSensor)
+										   .Select(s => new TenzoSensorViewModel((ITenzoSensor)s.Sensor, _bench.Settings.TenzoUnit, _localizationService)));
 		}
 
 		[Reactive]

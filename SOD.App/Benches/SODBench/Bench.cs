@@ -121,7 +121,7 @@ namespace SOD.App.Benches.SODBench
                                                 .Where(s => s.Id == Settings.SelectedTestSettings.PressureSensorId)
                                                 .Select(s => new BenchSensor(s)));
             post.Sensors.AddRange(_sensorService.GetAllSensors()
-                                                .Where(s => s.Id == Settings.SelectedTestSettings.TensoSensorId)
+                                                .Where(s => s.Id == Settings.SelectedTestSettings.TenzoSensorId)
                                                 .Select(s => new BenchSensor(s)));
             posts.Add(post);
         }

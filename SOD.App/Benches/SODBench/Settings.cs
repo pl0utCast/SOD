@@ -13,7 +13,7 @@ namespace SOD.App.Benches.SODBench
 		public TestSettings SelectedTestSettings { get; set; }
 		public Balloon SelectedBalloon { get; set; }
 		public PressureUnit PressureUnit { get; set; }
-		public MassUnit TensoUnit { get; set; }
+		public ForceUnit TenzoUnit { get; set; }
 		public List<BalloonProperty> BalloonProperties { get; set; } = new List<BalloonProperty>();
 		public List<Property> Parameters { get; set; } = new List<Property>();
 		public Dictionary<int, List<TestSettings>> Tests { get; set; } = new Dictionary<int, List<TestSettings>>();
@@ -34,7 +34,7 @@ namespace SOD.App.Benches.SODBench
 			public int Deformation { get; set; }
 			public int? MaxDeformation { get; set; }
 			public bool IsModeAuto { get; set; }
-			public int TensoSensorId { get; set; }
+			public int TenzoSensorId { get; set; }
 			public Pressure SetPressure { get; set; } = new Pressure(0, PressureUnit.Bar);
 		}
 	}

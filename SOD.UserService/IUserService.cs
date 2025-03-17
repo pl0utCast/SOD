@@ -13,8 +13,6 @@ namespace SOD.UserService
         public bool LogOut();
         public User GetCurrentUser();
         public IObservable<User> CurrentUser { get; }
-        public string GetBackground();
         public bool GetAuthorization();
-        public void SetBackground(string setBackground);
     }
 }

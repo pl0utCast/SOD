@@ -23,8 +23,8 @@
     "MetallPolimer": "металл-полимер",
     "MetallMetall": "металл-металл"
   },
-  "Title": "CRS",
-  "CRSBenchLocalization": {
+  "Title": "SOD",
+  "SODBenchLocalization": {
     "ShellTest": "Испытание на прочность",
     "BackSeatTest": "Испытание заднего седла",
     "SeatLeakageTest": "Испытание на протечку",
@@ -93,7 +93,7 @@
     "BackgroundChanged": "Фон успешно изменен!",
     "CantFindProtocol": "Не найден шаблон протокола",
     "Bench": {
-      "CrsBenchSettingsView": {
+      "SODBenchSettingsView": {
         "UseTempSensorWater": "Использовать датчик температуры (вода)",
         "UseTempSensorAir": "Использовать датчик температуры (воздух)",
         "ReportTemplate": "Шаблон протокола",
@@ -221,7 +221,7 @@
   "Testing": {
     "ValveName": "Имя арматуры",
     "ClearFilters": "Очистить фильтр",
-    "CRSBench": {
+    "SODBench": {
       "CanSaveReport": "Выбрана новая арматура, текущий протокол не сохранён, сохранить?",
       "No": "Нет",
       "Save": "Сохранить",

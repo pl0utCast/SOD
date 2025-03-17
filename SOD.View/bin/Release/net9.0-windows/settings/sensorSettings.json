@@ -1,5 +1,5 @@
 {
-  "TensoSensorCodeBased_Id_0": {
+  "TenzoSensorCodeBased_Id_0": {
     "Name": "100 kg",
     "ChannelId": 62,
     "MaxCode": 4963,
@@ -17,7 +17,7 @@
     "FilterCoef": 0.0,
     "SensorHint": ""
   },
-  "TensoSensorCodeBased_Id_1": {
+  "TenzoSensorCodeBased_Id_1": {
     "Name": "500 kg",
     "ChannelId": 64,
     "MaxCode": 4963,
@@ -35,7 +35,7 @@
     "FilterCoef": 0.0,
     "SensorHint": ""
   },
-  "TensoSensorCodeBased_Id_2": {
+  "TenzoSensorCodeBased_Id_2": {
     "Name": "5000 kg",
     "ChannelId": 66,
     "MaxCode": 4963,
@@ -53,7 +53,7 @@
     "FilterCoef": 0.0,
     "SensorHint": ""
   },
-  "TensoSensorCodeBased_Id_3": {
+  "TenzoSensorCodeBased_Id_3": {
     "Name": "10000 kg",
     "ChannelId": 68,
     "MaxCode": 4963,

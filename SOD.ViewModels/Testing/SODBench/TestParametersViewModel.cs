@@ -21,7 +21,7 @@ using SOD.Core.Sensor;
 using System.Collections.ObjectModel;
 using SOD.Core.Balloons;
 using SOD.Core.Balloons.Properties;
-using SOD.Core.Sensor.TensoSensor;
+using SOD.Core.Sensor.TenzoSensor;
 using SOD.Core;
 
 namespace SOD.ViewModels.Testing.SODBench
@@ -61,11 +61,11 @@ namespace SOD.ViewModels.Testing.SODBench
 			PressureSensor = PressureSensors.FirstOrDefault(x => x.Id == testSettings.PressureSensorId);
 			
 			IsModeAuto = testSettings.IsModeAuto;
-			TensoSensors.Add(sensorService.GetAllSensors().Where(s => bench.Settings.Sensors.TryGetValue(s.Id, out var isEnable) && isEnable && s is ITensoSensor));
-			TensoSensor = TensoSensors.FirstOrDefault(x => x.Id == testSettings.TensoSensorId);
+			TenzoSensors.Add(sensorService.GetAllSensors().Where(s => bench.Settings.Sensors.TryGetValue(s.Id, out var isEnable) && isEnable && s is ITenzoSensor));
+			TenzoSensor = TenzoSensors.FirstOrDefault(x => x.Id == testSettings.TenzoSensorId);
 
-			TensoUnits = new Mass().GetUnitTypeInfo();
-			SelectedTensoUnit = TensoUnits.SingleOrDefault(u => u.UnitType.Equals(bench.Settings.TensoUnit));
+			TenzoUnits = new Force().GetUnitTypeInfo();
+			SelectedTenzoUnit = TenzoUnits.SingleOrDefault(u => u.UnitType.Equals(bench.Settings.TenzoUnit));
 
 			this.WhenAnyValue(x => x.SelectedBalloon).Subscribe(sb =>
 			{
@@ -95,14 +95,13 @@ namespace SOD.ViewModels.Testing.SODBench
 				navigationService.GoBack();
 			});
 
-			IObservable<bool> canApply = this.WhenAnyValue(
-				x => x.SelectedStandart, x => x.IsConfirmed,
-				(selectedSt, isConf) => selectedSt != null && isConf);
+			var canApply = this.WhenAny(x => x.SelectedStandart, /*x => x.IsConfirmed,*/
+				(selectedSt/*, isConf*/) => selectedSt != null /*&& isConf*/);
 
 			Apply = ReactiveCommand.CreateFromTask(async () =>
 			{
 				bench.Settings.PressureUnit = (PressureUnit)SelectedPressureUnit?.UnitType;
-				bench.Settings.TensoUnit = (MassUnit)SelectedTensoUnit?.UnitType;
+				bench.Settings.TenzoUnit = (ForceUnit)SelectedTenzoUnit?.UnitType;
 				bench.Settings.SelectedBalloon = SelectedBalloon;
 				bench.Settings.SelectedBalloon.StandartId = SelectedStandart.Id;
 				bench.Settings.SelectedBalloon.BalloonVolume = BalloonVolume;
@@ -110,7 +109,7 @@ namespace SOD.ViewModels.Testing.SODBench
 
 				if (!IsModeAuto)
 				{
-					testSettings.TensoSensorId = TensoSensor.Id;
+					testSettings.TenzoSensorId = TenzoSensor.Id;
 				}
 				testSettings.SetPressure = (Pressure)UnitsHelper.GetValue(WorkPressure.Value, WorkPressure.SelectedUnitInfo);
 				testSettings.Deformation = Deformation;
@@ -155,9 +154,9 @@ namespace SOD.ViewModels.Testing.SODBench
 		public IReadOnlyList<UnitTypeInfo> PressureUnits { get; set; }
 		[Reactive]
 		public UnitTypeInfo SelectedPressureUnit { get; set; }
-		public IReadOnlyList<UnitTypeInfo> TensoUnits { get; set; }
+		public IReadOnlyList<UnitTypeInfo> TenzoUnits { get; set; }
 		[Reactive]
-		public UnitTypeInfo SelectedTensoUnit { get; set; }
+		public UnitTypeInfo SelectedTenzoUnit { get; set; }
 		[Reactive]
 		public Balloon SelectedBalloon { get; set; }
 		public ReactiveCommand<Unit, Unit> Cancel { get; set; }
@@ -188,8 +187,8 @@ namespace SOD.ViewModels.Testing.SODBench
 		public ObservableCollection<ISensor> PressureSensors { get; set; } = new ObservableCollection<ISensor>();
 		[Reactive]
 		public ISensor PressureSensor { get; set; }
-		public ObservableCollection<ISensor> TensoSensors {  get; set; } = new ObservableCollection<ISensor> { };
+		public ObservableCollection<ISensor> TenzoSensors {  get; set; } = new ObservableCollection<ISensor> { };
 		[Reactive]
-		public ISensor TensoSensor {  get; set; }
+		public ISensor TenzoSensor {  get; set; }
 	}
 }

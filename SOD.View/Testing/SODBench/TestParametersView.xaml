@@ -198,8 +198,8 @@
                                     materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestParameters.UnitType}"
                                     DisplayMemberPath="Name"
                                     FontSize="22"
-                                    ItemsSource="{Binding TensoUnits}"
-                                    SelectedValue="{Binding SelectedTensoUnit}"
+                                    ItemsSource="{Binding TenzoUnits}"
+                                    SelectedValue="{Binding SelectedTenzoUnit}"
                                     Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                             </StackPanel>
                             
@@ -227,12 +227,12 @@
                                     Margin="10 20 0 10"
                                     FontSize="22"
                                     Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                                    Text="Тезодатчик"/>
+                                    Text="Тензодатчик:"/>
                                 <ListBox 
                                     Margin="10 10 0 0"
                                     FontSize="22"
-                                    ItemsSource="{Binding TensoSensors}" 
-                                    SelectedValue="{Binding TensoSensor}">
+                                    ItemsSource="{Binding TenzoSensors}" 
+                                    SelectedValue="{Binding TenzoSensor}">
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <StackPanel Orientation="Horizontal"/>

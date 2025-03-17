@@ -101,9 +101,9 @@
 
                 <Expander Grid.Row="4">
                     <Expander.Header>
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="{lc:Localization Settings.DeviceAndSensor.TensoSensors}" />
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="{lc:Localization Settings.DeviceAndSensor.TenzoSensors}" />
                     </Expander.Header>
-                    <ItemsControl ItemsSource="{Binding TensoSensors}">
+                    <ItemsControl ItemsSource="{Binding TenzoSensors}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="3" />

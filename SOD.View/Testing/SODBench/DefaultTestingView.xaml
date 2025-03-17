@@ -83,10 +83,10 @@
                             SensorName="{lc:Localization Testing.SODBench.Pressure}"
                             ViewModel="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type sensorsVm:TensoSensorViewModel}">
+                    <DataTemplate DataType="{x:Type sensorsVm:TenzoSensorViewModel}">
                         <local:SensorView
                             Height="{Binding ElementName=topSp, Path=ActualHeight}"
-                            SensorName="{lc:Localization Testing.SODBench.Tenso}"
+                            SensorName="{lc:Localization Testing.SODBench.Tenzo}"
                             ViewModel="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />
                     </DataTemplate>
                     <!--<DataTemplate DataType="{x:Type sensorsVm:LeakageSensorViewModel}">

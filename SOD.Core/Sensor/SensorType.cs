@@ -13,6 +13,6 @@ namespace SOD.Core.Sensor
         LeakageSensorCodeBased,
         TemperatureSensorCodeBased,
         ImpulseSensor,
-		TensoSensorCodeBased
+		TenzoSensorCodeBased
 	}
 }

@@ -23,8 +23,8 @@
     "MetallPolimer": "metal-polymer",
     "MetallMetall": "metal-metal"
   },
-  "Title": "CRS",
-  "CRSBenchLocalization": {
+  "Title": "SOD",
+  "SODBenchLocalization": {
     "ShellTest": "Shell test",
     "BackSeatTest": "Back seat test",
     "SeatLeakageTest": "Seat leakage test",
@@ -93,7 +93,7 @@
     "BackgroundChanged": "Background successfully changed!",
     "CantFindProtocol": "Protocol template not found",
     "Bench": {
-      "CrsBenchSettingsView": {
+      "SODBenchSettingsView": {
         "UseTempSensorWater": "Use temperature sensor (liquid)",
         "UseTempSensorAir": "Use temperature sensor (gas)",
         "ReportTemplate": "Report template",
@@ -221,7 +221,7 @@
   "Testing": {
     "ValveName": "Valve name",
     "ClearFilters": "Clear filters",
-    "CRSBench": {
+    "SODBench": {
       "CanSaveReport": "Current report is not saved, save?",
       "No": "No",
       "Save": "Save",

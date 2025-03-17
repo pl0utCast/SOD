@@ -79,17 +79,6 @@ namespace SOD.UserService
             SaveSettings();
         }
 
-        public string GetBackground()
-        {
-            return Settings.SetBackground;
-        }
-
-        public void SetBackground(string setBackground)
-        {
-            Settings.SetBackground = setBackground;
-            SaveSettings();
-        }
-
         public bool GetAuthorization()
         {
             return isAutorization;

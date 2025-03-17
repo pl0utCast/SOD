@@ -1,7 +1,4 @@
 ﻿using SOD.Dialogs;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SOD.View
 {
@@ -16,13 +13,12 @@ namespace SOD.View
             dialogService.RegisterDialog("EditModbusTcpRegister", new Settings.DeviceAndSensor.Device.Dialog.EditModbusTcpRegisterView());
             dialogService.RegisterDialog("EditOvenMBDeviceRegister", new Settings.DeviceAndSensor.Device.Dialog.EditOvenMBDeviceRegisterView());
             //dialogService.RegisterDialog("ValueBasedSensorSettings", new Settings.DeviceAndSensor.Sensors.Dialog.ValueBasedSensorSettingsView());
-            //dialogService.RegisterDialog("ScriptSelector", new Settings.Standarts.Dialog.ScriptSelectorView());
-            //dialogService.RegisterDialog("SelectPostSensor", new Settings.Bench.ThreePostBench.Dialog.SelectPostSensorView());
-            //dialogService.RegisterDialog("AddTestSettings", new Settings.Bench.ThreePostBench.Dialog.AddTestView());
             dialogService.RegisterDialog("EditProperty", new Props.EditPropertyView());
             dialogService.RegisterDialog("DeleteProperty", new Props.DeletePropView());
             //dialogService.RegisterDialog("SaveDeviceSettings", new Settings.DeviceAndSensor.Device.Dialog.SaveDeviceSettingsView());
             dialogService.RegisterDialog("CodeBasedSensorSettings", new Settings.DeviceAndSensor.Sensors.Dialog.CodeBasedSensorSettingsView());
+            dialogService.RegisterDialog("TenzoSensorSettings", new Settings.DeviceAndSensor.Sensors.Dialog.TenzoSensorSettingsView());
+            dialogService.RegisterDialog("CoefficentCalibration", new Settings.DeviceAndSensor.Sensors.Dialog.CoefficentCalibrationView());
             dialogService.RegisterDialog("AddLangView", new Settings.Bench.Dialogs.AddLangView());
             dialogService.RegisterDialog("EditUser", new Settings.Users.Dialogs.EditUserView());
             dialogService.RegisterDialog("DeleteUser", new Settings.Users.Dialogs.DeleteUserView());

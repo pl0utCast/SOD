@@ -1,5 +1,7 @@
 ﻿using ReactiveUI;
 using SOD.Core.Sensor;
+using SOD.LocalizationService;
+using System.Globalization;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using UnitsNet;
@@ -9,7 +11,7 @@ namespace SOD.ViewModels.Testing.SODBench.Sensors
 {
     public class PressureSensorViewModel : SensorViewModel
     {
-        public PressureSensorViewModel(IPressureSensor sensor, PressureUnit pressureUnit) : base(sensor)
+        public PressureSensorViewModel(IPressureSensor sensor, PressureUnit pressureUnit, ILocalizationService localizationService) : base(sensor)
         {
             this.WhenActivated(dis =>
             {
@@ -20,7 +22,8 @@ namespace SOD.ViewModels.Testing.SODBench.Sensors
                           })
                           .DisposeWith(dis);
             });
-            Unit = UnitAbbreviationsCache.Default.GetDefaultAbbreviation(typeof(PressureUnit), (int)pressureUnit);
+
+            Unit = Pressure.GetAbbreviation(pressureUnit, new CultureInfo(localizationService.CurrentCulture.Name));
             Name = sensor.Name;
         }
     }

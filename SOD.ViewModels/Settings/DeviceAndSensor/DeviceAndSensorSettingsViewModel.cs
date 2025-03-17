@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Text;
-using SOD.Core.Sensor.TensoSensor;
+using SOD.Core.Sensor.TenzoSensor;
 using SOD.Core;
 using SOD.Localization.Settings.DeviceAndSensors;
 
@@ -37,9 +37,9 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor
                 {
                     LeakageSensors.Add(new SensorViewModel(sensor, dialogService));
                 }
-				else if (sensor is ITensoSensor tensoSensor)
+				else if (sensor is ITenzoSensor tenzoSensor)
 				{
-					TensoSensors.Add(new SensorViewModel(sensor, dialogService));
+					TenzoSensors.Add(new SensorViewModel(sensor, dialogService));
 				}
 			}
             
@@ -49,7 +49,7 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor
         public List<SensorViewModel> PressureSensors { get; set; } = new List<SensorViewModel>();
         public List<SensorViewModel> TemperatureSensors { get; set; } = new List<SensorViewModel>();
         public List<SensorViewModel> LeakageSensors { get; set; } = new List<SensorViewModel>();
-		public List<SensorViewModel> TensoSensors { get; set; } = new List<SensorViewModel>();
+		public List<SensorViewModel> TenzoSensors { get; set; } = new List<SensorViewModel>();
 		public ReactiveCommand<Unit, Unit> GoBack { get; set; }
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
         public string ViewTitle { get; set; }
