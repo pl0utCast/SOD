@@ -33,5 +33,9 @@ namespace SOD.Localization.Settings.DeviceAndSensors
         public string FiveSensors { get; set; } = "5 датчиков";
         public string FourSensorsIf { get; set; } = "4 датчика по условию";
         public string FourSensors { get; set; } = "4 датчика по одному";
+        public string CalibrationCoefficients { get; set; } = "Калибровка коэффициентов";
+        public string Weight { get; set; } = "Вес";
+        public string Code { get; set; } = "Код";
+        public string Add { get; set; } = "Добавить";
     }
 }

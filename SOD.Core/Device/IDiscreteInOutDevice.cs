@@ -6,7 +6,6 @@ namespace SOD.Core.Device
 {
     public interface IDiscreteInOutDevice
     {
-        public IEnumerable<DiscreteChannel> GetInChannel(IEnumerable<int> numbers);
         public void SetOutChannels(DiscreteChannel discreteChannel);
         public IEnumerable<DiscreteChannel> GetOutChannels();
         public class DiscreteChannel

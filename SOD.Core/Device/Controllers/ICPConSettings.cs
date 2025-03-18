@@ -1,12 +1,11 @@
-﻿using SOD.Core.Settings;
-using System;
+﻿using SOD.Core.Device.Modbus;
+using SOD.Core.Settings;
 using System.Collections.Generic;
-using System.Text;
 
-namespace SOD.Core.Device.Modbus
+namespace SOD.Core.Device.Controllers
 {
     [DeviceSettings]
-    public class ModbusTcpSettings
+    public class ICPConSettings
     {
         public string DeviceName { get; set; }
         public int Id { get; set; }
@@ -15,7 +14,6 @@ namespace SOD.Core.Device.Modbus
         public int SlaveAddress { get; set; } = 1;
         public List<ModbusRegister> Registers { get; set; } = new List<ModbusRegister>();
         public List<ModbusRegister> ReadWriteRegisters { get; set; } = new List<ModbusRegister>();
-        public List<ModbusRegister> ReadHoldingRegisters { get; set; } = new List<ModbusRegister>();
-        public string SensorHint { get; set; } = "";
+        public string SensorHint { get; set; } = "ET-7017";
     }
 }

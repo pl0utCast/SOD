@@ -7,6 +7,7 @@ namespace SOD.Core.Device
     public enum DeviceType
     {
         OvenMBDevice,
-        ModbusTCP
+        ModbusTCP,
+        ICPConDevice
     }
 }

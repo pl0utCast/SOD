@@ -23,6 +23,8 @@ namespace SOD.Core.Device
                     return new OvenMBDevice.OvenMBDevice(deviceConfig.Id, _settingsService);
                 case DeviceType.ModbusTCP:
                     return new Modbus.ModbusTcpDevice(deviceConfig.Id, _settingsService);
+                case DeviceType.ICPConDevice:
+                    return new Controllers.ICPConDevice(deviceConfig.Id, _settingsService);
                 default:
                     return null;
             }

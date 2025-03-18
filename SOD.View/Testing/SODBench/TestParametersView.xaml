@@ -99,6 +99,7 @@
                                 Text="{Binding BalloonVolume}"/>
                             <controls:UnitValueView
                                 Margin="10"
+                                FontSize="22"
                                 DataContext="{Binding WorkPressure}"
                                 FieldName="{lc:Localization Testing.SODBench.TestSettings.Pressure}" />
                         </StackPanel>

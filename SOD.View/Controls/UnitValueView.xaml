@@ -15,7 +15,6 @@
         </Grid.ColumnDefinitions>
         <TextBox
             materialDesign:HintAssist.Hint="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:UnitValueView}}, Path=FieldName}"
-            FontSize="22"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             Text="{Binding Value, UpdateSourceTrigger=LostFocus}" />
         <ComboBox
@@ -27,7 +26,7 @@
             SelectedItem="{Binding SelectedUnitInfo}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock FontSize="22" Text="{Binding Name}" />
+                    <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

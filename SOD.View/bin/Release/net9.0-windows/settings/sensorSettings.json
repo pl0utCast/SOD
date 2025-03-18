@@ -4,33 +4,51 @@
     "ChannelId": 62,
     "MaxCode": 4963,
     "MinCode": 26,
-    "MinValue": {
-      "Unit": "MassUnit.Kilogram",
-      "Value": 0.0
-    },
-    "MaxValue": {
-      "Unit": "MassUnit.Kilogram",
-      "Value": 100.0
-    },
-    "Unit": "Kilogram",
+    "Unit": "3",
     "Accaury": "F2",
     "FilterCoef": 0.0,
-    "SensorHint": ""
+    "SensorHint": "",
+    "Coefficients": [
+      {
+        "Id": 1,
+        "SavedCode": 125,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 11.5
+        }
+      },
+      {
+        "Id": 2,
+        "SavedCode": 564,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 55.2
+        }
+      },
+      {
+        "Id": 3,
+        "SavedCode": 986,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 87.6
+        }
+      },
+      {
+        "Id": 4,
+        "SavedCode": 1028,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 94.9
+        }
+      }
+    ]
   },
   "TenzoSensorCodeBased_Id_1": {
     "Name": "500 kg",
     "ChannelId": 64,
     "MaxCode": 4963,
     "MinCode": 26,
-    "MinValue": {
-      "Unit": "MassUnit.Kilogram",
-      "Value": 0.0
-    },
-    "MaxValue": {
-      "Unit": "MassUnit.Kilogram",
-      "Value": 500.0
-    },
-    "Unit": "Kilogram",
+    "Unit": "3",
     "Accaury": "F2",
     "FilterCoef": 0.0,
     "SensorHint": ""
@@ -40,15 +58,7 @@
     "ChannelId": 66,
     "MaxCode": 4963,
     "MinCode": 26,
-    "MinValue": {
-      "Unit": "MassUnit.Kilogram",
-      "Value": 0.0
-    },
-    "MaxValue": {
-      "Unit": "MassUnit.Kilogram",
-      "Value": 5000.0
-    },
-    "Unit": "Kilogram",
+    "Unit": "3",
     "Accaury": "F2",
     "FilterCoef": 0.0,
     "SensorHint": ""
@@ -58,15 +68,7 @@
     "ChannelId": 68,
     "MaxCode": 4963,
     "MinCode": 26,
-    "MinValue": {
-      "Unit": "MassUnit.Kilogram",
-      "Value": 0.0
-    },
-    "MaxValue": {
-      "Unit": "MassUnit.Kilogram",
-      "Value": 10000.0
-    },
-    "Unit": "Kilogram",
+    "Unit": "3",
     "Accaury": "F2",
     "FilterCoef": 0.0,
     "SensorHint": ""
@@ -253,7 +255,117 @@
     "ZeroTolerance": 0.0,
     "SensorHint": ""
   },
+  "CodeBasedPressureSensor_Id_14": {
+    "Name": "E1",
+    "ChannelId": 0,
+    "MaxCode": 60000,
+    "MinCode": 14,
+    "MinValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": -0.05
+    },
+    "MaxValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 0.05
+    },
+    "Unit": "Bar",
+    "Accaury": "F2",
+    "FilterCoef": 0.0,
+    "SensorHint": "ET41"
+  },
+  "CodeBasedPressureSensor_Id_15": {
+    "Name": "E2",
+    "ChannelId": 1,
+    "MaxCode": 60000,
+    "MinCode": 14,
+    "MinValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": -0.5
+    },
+    "MaxValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 0.5
+    },
+    "Unit": "Bar",
+    "Accaury": "F1",
+    "FilterCoef": 0.0,
+    "SensorHint": "ET42"
+  },
+  "CodeBasedPressureSensor_Id_16": {
+    "Name": "E3",
+    "ChannelId": 2,
+    "MaxCode": 60000,
+    "MinCode": 14,
+    "MinValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": -1.0
+    },
+    "MaxValue": {
+      "Unit": "PressureUnit.Bar",
+      "Value": 5.0
+    },
+    "Unit": "Bar",
+    "Accaury": "F1",
+    "FilterCoef": 0.0,
+    "SensorHint": "ET43"
+  },
+  "CodeBasedLeakageSensor_Id_17": {
+    "Name": "E4",
+    "ChannelId": 3,
+    "MaxCode": 60000,
+    "MinCode": 14,
+    "MinValue": {
+      "Unit": "VolumeFlowUnit.LiterPerMinute",
+      "Value": -0.5
+    },
+    "MaxValue": {
+      "Unit": "VolumeFlowUnit.LiterPerMinute",
+      "Value": 0.5
+    },
+    "Unit": "CubicCentimeterPerMinute",
+    "Accaury": "F2",
+    "FilterCoef": 0.0,
+    "ZeroTolerance": 0.2,
+    "SensorHint": "ET44"
+  },
+  "CodeBasedLeakageSensor_Id_18": {
+    "Name": "E5",
+    "ChannelId": 4,
+    "MaxCode": 60000,
+    "MinCode": 14,
+    "MinValue": {
+      "Unit": "VolumeFlowUnit.LiterPerMinute",
+      "Value": -10.0
+    },
+    "MaxValue": {
+      "Unit": "VolumeFlowUnit.LiterPerMinute",
+      "Value": 10.0
+    },
+    "Unit": "CubicCentimeterPerMinute",
+    "Accaury": "F2",
+    "FilterCoef": 0.0,
+    "ZeroTolerance": 0.2,
+    "SensorHint": "ET45"
+  },
+  "CodeBasedTemperatureSensor_Id_19": {
+    "Name": "E6",
+    "ChannelId": 5,
+    "MaxCode": 60000,
+    "MinCode": 14,
+    "MinValue": {
+      "Unit": "TemperatureUnit.DegreeCelsius",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "TemperatureUnit.DegreeCelsius",
+      "Value": 100.0
+    },
+    "Unit": "DegreeCelsius",
+    "Accaury": "F2",
+    "FilterCoef": 0.0,
+    "SensorHint": "ET46"
+  },
   "LastUpdate": {
-    "LastUpdateDate": "2024-10-22T08:53:24.3335789+03:00"
+    "LastUpdateDate": "2025-03-18T11:43:27.7048855+03:00"
   }
 }

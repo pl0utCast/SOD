@@ -95,8 +95,13 @@ namespace SOD.ViewModels.Testing.SODBench
 				navigationService.GoBack();
 			});
 
-			var canApply = this.WhenAny(x => x.SelectedStandart, /*x => x.IsConfirmed,*/
-				(selectedSt/*, isConf*/) => selectedSt != null /*&& isConf*/);
+#if DEBUG
+			var canApply = this.WhenAny(x => x.SelectedStandart,
+				(selectedSt) => selectedSt != null);
+#else
+			var canApply = this.WhenAnyValue(x => x.SelectedStandart, x => x.IsConfirmed,
+				(selectedSt, isConf) => selectedSt != null && isConf);
+#endif
 
 			Apply = ReactiveCommand.CreateFromTask(async () =>
 			{

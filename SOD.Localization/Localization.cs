@@ -75,6 +75,7 @@ namespace SOD.Localization
                 public string TemperatureSensors { get; set; } = "Датчики температуры";
 				public string TenzoSensors { get; set; } = "Тензодатчики";
 				public Settings.DeviceAndSensors.Device Device { get; set; } = new Settings.DeviceAndSensors.Device();
+                public Settings.DeviceAndSensors.IcpDevice IcpDevice { get; set; } = new Settings.DeviceAndSensors.IcpDevice();
                 public Settings.DeviceAndSensors.Sensor Sensor { get; set; } = new Settings.DeviceAndSensors.Sensor();
             }
         }

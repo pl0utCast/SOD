@@ -68,6 +68,175 @@
         "Description": "биты в плк"
       }
     ],
+    "ReadHoldingRegisters": [],
     "SensorHint": "Modbus"
+  },
+  "ICPConDevice_2": {
+    "DeviceName": "ICPCon Device",
+    "Id": 2,
+    "HostOrIp": "192.168.11.70",
+    "Port": 502,
+    "SlaveAddress": 1,
+    "Registers": [
+      {
+        "RegisterId": 0,
+        "Id": 0,
+        "DataType": 1,
+        "ByteCount": 0,
+        "Description": "Давление"
+      },
+      {
+        "RegisterId": 1,
+        "Id": 1,
+        "DataType": 1,
+        "ByteCount": 0,
+        "Description": ""
+      },
+      {
+        "RegisterId": 2,
+        "Id": 2,
+        "DataType": 1,
+        "ByteCount": 0,
+        "Description": ""
+      },
+      {
+        "RegisterId": 3,
+        "Id": 3,
+        "DataType": 1,
+        "ByteCount": 0,
+        "Description": ""
+      },
+      {
+        "RegisterId": 4,
+        "Id": 4,
+        "DataType": 1,
+        "ByteCount": 0,
+        "Description": ""
+      },
+      {
+        "RegisterId": 5,
+        "Id": 5,
+        "DataType": 1,
+        "ByteCount": 0,
+        "Description": ""
+      },
+      {
+        "RegisterId": 6,
+        "Id": 6,
+        "DataType": 1,
+        "ByteCount": 0,
+        "Description": ""
+      },
+      {
+        "RegisterId": 7,
+        "Id": 7,
+        "DataType": 1,
+        "ByteCount": 0,
+        "Description": ""
+      }
+    ],
+    "ReadWriteRegisters": [
+      {
+        "RegisterId": 0,
+        "Id": 0,
+        "DataType": 4,
+        "ByteCount": 0,
+        "Description": "Импульсный 1"
+      },
+      {
+        "RegisterId": 1,
+        "Id": 1,
+        "DataType": 4,
+        "ByteCount": 0,
+        "Description": "Импульсный 2"
+      },
+      {
+        "RegisterId": 2,
+        "Id": 2,
+        "DataType": 4,
+        "ByteCount": 0,
+        "Description": "Импульсный 3"
+      },
+      {
+        "RegisterId": 3,
+        "Id": 3,
+        "DataType": 4,
+        "ByteCount": 0,
+        "Description": "Импульсный 4"
+      },
+      {
+        "RegisterId": 628,
+        "Id": 628,
+        "DataType": 4,
+        "ByteCount": 0,
+        "Description": "Normal Mode (10 Hz)/Fast Mode (50 Hz)"
+      },
+      {
+        "RegisterId": 629,
+        "Id": 629,
+        "DataType": 4,
+        "ByteCount": 0,
+        "Description": "60/50 Hz Rejection"
+      }
+    ],
+    "ReadHoldingRegisters": [
+      {
+        "RegisterId": 427,
+        "Id": 427,
+        "DataType": 1,
+        "ByteCount": 0,
+        "Description": "0x07(7): 4 ~ 20 mA"
+      },
+      {
+        "RegisterId": 428,
+        "Id": 428,
+        "DataType": 1,
+        "ByteCount": 0,
+        "Description": "0x08(8): +/‐10 V"
+      },
+      {
+        "RegisterId": 429,
+        "Id": 429,
+        "DataType": 1,
+        "ByteCount": 0,
+        "Description": "0x09(9): +/‐5 V"
+      },
+      {
+        "RegisterId": 430,
+        "Id": 430,
+        "DataType": 1,
+        "ByteCount": 0,
+        "Description": "0x0A(10): +/‐1 V"
+      },
+      {
+        "RegisterId": 431,
+        "Id": 431,
+        "DataType": 1,
+        "ByteCount": 0,
+        "Description": "0x0B(11): +/‐500 mV"
+      },
+      {
+        "RegisterId": 432,
+        "Id": 432,
+        "DataType": 1,
+        "ByteCount": 0,
+        "Description": "0x0C(12): +/‐150 mV"
+      },
+      {
+        "RegisterId": 433,
+        "Id": 433,
+        "DataType": 1,
+        "ByteCount": 0,
+        "Description": "0x0D(13): +/‐20 mA"
+      },
+      {
+        "RegisterId": 434,
+        "Id": 434,
+        "DataType": 1,
+        "ByteCount": 0,
+        "Description": "0x1A(26): 0~20 mA"
+      }
+    ],
+    "SensorHint": "Controller"
   }
 }

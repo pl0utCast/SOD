@@ -1,17 +1,15 @@
-﻿using SOD.Core.Device;
-using SOD.Core.Device.Modbus;
-using ReactiveUI;
+﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using System;
-using System.Collections.Generic;
+using SOD.Core.Device;
+using SOD.Core.Device.Controllers;
+using SOD.Core.Device.Modbus;
 using System.Reactive.Disposables;
-using System.Text;
 
 namespace SOD.ViewModels.Settings.DeviceAndSensor.Device
 {
     public class ModbusTcpRegisterViewModel : ReactiveObject, IActivatableViewModel
     {
-        public ModbusTcpRegisterViewModel(ModbusTcpDevice modbusTcpDevice, ModbusRegister modbusRegister)
+        public ModbusTcpRegisterViewModel(object modbusTcpDevice, ModbusRegister modbusRegister)
         {
             Register = modbusRegister;
             Id = modbusRegister.Id;
@@ -21,13 +19,26 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Device
 
             this.WhenActivated(disposables =>
             {
-                modbusTcpDevice.DataComplite.Subscribe(dc =>
+                if (modbusTcpDevice is ModbusTcpDevice modbusDevice)
                 {
-                    if (dc.Id == Id)
+                    modbusDevice.DataComplite.Subscribe(dc =>
                     {
-                        Value = dc.Value.ToString();
-                    }
-                }).DisposeWith(disposables);
+                        if (dc.Id == Id)
+                        {
+                            Value = dc.Value.ToString();
+                        }
+                    }).DisposeWith(disposables);
+                }
+                else if (modbusTcpDevice is ICPConDevice conDevice)
+                {
+                    conDevice.DataComplite.Subscribe(dc =>
+                    {
+                        if (dc.Id == Id)
+                        {
+                            Value = dc.Value.ToString();
+                        }
+                    }).DisposeWith(disposables);
+                }
             });
         }
         [Reactive]

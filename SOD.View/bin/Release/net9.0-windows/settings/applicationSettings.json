@@ -17,13 +17,16 @@
       }
     },
     "SelectedBalloon": {
+      "Id": 0,
       "Name": "КПГ-1",
-      "BalloonType": 0,
+      "BalloonType": null,
+      "BalloonTypes": 0,
       "BalloonVolume": 0.0,
-      "StandartId": 0
+      "StandartId": 0,
+      "Properties": []
     },
     "PressureUnit": 2,
-    "TenzoUnit": 8,
+    "TenzoUnit": 3,
     "BalloonProperties": [],
     "Parameters": [
       "{\r\n  \"Id\": 0,\r\n  \"Name\": \"Сustomer\",\r\n  \"Alias\": \"customer\",\r\n  \"SerializedValue\": \"\\\"\\\"\",\r\n  \"Type\": 7\r\n}",
@@ -34,7 +37,7 @@
       "1": [
         {
           "Time": 120,
-          "PressureSensorId": 4,
+          "PressureSensorId": 1,
           "WorkPressure": 0,
           "Deformation": 0,
           "MaxDeformation": null,
@@ -47,7 +50,7 @@
         },
         {
           "Time": 180,
-          "PressureSensorId": 4,
+          "PressureSensorId": 2,
           "WorkPressure": 0,
           "Deformation": 0,
           "MaxDeformation": null,
@@ -62,7 +65,7 @@
       "2": [
         {
           "Time": 10,
-          "PressureSensorId": 4,
+          "PressureSensorId": 0,
           "WorkPressure": 0,
           "Deformation": 0,
           "MaxDeformation": null,
@@ -75,7 +78,7 @@
         },
         {
           "Time": 10,
-          "PressureSensorId": 4,
+          "PressureSensorId": 0,
           "WorkPressure": 0,
           "Deformation": 0,
           "MaxDeformation": null,
@@ -88,7 +91,7 @@
         },
         {
           "Time": 30,
-          "PressureSensorId": 4,
+          "PressureSensorId": 0,
           "WorkPressure": 0,
           "Deformation": 0,
           "MaxDeformation": null,
@@ -121,10 +124,15 @@
       "10": false,
       "11": false,
       "12": false,
-      "13": false
+      "13": false,
+      "14": true,
+      "15": true,
+      "16": true,
+      "17": true,
+      "18": true,
+      "19": true
     },
-    "ReportPath": "D:\\Source codes\\SOD\\SOD.View\\bin\\Debug\\net8.0-windows\\reports_template\\report_template_crsbench_vacuum.frx",
-    "UrlForQr": ""
+    "ReportPath": "D:\\Source codes\\SOD\\SOD.View\\bin\\Release\\net9.0-windows\\reports_template\\report_template_sod.frx"
   },
   "TestBenchSettings": {
     "OwnerDeviceId": 0,

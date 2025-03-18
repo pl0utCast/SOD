@@ -93,7 +93,7 @@
     "BackgroundChanged": "Фон успешно изменен!",
     "CantFindProtocol": "Не найден шаблон протокола",
     "Bench": {
-      "SODBenchSettingsView": {
+      "SodBenchSettingsView": {
         "UseTempSensorWater": "Использовать датчик температуры (вода)",
         "UseTempSensorAir": "Использовать датчик температуры (воздух)",
         "ReportTemplate": "Шаблон протокола",
@@ -123,6 +123,7 @@
       "PressureSensors": "Датчики давления",
       "LeakageSensors": "Датчики протечки",
       "TemperatureSensors": "Датчики температуры",
+      "TenzoSensors": "Тензодатчики",
       "Device": {
         "SaveSettings": "Сохранить настройки?",
         "Yes": "Да",
@@ -138,6 +139,18 @@
         "BaudRate": "Скорость",
         "Address": "Адрес:",
         "Value": "Значение:"
+      },
+      "IcpDevice": {
+        "Add": "Добавить",
+        "Edit": "Редактировать",
+        "Delete": "Удалить",
+        "ModbusId": "Id модбаса",
+        "DataType": "Тип данных",
+        "Value": "Значение",
+        "Description": "Описание",
+        "CoilsRegisters": "Coils регистры",
+        "HoldingRegisters": "Holding регистры",
+        "InputRegisters": "Input регистры"
       },
       "Sensor": {
         "Name": "Название",
@@ -166,7 +179,11 @@
         "LogicSwitchMIP": "Логика переключения",
         "FiveSensors": "5 датчиков",
         "FourSensorsIf": "4 датчика по условию",
-        "FourSensors": "4 датчика по одному"
+        "FourSensors": "4 датчика по одному",
+        "CalibrationCoefficients": "Калибровка коэффициентов",
+        "Weight": "Вес",
+        "Code": "Код",
+        "Add": "Add"
       }
     },
     "QrCode": {
@@ -249,6 +266,7 @@
       "Start": "СТАРТ",
       "Stop": "СТОП",
       "Pressure": "Давление",
+      "Tenzo": "Вес",
       "Time": "Время (чч:мм:сс)",
       "SelectOpenPoint": "Выбрать точку открытия",
       "SelectClosePoint": "Выбрать точку закрытия",

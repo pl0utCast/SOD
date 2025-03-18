@@ -80,10 +80,12 @@
                 </Grid>
                 <controls:UnitValueView
                     Margin="5 10 0 0"
+                    FontSize="22"
                     DataContext="{Binding MinValue}"
                     FieldName="{lc:Localization Settings.DeviceAndSensor.Sensor.MinValue}" />
                 <controls:UnitValueView
                     Margin="5 10 0 0"
+                    FontSize="22"
                     DataContext="{Binding MaxValue}"
                     FieldName="{lc:Localization Settings.DeviceAndSensor.Sensor.MaxValue}" />
                 <TextBox

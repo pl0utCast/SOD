@@ -93,7 +93,7 @@
     "BackgroundChanged": "Background successfully changed!",
     "CantFindProtocol": "Protocol template not found",
     "Bench": {
-      "SODBenchSettingsView": {
+      "SodBenchSettingsView": {
         "UseTempSensorWater": "Use temperature sensor (liquid)",
         "UseTempSensorAir": "Use temperature sensor (gas)",
         "ReportTemplate": "Report template",
@@ -123,6 +123,7 @@
       "PressureSensors": "Pressure sensors",
       "LeakageSensors": "Leakage sensors",
       "TemperatureSensors": "Temperature sensors",
+      "TenzoSensors": "Force sensors",
       "Device": {
         "SaveSettings": "Save settings? ",
         "Yes": "Yes",
@@ -138,6 +139,18 @@
         "BaudRate": "Baud rate",
         "Address": "Address:",
         "Value": "Value:"
+      },
+      "IcpDevice": {
+        "Add": "Add",
+        "Edit": "Edit",
+        "Delete": "Delete",
+        "ModbusId": "Modbus Id",
+        "DataType": "Data Type",
+        "Value": "Value",
+        "Description": "Description",
+        "CoilsRegisters": "Coils Registers",
+        "HoldingRegisters": "Holding Registers",
+        "InputRegisters": "Input Registers"
       },
       "Sensor": {
         "Name": "Name",
@@ -166,7 +179,11 @@
         "LogicSwitchMIP": "Switching logic",
         "FiveSensors": "5 sensors",
         "FourSensorsIf": "4 sensors condition",
-        "FourSensors": "4 sensors one at a time"
+        "FourSensors": "4 sensors one at a time",
+        "CalibrationCoefficients": "Calibration coefficients",
+        "Weight": "Weight",
+        "Code": "Code",
+        "Add": "Add"
       }
     },
     "QrCode": {
@@ -249,6 +266,7 @@
       "Start": "START",
       "Stop": "STOP",
       "Pressure": "Pressure",
+      "Tenzo": "Force",
       "Time": "Time (hh:mm:ss)",
       "SelectOpenPoint": "Select set pressure",
       "SelectClosePoint": "Select reseat pressure",

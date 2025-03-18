@@ -1,6 +1,7 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using SOD.Core.Device;
+using SOD.Core.Device.Controllers;
 using SOD.Core.Device.Modbus;
 using SOD.Core.Device.OvenMBDevice;
 using SOD.Dialogs;
@@ -27,6 +28,11 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Device
                 {
                     var vm = new ModbusTcpDeviceSettingsViewModel(navigationService, dialogService, modbusTcpDevice);
                     navigationService.NavigateTo("ModbusTcpDeviceSettings", vm);
+                }
+                else if (device is ICPConDevice icpConDevice)
+                {
+                    var vm = new ICPConDeviceSettingsViewModel(navigationService, dialogService, icpConDevice);
+                    navigationService.NavigateTo("ICPConDeviceSettings", vm);
                 }
             });
         }

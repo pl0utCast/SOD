@@ -68,5 +68,35 @@
         "Id":13,
         "DeviceId":1,
         "Type":"TemperatureSensorCodeBased"
+    },
+    {
+        "Id":14,
+        "DeviceId":2,
+        "Type":"PressureSensorCodeBased"
+    },
+    {
+        "Id":15,
+        "DeviceId":2,
+        "Type":"PressureSensorCodeBased"
+    },
+    {
+        "Id":16,
+        "DeviceId":2,
+        "Type":"PressureSensorCodeBased"
+    },
+    {
+        "Id":17,
+        "DeviceId":2,
+        "Type":"LeakageSensorCodeBased"
+    },
+    {
+        "Id":18,
+        "DeviceId":2,
+        "Type":"LeakageSensorCodeBased"
+    },
+    {
+        "Id":19,
+        "DeviceId":2,
+        "Type":"TemperatureSensorCodeBased"
     }
 ]

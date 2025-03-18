@@ -1,8 +1,6 @@
 ﻿using SOD.Core.Device.Modbus;
-using System;
-using System.Collections.Generic;
+using SOD.ViewModels.Settings.DeviceAndSensor.Device;
 using System.Collections.ObjectModel;
-using System.Text;
 
 namespace SOD.ViewModels.Settings.DeviceAndSensor.Device
 {
@@ -10,7 +8,8 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Device
     {
         public ModbusReadWriteBoolRegisterViewModel(ObservableCollection<IModbusRegisterViewModel> registers,
                                                     ModbusRegister modbusRegister,
-                                                    ModbusTcpDevice modbusTcpDevice) : base(registers, modbusRegister, modbusTcpDevice)
+                                                    object modbusTcpDevice,
+                                                    bool isHoldingRegister) : base(registers, modbusRegister, modbusTcpDevice, isHoldingRegister)
         {
         }
     }
