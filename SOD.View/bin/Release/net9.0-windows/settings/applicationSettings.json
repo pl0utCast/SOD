@@ -132,7 +132,12 @@
       "18": true,
       "19": true
     },
-    "ReportPath": "D:\\Source codes\\SOD\\SOD.View\\bin\\Release\\net9.0-windows\\reports_template\\report_template_sod.frx"
+    "DevicesUnits": {
+      "0": true,
+      "1": true,
+      "2": true
+    },
+    "ReportPath": "D:\\Source codes\\SOD\\SOD.View\\bin\\Debug\\net9.0-windows\\reports_template\\report_template_sod.frx"
   },
   "TestBenchSettings": {
     "OwnerDeviceId": 0,

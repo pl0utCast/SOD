@@ -19,11 +19,28 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor
 {
     public class DeviceAndSensorSettingsViewModel : ReactiveObject, IActivatableViewModel
     {
-        public DeviceAndSensorSettingsViewModel(INavigationService navigationService, IDeviceService deviceService, ISensorService sensorService, IDialogService dialogService, ILocalizationService localizationService)
+        public DeviceAndSensorSettingsViewModel(INavigationService navigationService, 
+                                                IDeviceService deviceService, 
+                                                ISensorService sensorService, 
+                                                IDialogService dialogService, 
+                                                ILocalizationService localizationService,
+                                                IConfigService configService,
+                                                App.Benches.SODBench.Bench bench)
         {
             ViewTitle = localizationService["Settings.DevicesAndSensors"];
-            Devices = deviceService.GetAllDevice().Select(d => new DeviceViewModel(d, navigationService, dialogService));
-            foreach (var sensor in sensorService.GetAllSensors())
+
+            // Выводим выбранные устройства из настроек
+            Devices = deviceService.GetAllDevice()
+                .Select(d => new DeviceViewModel(d, navigationService, dialogService))
+                .Where(d => bench.Settings.DevicesUnits[d.Device.Id]);
+
+            // Получаем Id выбранных устройств
+            var keys = bench.Settings.DevicesUnits.Where(v => v.Value == true).Select(v => v.Key);
+            // Получаем Id датчиков выбранных устройств
+            var availableSensors = configService.GetSensorConfigs().Where(d => keys.Contains(d.DeviceId)).Select(d => d.Id);
+
+            // Выводим датчики выбранных устройств
+            foreach (var sensor in sensorService.GetAllSensors().Where(d => availableSensors.Contains(d.Id)))
             {
                 if (sensor is IPressureSensor pressureSensor)
                 {

@@ -106,9 +106,9 @@
             Content="{lc:Localization Settings.Bench.SodBenchSettingsView.Select}" />
 
         <materialDesign:Card 
-    Grid.Row="4" 
-    Margin="0,20,10,10"
-    Visibility="{Binding ItemFromUser, Converter={StaticResource BooleanToVisibilityConverter}}">
+            Grid.Row="4" 
+            Margin="0,20,10,10"
+            Visibility="{Binding ItemFromUser, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
@@ -116,10 +116,10 @@
                 </Grid.RowDefinitions>
                 <materialDesign:ColorZone Padding="5" Mode="Standard">
                     <TextBlock
-                Grid.Row="2"
-                Margin="0,10,0,10"
-                FontSize="24"
-                Text="{lc:Localization Settings.Bench.SodBenchSettingsView.UsedSensors}" />
+                        Grid.Row="2"
+                        Margin="0,10,0,10"
+                        FontSize="24"
+                        Text="{lc:Localization Settings.Bench.SodBenchSettingsView.UsedSensors}" />
                 </materialDesign:ColorZone>
                 <ItemsControl
                     Grid.Row="1"
@@ -142,9 +142,9 @@
         </materialDesign:Card>
 
         <materialDesign:Card 
-    Grid.Row="5" 
-    Margin="0,0,10,10"
-    Visibility="{Binding ItemFromTehnologist, Converter={StaticResource BooleanToVisibilityConverter}}">
+            Grid.Row="5" 
+            Margin="0,0,10,10"
+            Visibility="{Binding ItemFromTehnologist, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
@@ -152,10 +152,10 @@
                 </Grid.RowDefinitions>
                 <materialDesign:ColorZone Padding="5" Mode="Standard">
                     <TextBlock
-                Grid.Row="2"
-                Margin="0,10,0,10"
-                FontSize="24"
-                Text="{lc:Localization Testing.SODBench.TestParameters.Pressure}" />
+                        Grid.Row="2"
+                        Margin="0,10,0,10"
+                        FontSize="24"
+                        Text="{lc:Localization Testing.SODBench.TestParameters.Pressure}" />
                 </materialDesign:ColorZone>
                 <StackPanel Grid.Row="1">
                     <ListBox ItemsSource="{Binding PressureUnits}" SelectedValue="{Binding SelectedPressureUnit}">
@@ -173,9 +173,9 @@
         </materialDesign:Card>
 
         <materialDesign:Card 
-    Grid.Row="6" 
-    Margin="0,20,10,10"
-    Visibility="{Binding ItemFromTehnologist, Converter={StaticResource BooleanToVisibilityConverter}}">
+            Grid.Row="6" 
+            Margin="0,20,10,10"
+            Visibility="{Binding ItemFromTehnologist, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
@@ -183,15 +183,15 @@
                 </Grid.RowDefinitions>
                 <materialDesign:ColorZone Padding="5" Mode="Standard">
                     <TextBlock
-                Grid.Row="2"
-                Margin="0,10,0,10"
-                FontSize="24"
-                Text="{lc:Localization Settings.Bench.SodBenchSettingsView.SensorsName}" />
+                        Grid.Row="2"
+                        Margin="0,10,0,10"
+                        FontSize="24"
+                        Text="{lc:Localization Settings.Bench.SodBenchSettingsView.SensorsName}" />
                 </materialDesign:ColorZone>
                 <ItemsControl
-            Grid.Row="1"
-            Margin="0,5,0,0"
-            ItemsSource="{Binding ChangeSensorsName}">
+                    Grid.Row="1"
+                    Margin="0,5,0,0"
+                    ItemsSource="{Binding ChangeSensorsName}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Grid.Row="1" Columns="2" />
@@ -255,5 +255,37 @@
             </Grid>
         </materialDesign:Card>
 
+        <materialDesign:Card 
+            Grid.Row="8" 
+            Margin="0,10,10,10"
+            Visibility="{Binding ItemFromUser, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <materialDesign:ColorZone Padding="5" Mode="Standard">
+                    <TextBlock
+                        Margin="0,10,0,10"
+                        FontSize="24"
+                        Text="{lc:Localization Settings.DeviceAndSensor.Devices}" />
+                </materialDesign:ColorZone>
+                <ItemsControl
+                    Grid.Row="1"
+                    Margin="5,5,0,0"
+                    ItemsSource="{Binding DevicesUnits}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox 
+                                Margin="0,4,0,0"
+                                materialDesign:CheckBoxAssist.CheckBoxSize="32" 
+                                IsChecked="{Binding IsEnable}">
+                                <TextBlock FontSize="24" Text="{Binding Name}" />
+                            </CheckBox>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </UserControl>

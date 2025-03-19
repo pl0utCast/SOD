@@ -24,7 +24,8 @@ namespace SOD.ViewModels.Settings.Bench.SODBench
 		private readonly ISettingsService _settingsService;
 		private readonly IDialogService _dialogService;
 		private readonly ILocalizationService _localizationService;
-		private readonly App.Benches.SODBench.Bench _bench;
+        private readonly IDeviceService _deviceService;
+        private readonly App.Benches.SODBench.Bench _bench;
 		private readonly string findReportLocation = Path.Combine(Directory.GetCurrentDirectory()) + @"\reports_template\report_template_sod.frx";
 		int i = 0;
 		public SODBenchSettingsViewModel(IDialogService dialogService,
@@ -32,13 +33,15 @@ namespace SOD.ViewModels.Settings.Bench.SODBench
 										 App.Benches.SODBench.Bench bench,
 										 IUserService userService,
 										 ISettingsService settingsService,
-										 ILocalizationService localizationService)
+										 ILocalizationService localizationService,
+                                         IDeviceService deviceService)
 		{
 			_sensorService = sensorService;
 			_settingsService = settingsService;
 			_dialogService = dialogService;
 			_localizationService = localizationService;
-			_bench = bench;
+            _deviceService = deviceService;
+            _bench = bench;
 
 			if (userService.GetCurrentUser().Role == UserRole.Technologist)
 				ItemFromTehnologist = true;
@@ -52,7 +55,13 @@ namespace SOD.ViewModels.Settings.Bench.SODBench
 			ReportPathChanged = findReportLocation;
 			AutoRange = _bench.Settings.AutoRange;
 
-			foreach (var sensor in sensorService.GetAllSensors())
+            foreach (var device in _deviceService.GetAllDevice())
+            {
+                if (_bench.Settings.DevicesUnits.ContainsKey(device.Id))
+                    DevicesUnits.Add(new DeviceViewModel() { Id = device.Id, Name = device.Name, IsEnable = _bench.Settings.DevicesUnits[device.Id] });
+            }
+
+            foreach (var sensor in sensorService.GetAllSensors())
 			{
 				if (_bench.Settings.Sensors.ContainsKey(sensor.Id))
 				{
@@ -102,8 +111,14 @@ namespace SOD.ViewModels.Settings.Bench.SODBench
 				_bench.Settings.Sensors.Add(sensor.Id, sensor.IsEnable);
 			}
 
-			//Сохраняем имена датчиков 
-			i = 0;
+            _bench.Settings.DevicesUnits.Clear();
+            foreach (var sensor in DevicesUnits)
+            {
+                _bench.Settings.DevicesUnits.Add(sensor.Id, sensor.IsEnable);
+            }
+
+            //Сохраняем имена датчиков 
+            i = 0;
 			foreach (var sensor in _sensorService.GetAllSensors())
 			{
 				if (ChangeSensorsName.Count() <= i) break;
@@ -134,11 +149,11 @@ namespace SOD.ViewModels.Settings.Bench.SODBench
 						codeBasedPressureSensor.Settings.Name = ChangeSensorsName[i].Name;
 						codeBasedPressureSensor.SaveSettings();
 					}
-					//else if (sensor is Core.Sensor.LeakageSensor.CodeBased.LeakageSensor codeBasedLeakageSensor)
-					//{
-					//	codeBasedLeakageSensor.Settings.Name = ChangeSensorsName[i].Name;
-					//	codeBasedLeakageSensor.SaveSettings();
-					//}
+					else if (sensor is Core.Sensor.LeakageSensor.CodeBased.LeakageSensor codeBasedLeakageSensor)
+					{
+						codeBasedLeakageSensor.Settings.Name = ChangeSensorsName[i].Name;
+						codeBasedLeakageSensor.SaveSettings();
+					}
 					else if (sensor is Core.Sensor.TemperatureSensor.CodeBased.TemperatureSensor codeBasedTemperatureSensor)
 					{
 						codeBasedTemperatureSensor.Settings.Name = ChangeSensorsName[i].Name;
@@ -164,8 +179,9 @@ namespace SOD.ViewModels.Settings.Bench.SODBench
 		[Reactive]
 		public string ReportPathChanged { get; set; }
 		public bool ItemFromUser { get; set; } = false;
-		public bool ItemFromTehnologist { get; set; } = false;
-		public ParametersSettingsViewModel Parameters { get; set; }
+		public bool ItemFromTehnologist { get; set; } = false; 
+		public ObservableCollection<DeviceViewModel> DevicesUnits { get; private set; } = new ObservableCollection<DeviceViewModel>();
+        public ParametersSettingsViewModel Parameters { get; set; }
 		[Reactive]
 		public bool AutoRange { get; set; }
 		[Reactive]
@@ -192,5 +208,13 @@ namespace SOD.ViewModels.Settings.Bench.SODBench
 			[Reactive]
 			public bool IsEnable { get; set; }
 		}
-	}
+
+        public class DeviceViewModel
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            [Reactive]
+            public bool IsEnable { get; set; }
+        }
+    }
 }

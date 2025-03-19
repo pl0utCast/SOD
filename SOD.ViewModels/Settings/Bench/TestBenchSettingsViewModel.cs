@@ -45,7 +45,7 @@ namespace SOD.ViewModels.Settings.Bench
 				if (sodBenchSettingsViewModel == null)
 				{
 					var bench = (App.Benches.SODBench.Bench)testBenchService.GetTestBench();
-                    sodBenchSettingsViewModel = new SODBench.SODBenchSettingsViewModel(dialogService, sensorService, bench, userService, settingsService, localizationService);
+                    sodBenchSettingsViewModel = new SODBench.SODBenchSettingsViewModel(dialogService, sensorService, bench, userService, settingsService, localizationService, deviceService);
                     sodBenchSettingsViewModel.Activator
 											 .Activate()
 											 .DisposeWith(dis);

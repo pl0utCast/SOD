@@ -24,7 +24,8 @@ namespace SOD.App.Benches.SODBench
 		public bool ManualLocation { get; set; }
 		public bool AutoRange { get; set; }
 		public Dictionary<int, bool> Sensors { get; set; } = new Dictionary<int, bool>();
-		public string ReportPath { get; set; }
+        public Dictionary<int, bool> DevicesUnits { get; set; } = new Dictionary<int, bool>();
+        public string ReportPath { get; set; }
 		//public string UrlForQr { get; set; } = string.Empty;
 		public class TestSettings
 		{
