@@ -25,7 +25,6 @@
                 </Setter.Value>
             </Setter>
             <Setter Property="TickTextBrush" Value="Black" />
-
         </Style>
         <Style x:Key="TimeAxisStyle" TargetType="{x:Type s:TimeSpanAxis}">
             <Setter Property="MajorGridLineStyle">
@@ -37,7 +36,17 @@
                 </Setter.Value>
             </Setter>
             <Setter Property="TickTextBrush" Value="Black" />
-
+        </Style>
+        <Style x:Key="TenzoAxisStyle" TargetType="{x:Type s:NumericAxis}">
+            <Setter Property="MajorGridLineStyle">
+                <Setter.Value>
+                    <Style TargetType="Line">
+                        <Setter Property="Stroke" Value="Gray" />
+                        <Setter Property="Opacity" Value="1" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TickTextBrush" Value="Black" />
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -112,7 +121,7 @@
                     DataContext="{Binding PressureChart}"
                     RenderableSeries="{s:SeriesBinding PressureSeries}"
                     XAxes="{s:AxesBinding XAxes}"
-                    YAxes="{s:AxesBinding YAxes}" />
+                    YAxes="{s:AxesBinding YAxes}"/>
             </materialDesign:Card>
         </Grid>
         <StackPanel 

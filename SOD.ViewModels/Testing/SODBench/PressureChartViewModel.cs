@@ -25,6 +25,10 @@ using SciChart.Data.Model;
 using UnitsNet.Units;
 using System.Linq;
 using SciChart.Core.Extensions;
+using System.Globalization;
+using System.Diagnostics;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
+using SOD.Core.Units;
 
 namespace SOD.ViewModels.Testing.SODBench
 {
@@ -38,6 +42,7 @@ namespace SOD.ViewModels.Testing.SODBench
         private readonly ILocalizationService localizationService;
         private readonly Bench bench;
         private NumericAxisViewModel yPressureAxis;
+        private NumericAxisViewModel yTenzoAxis;
 
         public PressureChartViewModel(ILocalizationService localizationService, SOD.App.Benches.SODBench.Bench bench)
         {
@@ -74,7 +79,7 @@ namespace SOD.ViewModels.Testing.SODBench
 
             yPressureAxis = new NumericAxisViewModel
             {
-                AxisTitle = localizationService["Testing.SODBench.Pressure"],
+                AxisTitle = localizationService["Testing.SODBench.Pressure"] + ", " + Pressure.GetAbbreviation(bench.Settings.PressureUnit, new CultureInfo(localizationService.CurrentCulture.Name)),
                 DrawMajorBands = false,
                 DrawMinorGridLines = false,
                 MajorDelta = 10,
@@ -85,10 +90,31 @@ namespace SOD.ViewModels.Testing.SODBench
                 StyleKey = "PressureAxisStyle",
                 HasZoomPanModifier = false,
                 BorderThickness= new Thickness(0,0,2,0),
-                BorderBrush=System.Windows.Media.Brushes.Green
+                BorderBrush=System.Windows.Media.Brushes.Green,
+                Id = "yPressureAxis"
             };
             YAxes.Add(yPressureAxis);
+
+            yTenzoAxis = new NumericAxisViewModel
+            {
+                AxisTitle = localizationService["Testing.SODBench.Tenzo"] + ", " + Force.GetAbbreviation(bench.Settings.TenzoUnit, new CultureInfo(localizationService.CurrentCulture.Name)),
+                DrawMajorBands = false,
+                DrawMinorGridLines = false,
+                MajorDelta = 10,
+                MinorDelta = 2,
+                AutoTicks = true,
+                TextFormatting = "0.0#",
+                AxisAlignment = AxisAlignment.Right,
+                StyleKey = "TenzoAxisStyle",
+                HasZoomPanModifier = false,
+                BorderThickness = new Thickness(0, 0, 2, 0),
+                BorderBrush = System.Windows.Media.Brushes.Green,
+                Id = "yTenzoAxis"
+            };
+            YAxes.Add(yTenzoAxis);
+            
         }
+            
 
         public void SetPressureSensor(IPressureSensor pressureSensor)
         {
@@ -140,12 +166,9 @@ namespace SOD.ViewModels.Testing.SODBench
             if (!pressureSeries.ContainsKey(pressureSensor.Id))
             {
                 var pressSeries = new XyDataSeries<TimeSpan, double>();
-                PressureSeries.Add(new LineRenderableSeriesViewModel() { DataSeries = pressSeries, AntiAliasing = true, Stroke = Colors.Red, StrokeThickness=2 });
+                PressureSeries.Add(new LineRenderableSeriesViewModel() { DataSeries = pressSeries, AntiAliasing = true, Stroke = Colors.Red, StrokeThickness = 2 });
                 pressureSeries.Add(pressureSensor.Id, pressSeries);
             }
-
-            yPressureAxis.AxisTitle = localizationService["Testing.SODBench.Pressure"] +
-                " ("+UnitsNet.UnitAbbreviationsCache.Default.GetDefaultAbbreviation(typeof(PressureUnit), (int)bench.Settings.PressureUnit)+")";
         }
 
         public void StartChart()

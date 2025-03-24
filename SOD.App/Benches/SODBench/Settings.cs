@@ -12,8 +12,8 @@ namespace SOD.App.Benches.SODBench
 	{
 		public TestSettings SelectedTestSettings { get; set; }
 		public Balloon SelectedBalloon { get; set; }
-		public PressureUnit PressureUnit { get; set; }
-		public ForceUnit TenzoUnit { get; set; }
+		public PressureUnit PressureUnit { get; set; } = PressureUnit.Bar;
+		public ForceUnit TenzoUnit { get; set; } = ForceUnit.KilogramForce;
 		public List<BalloonProperty> BalloonProperties { get; set; } = new List<BalloonProperty>();
 		public List<Property> Parameters { get; set; } = new List<Property>();
 		public Dictionary<int, List<TestSettings>> Tests { get; set; } = new Dictionary<int, List<TestSettings>>();
