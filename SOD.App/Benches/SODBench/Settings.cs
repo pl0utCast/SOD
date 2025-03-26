@@ -16,7 +16,8 @@ namespace SOD.App.Benches.SODBench
 		public ForceUnit TenzoUnit { get; set; } = ForceUnit.KilogramForce;
 		public List<BalloonProperty> BalloonProperties { get; set; } = new List<BalloonProperty>();
 		public List<Property> Parameters { get; set; } = new List<Property>();
-		public Dictionary<int, List<TestSettings>> Tests { get; set; } = new Dictionary<int, List<TestSettings>>();
+        public List<Property> ServiceParameters { get; set; } = new List<Property>();
+        public Dictionary<int, List<TestSettings>> Tests { get; set; } = new Dictionary<int, List<TestSettings>>();
 		public int? GasTemperatureSensorId { get; set; }
 		public int? LiquidTemperatureSensorId { get; set; }
 		public bool IsEnableGasTemperatureSensor { get; set; }

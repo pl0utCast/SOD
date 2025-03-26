@@ -20,6 +20,7 @@
         <converters:TranslatePrefixConverter x:Key="TranslateValvePrefixConverter"/>
         <converters:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
         <converters:ReverseBooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter"/>
+        <converters:HintConverter x:Key="HintConverter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -308,7 +309,88 @@
                     </ScrollViewer>
                 </Grid>
             </TabItem>
+            <!--Вкладка для тестовых параметров-->
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock
+                        Text="СЕРВИСНЫЕ ПАРАМЕТРЫ"
+                        Margin="0,0,20,0"
+                        FontSize="14"
+                        Foreground="#616273"
+                        FontWeight="Medium"
+                        VerticalAlignment="Center"/>
+                </TabItem.Header>
+                <controls:CustomScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock 
+                        Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                        Text="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters}"
+                        Margin="10"
+                        Opacity="0.6"
+                        Style="{StaticResource MaterialDesignHeadline5TextBlock}"/>
+                    <ItemsControl Grid.Row="1" Grid.Column="0" Margin="0 10 0 0" ItemsSource="{Binding ServiceProperties}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid VerticalAlignment="Top" Columns="3" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBox 
+                                    Margin="10 15 10 0"
+                                    FontSize="22"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                    Text="{Binding Value}" 
+                                    materialDesign:HintAssist.Hint="{Binding Name}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10">
+                        <TextBlock FontSize="20" Margin="10,0" HorizontalAlignment="Center">Биты параметров ПИД регулятора</TextBlock>
+                        <TextBlock FontSize="20" Margin="10,0" HorizontalAlignment="Center">(D30)</TextBlock>
+                        <CheckBox Margin="10,0" FontSize="20" Content="Настройка аварийного останова"/>
+                        <CheckBox Margin="10,0" FontSize="20" Content="Активация диагностики резкого падения давления"/>
+                        <CheckBox Margin="10,0" FontSize="20" Content="Резерв"/>
+                        <CheckBox Margin="10,0,0,20" FontSize="20" Content="Резерв"/>
+                        <Button
+                            Height="50"
+                            Margin="10"
+                            Content="Сброс веса 5кг"
+                            FontSize="24"
+                            Command="{Binding DropWeight_5kg}"/>
+                        <Button
+                            Height="50" 
+                            Margin="10" 
+                            Content="Сброс веса 10кг" 
+                            FontSize="24"
+                            Command="{Binding DropWeight_10kg}"/>
+                        
+                        <Button 
+                            Height="50" 
+                            Margin="10" 
+                            Content="Сброс веса 30кг" 
+                            FontSize="24"
+                            Command="{Binding DropWeight_30kg}"/>
+                        <Button 
+                            Height="50" 
+                            Margin="-40,40,10,10" 
+                            Content="Состояние контроллера" 
+                            FontSize="24"/>
+                    </StackPanel>
+                </Grid>
+                </controls:CustomScrollViewer>
+            </TabItem>
+
         </TabControl>
+        
         <StackPanel
             Grid.Row="1"
             Margin="5"

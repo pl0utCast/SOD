@@ -5,11 +5,11 @@
   "SODBenchSettings": {
     "SelectedTestSettings": {
       "Time": 30,
-      "PressureSensorId": 4,
+      "PressureSensorId": null,
       "WorkPressure": 0,
       "Deformation": 5,
       "MaxDeformation": null,
-      "IsModeAuto": false,
+      "IsModeAuto": true,
       "TenzoSensorId": 0,
       "SetPressure": {
         "Unit": "PressureUnit.Bar",
@@ -32,6 +32,29 @@
       "{\r\n  \"Id\": 0,\r\n  \"Name\": \"Сustomer\",\r\n  \"Alias\": \"customer\",\r\n  \"SerializedValue\": \"\\\"\\\"\",\r\n  \"Type\": 7\r\n}",
       "{\r\n  \"Id\": 0,\r\n  \"Name\": \"Order number\",\r\n  \"Alias\": \"order_number\",\r\n  \"SerializedValue\": \"\\\"111\\\"\",\r\n  \"Type\": 7\r\n}",
       "{\r\n  \"Id\": 0,\r\n  \"Name\": \"Due date\",\r\n  \"Alias\": \"due_date\",\r\n  \"SerializedValue\": \"\\\"11222\\\"\",\r\n  \"Type\": 7\r\n}"
+    ],
+    "ServiceParameters": [
+      "{\r\n  \"Id\": 0,\r\n  \"Name\": \"PressureVelocity\",\r\n  \"Alias\": \"pressure_velocity\",\r\n  \"SerializedValue\": \"\\\"10.000\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 1,\r\n  \"Name\": \"HydraulicPressureCoef\",\r\n  \"Alias\": \"hydraulic_pressure_coef\",\r\n  \"SerializedValue\": \"\\\"75.000\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 2,\r\n  \"Name\": \"MaxAllowablePressure\",\r\n  \"Alias\": \"max_allowable_pressure\",\r\n  \"SerializedValue\": \"\\\"370.0\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 3,\r\n  \"Name\": \"ThrottleActivationPercentage\",\r\n  \"Alias\": \"throttle_activation_percentage\",\r\n  \"SerializedValue\": \"\\\"90.0\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 4,\r\n  \"Name\": \"ThrottleDeactivationPercentage\",\r\n  \"Alias\": \"throttle_deactivation_percentage\",\r\n  \"SerializedValue\": \"\\\"80.0\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 5,\r\n  \"Name\": \"OverpressureAllowancePercentage\",\r\n  \"Alias\": \"overpressure_allowance_percentage\",\r\n  \"SerializedValue\": \"\\\"1.0\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 6,\r\n  \"Name\": \"NominalPressureValue\",\r\n  \"Alias\": \"nominal_pressure_value\",\r\n  \"SerializedValue\": \"\\\"600.0\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 7,\r\n  \"Name\": \"Reserve1\",\r\n  \"Alias\": \"reserve1\",\r\n  \"SerializedValue\": \"\\\"100.0\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 8,\r\n  \"Name\": \"Reserve2\",\r\n  \"Alias\": \"reserve2\",\r\n  \"SerializedValue\": \"\\\"100.0\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 9,\r\n  \"Name\": \"VesselEmergencyLevel_5kg\",\r\n  \"Alias\": \"vessel_emergency_level_5kg\",\r\n  \"SerializedValue\": \"\\\"4500.0\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 10,\r\n  \"Name\": \"VesselEmergencyLevel_10kg\",\r\n  \"Alias\": \"vessel_emergency_level_10kg\",\r\n  \"SerializedValue\": \"\\\"9000.0\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 11,\r\n  \"Name\": \"VesselEmergencyLevel_30kg\",\r\n  \"Alias\": \"vessel_emergency_level_30kg\",\r\n  \"SerializedValue\": \"\\\"28000.0\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 12,\r\n  \"Name\": \"KpPID\",\r\n  \"Alias\": \"kp_pid\",\r\n  \"SerializedValue\": \"\\\"0.00\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 13,\r\n  \"Name\": \"KiPID\",\r\n  \"Alias\": \"ki_pid\",\r\n  \"SerializedValue\": \"\\\"3.00\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 14,\r\n  \"Name\": \"KdPID\",\r\n  \"Alias\": \"kd_pid\",\r\n  \"SerializedValue\": \"\\\"0.00\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 15,\r\n  \"Name\": \"dwePID\",\r\n  \"Alias\": \"dwe_pid\",\r\n  \"SerializedValue\": \"\\\"0.0\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 16,\r\n  \"Name\": \"tfPID\",\r\n  \"Alias\": \"tf_pid\",\r\n  \"SerializedValue\": \"\\\"0.3\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 17,\r\n  \"Name\": \"MaxOutputConst\",\r\n  \"Alias\": \"max_output_const\",\r\n  \"SerializedValue\": \"\\\"100.0\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 18,\r\n  \"Name\": \"ErrorZonePID\",\r\n  \"Alias\": \"error_zone_pid\",\r\n  \"SerializedValue\": \"\\\"0.0\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 19,\r\n  \"Name\": \"MinOutputConst\",\r\n  \"Alias\": \"min_output_const\",\r\n  \"SerializedValue\": \"\\\"0.0\\\"\",\r\n  \"Type\": 7\r\n}",
+      "{\r\n  \"Id\": 20,\r\n  \"Name\": \"CyclePID\",\r\n  \"Alias\": \"cycle_pid\",\r\n  \"SerializedValue\": \"\\\"2.0\\\"\",\r\n  \"Type\": 7\r\n}"
     ],
     "Tests": {
       "1": [
@@ -104,40 +127,15 @@
         }
       ]
     },
-    "GasTemperatureSensorId": 12,
-    "LiquidTemperatureSensorId": 13,
+    "GasTemperatureSensorId": null,
+    "LiquidTemperatureSensorId": null,
     "IsEnableGasTemperatureSensor": true,
     "IsEnableLiquidTemperatureSensor": true,
     "ManualLocation": false,
     "AutoRange": false,
-    "Sensors": {
-      "0": true,
-      "1": true,
-      "2": true,
-      "3": true,
-      "4": true,
-      "5": false,
-      "6": false,
-      "7": false,
-      "8": false,
-      "9": false,
-      "10": false,
-      "11": false,
-      "12": false,
-      "13": false,
-      "14": true,
-      "15": true,
-      "16": true,
-      "17": true,
-      "18": true,
-      "19": true
-    },
-    "DevicesUnits": {
-      "0": true,
-      "1": true,
-      "2": true
-    },
-    "ReportPath": "D:\\Source codes\\SOD\\SOD.View\\bin\\Debug\\net9.0-windows\\reports_template\\report_template_sod.frx"
+    "Sensors": {},
+    "DevicesUnits": {},
+    "ReportPath": "C:\\Users\\boriskin\\Source\\Repos\\SOD\\SOD.View\\bin\\Debug\\net9.0-windows\\reports_template\\report_template_sod.frx"
   },
   "TestBenchSettings": {
     "OwnerDeviceId": 0,
@@ -153,7 +151,7 @@
       "en-US",
       "ru-RU"
     ],
-    "CurrentLang": "en-US"
+    "CurrentLang": "ru-RU"
   },
   "UserService": {
     "SetBackground": "White",

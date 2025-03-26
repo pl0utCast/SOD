@@ -162,9 +162,9 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <CheckBox
-                            Content="{Binding Name}"
-                            FontSize="20"
-                            IsChecked="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}" />
+                                    Content="{Binding Name}"
+                                    FontSize="20"
+                                    IsChecked="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

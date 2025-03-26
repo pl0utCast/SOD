@@ -23,13 +23,20 @@ using SOD.Core.Balloons;
 using SOD.Core.Balloons.Properties;
 using SOD.Core.Sensor.TenzoSensor;
 using SOD.Core;
+using SOD.Core.Device.Modbus;
+using System.Windows.Media.Media3D;
+using SOD.Core.Device;
 
 namespace SOD.ViewModels.Testing.SODBench
 {
 	public class TestParametersViewModel : ReactiveObject, IActivatableViewModel
 	{
-		private Dictionary<string, IValueViewModel> parameters = new Dictionary<string, IValueViewModel>();
-		public TestParametersViewModel(INavigationService navigationService,
+        private IDevice device;
+        private Dictionary<string, IValueViewModel> parameters = new Dictionary<string, IValueViewModel>();
+        private Dictionary<string, IValueViewModel> serviceParameters = new Dictionary<string, IValueViewModel>();
+
+        private ushort Drop_Weight = 7000;
+        public TestParametersViewModel(INavigationService navigationService,
 									   ITestBenchService testBenchService,
 									   ITestingService testingService,
 									   ISensorService sensorService,
@@ -40,7 +47,7 @@ namespace SOD.ViewModels.Testing.SODBench
 		{
 			var bench = (App.Benches.SODBench.Bench)testBenchService.GetTestBench();
 			var testSettings = bench.Settings.SelectedTestSettings;
-			
+
 			Standarts = testingService.GetAllStandarts().ToList();
 			SelectedStandart = Standarts.SingleOrDefault(u => u.Id == bench.Settings.SelectedBalloon?.StandartId);
 
@@ -67,7 +74,7 @@ namespace SOD.ViewModels.Testing.SODBench
 			TenzoUnits = new Force().GetUnitTypeInfo();
 			SelectedTenzoUnit = TenzoUnits.SingleOrDefault(u => u.UnitType.Equals(bench.Settings.TenzoUnit));
 
-			this.WhenAnyValue(x => x.SelectedBalloon).Subscribe(sb =>
+            this.WhenAnyValue(x => x.SelectedBalloon).Subscribe(sb =>
 			{
 				IsKPG4 = sb?.BalloonTypes == BalloonTypes.KPG4;
 				Deformation = IsKPG4 ? 10 : 5;
@@ -90,7 +97,12 @@ namespace SOD.ViewModels.Testing.SODBench
 				parameters.Add(param.Alias, param.GetValueViewModel());
 			}
 
-			Cancel = ReactiveCommand.Create(() =>
+            foreach (var param in bench.Settings.ServiceParameters)
+            {
+                serviceParameters.Add(param.Alias, param.GetValueViewModel());
+            }
+
+            Cancel = ReactiveCommand.Create(() =>
 			{
 				navigationService.GoBack();
 			});
@@ -102,8 +114,21 @@ namespace SOD.ViewModels.Testing.SODBench
 			var canApply = this.WhenAnyValue(x => x.SelectedStandart, x => x.IsConfirmed,
 				(selectedSt, isConf) => selectedSt != null && isConf);
 #endif
+			DropWeight_5kg = DropWeight(5);
+			DropWeight_10kg = DropWeight(10);
+			DropWeight_30kg = DropWeight(30);
 
-			Apply = ReactiveCommand.CreateFromTask(async () =>
+            ReactiveCommand<Unit, Unit> DropWeight(ushort weight){
+				return ReactiveCommand.CreateFromTask(async () =>
+				{
+                    if (device is ModbusTcpDevice modbusTcpDevice && device.GetStatus() == DeviceStatus.Online)
+                    {
+                        await modbusTcpDevice.WriteHoldingRegistersAsync(Drop_Weight, new ushort[] { weight });
+                    }
+				});
+			}
+
+            Apply = ReactiveCommand.CreateFromTask(async () =>
 			{
 				bench.Settings.PressureUnit = (PressureUnit)SelectedPressureUnit?.UnitType;
 				bench.Settings.TenzoUnit = (ForceUnit)SelectedTenzoUnit?.UnitType;
@@ -111,11 +136,12 @@ namespace SOD.ViewModels.Testing.SODBench
 				bench.Settings.SelectedBalloon.StandartId = SelectedStandart.Id;
 				bench.Settings.SelectedBalloon.BalloonVolume = BalloonVolume;
 				bench.Settings.BalloonProperties = BalloonProperties.ToList();
-
+				
 				if (!IsModeAuto)
 				{
 					testSettings.TenzoSensorId = TenzoSensor.Id;
 				}
+				
 				testSettings.SetPressure = (Pressure)UnitsHelper.GetValue(WorkPressure.Value, WorkPressure.SelectedUnitInfo);
 				testSettings.Deformation = Deformation;
 				var t = int.TryParse(MaxDeformation, out var value);
@@ -146,7 +172,16 @@ namespace SOD.ViewModels.Testing.SODBench
 					}
 				}
 
-				bench.SaveSettings();
+                foreach (var param in serviceParameters)
+                {
+                    var serviceParameter = bench.Settings.ServiceParameters.SingleOrDefault(p => p.Alias == param.Key);
+                    if (serviceParameter != null)
+                    {
+                        serviceParameter.Value = param.Value.GetValue();
+                    }
+                }
+
+                bench.SaveSettings();
 
 				bus.Publish(new App.Benches.SODBench.Messages.SelectedTestMessage());
 
@@ -155,8 +190,16 @@ namespace SOD.ViewModels.Testing.SODBench
 
 		}
 
-		public IEnumerable<IValueViewModel> Properties => parameters.Select(kv => kv.Value);
-		public IReadOnlyList<UnitTypeInfo> PressureUnits { get; set; }
+		public ReactiveCommand<Unit, Unit> DropWeight { get; set; }
+		[Reactive]
+        public ReactiveCommand<Unit, Unit> DropWeight_5kg { get; set; }
+        [Reactive]
+        public ReactiveCommand<Unit, Unit> DropWeight_10kg { get; set; }
+        [Reactive]
+        public ReactiveCommand<Unit, Unit> DropWeight_30kg { get; set; }
+        public IEnumerable<IValueViewModel> Properties => parameters.Select(kv => kv.Value);
+        public IEnumerable<IValueViewModel> ServiceProperties => serviceParameters.Select(kv => kv.Value);
+        public IReadOnlyList<UnitTypeInfo> PressureUnits { get; set; }
 		[Reactive]
 		public UnitTypeInfo SelectedPressureUnit { get; set; }
 		public IReadOnlyList<UnitTypeInfo> TenzoUnits { get; set; }
@@ -194,6 +237,6 @@ namespace SOD.ViewModels.Testing.SODBench
 		public ISensor PressureSensor { get; set; }
 		public ObservableCollection<ISensor> TenzoSensors {  get; set; } = new ObservableCollection<ISensor> { };
 		[Reactive]
-		public ISensor TenzoSensor {  get; set; }
+		public ISensor TenzoSensor { get; set; }
 	}
 }
