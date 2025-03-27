@@ -19,4 +19,25 @@ namespace SOD.View.Converters
         
         {}
     }
+
+    public class MediumTypeConverter3Post : EnumConverterTemplate<MediumType3Post>
+    {
+        public MediumTypeConverter3Post() : base(mt =>
+        {
+            switch (mt)
+            {
+                case MediumType3Post.Liquid:
+                    return LocalizationExtension.LocaliztionService["MediumType3Post.Water"];
+                case MediumType3Post.LiquidHigh:
+                    return LocalizationExtension.LocaliztionService["MediumType3Post.WaterHigh"];
+                case MediumType3Post.Gas:
+                    return LocalizationExtension.LocaliztionService["MediumType3Post.Air"];
+                case MediumType3Post.GasHigh:
+                    return LocalizationExtension.LocaliztionService["MediumType3Post.AirHigh"];
+                default: return null;
+            }
+        })
+
+        { }
+    }
 }

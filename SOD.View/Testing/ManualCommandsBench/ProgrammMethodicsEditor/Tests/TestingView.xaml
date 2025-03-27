@@ -1,0 +1,44 @@
+﻿<UserControl
+    x:Class="SOD.View.Testing.ManualCommandsBench.ProgrammMethodicsEditor.Tests.TestingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SOD.View.Testing.ManualCommandsBench.ProgrammMethodicsEditor.Tests"
+    xmlns:lc="clr-namespace:SOD.LocalizationService;assembly=SOD.LocalizationService"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:SOD.ViewModels.Testing.ManualCommandsBench.ProgrammMethodicsEditor.Tests;assembly=SOD.ViewModels"
+    mc:Ignorable="d">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock FontSize="24" Text="{Binding Name}" />
+            <StackPanel Margin="10" Orientation="Horizontal">
+                <TextBlock 
+                    Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
+                    Text="{lc:Localization Testing.ManualCommandsBench.NoStandart}" />
+                <ToggleButton Margin="10,0,0,0" IsChecked="{Binding NoStandart}" />
+            </StackPanel>
+            <ContentPresenter Content="{Binding ControlSettings}">
+                <ContentPresenter.Resources>
+                    <Style TargetType="ContentPresenter">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=StandartSelector, Path=Visibility}" Value="Collapsed">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=StandartSelector, Path=Visibility}" Value="Visible">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+
+                    </Style>
+                    <!--<DataTemplate DataType="{x:Type vm:StrengthTestViewModel}">
+                        <local:StrenghtTestView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:LeakageTestViewModel}">
+                        <local:LeakageTestView />
+                    </DataTemplate>-->
+                </ContentPresenter.Resources>
+            </ContentPresenter>
+        </StackPanel>
+    </Grid>
+</UserControl>

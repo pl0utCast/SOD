@@ -34,6 +34,8 @@ using System.Reflection;
 using MemBus.Support;
 using System.Net;
 using System.Drawing.Text;
+using SOD.App.Testing.Programms;
+using SOD.ViewModels.Testing.ManualCommandsBench;
 
 namespace SOD.ViewModels.Testing.SODBench
 {
@@ -284,5 +286,7 @@ namespace SOD.ViewModels.Testing.SODBench
         public ObservableCollection<ISensor> TenzoSensors { get; set; } = new ObservableCollection<ISensor> { };
         [Reactive]
         public ISensor TenzoSensor { get; set; }
+        [Reactive]
+        public SelectProgrammMethodicsViewModel ProgrammMethodics { get; set; }
     }
 }

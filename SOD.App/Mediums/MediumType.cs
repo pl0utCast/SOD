@@ -9,4 +9,12 @@ namespace SOD.App.Mediums
         Liquid,
         Gas
     }
+
+    public enum MediumType3Post
+    {
+        Liquid,
+        LiquidHigh,
+        Gas,
+        GasHigh
+    }
 }

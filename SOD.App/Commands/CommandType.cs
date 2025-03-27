@@ -13,6 +13,7 @@ namespace SOD.App.Commands
         SetPressure,
         Hold,
         Registartion,
-        PressureRelease
+        PressureRelease,
+        Purge
     }
 }
