@@ -44,21 +44,21 @@ namespace SOD.App.Commands
             switch (commandType)
             {
                 case CommandType.TestMedium:
-                    return LocalizationExtension.LocaliztionService["Testing.MultiPostBench.TestMedium"];
+                    return LocalizationExtension.LocaliztionService["Testing.ManualCommandsBench.TestMedium"];
                 case CommandType.Filling:
-                    return LocalizationExtension.LocaliztionService["Testing.MultiPostBench.Filling"];
+                    return LocalizationExtension.LocaliztionService["Testing.ManualCommandsBench.Filling"];
                 case CommandType.PressurizedCavity:
-                    return LocalizationExtension.LocaliztionService["Testing.MultiPostBench.PressurizedCavity"];
+                    return LocalizationExtension.LocaliztionService["Testing.ManualCommandsBench.PressurizedCavity"];
                 case CommandType.LeakControlCavity:
-                    return LocalizationExtension.LocaliztionService["Testing.MultiPostBench.LeakControlCavity"];
+                    return LocalizationExtension.LocaliztionService["Testing.ManualCommandsBench.LeakControlCavity"];
                 case CommandType.SetPressure:
-                    return LocalizationExtension.LocaliztionService["Testing.MultiPostBench.SetPressure"];
+                    return LocalizationExtension.LocaliztionService["Testing.ManualCommandsBench.SetPressure"];
                 case CommandType.Hold:
-                    return LocalizationExtension.LocaliztionService["Testing.MultiPostBench.Hold"];
+                    return LocalizationExtension.LocaliztionService["Testing.ManualCommandsBench.Hold"];
                 case CommandType.Registartion:
-                    return LocalizationExtension.LocaliztionService["Testing.MultiPostBench.Registration"];
+                    return LocalizationExtension.LocaliztionService["Testing.ManualCommandsBench.Registration"];
                 case CommandType.PressureRelease:
-                    return LocalizationExtension.LocaliztionService["Testing.MultiPostBench.PressureRelease"];
+                    return LocalizationExtension.LocaliztionService["Testing.ManualCommandsBench.PressureRelease"];
                 default:
                     return commandType.ToString();
             }

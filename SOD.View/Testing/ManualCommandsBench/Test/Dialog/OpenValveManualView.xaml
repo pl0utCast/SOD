@@ -1,0 +1,34 @@
+﻿<UserControl
+    x:Class="SOD.View.Testing.ManualCommandsBench.Test.Dialog.OpenValveManualView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SOD.View.Testing.ManualCommandsBench.Test.Dialog"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:lc="clr-namespace:SOD.LocalizationService;assembly=SOD.LocalizationService"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="560"
+    mc:Ignorable="d">
+    <materialDesign:Card Padding="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock
+                HorizontalAlignment="Center"
+                Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                Text="{lc:Localization Testing.ManualCommandsBench.OpenValveGate}"
+                TextAlignment="Center"
+                TextWrapping="WrapWithOverflow"/>
+            <Button
+                Grid.Row="1"
+                Height="50"
+                Margin="0,10,0,0"
+                HorizontalAlignment="Center"
+                Command="{Binding Apply}"
+                Content="{lc:Localization Testing.ManualCommandsBench.Confirm}"
+                FontSize="24"/>
+        </Grid>
+    </materialDesign:Card>
+</UserControl>

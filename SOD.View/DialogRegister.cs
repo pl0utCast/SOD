@@ -23,6 +23,9 @@ namespace SOD.View
             dialogService.RegisterDialog("EditUser", new Settings.Users.Dialogs.EditUserView());
             dialogService.RegisterDialog("DeleteUser", new Settings.Users.Dialogs.DeleteUserView());
 
+            dialogService.RegisterDialog("DeleteProgrammMethodics", new Testing.ManualCommandsBench.Dialog.DeleteProgrammMethodicsView());
+            dialogService.RegisterDialog("AddCommand", new Testing.ManualCommandsBench.ProgrammMethodicsEditor.Dialogs.AddCommandDialog());
+
             dialogService.RegisterDialog("DeleteReportDialog", new Reports.Dialogs.DeleteReportsDialogView());
             dialogService.RegisterDialog("ExportReportDialog", new Reports.Dialogs.ExportReportDialogView());
 

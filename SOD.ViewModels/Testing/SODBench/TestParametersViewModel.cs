@@ -23,6 +23,8 @@ using SOD.Core.Balloons;
 using SOD.Core.Balloons.Properties;
 using SOD.Core.Sensor.TenzoSensor;
 using SOD.Core;
+using SOD.App.Testing.Programms;
+using SOD.ViewModels.Testing.ManualCommandsBench;
 
 namespace SOD.ViewModels.Testing.SODBench
 {
@@ -67,7 +69,11 @@ namespace SOD.ViewModels.Testing.SODBench
 			TenzoUnits = new Force().GetUnitTypeInfo();
 			SelectedTenzoUnit = TenzoUnits.SingleOrDefault(u => u.UnitType.Equals(bench.Settings.TenzoUnit));
 
-			this.WhenAnyValue(x => x.SelectedBalloon).Subscribe(sb =>
+    //        ProgrammMethodics = new SelectProgrammMethodicsViewModel(bus, testingService, navigationService, /*valveService,*/
+				//dialogService, testBenchService, localizationService);
+    //        ProgrammMethodics.Activator.Activate();
+
+            this.WhenAnyValue(x => x.SelectedBalloon).Subscribe(sb =>
 			{
 				IsKPG4 = sb?.BalloonTypes == BalloonTypes.KPG4;
 				Deformation = IsKPG4 ? 10 : 5;
@@ -95,13 +101,7 @@ namespace SOD.ViewModels.Testing.SODBench
 				navigationService.GoBack();
 			});
 
-#if DEBUG
-			var canApply = this.WhenAny(x => x.SelectedStandart,
-				(selectedSt) => selectedSt != null);
-#else
-			var canApply = this.WhenAnyValue(x => x.SelectedStandart, x => x.IsConfirmed,
-				(selectedSt, isConf) => selectedSt != null && isConf);
-#endif
+			var canApply = this.WhenAny(x => x.SelectedStandart, (selectedSt) => selectedSt != null);
 
 			Apply = ReactiveCommand.CreateFromTask(async () =>
 			{
@@ -195,5 +195,7 @@ namespace SOD.ViewModels.Testing.SODBench
 		public ObservableCollection<ISensor> TenzoSensors {  get; set; } = new ObservableCollection<ISensor> { };
 		[Reactive]
 		public ISensor TenzoSensor {  get; set; }
-	}
+        [Reactive]
+        public SelectProgrammMethodicsViewModel ProgrammMethodics { get; set; }
+    }
 }
