@@ -312,7 +312,7 @@
             <TabItem>
                 <TabItem.Header>
                     <TextBlock
-                        Text="СЕРВИСНЫЕ ПАРАМЕТРЫ"
+                        Text="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.ServiceParams}"
                         Margin="0,0,20,0"
                         FontSize="14"
                         Foreground="#616273"
@@ -334,132 +334,131 @@
                             <TextBox 
                                 Text="{Binding ServiceProperties.PressureVelocity}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="Скорость набора давления"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.PressureVelocity}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.HydraulicPressureCoef}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="Коэффициент мультипликации гидро"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.HydraulicPressureCoef}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.MaxAllowablePressure}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="Допустимое значение датчика, бар"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.MaxAllowablePressure}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.ThrottleActivationPercentage}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="%включения дросселирования"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.ThrottleActivationPercentage}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.ThrottleDeactivationPercentage}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="% отключения дросселирвоания"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.ThrottleDeactivationPercentage}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.OverpressureAllowancePercentage}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="% превыш. макс. допуст. давления"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.OverpressureAllowancePercentage}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.NominalPressureValue}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="Номин. значение датчика давления, бар"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.NominalPressureValue}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.Reserve1}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="Резерв 2"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.Reserve1}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.Reserve2}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="Резерв 3"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.Reserve2}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.VesselEmergencyLevel_5kg}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="Аварийный уровень в колбе 5 кг"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.VesselEmergencyLevel_5kg}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.VesselEmergencyLevel_10kg}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="Аварийный уровень в колбе 10 кг"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.VesselEmergencyLevel_10kg}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.VesselEmergencyLevel_30kg}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="Аварийный уровень в колбе 30 кг"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.VesselEmergencyLevel_30kg}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.KpPID}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="Kp ПИД регулятора KP1"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.KpPID}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.KiPID}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="Ki ПИД регулятора KP1"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.KiPID}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.KdPID}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="Kd ПИД регулятора KP1"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.KdPID}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.dwePID}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="dwe ПИД регулятор KP1"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.dwePID}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.tfPID}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="tf ПИД регулятор KP1"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.tfPID}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.MaxOutputConst}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="Максимальная выходная константа"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.MaxOutputConst}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.ErrorZonePID}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="Зона ошибок ПИД регулятора КР1"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.ErrorZonePID}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.MinOutputConst}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="Минимальная выходная константа"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.MinOutputConst}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                             <TextBox 
                                 Text="{Binding ServiceProperties.CyclePID}" 
                                 Margin="10 15 10 0"
-                                materialDesign:HintAssist.Hint="Цикл ПИД регулятора КР1"
+                                materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters.CyclePID}"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 FontSize="22"/>
                         </ItemsControl>
-
-
+                    
                         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10">
                         <Button
                             Height="50"

@@ -24,7 +24,6 @@
 		public string Pressure { get; set; } = "Испытательное давление баллона";
 		public string BalloonValue { get; set; } = "Объем баллона, л";
 		public string Parameters { get; set; } = "Параметры баллона";
-
-		public string ServiceParameters { get; set; } = "Сервисные параметры";
+		public ServiceParameters ServiceParameters { get; set; } = new ServiceParameters();
 	}
 }

@@ -153,7 +153,6 @@ namespace SOD.ViewModels.Testing.SODBench
 			{
 				navigationService.GoBack();
 			});
-			this.Selected
 #if DEBUG
 			var canApply = this.WhenAny(x => x.SelectedStandart,
 				(selectedSt) => selectedSt != null);
