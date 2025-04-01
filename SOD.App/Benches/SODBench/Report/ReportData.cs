@@ -5,6 +5,7 @@ using SOD.Core.Reports;
 using SOD.Core.Sensor;
 using SOD.LocalizationService;
 using System.Data;
+using System.Globalization;
 using UnitsNet;
 
 namespace SOD.App.Benches.SODBench.Report

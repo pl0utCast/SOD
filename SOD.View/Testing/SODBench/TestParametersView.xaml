@@ -20,7 +20,6 @@
         <converters:TranslatePrefixConverter x:Key="TranslateValvePrefixConverter"/>
         <converters:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
         <converters:ReverseBooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter"/>
-        <converters:HintConverter x:Key="HintConverter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -321,68 +320,170 @@
                         VerticalAlignment="Center"/>
                 </TabItem.Header>
                 <controls:CustomScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock 
-                        Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                        Text="{lc:Localization Testing.SODBench.TestSettings.ServiceParameters}"
-                        Margin="10"
-                        Opacity="0.6"
-                        Style="{StaticResource MaterialDesignHeadline5TextBlock}"/>
-                    <ItemsControl Grid.Row="1" Grid.Column="0" Margin="0 10 0 0" ItemsSource="{Binding ServiceProperties}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid VerticalAlignment="Top" Columns="3" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBox 
-                                    Margin="10 15 10 0"
-                                    FontSize="22"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                    Text="{Binding Value}" 
-                                    materialDesign:HintAssist.Hint="{Binding Name}"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10">
-                        <TextBlock FontSize="20" Margin="10,0" HorizontalAlignment="Center">Биты параметров ПИД регулятора</TextBlock>
-                        <TextBlock FontSize="20" Margin="10,0" HorizontalAlignment="Center">(D30)</TextBlock>
-                        <CheckBox Margin="10,0" FontSize="20" Content="Настройка аварийного останова"/>
-                        <CheckBox Margin="10,0" FontSize="20" Content="Активация диагностики резкого падения давления"/>
-                        <CheckBox Margin="10,0" FontSize="20" Content="Резерв"/>
-                        <CheckBox Margin="10,0,0,20" FontSize="20" Content="Резерв"/>
+                <Grid Margin="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ItemsControl ItemsSource="{Binding ServiceProperties}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid VerticalAlignment="Top" Columns="3" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.PressureVelocity}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="Скорость набора давления"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.HydraulicPressureCoef}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="Коэффициент мультипликации гидро"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.MaxAllowablePressure}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="Допустимое значение датчика, бар"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.ThrottleActivationPercentage}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="%включения дросселирования"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.ThrottleDeactivationPercentage}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="% отключения дросселирвоания"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.OverpressureAllowancePercentage}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="% превыш. макс. допуст. давления"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.NominalPressureValue}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="Номин. значение датчика давления, бар"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.Reserve1}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="Резерв 2"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.Reserve2}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="Резерв 3"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.VesselEmergencyLevel_5kg}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="Аварийный уровень в колбе 5 кг"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.VesselEmergencyLevel_10kg}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="Аварийный уровень в колбе 10 кг"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.VesselEmergencyLevel_30kg}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="Аварийный уровень в колбе 30 кг"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.KpPID}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="Kp ПИД регулятора KP1"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.KiPID}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="Ki ПИД регулятора KP1"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.KdPID}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="Kd ПИД регулятора KP1"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.dwePID}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="dwe ПИД регулятор KP1"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.tfPID}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="tf ПИД регулятор KP1"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.MaxOutputConst}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="Максимальная выходная константа"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.ErrorZonePID}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="Зона ошибок ПИД регулятора КР1"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.MinOutputConst}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="Минимальная выходная константа"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                            <TextBox 
+                                Text="{Binding ServiceProperties.CyclePID}" 
+                                Margin="10 15 10 0"
+                                materialDesign:HintAssist.Hint="Цикл ПИД регулятора КР1"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                FontSize="22"/>
+                        </ItemsControl>
+
+
+                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10">
                         <Button
                             Height="50"
                             Margin="10"
                             Content="Сброс веса 5кг"
                             FontSize="24"
                             Command="{Binding DropWeight_5kg}"/>
-                        <Button
+                            <Button
                             Height="50" 
                             Margin="10" 
                             Content="Сброс веса 10кг" 
                             FontSize="24"
                             Command="{Binding DropWeight_10kg}"/>
-                        
-                        <Button 
+                            <Button 
                             Height="50" 
                             Margin="10" 
-                            Content="Сброс веса 30кг" 
+                            Content="Сброс веса 30кг"
                             FontSize="24"
                             Command="{Binding DropWeight_30kg}"/>
                         <Button 
                             Height="50" 
-                            Margin="-40,40,10,10" 
-                            Content="Состояние контроллера" 
+                            Margin="-40,220,10,10"
+                            Command="{Binding ApplyController}"
+                            Content="Запись параметров"
                             FontSize="24"/>
                     </StackPanel>
                 </Grid>
