@@ -33,29 +33,36 @@
       "{\r\n  \"Id\": 0,\r\n  \"Name\": \"Order number\",\r\n  \"Alias\": \"order_number\",\r\n  \"SerializedValue\": \"\\\"111\\\"\",\r\n  \"Type\": 7\r\n}",
       "{\r\n  \"Id\": 0,\r\n  \"Name\": \"Due date\",\r\n  \"Alias\": \"due_date\",\r\n  \"SerializedValue\": \"\\\"11222\\\"\",\r\n  \"Type\": 7\r\n}"
     ],
-    "ServiceParameters": [
-      "{\r\n  \"Id\": 0,\r\n  \"Name\": \"PressureVelocity\",\r\n  \"Alias\": \"pressure_velocity\",\r\n  \"SerializedValue\": \"\\\"10.000\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 1,\r\n  \"Name\": \"HydraulicPressureCoef\",\r\n  \"Alias\": \"hydraulic_pressure_coef\",\r\n  \"SerializedValue\": \"\\\"75.000\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 2,\r\n  \"Name\": \"MaxAllowablePressure\",\r\n  \"Alias\": \"max_allowable_pressure\",\r\n  \"SerializedValue\": \"\\\"370.0\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 3,\r\n  \"Name\": \"ThrottleActivationPercentage\",\r\n  \"Alias\": \"throttle_activation_percentage\",\r\n  \"SerializedValue\": \"\\\"90.0\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 4,\r\n  \"Name\": \"ThrottleDeactivationPercentage\",\r\n  \"Alias\": \"throttle_deactivation_percentage\",\r\n  \"SerializedValue\": \"\\\"80.0\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 5,\r\n  \"Name\": \"OverpressureAllowancePercentage\",\r\n  \"Alias\": \"overpressure_allowance_percentage\",\r\n  \"SerializedValue\": \"\\\"1.0\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 6,\r\n  \"Name\": \"NominalPressureValue\",\r\n  \"Alias\": \"nominal_pressure_value\",\r\n  \"SerializedValue\": \"\\\"600.0\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 7,\r\n  \"Name\": \"Reserve1\",\r\n  \"Alias\": \"reserve1\",\r\n  \"SerializedValue\": \"\\\"100.0\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 8,\r\n  \"Name\": \"Reserve2\",\r\n  \"Alias\": \"reserve2\",\r\n  \"SerializedValue\": \"\\\"100.0\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 9,\r\n  \"Name\": \"VesselEmergencyLevel_5kg\",\r\n  \"Alias\": \"vessel_emergency_level_5kg\",\r\n  \"SerializedValue\": \"\\\"4500.0\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 10,\r\n  \"Name\": \"VesselEmergencyLevel_10kg\",\r\n  \"Alias\": \"vessel_emergency_level_10kg\",\r\n  \"SerializedValue\": \"\\\"9000.0\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 11,\r\n  \"Name\": \"VesselEmergencyLevel_30kg\",\r\n  \"Alias\": \"vessel_emergency_level_30kg\",\r\n  \"SerializedValue\": \"\\\"28000.0\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 12,\r\n  \"Name\": \"KpPID\",\r\n  \"Alias\": \"kp_pid\",\r\n  \"SerializedValue\": \"\\\"0.00\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 13,\r\n  \"Name\": \"KiPID\",\r\n  \"Alias\": \"ki_pid\",\r\n  \"SerializedValue\": \"\\\"3.00\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 14,\r\n  \"Name\": \"KdPID\",\r\n  \"Alias\": \"kd_pid\",\r\n  \"SerializedValue\": \"\\\"0.00\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 15,\r\n  \"Name\": \"dwePID\",\r\n  \"Alias\": \"dwe_pid\",\r\n  \"SerializedValue\": \"\\\"0.0\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 16,\r\n  \"Name\": \"tfPID\",\r\n  \"Alias\": \"tf_pid\",\r\n  \"SerializedValue\": \"\\\"0.3\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 17,\r\n  \"Name\": \"MaxOutputConst\",\r\n  \"Alias\": \"max_output_const\",\r\n  \"SerializedValue\": \"\\\"100.0\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 18,\r\n  \"Name\": \"ErrorZonePID\",\r\n  \"Alias\": \"error_zone_pid\",\r\n  \"SerializedValue\": \"\\\"0.0\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 19,\r\n  \"Name\": \"MinOutputConst\",\r\n  \"Alias\": \"min_output_const\",\r\n  \"SerializedValue\": \"\\\"0.0\\\"\",\r\n  \"Type\": 7\r\n}",
-      "{\r\n  \"Id\": 20,\r\n  \"Name\": \"CyclePID\",\r\n  \"Alias\": \"cycle_pid\",\r\n  \"SerializedValue\": \"\\\"2.0\\\"\",\r\n  \"Type\": 7\r\n}"
-    ],
+    "TestBenchSettings": {
+      "OwnerDeviceId": 0,
+      "PressureClampSensorId": 0,
+      "PressureSensorId": 0,
+      "AmbientTemperatureSensorId": 0,
+      "Parameters": [],
+      "PressureUnit": 0,
+      "LeakageUnit": 0,
+      "PressureVelocity": 11.0,
+      "HydraulicPressureCoef": 75.0,
+      "MaxAllowablePressure": 370.0,
+      "ThrottleActivationPercentage": 90.0,
+      "ThrottleDeactivationPercentage": 80.0,
+      "OverpressureAllowancePercentage": 1.0,
+      "NominalPressureValue": 600.0,
+      "Reserve1": 100.0,
+      "Reserve2": 100.0,
+      "VesselEmergencyLevel_5kg": 4500.0,
+      "VesselEmergencyLevel_10kg": 9000.0,
+      "VesselEmergencyLevel_30kg": 28000.0,
+      "KpPID": 0.0,
+      "KiPID": 3.0,
+      "KdPID": 0.0,
+      "dwePID": 0.0,
+      "tfPID": 0.3,
+      "MaxOutputConst": 100.0,
+      "ErrorZonePID": 0.0,
+      "MinOutputConst": 0.0,
+      "CyclePID": 2.0
+    },
     "Tests": {
       "1": [
         {
@@ -136,15 +143,6 @@
     "Sensors": {},
     "DevicesUnits": {},
     "ReportPath": "C:\\Users\\boriskin\\Source\\Repos\\SOD\\SOD.View\\bin\\Debug\\net9.0-windows\\reports_template\\report_template_sod.frx"
-  },
-  "TestBenchSettings": {
-    "OwnerDeviceId": 0,
-    "PressureClampSensorId": 1,
-    "PressuriseSensorId": 0,
-    "AmbientTemparatureSensorId": 15,
-    "Parameters": [],
-    "PressureUnit": 2,
-    "LeakageUnit": 8
   },
   "LocalizationService": {
     "Langs": [

@@ -127,27 +127,27 @@ namespace SOD.ViewModels.Testing.SODBench
 			}
 
 			//Чтение сервисных параметров
-			serviceParameters.PressureVelocity = bench.Settings.ServiceParameters.PressureVelocity;
-            serviceParameters.HydraulicPressureCoef = bench.Settings.ServiceParameters.HydraulicPressureCoef;
-            serviceParameters.MaxAllowablePressure = bench.Settings.ServiceParameters.MaxAllowablePressure;
-            serviceParameters.ThrottleActivationPercentage = bench.Settings.ServiceParameters.ThrottleActivationPercentage;
-            serviceParameters.ThrottleDeactivationPercentage = bench.Settings.ServiceParameters.ThrottleDeactivationPercentage;
-            serviceParameters.OverpressureAllowancePercentage = bench.Settings.ServiceParameters.OverpressureAllowancePercentage;
-            serviceParameters.NominalPressureValue = bench.Settings.ServiceParameters.NominalPressureValue;
-            serviceParameters.Reserve1 = bench.Settings.ServiceParameters.Reserve1;
-            serviceParameters.Reserve2 = bench.Settings.ServiceParameters.Reserve2;
-            serviceParameters.VesselEmergencyLevel_5kg = bench.Settings.ServiceParameters.VesselEmergencyLevel_5kg;
-            serviceParameters.VesselEmergencyLevel_10kg = bench.Settings.ServiceParameters.VesselEmergencyLevel_10kg;
-            serviceParameters.VesselEmergencyLevel_30kg = bench.Settings.ServiceParameters.VesselEmergencyLevel_30kg;
-            serviceParameters.KpPID = bench.Settings.ServiceParameters.KpPID;
-            serviceParameters.KiPID = bench.Settings.ServiceParameters.KiPID;
-            serviceParameters.KdPID = bench.Settings.ServiceParameters.KdPID;
-            serviceParameters.dwePID = bench.Settings.ServiceParameters.dwePID;
-            serviceParameters.tfPID = bench.Settings.ServiceParameters.tfPID;
-            serviceParameters.MaxOutputConst = bench.Settings.ServiceParameters.MaxOutputConst;
-            serviceParameters.ErrorZonePID = bench.Settings.ServiceParameters.ErrorZonePID;
-            serviceParameters.MinOutputConst = bench.Settings.ServiceParameters.MinOutputConst;
-            serviceParameters.CyclePID = bench.Settings.ServiceParameters.CyclePID;
+			serviceParameters.PressureVelocity = bench.Settings.TestBenchSettings.PressureVelocity;
+            serviceParameters.HydraulicPressureCoef = bench.Settings.TestBenchSettings.HydraulicPressureCoef;
+            serviceParameters.MaxAllowablePressure = bench.Settings.TestBenchSettings.MaxAllowablePressure;
+            serviceParameters.ThrottleActivationPercentage = bench.Settings.TestBenchSettings.ThrottleActivationPercentage;
+            serviceParameters.ThrottleDeactivationPercentage = bench.Settings.TestBenchSettings.ThrottleDeactivationPercentage;
+            serviceParameters.OverpressureAllowancePercentage = bench.Settings.TestBenchSettings.OverpressureAllowancePercentage;
+            serviceParameters.NominalPressureValue = bench.Settings.TestBenchSettings.NominalPressureValue;
+            serviceParameters.Reserve1 = bench.Settings.TestBenchSettings.Reserve1;
+            serviceParameters.Reserve2 = bench.Settings.TestBenchSettings.Reserve2;
+            serviceParameters.VesselEmergencyLevel_5kg = bench.Settings.TestBenchSettings.VesselEmergencyLevel_5kg;
+            serviceParameters.VesselEmergencyLevel_10kg = bench.Settings.TestBenchSettings.VesselEmergencyLevel_10kg;
+            serviceParameters.VesselEmergencyLevel_30kg = bench.Settings.TestBenchSettings.VesselEmergencyLevel_30kg;
+            serviceParameters.KpPID = bench.Settings.TestBenchSettings.KpPID;
+            serviceParameters.KiPID = bench.Settings.TestBenchSettings.KiPID;
+            serviceParameters.KdPID = bench.Settings.TestBenchSettings.KdPID;
+            serviceParameters.dwePID = bench.Settings.TestBenchSettings.dwePID;
+            serviceParameters.tfPID = bench.Settings.TestBenchSettings.tfPID;
+            serviceParameters.MaxOutputConst = bench.Settings.TestBenchSettings.MaxOutputConst;
+            serviceParameters.ErrorZonePID = bench.Settings.TestBenchSettings.ErrorZonePID;
+            serviceParameters.MinOutputConst = bench.Settings.TestBenchSettings.MinOutputConst;
+            serviceParameters.CyclePID = bench.Settings.TestBenchSettings.CyclePID;
 
             Cancel = ReactiveCommand.Create(() =>
 			{
@@ -177,26 +177,26 @@ namespace SOD.ViewModels.Testing.SODBench
 
 			ApplyController = ReactiveCommand.CreateFromTask(async () =>
 			{
-                await SendToControllerNumeric((ushort)RegAdresses.hydraulicPressureCoef, bench.Settings.ServiceParameters.HydraulicPressureCoef).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.maxAllowablePressure, bench.Settings.ServiceParameters.MaxAllowablePressure).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.throttleActivationPercentage, bench.Settings.ServiceParameters.ThrottleActivationPercentage).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.throttleDeactivationPercentage, bench.Settings.ServiceParameters.ThrottleDeactivationPercentage).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.overpressureAllowancePercentage, bench.Settings.ServiceParameters.OverpressureAllowancePercentage).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.nominalPressureValue, bench.Settings.ServiceParameters.NominalPressureValue).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.reserve1, bench.Settings.ServiceParameters.Reserve1).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.reserve2, bench.Settings.ServiceParameters.Reserve2).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.vesselEmergencyLevel_5kg, bench.Settings.ServiceParameters.VesselEmergencyLevel_5kg).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.vesselEmergencyLevel_10kg, bench.Settings.ServiceParameters.VesselEmergencyLevel_10kg).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.vesselEmergencyLevel_30kg, bench.Settings.ServiceParameters.VesselEmergencyLevel_30kg).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.kpPID, bench.Settings.ServiceParameters.KpPID).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.kiPID, bench.Settings.ServiceParameters.KiPID).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.kdPID, bench.Settings.ServiceParameters.KdPID).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.dwePID, bench.Settings.ServiceParameters.dwePID).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.tfPID, bench.Settings.ServiceParameters.tfPID).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.maxOutputConst, bench.Settings.ServiceParameters.MaxOutputConst).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.errorZonePID, bench.Settings.ServiceParameters.ErrorZonePID).Execute();
-                await SendToControllerNumeric((ushort)RegAdresses.minOutputConst, bench.Settings.ServiceParameters.MinOutputConst).Execute();
-				await SendToControllerNumeric((ushort)RegAdresses.cyclePID, bench.Settings.ServiceParameters.CyclePID).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.hydraulicPressureCoef, bench.Settings.TestBenchSettings.HydraulicPressureCoef).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.maxAllowablePressure, bench.Settings.TestBenchSettings.MaxAllowablePressure).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.throttleActivationPercentage, bench.Settings.TestBenchSettings.ThrottleActivationPercentage).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.throttleDeactivationPercentage, bench.Settings.TestBenchSettings.ThrottleDeactivationPercentage).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.overpressureAllowancePercentage, bench.Settings.TestBenchSettings.OverpressureAllowancePercentage).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.nominalPressureValue, bench.Settings.TestBenchSettings.NominalPressureValue).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.reserve1, bench.Settings.TestBenchSettings.Reserve1).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.reserve2, bench.Settings.TestBenchSettings.Reserve2).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.vesselEmergencyLevel_5kg, bench.Settings.TestBenchSettings.VesselEmergencyLevel_5kg).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.vesselEmergencyLevel_10kg, bench.Settings.TestBenchSettings.VesselEmergencyLevel_10kg).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.vesselEmergencyLevel_30kg, bench.Settings.TestBenchSettings.VesselEmergencyLevel_30kg).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.kpPID, bench.Settings.TestBenchSettings.KpPID).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.kiPID, bench.Settings.TestBenchSettings.KiPID).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.kdPID, bench.Settings.TestBenchSettings.KdPID).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.dwePID, bench.Settings.TestBenchSettings.dwePID).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.tfPID, bench.Settings.TestBenchSettings.tfPID).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.maxOutputConst, bench.Settings.TestBenchSettings.MaxOutputConst).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.errorZonePID, bench.Settings.TestBenchSettings.ErrorZonePID).Execute();
+                await SendToControllerNumeric((ushort)RegAdresses.minOutputConst, bench.Settings.TestBenchSettings.MinOutputConst).Execute();
+				await SendToControllerNumeric((ushort)RegAdresses.cyclePID, bench.Settings.TestBenchSettings.CyclePID).Execute();
             });
 
 				Apply = ReactiveCommand.CreateFromTask(async () =>
@@ -244,27 +244,27 @@ namespace SOD.ViewModels.Testing.SODBench
 				}
 
 				//Запись сервисных параметров
-                bench.Settings.ServiceParameters.PressureVelocity = serviceParameters.PressureVelocity;
-                bench.Settings.ServiceParameters.HydraulicPressureCoef = serviceParameters.HydraulicPressureCoef;
-                bench.Settings.ServiceParameters.MaxAllowablePressure = serviceParameters.MaxAllowablePressure;
-                bench.Settings.ServiceParameters.ThrottleActivationPercentage = serviceParameters.ThrottleActivationPercentage;
-                bench.Settings.ServiceParameters.ThrottleDeactivationPercentage = serviceParameters.ThrottleDeactivationPercentage;
-                bench.Settings.ServiceParameters.OverpressureAllowancePercentage = serviceParameters.OverpressureAllowancePercentage;
-                bench.Settings.ServiceParameters.NominalPressureValue = serviceParameters.NominalPressureValue;
-                bench.Settings.ServiceParameters.Reserve1 = serviceParameters.Reserve1;
-                bench.Settings.ServiceParameters.Reserve2 = serviceParameters.Reserve2;
-                bench.Settings.ServiceParameters.VesselEmergencyLevel_5kg = serviceParameters.VesselEmergencyLevel_5kg;
-                bench.Settings.ServiceParameters.VesselEmergencyLevel_10kg = serviceParameters.VesselEmergencyLevel_10kg;
-                bench.Settings.ServiceParameters.VesselEmergencyLevel_30kg = serviceParameters.VesselEmergencyLevel_30kg;
-                bench.Settings.ServiceParameters.KpPID = serviceParameters.KpPID;
-                bench.Settings.ServiceParameters.KiPID = serviceParameters.KiPID;
-                bench.Settings.ServiceParameters.KdPID = serviceParameters.KdPID;
-                bench.Settings.ServiceParameters.dwePID = serviceParameters.dwePID;
-                bench.Settings.ServiceParameters.tfPID = serviceParameters.tfPID;
-                bench.Settings.ServiceParameters.MaxOutputConst = serviceParameters.MaxOutputConst;
-                bench.Settings.ServiceParameters.ErrorZonePID = serviceParameters.ErrorZonePID;
-                bench.Settings.ServiceParameters.MinOutputConst = serviceParameters.MinOutputConst;
-                bench.Settings.ServiceParameters.CyclePID = serviceParameters.CyclePID;
+                bench.Settings.TestBenchSettings.PressureVelocity = serviceParameters.PressureVelocity;
+                bench.Settings.TestBenchSettings.HydraulicPressureCoef = serviceParameters.HydraulicPressureCoef;
+                bench.Settings.TestBenchSettings.MaxAllowablePressure = serviceParameters.MaxAllowablePressure;
+                bench.Settings.TestBenchSettings.ThrottleActivationPercentage = serviceParameters.ThrottleActivationPercentage;
+                bench.Settings.TestBenchSettings.ThrottleDeactivationPercentage = serviceParameters.ThrottleDeactivationPercentage;
+                bench.Settings.TestBenchSettings.OverpressureAllowancePercentage = serviceParameters.OverpressureAllowancePercentage;
+                bench.Settings.TestBenchSettings.NominalPressureValue = serviceParameters.NominalPressureValue;
+                bench.Settings.TestBenchSettings.Reserve1 = serviceParameters.Reserve1;
+                bench.Settings.TestBenchSettings.Reserve2 = serviceParameters.Reserve2;
+                bench.Settings.TestBenchSettings.VesselEmergencyLevel_5kg = serviceParameters.VesselEmergencyLevel_5kg;
+                bench.Settings.TestBenchSettings.VesselEmergencyLevel_10kg = serviceParameters.VesselEmergencyLevel_10kg;
+                bench.Settings.TestBenchSettings.VesselEmergencyLevel_30kg = serviceParameters.VesselEmergencyLevel_30kg;
+                bench.Settings.TestBenchSettings.KpPID = serviceParameters.KpPID;
+                bench.Settings.TestBenchSettings.KiPID = serviceParameters.KiPID;
+                bench.Settings.TestBenchSettings.KdPID = serviceParameters.KdPID;
+                bench.Settings.TestBenchSettings.dwePID = serviceParameters.dwePID;
+                bench.Settings.TestBenchSettings.tfPID = serviceParameters.tfPID;
+                bench.Settings.TestBenchSettings.MaxOutputConst = serviceParameters.MaxOutputConst;
+                bench.Settings.TestBenchSettings.ErrorZonePID = serviceParameters.ErrorZonePID;
+                bench.Settings.TestBenchSettings.MinOutputConst = serviceParameters.MinOutputConst;
+                bench.Settings.TestBenchSettings.CyclePID = serviceParameters.CyclePID;
 
                 bench.SaveSettings();
 
@@ -293,7 +293,11 @@ namespace SOD.ViewModels.Testing.SODBench
         public ReactiveCommand<Unit, Unit> DropWeight_30kg { get; set; }
         public IEnumerable<IValueViewModel> Properties => parameters.Select(kv => kv.Value);
 		[Reactive]
-        public TestBenchSettings ServiceProperties => serviceParameters;
+        public TestBenchSettings ServiceProperties
+        {
+            get => serviceParameters;
+            set => serviceParameters = value;
+        }
         public IReadOnlyList<UnitTypeInfo> PressureUnits { get; set; }
 		[Reactive]
 		public UnitTypeInfo SelectedPressureUnit { get; set; }
