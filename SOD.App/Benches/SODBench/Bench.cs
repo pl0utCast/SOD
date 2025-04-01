@@ -2,6 +2,7 @@
 using SOD.App.Benches.SODBench.Report;
 using SOD.App.Messages.Commands;
 using SOD.App.Testing;
+using SOD.App.Testing.Programms;
 using SOD.App.Testing.Standarts;
 using SOD.App.Testing.Test;
 using SOD.Core.Balloons;
@@ -25,6 +26,7 @@ namespace SOD.App.Benches.SODBench
         private CancellationTokenSource cancellationTokenSource;
         private ITesting currentTest;
         private Timer registrationTimer;
+        private ProgrammMethodicsConfig programmMethodicsConfig;
         private readonly List<Post> posts = new List<Post>();
 
         public Bench(ISettingsService settingsService,
@@ -165,6 +167,18 @@ namespace SOD.App.Benches.SODBench
                     reportData?.Fill(value);
                 }
                 testingBalloon = value;
+            }
+        }
+
+        public ProgrammMethodicsConfig ProgrammMethodicsConfig
+        {
+            get
+            {
+                return programmMethodicsConfig;
+            }
+            set
+            {
+                programmMethodicsConfig = value;
             }
         }
 
