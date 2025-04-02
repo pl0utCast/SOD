@@ -36,35 +36,7 @@ namespace SOD.ViewModels.Testing.SODBench
 	{
         private IDevice device;
         private Dictionary<string, IValueViewModel> parameters = new Dictionary<string, IValueViewModel>();
-		//private Dictionary<string, IValueViewModel> serviceParameters = new Dictionary<string, IValueViewModel>();
 		private TestBenchSettings serviceParameters = new TestBenchSettings();
-
-		private enum RegAdresses
-		{
-			dropWeight = 6119,
-			pressureVelocity = 6120,
-			hydraulicPressureCoef = 6121,
-			maxAllowablePressure = 6122,
-			throttleActivationPercentage = 6123,
-			throttleDeactivationPercentage = 6124,
-			overpressureAllowancePercentage = 6125,
-			nominalPressureValue = 6126,
-			reserve1 = 6127,
-			reserve2 = 6128,
-			vesselEmergencyLevel_5kg = 6129,
-			vesselEmergencyLevel_10kg = 6130,
-			vesselEmergencyLevel_30kg = 6131,
-			kpPID = 6132,
-			kiPID = 6133,
-			kdPID = 6134,
-			dwePID = 6135,
-			tfPID = 6136,
-			maxOutputConst = 6137,
-			errorZonePID = 6138,
-			minOutputConst = 6139,
-			cyclePID = 6140,
-		}
-
         public TestParametersViewModel(INavigationService navigationService,
 									   ITestBenchService testBenchService,
 									   ITestingService testingService,
@@ -125,7 +97,6 @@ namespace SOD.ViewModels.Testing.SODBench
 			{
 				parameters.Add(param.Alias, param.GetValueViewModel());
 			}
-
 			//Чтение сервисных параметров
 			serviceParameters.PressureVelocity = bench.Settings.TestBenchSettings.PressureVelocity;
             serviceParameters.HydraulicPressureCoef = bench.Settings.TestBenchSettings.HydraulicPressureCoef;
@@ -208,10 +179,10 @@ namespace SOD.ViewModels.Testing.SODBench
 				bench.Settings.SelectedBalloon.BalloonVolume = BalloonVolume;
 				bench.Settings.BalloonProperties = BalloonProperties.ToList();
 				
-				if (!IsModeAuto)
-				{
-					testSettings.TenzoSensorId = TenzoSensor.Id;
-				}
+				//if (!IsModeAuto)
+				//{
+				//	testSettings.TenzoSensorId = TenzoSensor.Id;
+				//}
 				
 				testSettings.SetPressure = (Pressure)UnitsHelper.GetValue(WorkPressure.Value, WorkPressure.SelectedUnitInfo);
 				testSettings.Deformation = Deformation;
@@ -220,7 +191,6 @@ namespace SOD.ViewModels.Testing.SODBench
 				testSettings.IsModeAuto = IsModeAuto;
 				testSettings.Time = ExposureTime;
 				testSettings.PressureSensorId = PressureSensor?.Id;
-				
 
 				if (reportService.CurrentReport != null && !reportService.CurrentReport.IsSave && reportService.CurrentReport.ReportData.IsFill)
 				{

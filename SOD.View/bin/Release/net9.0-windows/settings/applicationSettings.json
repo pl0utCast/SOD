@@ -5,11 +5,11 @@
   "SODBenchSettings": {
     "SelectedTestSettings": {
       "Time": 30,
-      "PressureSensorId": null,
+      "PressureSensorId": 4,
       "WorkPressure": 0,
       "Deformation": 5,
       "MaxDeformation": null,
-      "IsModeAuto": true,
+      "IsModeAuto": false,
       "TenzoSensorId": 0,
       "SetPressure": {
         "Unit": "PressureUnit.Bar",
@@ -35,12 +35,12 @@
     ],
     "TestBenchSettings": {
       "OwnerDeviceId": 0,
-      "PressureClampSensorId": 0,
-      "PressureSensorId": 0,
-      "AmbientTemperatureSensorId": 0,
+      "PressureClampSensorId": 1,
+      "PressuriseSensorId": 0,
+      "AmbientTemparatureSensorId": 15,
       "Parameters": [],
-      "PressureUnit": 0,
-      "LeakageUnit": 0,
+      "PressureUnit": 2,
+      "LeakageUnit": 8,
       "PressureVelocity": 11.0,
       "HydraulicPressureCoef": 75.0,
       "MaxAllowablePressure": 370.0,
@@ -134,15 +134,40 @@
         }
       ]
     },
-    "GasTemperatureSensorId": null,
-    "LiquidTemperatureSensorId": null,
+    "GasTemperatureSensorId": 12,
+    "LiquidTemperatureSensorId": 13,
     "IsEnableGasTemperatureSensor": true,
     "IsEnableLiquidTemperatureSensor": true,
     "ManualLocation": false,
     "AutoRange": false,
-    "Sensors": {},
-    "DevicesUnits": {},
-    "ReportPath": "C:\\Users\\boriskin\\Source\\Repos\\SOD\\SOD.View\\bin\\Debug\\net9.0-windows\\reports_template\\report_template_sod.frx"
+    "Sensors": {
+      "0": true,
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true,
+      "5": false,
+      "6": false,
+      "7": false,
+      "8": false,
+      "9": false,
+      "10": false,
+      "11": false,
+      "12": false,
+      "13": false,
+      "14": true,
+      "15": true,
+      "16": true,
+      "17": true,
+      "18": true,
+      "19": true
+    },
+    "DevicesUnits": {
+      "0": true,
+      "1": true,
+      "2": true
+    },
+    "ReportPath": "D:\\Source codes\\SOD\\SOD.View\\bin\\Debug\\net9.0-windows\\reports_template\\report_template_sod.frx"
   },
   "LocalizationService": {
     "Langs": [
