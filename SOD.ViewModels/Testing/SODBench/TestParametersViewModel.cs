@@ -135,7 +135,7 @@ namespace SOD.ViewModels.Testing.SODBench
 			DropWeight_10kg = SendToControllerNumeric(((int)RegAdresses.dropWeight), 10);
 			DropWeight_30kg = SendToControllerNumeric(((int)RegAdresses.dropWeight), 30);
 
-            ReactiveCommand<Unit, Unit> SendToControllerNumeric(ushort code, object value){
+            ReactiveCommand<Unit,Unit> SendToControllerNumeric(ushort code, object value){
 				return ReactiveCommand.CreateFromTask(async () =>
 				{
                     if (device is ModbusTcpDevice modbusTcpDevice && device.GetStatus() == DeviceStatus.Online)
@@ -244,15 +244,6 @@ namespace SOD.ViewModels.Testing.SODBench
 			}, canApply);
 
 		}
-
-		private void SendToControllerNumeric(ushort code, object value)
-		{
-            if (device is ModbusTcpDevice modbusTcpDevice && device.GetStatus() == DeviceStatus.Online)
-            {
-                ushort valueConverted = Convert.ToUInt16(value);
-                modbusTcpDevice.WriteHoldingRegistersAsync(((int)RegAdresses.dropWeight), new ushort[] { valueConverted });
-            }
-        }
 
 		public ReactiveCommand<Unit, Unit> DropWeight { get; set; }
 		[Reactive]

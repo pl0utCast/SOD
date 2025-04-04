@@ -3,6 +3,7 @@
     "Name": "Oven MB110-224.4ТД",
     "SerialPort": "COM6",
     "UsedBaudRate": 9600,
+    "UseDigitalSensors": false,
     "RequestChannels": [
       {
         "Address": 62,

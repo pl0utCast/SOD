@@ -14,7 +14,7 @@ namespace SOD.Localization.Testing.SODBench
         public string MaxAllowablePressure { get; set; } = "Допустимое значение датчика давления, бар";
         public string ThrottleActivationPercentage { get; set; } = "% включения дросселирования";
         public string ThrottleDeactivationPercentage { get; set; } = "% отключения дросселирования";
-        public string OverpressureAllowancePercentage { get; set; } = "%превыш. макс. допуст. давления";
+        public string OverpressureAllowancePercentage { get; set; } = "% превыш. макс. допуст. давления";
         public string NominalPressureValue { get; set; } = "Номин. значение датчика давления, бар";
         public string Reserve1 { get; set; } = "Резерв 2";
         public string Reserve2 { get; set; } = "Резерв 3";
