@@ -29,7 +29,7 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench
         public ObservableCollection<object> Serials { get; set; } = new ObservableCollection<object>();
         public ReactiveCommand<Unit, Unit> GoBack { get; set; }
 
-        public ValidationContext ValidationContext { get; } = new ValidationContext();
+        //public ValidationContext ValidationContext { get; } = new ValidationContext();
 
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
     }

@@ -34,9 +34,9 @@
     <PackageReference Include="MaterialDesignThemes.Wpf" Version="1.0.1" />
     <PackageReference Include="Ninject" Version="3.3.6" />
     <PackageReference Include="NLog" Version="5.3.3" />
-    <PackageReference Include="ReactiveUI" Version="20.1.1" />
+    <PackageReference Include="ReactiveUI" Version="20.1.63" />
     <PackageReference Include="ReactiveUI.Events.WPF" Version="15.1.1" />
-    <PackageReference Include="ReactiveUI.WPF" Version="20.1.1" />
+    <PackageReference Include="ReactiveUI.WPF" Version="20.1.63" />
 	<PackageReference Include="SciChart" Version="6.3.0.13476" />
 	<PackageReference Include="SciChart.DirectX" Version="6.3.0.13476" />
 	<PackageReference Include="System.Net.Http" Version="4.3.4" />

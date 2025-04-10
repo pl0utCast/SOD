@@ -25,13 +25,15 @@ using SOD.Core.Sensor.TenzoSensor;
 using SOD.Core;
 using SOD.App.Testing.Programms;
 using SOD.ViewModels.Testing.ManualCommandsBench;
+using ReactiveUI.Validation.Abstractions;
+using ReactiveUI.Validation.Helpers;
 
 namespace SOD.ViewModels.Testing.SODBench
 {
-	public class TestParametersViewModel : ReactiveObject, IActivatableViewModel
+	public class TestParametersViewModel : ReactiveValidationObject, IActivatableViewModel
 	{
 		private Dictionary<string, IValueViewModel> parameters = new Dictionary<string, IValueViewModel>();
-		public TestParametersViewModel(INavigationService navigationService,
+        public TestParametersViewModel(INavigationService navigationService,
 									   ITestBenchService testBenchService,
 									   ITestingService testingService,
 									   ISensorService sensorService,
@@ -69,11 +71,11 @@ namespace SOD.ViewModels.Testing.SODBench
 			TenzoUnits = new Force().GetUnitTypeInfo();
 			SelectedTenzoUnit = TenzoUnits.SingleOrDefault(u => u.UnitType.Equals(bench.Settings.TenzoUnit));
 
-    //        ProgrammMethodics = new SelectProgrammMethodicsViewModel(bus, testingService, navigationService, /*valveService,*/
-				//dialogService, testBenchService, localizationService);
-    //        ProgrammMethodics.Activator.Activate();
+			ProgrammMethodics = new SelectProgrammMethodicsViewModel(bus, testingService, navigationService, /*valveService,*/
+				dialogService, testBenchService, localizationService);
+			ProgrammMethodics.Activator.Activate();
 
-            this.WhenAnyValue(x => x.SelectedBalloon).Subscribe(sb =>
+			this.WhenAnyValue(x => x.SelectedBalloon).Subscribe(sb =>
 			{
 				IsKPG4 = sb?.BalloonTypes == BalloonTypes.KPG4;
 				Deformation = IsKPG4 ? 10 : 5;

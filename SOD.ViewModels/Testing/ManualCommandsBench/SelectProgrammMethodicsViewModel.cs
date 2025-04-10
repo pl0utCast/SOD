@@ -26,6 +26,7 @@ using System.Reactive.Subjects;
 using System.Text;
 using SOD.LocalizationService;
 using ReactiveUI.Validation.Helpers;
+using System.Xml.Linq;
 
 namespace SOD.ViewModels.Testing.ManualCommandsBench
 {
@@ -47,22 +48,22 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench
             var standarts = testingService.GetAllStandarts();
             this.WhenActivated(dis =>
             {
-                testingService.ConnectToProgrammMethodics()
-                    .Transform(pm =>
-                    {
-                        //var name = valveService.GetValveTypes().SingleOrDefault(vt => vt.Id == pm.ValveTypeId)?.Name;
+                //testingService.ConnectToProgrammMethodics()
+                //    .Transform(pm =>
+                //    {
+                //        var name = valveService.GetValveTypes().SingleOrDefault(vt => vt.Id == pm.ValveTypeId)?.Name;
 
-                        Action editAction = () =>
-                        {
-                            var vm = new EditProgrammMethodicsViewModel(pm, testingService, navigationService, dialogService, testBenchService, localizationService);
-                            navigationService.NavigateTo("EditProgrammMethodics", vm);
-                        };
-                        return new ProgrammMethodicsInfoViewModel(pm, "name", standarts, editAction);
-                    })
-                    .Sort(SortExpressionComparer<ProgrammMethodicsInfoViewModel>.Ascending(pm => pm.Config.Id))
-                    .Bind(ProgrammMethodics)
-                    .Subscribe()
-                    .DisposeWith(dis);
+                //        Action editAction = () =>
+                //        {
+                //            var vm = new EditProgrammMethodicsViewModel(pm, testingService, navigationService, dialogService, testBenchService, localizationService);
+                //            navigationService.NavigateTo("EditProgrammMethodics", vm);
+                //        };
+                //        return new ProgrammMethodicsInfoViewModel(pm, name, standarts, editAction);
+                //    })
+                //    .Sort(SortExpressionComparer<ProgrammMethodicsInfoViewModel>.Ascending(pm => pm.Config.Id))
+                //    .Bind(ProgrammMethodics)
+                //    .Subscribe()
+                //    .DisposeWith(dis);
 
                 Delete = ReactiveCommand.CreateFromTask(async () =>
                 {
@@ -109,7 +110,7 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench
 
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
 
-        public ValidationContext ValidationContext { get; } = new ValidationContext();
+        //public ValidationContext ValidationContext { get; } = new ValidationContext();
 
         public void Cancel()
         {
