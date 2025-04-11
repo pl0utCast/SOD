@@ -27,25 +27,12 @@
             <controls:SaveButton />
         </StackPanel>
         <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
             <TextBox
                 Margin="5"
                 materialDesign:HintAssist.Hint="{lc:Localization Testing.ManualCommandsBench.Name}"
                 FontSize="24"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-            <ComboBox
-                Grid.Column="1"
-                Margin="5"
-                materialDesign:HintAssist.Hint="{lc:Localization Testing.ManualCommandsBench.ValveType}"
-                DisplayMemberPath="Name"
-                FontSize="24"
-                ItemsSource="{Binding ValveTypes}"
-                SelectedValue="{Binding SelectedValveType}"
-                Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -70,20 +57,6 @@
                             <TextBlock 
                                 VerticalAlignment="Center"
                                 Text="{lc:Localization Testing.ManualCommandsBench.Command}"/>
-                        </StackPanel>
-                    </Button>
-                    <Button
-                        Height="50"
-                        Margin="10,0,0,0"
-                        Command="{Binding AddTesting}">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon
-                                Width="24"
-                                Height="24"
-                                Kind="Add" />
-                            <TextBlock 
-                                VerticalAlignment="Center"
-                                Text="{lc:Localization Testing.ManualCommandsBench.Test}"/>
                         </StackPanel>
                     </Button>
                     <Button

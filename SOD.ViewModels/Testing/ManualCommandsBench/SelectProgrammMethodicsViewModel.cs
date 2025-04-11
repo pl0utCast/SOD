@@ -38,7 +38,6 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench
         public SelectProgrammMethodicsViewModel(IBus bus,
                                                 ITestingService testingService,
                                                 INavigationService navigationService,
-                                                //IValveService valveService,
                                                 IDialogService dialogService,
                                                 ITestBenchService testBenchService,
                                                 ILocalizationService localizationService)
@@ -48,22 +47,20 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench
             var standarts = testingService.GetAllStandarts();
             this.WhenActivated(dis =>
             {
-                //testingService.ConnectToProgrammMethodics()
-                //    .Transform(pm =>
-                //    {
-                //        var name = valveService.GetValveTypes().SingleOrDefault(vt => vt.Id == pm.ValveTypeId)?.Name;
-
-                //        Action editAction = () =>
-                //        {
-                //            var vm = new EditProgrammMethodicsViewModel(pm, testingService, navigationService, dialogService, testBenchService, localizationService);
-                //            navigationService.NavigateTo("EditProgrammMethodics", vm);
-                //        };
-                //        return new ProgrammMethodicsInfoViewModel(pm, name, standarts, editAction);
-                //    })
-                //    .Sort(SortExpressionComparer<ProgrammMethodicsInfoViewModel>.Ascending(pm => pm.Config.Id))
-                //    .Bind(ProgrammMethodics)
-                //    .Subscribe()
-                //    .DisposeWith(dis);
+                testingService.ConnectToProgrammMethodics()
+                    .Transform(pm =>
+                    {
+                        Action editAction = () =>
+                        {
+                            var vm = new EditProgrammMethodicsViewModel(pm, testingService, navigationService, dialogService, testBenchService, localizationService);
+                            navigationService.NavigateTo("EditProgrammMethodics", vm);
+                        };
+                        return new ProgrammMethodicsInfoViewModel(pm, standarts, editAction);
+                    })
+                    .Sort(SortExpressionComparer<ProgrammMethodicsInfoViewModel>.Ascending(pm => pm.Config.Id))
+                    .Bind(ProgrammMethodics)
+                    .Subscribe()
+                    .DisposeWith(dis);
 
                 Delete = ReactiveCommand.CreateFromTask(async () =>
                 {
@@ -85,8 +82,8 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench
                     })
                     .DisposeWith(dis);
 
-                //this.ValidationRule(x => x.SelectedProgrammMethodics, pm => pm != null, "error")
-                //    .DisposeWith(dis);
+                this.ValidationRule(x => x.SelectedProgrammMethodics, pm => pm != null, "error")
+                    .DisposeWith(dis);
 
                 SelectedProgrammMethodics = ProgrammMethodics.SingleOrDefault(pm => pm.Config.Id == oldConfig?.Id);
             });
@@ -107,10 +104,7 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench
         public ReactiveCommand<Unit, Unit> Select { get; set; }
         [Reactive]
         public ReactiveCommand<Unit, Unit> Delete { get; set; }
-
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
-
-        //public ValidationContext ValidationContext { get; } = new ValidationContext();
 
         public void Cancel()
         {
