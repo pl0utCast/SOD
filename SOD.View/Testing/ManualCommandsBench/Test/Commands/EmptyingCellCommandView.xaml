@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="SOD.View.Testing.ManualCommandsBench.Test.Commands.PressureReleaseCommandView"
+    x:Class="SOD.View.Testing.ManualCommandsBench.Test.Commands.EmptyingCellCommandView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,13 +7,7 @@
     xmlns:lc="clr-namespace:SOD.LocalizationService;assembly=SOD.LocalizationService"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <StackPanel>
-        <TextBlock 
-            Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
-            Text="{lc:Localization Testing.ManualCommandsBench.PressureRelease}" />
-        <TextBlock
-            HorizontalAlignment="Center"
-            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-            Text="{Binding Time}" />
-    </StackPanel>
+    <TextBlock 
+        Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
+        Text="{lc:Localization Testing.ManualCommandsBench.EmptyingCell}" />
 </UserControl>

@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="SOD.View.Testing.ManualCommandsBench.Test.Commands.PressureReleaseCommandView"
+    x:Class="SOD.View.Testing.ManualCommandsBench.Test.Commands.EmptyingBalloonCommandView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,7 +10,7 @@
     <StackPanel>
         <TextBlock 
             Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
-            Text="{lc:Localization Testing.ManualCommandsBench.PressureRelease}" />
+            Text="{lc:Localization Testing.ManualCommandsBench.EmptyingBalloon}" />
         <TextBlock
             HorizontalAlignment="Center"
             Style="{StaticResource MaterialDesignHeadline6TextBlock}"

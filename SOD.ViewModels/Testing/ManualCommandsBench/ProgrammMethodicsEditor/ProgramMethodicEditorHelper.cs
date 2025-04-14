@@ -1,5 +1,6 @@
 ﻿using SOD.App.Commands;
 using SOD.ViewModels.Testing.ManualCommandsBench.ProgrammMethodicsEditor.Commands;
+using SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,24 +13,22 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.ProgrammMethodicsEditor
         {
             switch (commandConfig.Type)
             {
-                case CommandType.TestMedium:
-                    return new TestMediumCommandViewModel(commandConfig);
-                case CommandType.Filling:
-                    return new FillingCommandViewModel(commandConfig);
-                case CommandType.PressurizedCavity:
-                    return new PressurizeCavityCommandViewModel(commandConfig);
-                case CommandType.LeakControlCavity:
-                    return new LeakControlCavityCommandViewModel(commandConfig);
-                case CommandType.SetPressure:
-                    return new SetPressureCommandViewModel(commandConfig);
-                case CommandType.Hold:
-                    return new HoldCommandViewModel(commandConfig);
-                case CommandType.Registartion:
-                    return new RegistrationCommandViewModel(commandConfig);
+                case CommandType.FillingBalloon:
+                    return new Commands.FillingBalloonCommandViewModel(commandConfig);
+                case CommandType.EmptyingBalloon:
+                    return new Commands.EmptyingBalloonCommandViewModel(commandConfig);
+                case CommandType.FillingCell:
+                    return new Commands.FillingCellCommandViewModel(commandConfig);
+                case CommandType.EmptyingCell:
+                    return new Commands.EmptyingCellCommandViewModel(commandConfig);
+                case CommandType.PressureSet:
+                    return new Commands.PressureSetCommandViewModel(commandConfig);
                 case CommandType.PressureRelease:
-                    return new PressureRealeseCommandViewModel(commandConfig);
-                case CommandType.Purge:
-                    return new PurgeCommandViewModel(commandConfig);
+                    return new Commands.PressureReleaseCommandViewModel(commandConfig);
+                case CommandType.VerticalCell:
+                    return new Commands.VerticalCellCommandViewModel(commandConfig);
+                case CommandType.HorizontalCell:
+                    return new Commands.HorizontalCellCommandViewModel(commandConfig);
                 default:
                     break;
             }

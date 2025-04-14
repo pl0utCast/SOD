@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace SOD.View.Testing.ManualCommandsBench.Test.Commands
+namespace SOD.View.Testing.ManualCommandsBench.ProgrammMethodicsEditor.Commands
 {
     /// <summary>
     /// Логика взаимодействия для PressureReleaseCommandView.xaml

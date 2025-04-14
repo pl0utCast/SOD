@@ -138,32 +138,29 @@
 
                 <ContentPresenter Content="{Binding SelectedCommand}">
                     <ContentPresenter.Resources>
-                        <DataTemplate DataType="{x:Type commandsVM:TestMediumCommandViewModel}">
-                            <commands:TestMediumCommandView />
+                        <DataTemplate DataType="{x:Type commandsVM:FillingBalloonCommandViewModel}">
+                            <commands:FillingBalloonCommandView />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type commandsVM:FillingCommandViewModel}">
-                            <commands:FillingCommandView />
+                        <DataTemplate DataType="{x:Type commandsVM:EmptyingBalloonCommandViewModel}">
+                            <commands:EmptyingBalloonCommandView />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type commandsVM:PressurizeCavityCommandViewModel}">
-                            <commands:PressurizeCavityCommandView />
+                        <DataTemplate DataType="{x:Type commandsVM:FillingCellCommandViewModel}">
+                            <commands:FillingCellCommandView />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type commandsVM:LeakControlCavityCommandViewModel}">
-                            <commands:LeakControlCavityCommandView />
+                        <DataTemplate DataType="{x:Type commandsVM:EmptyingCellCommandViewModel}">
+                            <commands:EmptyingCellCommandView />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type commandsVM:SetPressureCommandViewModel}">
-                            <commands:SetPressureCommandView />
+                        <DataTemplate DataType="{x:Type commandsVM:PressureSetCommandViewModel}">
+                            <commands:PressureSetCommandView />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type commandsVM:HoldCommandViewModel}">
-                            <commands:HoldCommandView />
+                        <DataTemplate DataType="{x:Type commandsVM:PressureReleaseCommandViewModel}">
+                            <commands:PressureReleaseCommandView />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type commandsVM:RegistrationCommandViewModel}">
-                            <commands:RegistrationCommandView />
+                        <DataTemplate DataType="{x:Type commandsVM:VerticalCellCommandViewModel}">
+                            <commands:VerticalCellCommandView />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type commandsVM:PressureRealeseCommandViewModel}">
-                            <commands:PressureRealeseCommandView />
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type commandsVM:PurgeCommandViewModel}">
-                            <commands:PurgeCommandView />
+                        <DataTemplate DataType="{x:Type commandsVM:HorizontalCellCommandViewModel}">
+                            <commands:HorizontalCellCommandView />
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type testsVM:TestingViewModel}">
                             <tests:TestingView />

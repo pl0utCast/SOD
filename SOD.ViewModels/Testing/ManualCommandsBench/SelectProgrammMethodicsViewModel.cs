@@ -85,7 +85,9 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench
                 this.ValidationRule(x => x.SelectedProgrammMethodics, pm => pm != null, "error")
                     .DisposeWith(dis);
 
-                SelectedProgrammMethodics = ProgrammMethodics.SingleOrDefault(pm => pm.Config.Id == oldConfig?.Id);
+                if (ProgrammMethodics != null)
+                    SelectedProgrammMethodics = ProgrammMethodics.FirstOrDefault();
+                //SelectedProgrammMethodics = ProgrammMethodics.SingleOrDefault(pm => pm.Config.Id == oldConfig?.Id);
             });
 
             Add = ReactiveCommand.Create(() =>

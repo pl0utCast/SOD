@@ -1,13 +1,10 @@
 ﻿using MemBus;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using SOD.App.Commands;
 using SOD.App.Messages.Commands;
 using SOD.Dialogs;
-using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
-using System;
-using System.Collections.Generic;
 using System.Reactive.Disposables;
-using System.Text;
 
 namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
 {
@@ -39,27 +36,24 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
 
         private IActivatableViewModel CreateCommandViewModel(CommandConfig commandConfig)
         {
-            //Command?.Activator.Deactivate();
             switch (commandConfig.Type)
             {
-                case CommandType.TestMedium:
-                    return new TestMediumCommandViewModel(commandConfig);
-                case CommandType.Filling:
-                    return new FillingCommandViewModel(_bus, _dialogService);
-                case CommandType.PressurizedCavity:
-                    return new PressurizeCavityCommandViewModel(commandConfig);
-                case CommandType.LeakControlCavity:
-                    return new LeakControlCavityViewModel(commandConfig);
-                case CommandType.SetPressure:
-                    return new SetPressureCommandViewModel(commandConfig, _bus);
-                case CommandType.Hold:
-                    return new HoldCommandViewModel(commandConfig, _bus);
-                case CommandType.Registartion:
-                    return new RegistartionCommandViewModel(commandConfig, _bus);
+                case CommandType.FillingBalloon:
+                    return new FillingBalloonCommandViewModel(commandConfig);
+                case CommandType.EmptyingBalloon:
+                    return new EmptyingBalloonCommandViewModel(_bus, _dialogService);
+                case CommandType.FillingCell:
+                    return new FillingCellCommandViewModel(commandConfig, _bus);
+                case CommandType.EmptyingCell:
+                    return new EmptyingCellCommandViewModel(commandConfig, _bus);
+                case CommandType.PressureSet:
+                    return new PressureSetCommandViewModel(commandConfig);
                 case CommandType.PressureRelease:
                     return new PressureReleaseCommandViewModel();
-                case CommandType.Purge:
-                    return new PurgeCommandViewModel();
+                case CommandType.VerticalCell:
+                    return new VerticalCellCommandViewModel(commandConfig, _bus);
+                case CommandType.HorizontalCell:
+                    return new HorizontalCellCommandViewModel(commandConfig);
                 default:
                     break;
             }

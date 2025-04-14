@@ -3,11 +3,11 @@
 namespace SOD.View.Testing.ManualCommandsBench.Test.Commands
 {
     /// <summary>
-    /// Логика взаимодействия для PressureReleaseCommandView.xaml
+    /// Логика взаимодействия для HorizontalCellCommandView.xaml
     /// </summary>
-    public partial class PressureReleaseCommandView : UserControl
+    public partial class HorizontalCellCommandView : UserControl
     {
-        public PressureReleaseCommandView()
+        public HorizontalCellCommandView()
         {
             InitializeComponent();
         }
