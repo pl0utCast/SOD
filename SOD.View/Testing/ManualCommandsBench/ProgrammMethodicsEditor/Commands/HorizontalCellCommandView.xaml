@@ -15,25 +15,6 @@
                 FontSize="24"
                 HorizontalAlignment="Center"
                 Text="{lc:Localization Testing.ManualCommandsBench.HorizontalCell}" />
-            <UniformGrid Margin="10" >
-                <RadioButton
-                    Margin="15"
-                    Content="{lc:Localization MediumType3Post.Water}"
-                    IsChecked="{Binding Liquid}"
-                    Style="{StaticResource MaterialDesignTabRadioButton}" />
-                <RadioButton
-                    Content="{lc:Localization MediumType3Post.WaterHigh}"
-                    IsChecked="{Binding LiquidHigh}"
-                    Style="{StaticResource MaterialDesignTabRadioButton}" />
-                <RadioButton
-                    Content="{lc:Localization MediumType3Post.Air}"
-                    IsChecked="{Binding Gas}"
-                    Style="{StaticResource MaterialDesignTabRadioButton}" />
-                <RadioButton
-                    Content="{lc:Localization MediumType3Post.AirHigh}"
-                    IsChecked="{Binding GasHigh}"
-                    Style="{StaticResource MaterialDesignTabRadioButton}" />
-            </UniformGrid>
         </StackPanel>
     </Grid>
 </UserControl>

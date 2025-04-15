@@ -43,8 +43,8 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.ProgrammMethodicsEditor.Com
             CommandConfig.Parameters.Clear();
             CommandConfig.Parameters.Add(new KeyValuePair<Type, object>(typeof(int), Time));
             CommandConfig.Parameters.Add(new KeyValuePair<Type, object>(typeof(bool), TimeInStandart));
-
         }
+
         [Reactive]
         public int Time { get; set; }
         [Reactive]

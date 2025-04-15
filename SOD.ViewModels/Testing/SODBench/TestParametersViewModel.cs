@@ -27,12 +27,17 @@ using SOD.App.Testing.Programms;
 using SOD.ViewModels.Testing.ManualCommandsBench;
 using ReactiveUI.Validation.Abstractions;
 using ReactiveUI.Validation.Helpers;
+using SOD.App.Commands;
+using SOD.App.Messages.Commands;
+using System.Threading;
 
 namespace SOD.ViewModels.Testing.SODBench
 {
 	public class TestParametersViewModel : ReactiveValidationObject, IActivatableViewModel
 	{
 		private Dictionary<string, IValueViewModel> parameters = new Dictionary<string, IValueViewModel>();
+        private IBus _bus;
+
         public TestParametersViewModel(INavigationService navigationService,
 									   ITestBenchService testBenchService,
 									   ITestingService testingService,
@@ -44,6 +49,7 @@ namespace SOD.ViewModels.Testing.SODBench
 		{
 			var bench = (App.Benches.SODBench.Bench)testBenchService.GetTestBench();
 			var testSettings = bench.Settings.SelectedTestSettings;
+			_bus = bus;
 			
 			Standarts = testingService.GetAllStandarts().ToList();
 			SelectedStandart = Standarts.SingleOrDefault(u => u.Id == bench.Settings.SelectedBalloon?.StandartId);
@@ -155,7 +161,12 @@ namespace SOD.ViewModels.Testing.SODBench
 				navigationService.GoBack();
 			}, canApply);
 
-		}
+            ExecuteCommand = ReactiveCommand.Create(() =>
+            {
+				var command = CommandsHelper.GetDefault(CommandCollectionType.Modbus3Post, SelectedCommand);
+                _bus.Publish(new ExecuteTestCommand(command, true));
+            });
+        }
 
 		public IEnumerable<IValueViewModel> Properties => parameters.Select(kv => kv.Value);
 		public IReadOnlyList<UnitTypeInfo> PressureUnits { get; set; }
@@ -168,6 +179,7 @@ namespace SOD.ViewModels.Testing.SODBench
 		public Balloon SelectedBalloon { get; set; }
 		public ReactiveCommand<Unit, Unit> Cancel { get; set; }
 		public ReactiveCommand<Unit, Unit> Apply { get; set; }
+		public ReactiveCommand<Unit, Unit> ExecuteCommand { get; set; }
 		public ViewModelActivator Activator { get; } = new ViewModelActivator();
 		[Reactive]
 		public List<Balloon> Balloons { get; set; } = new List<Balloon>();
@@ -199,5 +211,7 @@ namespace SOD.ViewModels.Testing.SODBench
 		public ISensor TenzoSensor {  get; set; }
         [Reactive]
         public SelectProgrammMethodicsViewModel ProgrammMethodics { get; set; }
+        [Reactive]
+        public CommandType SelectedCommand { get; set; }
     }
 }

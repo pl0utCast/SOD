@@ -1,9 +1,5 @@
-﻿using SOD.App.Commands;
-using SOD.App.Mediums;
-using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ReactiveUI;
+using SOD.App.Commands;
 
 namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
 {
@@ -13,7 +9,6 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
         {
 
         }
-
 
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
     }

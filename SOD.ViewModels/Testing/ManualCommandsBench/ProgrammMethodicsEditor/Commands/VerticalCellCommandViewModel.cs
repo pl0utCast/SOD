@@ -31,17 +31,11 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.ProgrammMethodicsEditor.Com
                 this.WhenAnyValue(x => x.Pressure)
                 .Subscribe(p =>
                 {
-                    Notify(Validate());
+                    Notify(true);
                 })
                 .DisposeWith(dis);
             });
         }
-
-        private bool Validate()
-        {
-            return true;
-        }
-
 
         public override void Save()
         {

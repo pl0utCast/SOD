@@ -49,7 +49,7 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
                 case CommandType.PressureSet:
                     return new PressureSetCommandViewModel(commandConfig);
                 case CommandType.PressureRelease:
-                    return new PressureReleaseCommandViewModel();
+                    return new PressureReleaseCommandViewModel(commandConfig);
                 case CommandType.VerticalCell:
                     return new VerticalCellCommandViewModel(commandConfig, _bus);
                 case CommandType.HorizontalCell:

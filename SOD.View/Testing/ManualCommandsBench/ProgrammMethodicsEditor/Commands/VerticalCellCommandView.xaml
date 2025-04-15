@@ -16,17 +16,6 @@
                 HorizontalAlignment="Center" 
                 FontSize="24"
                 Text="{lc:Localization Testing.ManualCommandsBench.VerticalCell}" />
-            <TextBox
-                Margin="10"
-                materialDesign:HintAssist.Hint="{lc:Localization Testing.ManualCommandsBench.PressureOrFormula}"
-                FontSize="24"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                Text="{Binding Pressure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBlock 
-                Margin="10,0,0,0" 
-                Style="{StaticResource MaterialDesignCaptionTextBlock}"
-                Text="{lc:Localization Testing.ManualCommandsBench.Example}" />
         </StackPanel>
-
     </Grid>
 </UserControl>

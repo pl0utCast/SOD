@@ -21,14 +21,6 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.ProgrammMethodicsEditor.Com
 
             }
         }
-        [Reactive]
-        public bool Liquid { get; set; }
-        [Reactive]
-        public bool LiquidHigh { get; set; }
-        [Reactive]
-        public bool Gas { get; set; }
-        [Reactive]
-        public bool GasHigh { get; set; }
 
         public override void Save()
         {

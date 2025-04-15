@@ -1,9 +1,5 @@
-﻿using SOD.App.Commands;
-using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ReactiveUI;
+using SOD.App.Commands;
 
 namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
 {
@@ -13,8 +9,6 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
         {
 
         }
-
-        public string Cavity { get; set; }
 
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
     }

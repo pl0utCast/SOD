@@ -14,35 +14,6 @@
             <TextBlock 
                 FontSize="24"
                 Text="{lc:Localization Testing.ManualCommandsBench.FillingCell}" />
-            <StackPanel
-                Margin="0,20,0,0"
-                HorizontalAlignment="Center"
-                Orientation="Horizontal">
-                <ToggleButton
-                    Width="50"
-                    Height="50"
-                    Margin="10,4,10,4"
-                    Content="A"
-                    FontSize="24"
-                    IsChecked="{Binding CavityA}"
-                    Style="{StaticResource MaterialDesignFlatToggleButton}" />
-                <ToggleButton
-                    Width="50"
-                    Height="50"
-                    Margin="10,4,10,4"
-                    Content="B"
-                    FontSize="24"
-                    IsChecked="{Binding CavityB}"
-                    Style="{StaticResource MaterialDesignFlatToggleButton}" />
-                <ToggleButton
-                    Width="50"
-                    Height="50"
-                    Margin="10,4,10,4"
-                    Content="C"
-                    FontSize="24"
-                    IsChecked="{Binding CavityC}"
-                    Style="{StaticResource MaterialDesignFlatToggleButton}" />
-            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

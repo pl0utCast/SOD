@@ -16,20 +16,6 @@
                 HorizontalAlignment="Center" 
                 FontSize="24"
                 Text="{lc:Localization Testing.ManualCommandsBench.PressureRelease}" />
-            <StackPanel Margin="10" Orientation="Horizontal">
-                <ToggleButton IsChecked="{Binding TimeInStandart}" />
-                <TextBlock 
-                    Margin="10,0,0,0" 
-                    FontSize="24"
-                    Text="{lc:Localization Testing.ManualCommandsBench.UseFromStandard}" />
-            </StackPanel>
-            <TextBox
-                Margin="10,0,10,0"
-                materialDesign:HintAssist.Hint="{lc:Localization Testing.ManualCommandsBench.RegistrationTimeSeconds}"
-                FontSize="24"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                Text="{Binding Time, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                Visibility="{Binding TimeInStandart, Converter={StaticResource InverseBoolToVisConverter}}" />
         </StackPanel>
     </Grid>
 </UserControl>
