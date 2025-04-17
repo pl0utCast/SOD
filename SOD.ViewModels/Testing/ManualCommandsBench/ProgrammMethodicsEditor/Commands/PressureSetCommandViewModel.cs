@@ -1,12 +1,4 @@
 ﻿using SOD.App.Commands;
-using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
-using ReactiveUI.Validation.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Reactive.Disposables;
-using System.Reactive.Linq;
-using System.Text;
 
 namespace SOD.ViewModels.Testing.ManualCommandsBench.ProgrammMethodicsEditor.Commands
 {
@@ -14,14 +6,13 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.ProgrammMethodicsEditor.Com
     {
         public PressureSetCommandViewModel(CommandConfig commandConfig) : base(commandConfig)
         {
-            Notify(true);
             if (commandConfig.Type != CommandType.PressureSet) throw new ArgumentException("command is not support");
-
+            Notify(true);
         }
 
         public override void Save()
         {
-            CommandConfig.Parameters.Clear();
+            
         }
     }
 }

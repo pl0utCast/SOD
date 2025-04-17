@@ -1,12 +1,18 @@
 ﻿using MemBus;
+using NLog;
 using SOD.App.Benches.SODBench.Report;
+using SOD.App.Commands;
+using SOD.App.Commands.Modbus3Post;
+using SOD.App.Messages;
 using SOD.App.Messages.Commands;
 using SOD.App.Testing;
 using SOD.App.Testing.Programms;
 using SOD.App.Testing.Standarts;
 using SOD.App.Testing.Test;
 using SOD.Core.Balloons;
+using SOD.Core.Device.Modbus;
 using SOD.Core.Infrastructure;
+using SOD.Localization.Settings.DeviceAndSensors;
 using SOD.LocalizationService;
 using System.Drawing;
 
@@ -27,6 +33,8 @@ namespace SOD.App.Benches.SODBench
         private ITesting currentTest;
         private Timer registrationTimer;
         private ProgrammMethodicsConfig programmMethodicsConfig;
+        private ModbusTcpDevice device;
+        private ModbusCommandsFactory modbusCommandsFactory;
         private readonly List<Post> posts = new List<Post>();
 
         public Bench(ISettingsService settingsService,
@@ -34,7 +42,8 @@ namespace SOD.App.Benches.SODBench
                      ITestingService testingService,
                      IBus bus,
                      IReportService reportService,
-                     ILocalizationService localizationService)
+                     ILocalizationService localizationService,
+                     IDeviceService deviceService)
         {
             _settingsService = settingsService;
             _sensorService = sensorService;
@@ -43,6 +52,9 @@ namespace SOD.App.Benches.SODBench
             _reportService = reportService;
             _localizationService = localizationService;
             Settings = settingsService?.GetSettings<Settings>(settingsKey, new Settings());
+
+            device = (ModbusTcpDevice)deviceService.GetDevice(1);
+            modbusCommandsFactory = new ModbusCommandsFactory(device, bus);
 
             posts.Add(new Post(1) { IsEnable = true, Name = "Post 1" });
 
@@ -69,7 +81,7 @@ namespace SOD.App.Benches.SODBench
             _settingsService.SaveSettings(settingsKey, Settings);
         }
 
-        public void StartTesting()
+        public async Task StartTestingAsync()
         {
             if (currentTest?.IsRun == true) return;
             var testSettings = Settings.SelectedTestSettings;
@@ -81,6 +93,32 @@ namespace SOD.App.Benches.SODBench
                 cancellationTokenSource = new CancellationTokenSource();
                 currentTest.Start(this);
                 currentTest.StartCollectData();
+            }
+
+            var programm = _testingService.CreateProgrammMethodics(ProgrammMethodicsConfig, TestingBalloon, modbusCommandsFactory, reportData);
+
+            try
+            {
+                foreach (var children in programm.Childrens)
+                {
+                    if (cancellationTokenSource.Token.IsCancellationRequested)
+                    {
+                        cancellationTokenSource.Token.ThrowIfCancellationRequested();
+                    }
+                    if (children is ICommand baseCommand)
+                    {
+                        _bus.Publish(new ExecuteTestCommand(baseCommand.CommandConfig, true));
+                        await baseCommand.ExecuteAsync(cancellationTokenSource.Token);
+                        //_bus.Publish(new ExecuteTestCommand(baseCommand.CommandConfig, false));
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                currentTest?.Stop();
+                // посылаем контроллеру команду стоп
+                await device.WriteInt32(46, 2);
+                //logger.Error(e, $"Ошибка выполнения программной методики");
             }
         }
 

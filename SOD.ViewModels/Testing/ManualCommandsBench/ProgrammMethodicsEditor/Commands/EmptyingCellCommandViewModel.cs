@@ -1,7 +1,4 @@
 ﻿using SOD.App.Commands;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SOD.ViewModels.Testing.ManualCommandsBench.ProgrammMethodicsEditor.Commands
 {
@@ -9,6 +6,7 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.ProgrammMethodicsEditor.Com
     {
         public EmptyingCellCommandViewModel(CommandConfig commandConfig) : base(commandConfig)
         {
+            if (commandConfig.Type != CommandType.EmptyingCell) throw new ArgumentException("Command not support");
             Notify(true);
         }
 

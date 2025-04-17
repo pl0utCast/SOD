@@ -302,6 +302,15 @@
                             FontSize="22"
                             ItemsSource="{Binding Source={converters:CommandTypeConverter}, Path=Types}" 
                             SelectedValue="{Binding SelectedCommand, Converter={converters:CommandTypeConverter}}">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Foreground" Value="ForestGreen" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Vertical"/>

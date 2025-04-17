@@ -50,7 +50,7 @@ namespace SOD.App.Benches
                 case BenchesType.SOD:
                     if (sodBench == null)
                     {
-                        sodBench = new SODBench.Bench(_settingsService, _sensorService, _testingService, _bus, _reportService, localizationService);
+                        sodBench = new SODBench.Bench(_settingsService, _sensorService, _testingService, _bus, _reportService, localizationService, _deviceService);
                     }
                     return sodBench;
                 default: return null;

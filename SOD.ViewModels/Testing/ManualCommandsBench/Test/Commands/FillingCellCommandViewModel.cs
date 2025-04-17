@@ -14,13 +14,10 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
 {
     public class FillingCellCommandViewModel: ReactiveObject, IActivatableViewModel
     {
-        private IDisposable timerDisposable;
         public FillingCellCommandViewModel(CommandConfig commandConfig, IBus bus)
         {
             
         }
-        [Reactive]
-        public string Time { get; set; }
 
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
     }

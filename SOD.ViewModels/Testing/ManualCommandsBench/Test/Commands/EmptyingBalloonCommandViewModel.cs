@@ -16,7 +16,7 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
         {
             
         }
-        public int Time { get; set; }
+
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
     }
 }

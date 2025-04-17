@@ -18,8 +18,7 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
         {
             
         }
-        [Reactive]
-        public string Time { get; set; }
+
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
     }
 }
