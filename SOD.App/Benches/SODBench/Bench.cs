@@ -53,7 +53,7 @@ namespace SOD.App.Benches.SODBench
             _localizationService = localizationService;
             Settings = settingsService?.GetSettings<Settings>(settingsKey, new Settings());
 
-            device = (ModbusTcpDevice)deviceService.GetDevice(1);
+            device = deviceService.GetAllDevice().FirstOrDefault(d => d is ModbusTcpDevice) as ModbusTcpDevice;
             modbusCommandsFactory = new ModbusCommandsFactory(device, bus);
 
             posts.Add(new Post(1) { IsEnable = true, Name = "Post 1" });
@@ -109,7 +109,7 @@ namespace SOD.App.Benches.SODBench
                     {
                         _bus.Publish(new ExecuteTestCommand(baseCommand.CommandConfig, true));
                         await baseCommand.ExecuteAsync(cancellationTokenSource.Token);
-                        //_bus.Publish(new ExecuteTestCommand(baseCommand.CommandConfig, false));
+                        _bus.Publish(new ExecuteTestCommand(baseCommand.CommandConfig, false));
                     }
                 }
             }

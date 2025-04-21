@@ -12,7 +12,7 @@ namespace SOD.App.Commands
         {
             switch (commandCollectionType)
             {
-                case CommandCollectionType.Modbus3Post:
+                case CommandCollectionType.ModbusSod:
                     switch (commandType)
                     {
                         case CommandType.FillingBalloon:

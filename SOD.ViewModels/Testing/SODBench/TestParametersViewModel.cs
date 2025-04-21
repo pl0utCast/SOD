@@ -163,7 +163,7 @@ namespace SOD.ViewModels.Testing.SODBench
 
             ExecuteCommand = ReactiveCommand.Create(() =>
             {
-				var command = CommandsHelper.GetDefault(CommandCollectionType.Modbus3Post, SelectedCommand);
+				var command = CommandsHelper.GetDefault(CommandCollectionType.ModbusSod, SelectedCommand);
                 _bus.Publish(new ExecuteTestCommand(command, true));
             });
         }

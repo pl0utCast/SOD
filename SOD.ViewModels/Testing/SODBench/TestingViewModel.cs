@@ -31,6 +31,7 @@ namespace SOD.ViewModels.Testing.SODBench
 								ITestBenchService testBenchService,
 								IBus bus,
 								IDialogService dialogService,
+								IDeviceService deviceService,
 								ISensorService sensorService,
 								ISettingsService settingsService,
 								ILocalizationService localizationService)
@@ -61,7 +62,7 @@ namespace SOD.ViewModels.Testing.SODBench
 				}).DisposeWith(dis);
 			});
 
-            Commands = new CommandsViewModel(bus, dialogService);
+            Commands = new CommandsViewModel(bus, dialogService, deviceService);
         }
 
 		[Reactive]
