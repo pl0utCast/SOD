@@ -175,7 +175,7 @@ namespace SOD.App.Benches.SODBench
                     currentTest?.FillReport(chart);
                     //Settings.BalloonProperties.Insert(0, new Core.Balloons.Properties.BalloonProperty() { Name = _localizationService["Testing.SODBench.TestSettings.BalloonType"], Value = Settings.SelectedBalloon.Name });
                     //Settings.BalloonProperties.Insert(1, new Core.Balloons.Properties.BalloonProperty() { Name = _localizationService["Testing.SODBench.TestSettings.BalloonValue"], Value = Settings.SelectedBalloon.BalloonVolume.ToString() });
-                    //reportData.Fill(Settings.BalloonProperties);
+                    reportData.Fill(Settings.BalloonProperties);
                     reportData.Fill(TestingBalloon);
                     reportData.Fill(Settings.Parameters);
                     var report = await _reportService.CreateReportAsync(reportData, Settings.ReportPath);
@@ -184,7 +184,8 @@ namespace SOD.App.Benches.SODBench
                     {
                         report.Properties.Add(prop.Prefix, prop.Value.ToString());
                     }
-                    report.Properties.Add("balloon_type", TestingBalloon.BalloonType.ToString());
+                    if (TestingBalloon.BalloonType != null)
+                        report.Properties.Add("balloon_type", TestingBalloon.BalloonType.ToString());
                     report.Properties.Add("balloon_volume", TestingBalloon.BalloonVolume.ToString());
                 }
             });

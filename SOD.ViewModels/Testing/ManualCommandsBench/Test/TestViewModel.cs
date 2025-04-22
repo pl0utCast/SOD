@@ -98,10 +98,10 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test
                 //    Posts.Add(postVm);
                 //}
 
-                if (Posts.Count <= 3) // Верстаем количество колонок по количеству постов
-                    PostsColumn = Posts.Count;
-                else // Верстаем количество колонок по количеству постов деленное на 2 и округленное в большую сторону
-                    PostsColumn = (int)Math.Ceiling(Posts.Count / 2.0);
+                //if (Posts.Count <= 3) // Верстаем количество колонок по количеству постов
+                //    PostsColumn = Posts.Count;
+                //else // Верстаем количество колонок по количеству постов деленное на 2 и округленное в большую сторону
+                //    PostsColumn = (int)Math.Ceiling(Posts.Count / 2.0);
             });
 
             Commands = new CommandsViewModel(bus, dialogService, _deviceService);

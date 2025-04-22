@@ -4,6 +4,8 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using SOD.App.Benches;
 using SOD.App.Benches.SODBench;
+using SOD.App.Messages;
+using SOD.App.Testing.Programms;
 using SOD.Core;
 using SOD.Core.Infrastructure;
 using SOD.Core.Sensor;
@@ -85,8 +87,9 @@ namespace SOD.ViewModels.Testing.SODBench
 					PressureChart.StartChart();
 				}
 				IsRunTest = !IsRunTest;
-			}, this.WhenAnyValue(x => x.IsExposure, x => x.IsSelectedTest,
-				(isExposure, isSelectedTest) => !isExposure && isSelectedTest));
+			}, this.WhenAnyValue(x => x.IsExposure, x => x.IsSelectedTest, x => x.ProgrammMethodicsConfig,
+					(isExposure, isSelectedTest, selectedProgrammMethodics) => 
+						!isExposure && isSelectedTest && ProgrammMethodicsConfig != null));
 
 			Exposure = ReactiveCommand.Create(() =>
 			{
@@ -154,7 +157,13 @@ namespace SOD.ViewModels.Testing.SODBench
 				{
 					IsTestResultFill = false;
 				}).DisposeWith(dis);
-			});
+
+                bus.Subscribe<SelectProgrammMethodicsConfigMessage>(m =>
+                {
+                    ProgrammMethodicsConfig = m.ProgrammMethodicsConfig;
+                })
+				.DisposeWith(dis);
+            });
 		}
 
 		private void UpdateChart()
@@ -187,6 +196,8 @@ namespace SOD.ViewModels.Testing.SODBench
 		public string ExposureTime { get; set; }
 		[Reactive]
 		public string InfoMessage { get; set; }
+		[Reactive]
+        public ProgrammMethodicsConfig ProgrammMethodicsConfig { get; set; }
 		public ObservableCollectionExtended<SensorViewModel> Sensors { get; set; } = new ObservableCollectionExtended<SensorViewModel>();
 		public PressureChartViewModel PressureChart { get; set; }
 		public TemperatureSensorsViewModel TemperatureSensors { get; set; }
