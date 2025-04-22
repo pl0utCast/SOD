@@ -42,6 +42,7 @@ namespace SOD.ViewModels.Testing.SODBench
         private IDevice device;
         private Dictionary<string, IValueViewModel> parameters = new Dictionary<string, IValueViewModel>();
         private TestBenchSettings serviceParameters = new TestBenchSettings();
+
         public TestParametersViewModel(INavigationService navigationService,
                                        ITestBenchService testBenchService,
                                        ITestingService testingService,
@@ -134,15 +135,25 @@ namespace SOD.ViewModels.Testing.SODBench
 
             ReactiveCommand<Unit, Unit> SendToControllerNumeric(ushort code, object value)
             {
-                return ReactiveCommand.CreateFromTask(async () =>
+                return ReactiveCommand.Create(() =>
                 {
                     if (device is ModbusTcpDevice modbusTcpDevice && device.GetStatus() == DeviceStatus.Online)
                     {
                         ushort valueConverted = Convert.ToUInt16(value);
-                        await modbusTcpDevice.WriteHoldingRegistersAsync(code, new ushort[] { valueConverted });
+
+                        //_ = modbusTcpDevice.WriteHoldingRegistersAsync(code, new ushort[] { valueConverted });
+                        ModbusRegister modbusRegister = new ModbusRegister
+                        {
+                            Id = code,
+                            Value = value,
+                            DataType = ChannelDataType.FLOAT
+                        };
+                        modbusTcpDevice.WriteHoldingRegister(modbusRegister);
                     }
+                    return Unit.Default;
                 });
             }
+
 
             //Запись сервисных параметров в регистры контроллера
             ApplyController = ReactiveCommand.CreateFromTask(async () =>
@@ -178,7 +189,6 @@ namespace SOD.ViewModels.Testing.SODBench
             //{
             //	testSettings.TenzoSensorId = TenzoSensor.Id;
             //}
-
             testSettings.SetPressure = (Pressure)UnitsHelper.GetValue(WorkPressure.Value, WorkPressure.SelectedUnitInfo);
             testSettings.Deformation = Deformation;
             var t = int.TryParse(MaxDeformation, out var value);
@@ -228,7 +238,6 @@ namespace SOD.ViewModels.Testing.SODBench
 
             navigationService.GoBack();
         }, canApply);
-
         }
 
         [Reactive]
