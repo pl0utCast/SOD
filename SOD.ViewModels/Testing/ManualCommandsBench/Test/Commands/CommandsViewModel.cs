@@ -1,13 +1,13 @@
 ﻿using MemBus;
-using SOD.App.Commands;
-using SOD.App.Messages.Commands;
-using SOD.Dialogs;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using System;
-using System.Collections.Generic;
+using SOD.App.Commands;
+using SOD.App.Commands.Modbus3Post;
+using SOD.App.Messages.Commands;
+using SOD.Core.Device.Modbus;
+using SOD.Core.Infrastructure;
+using SOD.Dialogs;
 using System.Reactive.Disposables;
-using System.Text;
 
 namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
 {
@@ -15,19 +15,33 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
     {
         private readonly IBus _bus;
         private readonly IDialogService _dialogService;
-        public CommandsViewModel(IBus bus, IDialogService dialogService)
+        private readonly ModbusTcpDevice _modbusTcpDevice;
+        private CancellationTokenSource cancellationTokenSource;
+
+        public CommandsViewModel(IBus bus, IDialogService dialogService, IDeviceService deviceService)
         {
             _bus = bus;
             _dialogService = dialogService;
+            _modbusTcpDevice = deviceService.GetAllDevice().FirstOrDefault(d => d is ModbusTcpDevice) as ModbusTcpDevice;
+            cancellationTokenSource = new CancellationTokenSource();
+
             this.WhenActivated(dis =>
             {
-                bus.Subscribe<ExecuteTestCommand>(m =>
+                bus.Subscribe<ExecuteTestCommand>(async m =>
                 {
                     if (m.IsExecute)
                     {
-                        Command = CreateCommandViewModel(m.CommandConfig);
-                        Command.Activator.Activate();
-                        Command.Activator.DisposeWith(dis);
+                        if (cancellationTokenSource.Token.IsCancellationRequested)
+                        {
+                            cancellationTokenSource.Token.ThrowIfCancellationRequested();
+                        }
+
+                        Command = CreateCommand(m.CommandConfig);
+                        await Command.ExecuteAsync(cancellationTokenSource.Token);
+
+                        //Command = CreateCommandViewModel(m.CommandConfig);
+                        //Command.Activator.Activate();
+                        //Command.Activator.DisposeWith(dis);
                     }
                         
                     IsExecute = m.IsExecute;
@@ -37,38 +51,64 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
 
         }
 
-        private IActivatableViewModel CreateCommandViewModel(CommandConfig commandConfig)
+        private ICommand CreateCommand(CommandConfig commandConfig)
         {
-            //Command?.Activator.Deactivate();
+            var parameters = commandConfig.Parameters.Select(kv => kv.Value).ToArray();
             switch (commandConfig.Type)
             {
-                case CommandType.TestMedium:
-                    return new TestMediumCommandViewModel(commandConfig);
-                case CommandType.Filling:
-                    return new FillingCommandViewModel(_bus, _dialogService);
-                case CommandType.PressurizedCavity:
-                    return new PressurizeCavityCommandViewModel(commandConfig);
-                case CommandType.LeakControlCavity:
-                    return new LeakControlCavityViewModel(commandConfig);
-                case CommandType.SetPressure:
-                    return new SetPressureCommandViewModel(commandConfig, _bus);
-                case CommandType.Hold:
-                    return new HoldCommandViewModel(commandConfig, _bus);
-                case CommandType.Registartion:
-                    return new RegistartionCommandViewModel(commandConfig, _bus);
+                case CommandType.FillingBalloon:
+                    return new FillingBalloonCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                case CommandType.EmptyingBalloon:
+                    return new EmptyingBalloonCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                case CommandType.FillingCell:
+                    return new FillingCellCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                case CommandType.EmptyingCell:
+                    return new EmptyingCellCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                case CommandType.PressureSet:
+                    return new PressureSetCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
                 case CommandType.PressureRelease:
-                    return new PressureReleaseCommandViewModel();
-                case CommandType.Purge:
-                    return new PurgeCommandViewModel();
+                    return new PressureReleaseCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                case CommandType.VerticalCell:
+                    return new VerticalCellCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                case CommandType.HorizontalCell:
+                    return new HorizontalCellCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
                 default:
                     break;
             }
             return null;
         }
+
+        //private IActivatableViewModel CreateCommandViewModel(CommandConfig commandConfig)
+        //{
+        //    switch (commandConfig.Type)
+        //    {
+        //        case CommandType.FillingBalloon:
+        //            return new FillingBalloonCommandViewModel(commandConfig);
+        //        case CommandType.EmptyingBalloon:
+        //            return new EmptyingBalloonCommandViewModel(_bus, _dialogService);
+        //        case CommandType.FillingCell:
+        //            return new FillingCellCommandViewModel(commandConfig, _bus);
+        //        case CommandType.EmptyingCell:
+        //            return new EmptyingCellCommandViewModel(commandConfig, _bus);
+        //        case CommandType.PressureSet:
+        //            return new PressureSetCommandViewModel(commandConfig);
+        //        case CommandType.PressureRelease:
+        //            return new PressureReleaseCommandViewModel(commandConfig);
+        //        case CommandType.VerticalCell:
+        //            return new VerticalCellCommandViewModel(commandConfig, _bus);
+        //        case CommandType.HorizontalCell:
+        //            return new HorizontalCellCommandViewModel(commandConfig);
+        //        default:
+        //            break;
+        //    }
+        //    return null;
+        //}
+
         [Reactive]
         public bool IsExecute { get; set; }
         [Reactive]
-        public IActivatableViewModel Command { get; set; }
+        public ICommand Command { get; set; }
+        //public IActivatableViewModel Command { get; set; }
 
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
     }

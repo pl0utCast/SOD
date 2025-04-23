@@ -8,9 +8,11 @@ using SOD.Core.Cryptography;
 using SOD.Core.Infrastructure;
 using SOD.Core.Sensor;
 using SOD.Dialogs;
+using SOD.Localization;
 using SOD.LocalizationService;
 using SOD.Navigation;
 using SOD.ViewModels.Controls;
+using SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands;
 using System.IO;
 using System.Reactive.Disposables;
 
@@ -29,6 +31,7 @@ namespace SOD.ViewModels.Testing.SODBench
 								ITestBenchService testBenchService,
 								IBus bus,
 								IDialogService dialogService,
+								IDeviceService deviceService,
 								ISensorService sensorService,
 								ISettingsService settingsService,
 								ILocalizationService localizationService)
@@ -49,20 +52,25 @@ namespace SOD.ViewModels.Testing.SODBench
 				Test = defaultTestingViewModel;
 				defaultTestingViewModel.Activator.Activate().DisposeWith(dis);
 
-				bus.Subscribe<SelectedTestMessage>(m =>
+                Commands.Activator.Activate().DisposeWith(dis);
+
+                bus.Subscribe<SelectedTestMessage>(m =>
 				{
 					defaultTestingViewModel.Activator.Activate().DisposeWith(dis);
 					Test = defaultTestingViewModel;
 					//ViewTitle = bench.Settings.SelectedTestSettings?.LocalName;
 				}).DisposeWith(dis);
 			});
-		}
+
+            Commands = new CommandsViewModel(bus, dialogService, deviceService);
+        }
 
 		[Reactive]
 		public string ViewTitle { get; set; } = "Испытания";
 		[Reactive]
 		public IActivatableViewModel Test { get; set; }
-		public LastUpadateSensorSettings LastUpadateSensorSettings { get; set; }
+        public CommandsViewModel Commands { get; set; }
+        public LastUpadateSensorSettings LastUpadateSensorSettings { get; set; }
 
 		public ViewModelActivator Activator { get; } = new ViewModelActivator();
 	}

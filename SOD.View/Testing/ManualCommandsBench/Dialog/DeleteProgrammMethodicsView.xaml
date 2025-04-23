@@ -6,10 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SOD.View.Testing.ManualCommandsBench.Dialog"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="500"
-    Height="400"
+    xmlns:lc="clr-namespace:SOD.LocalizationService;assembly=SOD.LocalizationService"
+    MinWidth="500"
+    MinHeight="200"
     mc:Ignorable="d">
-    <controls:YesNoDialog NoCommand="{Binding Cancel}" YesCommand="{Binding Delete}">
+    <controls:YesNoDialog
+        NoCommand="{Binding Cancel}"
+        NoText="{lc:Localization Settings.DeviceAndSensor.Device.No}"
+        YesCommand="{Binding Delete}"
+        YesText="{lc:Localization Settings.DeviceAndSensor.Device.Yes}">
         <controls:YesNoDialog.MessageContent>
             <TextBlock
                 HorizontalAlignment="Center"

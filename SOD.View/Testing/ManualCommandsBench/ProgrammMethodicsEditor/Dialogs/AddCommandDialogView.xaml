@@ -19,7 +19,7 @@
         YesText="{lc:Localization Props.EditPropertyView.Save}">
         <controls:YesNoDialog.MessageContent>
             <ComboBox
-                Margin="10"
+                Margin="20 20 20 10"
                 materialDesign:HintAssist.Hint="{lc:Localization Testing.ManualCommandsBench.Command}"
                 FontSize="24"
                 ItemsSource="{Binding Source={converters:CommandTypeConverter}, Path=Types}"

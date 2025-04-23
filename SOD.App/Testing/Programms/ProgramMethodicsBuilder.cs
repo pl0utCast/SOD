@@ -38,20 +38,20 @@ namespace SOD.App.Testing.Programms
                 if (children is TestProgrammConfig testProgrammConfig)
                 {
                     var testProgramm = new TestProgramm() { Id = testProgrammConfig.Id };
-                    if (testProgrammConfig.StandartId!=null)
+                    if (testProgrammConfig.StandartId != null)
                         testProgramm.Standart = _standarts.SingleOrDefault(s => s.Id == testProgrammConfig.StandartId);
-					testProgramm.Test = new Test.Test(reportData, localizationService, testProgramm.Standart, testProgrammConfig.Parameters.Select(kv => kv.Value).ToArray());
-					switch (testProgrammConfig.TestType)
-                    {
-                        //case TestType.Strength:
-                        //    testProgramm.Test = new Strength.Test(testProgrammConfig.Name, reportData, localizationService, testProgramm.Standart, testProgrammConfig.Parameters.Select(kv => kv.Value).ToArray());
-                        //    break;
-                        //case TestType.Leakage:
-                        //    testProgramm.Test = new Leakage.Test(testProgrammConfig.Name, reportData, localizationService, testProgramm.Standart, testProgrammConfig.Parameters.Select(kv => kv.Value).ToArray());
-                        //    break;
-                        default:
-                            break;
-                    }
+                    testProgramm.Test = new Test.Test(reportData, localizationService, testProgramm.Standart, testProgrammConfig.Parameters.Select(kv => kv.Value).ToArray());
+                    //switch (testProgrammConfig.TestType)
+                    //{
+                    //    case TestType.Strength:
+                    //        testProgramm.Test = new Strength.Test(testProgrammConfig.Name, reportData, localizationService, testProgramm.Standart, testProgrammConfig.Parameters.Select(kv => kv.Value).ToArray());
+                    //        break;
+                    //    case TestType.Leakage:
+                    //        testProgramm.Test = new Leakage.Test(testProgrammConfig.Name, reportData, localizationService, testProgramm.Standart, testProgrammConfig.Parameters.Select(kv => kv.Value).ToArray());
+                    //        break;
+                    //    default:
+                    //        break;
+                    //}
                     foreach (var commandChildren in children.Childrens)
                     {
                         if (commandChildren is CommandConfig cc)

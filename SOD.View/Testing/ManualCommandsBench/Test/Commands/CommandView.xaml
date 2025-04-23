@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:commandsVM="clr-namespace:SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands;assembly=SOD.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:SOD.View.Testing.ManualCommandsBench.Test.Commands"
+    xmlns:commands="clr-namespace:SOD.View.Testing.ManualCommandsBench.Test.Commands"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -20,32 +20,29 @@
             </Grid.RowDefinitions>
             <ContentPresenter Content="{Binding Command}">
                 <ContentPresenter.Resources>
-                    <DataTemplate DataType="{x:Type commandsVM:TestMediumCommandViewModel}">
-                        <local:TestMediumCommandView />
+                    <DataTemplate DataType="{x:Type commandsVM:FillingBalloonCommandViewModel}">
+                        <commands:FillingBalloonCommandView />
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type commandsVM:FillingCommandViewModel}">
-                        <local:FillingCommandView />
+                    <DataTemplate DataType="{x:Type commandsVM:EmptyingBalloonCommandViewModel}">
+                        <commands:EmptyingBalloonCommandView />
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type commandsVM:PressurizeCavityCommandViewModel}">
-                        <local:PressurizedCavityCommandView />
+                    <DataTemplate DataType="{x:Type commandsVM:FillingCellCommandViewModel}">
+                        <commands:FillingCellCommandView />
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type commandsVM:LeakControlCavityViewModel}">
-                        <local:LeakControlCavityCommand />
+                    <DataTemplate DataType="{x:Type commandsVM:EmptyingCellCommandViewModel}">
+                        <commands:EmptyingCellCommandView />
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type commandsVM:SetPressureCommandViewModel}">
-                        <local:SetPressureCommandView />
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type commandsVM:HoldCommandViewModel}">
-                        <local:HoldCommandView />
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type commandsVM:RegistartionCommandViewModel}">
-                        <local:RegistrationCommandView />
+                    <DataTemplate DataType="{x:Type commandsVM:PressureSetCommandViewModel}">
+                        <commands:PressureSetCommandView />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type commandsVM:PressureReleaseCommandViewModel}">
-                        <local:PressureReleaseCommandView />
+                        <commands:PressureReleaseCommandView />
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type commandsVM:PurgeCommandViewModel}">
-                        <local:PurgeCommandView />
+                    <DataTemplate DataType="{x:Type commandsVM:VerticalCellCommandViewModel}">
+                        <commands:VerticalCellCommandView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type commandsVM:HorizontalCellCommandViewModel}">
+                        <commands:HorizontalCellCommandView />
                     </DataTemplate>
                 </ContentPresenter.Resources>
             </ContentPresenter>

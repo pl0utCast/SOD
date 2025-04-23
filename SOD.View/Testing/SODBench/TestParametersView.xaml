@@ -36,7 +36,6 @@
                     <TextBlock 
                         Text="{lc:Localization Testing.SODBench.TestParameters.ParametersTest}"
                         FontSize="14"
-                        Foreground="#616273"
                         FontWeight="Medium"
                         VerticalAlignment="Center"/>
                 </TabItem.Header>
@@ -245,10 +244,9 @@
             <TabItem>
                 <TabItem.Header>
                     <TextBlock 
-                        Text="РУЧНОЕ УПРАВЛЕНИЕ"
+                        Text="АВТОМАТИЧЕСКОЕ УПРАВЛЕНИЕ"
                         Margin="0,0,20,0"
                         FontSize="14"
-                        Foreground="#616273"
                         FontWeight="Medium"
                         VerticalAlignment="Center"/>
                 </TabItem.Header>
@@ -262,10 +260,73 @@
             <TabItem>
                 <TabItem.Header>
                     <TextBlock 
+                        Text="РУЧНОЕ УПРАВЛЕНИЕ"
+                        Margin="0,0,20,0"
+                        FontSize="14"
+                        FontWeight="Medium"
+                        VerticalAlignment="Center"/>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="80*" />
+                    </Grid.RowDefinitions>
+
+                    <Button
+                        Grid.Row="0"
+                        Height="50"
+                        Margin="20 40 20 20"
+                        Command="{Binding ExecuteCommand}"
+                        FontSize="24" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                Kind="LinkVariant" />
+                            <TextBlock 
+                                Text="ВЫПОЛНИТЬ"
+                                VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <TextBlock 
+                        Grid.Row="1"
+                        Margin="20 0 0 0"
+                        Foreground="Gray"
+                        Text="{lc:Localization Testing.ManualCommandsBench.Command}" 
+                        Style="{StaticResource MaterialDesignHeadline5TextBlock}"/>
+                    
+                    <ScrollViewer Grid.Row="2" Margin="0,25,0,0" Visibility="Visible">
+                        <ListBox 
+                            Margin="10 0 0 0"
+                            FontSize="22"
+                            ItemsSource="{Binding Source={converters:CommandTypeConverter}, Path=Types}" 
+                            SelectedValue="{Binding SelectedCommand, Converter={converters:CommandTypeConverter}}">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Foreground" Value="ForestGreen" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock 
                         Text="{lc:Localization Testing.SODBench.TestParameters.Information}"
                         Margin="0,0,20,0"
                         FontSize="14"
-                        Foreground="#616273"
                         FontWeight="Medium"
                         VerticalAlignment="Center"/>
                 </TabItem.Header>

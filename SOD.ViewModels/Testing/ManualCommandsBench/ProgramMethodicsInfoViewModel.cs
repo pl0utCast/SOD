@@ -13,10 +13,9 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench
 {
     public class ProgrammMethodicsInfoViewModel
     {
-        public ProgrammMethodicsInfoViewModel(ProgrammMethodicsConfig programmMethodicsConfig, string valveTypeName, IEnumerable<LuaStandart> standarts, Action editAction)
+        public ProgrammMethodicsInfoViewModel(ProgrammMethodicsConfig programmMethodicsConfig, IEnumerable<LuaStandart> standarts, Action editAction)
         {
             Name = programmMethodicsConfig.Name;
-            ValveTypeName = valveTypeName;
             CreatedDate = programmMethodicsConfig.CreatedDate.ToString("dd.MM.yyyy hh:mm");
             foreach (var children in programmMethodicsConfig.Childrens)
             {
@@ -36,7 +35,6 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench
         public ReactiveCommand<Unit, Unit> Edit { get; set; }
         public List<object> FullInfo { get; set; } = new List<object>();
         public string Name { get; set; }
-        public string ValveTypeName { get; set; }
         public string CreatedDate { get; set; }
         public ProgrammMethodicsConfig Config { get; set; }
     }

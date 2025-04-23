@@ -6,6 +6,6 @@ namespace SOD.App.Commands
 {
     public enum CommandCollectionType
     {
-        Modbus3Post
+        ModbusSod
     }
 }

@@ -14,7 +14,7 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.ProgrammMethodicsEditor.Dia
         public AddCommandDialogViewModel(IDialogService dialogService)
         {
             Cancel = ReactiveCommand.Create(() => dialogService.CloseAsync(null));
-            Save = ReactiveCommand.Create(() => dialogService.CloseAsync(CommandsHelper.GetDefault(CommandCollectionType.Modbus3Post, SelectedCommand)));
+            Save = ReactiveCommand.Create(() => dialogService.CloseAsync(CommandsHelper.GetDefault(CommandCollectionType.ModbusSod, SelectedCommand)));
         }
         public ReactiveCommand<Unit, Unit> Save { get; set; }
         public ReactiveCommand<Unit, Unit> Cancel { get; set; }

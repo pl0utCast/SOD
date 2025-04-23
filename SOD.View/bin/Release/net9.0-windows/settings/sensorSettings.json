@@ -2,11 +2,8 @@
   "TenzoSensorCodeBased_Id_0": {
     "Name": "100 kg",
     "ChannelId": 62,
-    "MaxCode": 4963,
-    "MinCode": 26,
-    "Unit": "3",
+    "Unit": 3,
     "Accaury": "F2",
-    "FilterCoef": 0.0,
     "SensorHint": "",
     "Coefficients": [
       {
@@ -46,32 +43,125 @@
   "TenzoSensorCodeBased_Id_1": {
     "Name": "500 kg",
     "ChannelId": 64,
-    "MaxCode": 4963,
-    "MinCode": 26,
-    "Unit": "3",
+    "Unit": 3,
     "Accaury": "F2",
-    "FilterCoef": 0.0,
-    "SensorHint": ""
+    "SensorHint": "",
+    "Coefficients": [
+      {
+        "Id": 1,
+        "SavedCode": 125,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 11.5
+        }
+      },
+      {
+        "Id": 2,
+        "SavedCode": 564,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 55.2
+        }
+      },
+      {
+        "Id": 3,
+        "SavedCode": 986,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 87.6
+        }
+      },
+      {
+        "Id": 4,
+        "SavedCode": 1028,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 94.9
+        }
+      }
+    ]
   },
   "TenzoSensorCodeBased_Id_2": {
     "Name": "5000 kg",
     "ChannelId": 66,
-    "MaxCode": 4963,
-    "MinCode": 26,
-    "Unit": "3",
+    "Unit": 3,
     "Accaury": "F2",
-    "FilterCoef": 0.0,
-    "SensorHint": ""
+    "SensorHint": "",
+    "Coefficients": [
+      {
+        "Id": 1,
+        "SavedCode": 125,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 11.5
+        }
+      },
+      {
+        "Id": 2,
+        "SavedCode": 564,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 55.2
+        }
+      },
+      {
+        "Id": 3,
+        "SavedCode": 986,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 87.6
+        }
+      },
+      {
+        "Id": 4,
+        "SavedCode": 1028,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 94.9
+        }
+      }
+    ]
   },
   "TenzoSensorCodeBased_Id_3": {
     "Name": "10000 kg",
     "ChannelId": 68,
-    "MaxCode": 4963,
-    "MinCode": 26,
-    "Unit": "3",
+    "Unit": 3,
     "Accaury": "F2",
-    "FilterCoef": 0.0,
-    "SensorHint": ""
+    "SensorHint": "",
+    "Coefficients": [
+      {
+        "Id": 1,
+        "SavedCode": 125,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 11.5
+        }
+      },
+      {
+        "Id": 2,
+        "SavedCode": 564,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 55.2
+        }
+      },
+      {
+        "Id": 3,
+        "SavedCode": 986,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 87.6
+        }
+      },
+      {
+        "Id": 4,
+        "SavedCode": 1028,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 94.9
+        }
+      }
+    ]
   },
   "CodeBasedPressureSensor_Id_4": {
     "Name": "10 bar",

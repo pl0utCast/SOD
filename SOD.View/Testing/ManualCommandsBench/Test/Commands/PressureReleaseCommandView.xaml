@@ -7,7 +7,13 @@
     xmlns:lc="clr-namespace:SOD.LocalizationService;assembly=SOD.LocalizationService"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <TextBlock 
-        Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
-        Text="{lc:Localization Testing.ManualCommandsBench.PressureRelease}" />
+    <StackPanel>
+        <TextBlock 
+            Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
+            Text="{lc:Localization Testing.ManualCommandsBench.PressureRelease}" />
+        <TextBlock
+            HorizontalAlignment="Center"
+            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+            Text="{Binding Time}" />
+    </StackPanel>
 </UserControl>

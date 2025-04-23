@@ -27,25 +27,12 @@
             <controls:SaveButton />
         </StackPanel>
         <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
             <TextBox
                 Margin="5"
                 materialDesign:HintAssist.Hint="{lc:Localization Testing.ManualCommandsBench.Name}"
                 FontSize="24"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-            <ComboBox
-                Grid.Column="1"
-                Margin="5"
-                materialDesign:HintAssist.Hint="{lc:Localization Testing.ManualCommandsBench.ValveType}"
-                DisplayMemberPath="Name"
-                FontSize="24"
-                ItemsSource="{Binding ValveTypes}"
-                SelectedValue="{Binding SelectedValveType}"
-                Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -70,20 +57,6 @@
                             <TextBlock 
                                 VerticalAlignment="Center"
                                 Text="{lc:Localization Testing.ManualCommandsBench.Command}"/>
-                        </StackPanel>
-                    </Button>
-                    <Button
-                        Height="50"
-                        Margin="10,0,0,0"
-                        Command="{Binding AddTesting}">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon
-                                Width="24"
-                                Height="24"
-                                Kind="Add" />
-                            <TextBlock 
-                                VerticalAlignment="Center"
-                                Text="{lc:Localization Testing.ManualCommandsBench.Test}"/>
                         </StackPanel>
                     </Button>
                     <Button
@@ -165,32 +138,29 @@
 
                 <ContentPresenter Content="{Binding SelectedCommand}">
                     <ContentPresenter.Resources>
-                        <DataTemplate DataType="{x:Type commandsVM:TestMediumCommandViewModel}">
-                            <commands:TestMediumCommandView />
+                        <DataTemplate DataType="{x:Type commandsVM:FillingBalloonCommandViewModel}">
+                            <commands:FillingBalloonCommandView />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type commandsVM:FillingCommandViewModel}">
-                            <commands:FillingCommandView />
+                        <DataTemplate DataType="{x:Type commandsVM:EmptyingBalloonCommandViewModel}">
+                            <commands:EmptyingBalloonCommandView />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type commandsVM:PressurizeCavityCommandViewModel}">
-                            <commands:PressurizeCavityCommandView />
+                        <DataTemplate DataType="{x:Type commandsVM:FillingCellCommandViewModel}">
+                            <commands:FillingCellCommandView />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type commandsVM:LeakControlCavityCommandViewModel}">
-                            <commands:LeakControlCavityCommandView />
+                        <DataTemplate DataType="{x:Type commandsVM:EmptyingCellCommandViewModel}">
+                            <commands:EmptyingCellCommandView />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type commandsVM:SetPressureCommandViewModel}">
-                            <commands:SetPressureCommandView />
+                        <DataTemplate DataType="{x:Type commandsVM:PressureSetCommandViewModel}">
+                            <commands:PressureSetCommandView />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type commandsVM:HoldCommandViewModel}">
-                            <commands:HoldCommandView />
+                        <DataTemplate DataType="{x:Type commandsVM:PressureReleaseCommandViewModel}">
+                            <commands:PressureReleaseCommandView />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type commandsVM:RegistrationCommandViewModel}">
-                            <commands:RegistrationCommandView />
+                        <DataTemplate DataType="{x:Type commandsVM:VerticalCellCommandViewModel}">
+                            <commands:VerticalCellCommandView />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type commandsVM:PressureRealeseCommandViewModel}">
-                            <commands:PressureRealeseCommandView />
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type commandsVM:PurgeCommandViewModel}">
-                            <commands:PurgeCommandView />
+                        <DataTemplate DataType="{x:Type commandsVM:HorizontalCellCommandViewModel}">
+                            <commands:HorizontalCellCommandView />
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type testsVM:TestingViewModel}">
                             <tests:TestingView />

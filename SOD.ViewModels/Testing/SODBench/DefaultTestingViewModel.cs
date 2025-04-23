@@ -3,6 +3,9 @@ using MemBus;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using SOD.App.Benches;
+using SOD.App.Benches.SODBench;
+using SOD.App.Messages;
+using SOD.App.Testing.Programms;
 using SOD.Core;
 using SOD.Core.Infrastructure;
 using SOD.Core.Sensor;
@@ -49,10 +52,9 @@ namespace SOD.ViewModels.Testing.SODBench
 				IsSelectedTest = true;
 				UpdateChart();
 				UpdateSensors();
-				InfoMessage = localizationService["Testing.SODBench.Step2"];
 			});
 
-			StartTest = ReactiveCommand.Create(() =>
+			StartTest = ReactiveCommand.CreateFromTask(async () =>
 			{
 				if (IsRunTest)
 				{
@@ -66,12 +68,10 @@ namespace SOD.ViewModels.Testing.SODBench
 					if (exposureCounter > 0)
 					{
 						IsTestResultFill = true;
-						InfoMessage = localizationService["Testing.SODBench.Step6_2"];
 					}
 					else
 					{
 						IsTestResultFill = false;
-						InfoMessage = localizationService["Testing.SODBench.Step2"];
 					}
 					isAddTestToReport = IsTestResultFill;
 					PressureChart.StopChart();
@@ -79,30 +79,28 @@ namespace SOD.ViewModels.Testing.SODBench
 				}
 				else
 				{
-					InfoMessage = localizationService["Testing.SODBench.Step3"];
 					exposureCounter = 0;
 					ExposureTime = "00:00:00";
 					bus.Publish(new App.Messages.ProgrammMethodicsStatus(App.Messages.ProgrammStatus.Run));
-					_bench.StartTesting();
-					UpdateChart();
+					await _bench.StartTestingAsync();
+                    UpdateChart();
 					PressureChart.StartChart();
 				}
 				IsRunTest = !IsRunTest;
-			}, this.WhenAnyValue(x => x.IsExposure, x => x.IsSelectedTest,
-				(isExposure, isSelectedTest) => !isExposure && isSelectedTest));
+			}, this.WhenAnyValue(x => x.IsExposure, x => x.IsSelectedTest, x => x.ProgrammMethodicsConfig,
+					(isExposure, isSelectedTest, selectedProgrammMethodics) => 
+						!isExposure && isSelectedTest && ProgrammMethodicsConfig != null));
 
 			Exposure = ReactiveCommand.Create(() =>
 			{
 				if (!IsExposure && exposureCounter < 3)
 				{
-					InfoMessage = localizationService["Testing.SODBench.Step4"];
 					exposureCounter++;
 					IsExposure = true;
 					_bench.StartRegistration();
 				}
 				else if (IsExposure && exposureCounter <= 3)
 				{
-					InfoMessage = localizationService["Testing.SODBench.Step5"];
 					IsExposure = false;
 					_bench.StopRegistartion();
 				}
@@ -126,7 +124,6 @@ namespace SOD.ViewModels.Testing.SODBench
 					isAddTestToReport = false;
 					_bench.UpdateReport(PressureChart.PressureSeries.FirstOrDefault().DataSeries.ParentSurface.ExportToBitmapSource().GetBitmap());
 				}
-				InfoMessage = localizationService["Testing.SODBench.Step2"];
 			}, canResult);
 
 			this.WhenActivated(dis =>
@@ -160,7 +157,13 @@ namespace SOD.ViewModels.Testing.SODBench
 				{
 					IsTestResultFill = false;
 				}).DisposeWith(dis);
-			});
+
+                bus.Subscribe<SelectProgrammMethodicsConfigMessage>(m =>
+                {
+                    ProgrammMethodicsConfig = m.ProgrammMethodicsConfig;
+                })
+				.DisposeWith(dis);
+            });
 		}
 
 		private void UpdateChart()
@@ -193,6 +196,8 @@ namespace SOD.ViewModels.Testing.SODBench
 		public string ExposureTime { get; set; }
 		[Reactive]
 		public string InfoMessage { get; set; }
+		[Reactive]
+        public ProgrammMethodicsConfig ProgrammMethodicsConfig { get; set; }
 		public ObservableCollectionExtended<SensorViewModel> Sensors { get; set; } = new ObservableCollectionExtended<SensorViewModel>();
 		public PressureChartViewModel PressureChart { get; set; }
 		public TemperatureSensorsViewModel TemperatureSensors { get; set; }

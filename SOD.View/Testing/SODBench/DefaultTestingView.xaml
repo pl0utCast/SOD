@@ -88,22 +88,16 @@
                 <ItemsControl.Resources>
                     <DataTemplate DataType="{x:Type sensorsVm:PressureSensorViewModel}">
                         <local:SensorView
-                            Height="{Binding ElementName=topSp, Path=ActualHeight}"
+                            MinHeight="90"
                             SensorName="{lc:Localization Testing.SODBench.Pressure}"
                             ViewModel="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type sensorsVm:TenzoSensorViewModel}">
                         <local:SensorView
-                            Height="{Binding ElementName=topSp, Path=ActualHeight}"
+                            MinHeight="90"
                             SensorName="{lc:Localization Testing.SODBench.Tenzo}"
                             ViewModel="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />
                     </DataTemplate>
-                    <!--<DataTemplate DataType="{x:Type sensorsVm:LeakageSensorViewModel}">
-                        <local:SensorView
-                            Height="{Binding ElementName=topSp, Path=ActualHeight}"
-                            SensorName="{lc:Localization Testing.SODBench.Leakage}"
-                            ViewModel="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />
-                    </DataTemplate>-->
                 </ItemsControl.Resources>
             </ItemsControl>
             <local:TemperatureSensorsView DataContext="{Binding TemperatureSensors}" ViewModel="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />

@@ -23,18 +23,26 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Windows;
 using SOD.LocalizationService;
+using SOD.Core.Infrastructure;
 
 namespace SOD.ViewModels.Testing.ManualCommandsBench.Test
 {
     public class TestViewModel : ReactiveObject, IActivatableViewModel
     {
         private ITestBenchService testBechService;
+        private IDeviceService _deviceService;
 
-        public TestViewModel(INavigationService navigationService, ITestBenchService testBechService, IBus bus, IDialogService dialogService, ILocalizationService localizationService)
+        public TestViewModel(INavigationService navigationService, 
+                             ITestBenchService testBechService, 
+                             IBus bus, 
+                             IDialogService dialogService,
+                             IDeviceService deviceService,
+                             ILocalizationService localizationService)
         {
             ViewTitle = localizationService["MainView.Testing"];
 
             this.testBechService = testBechService;
+            _deviceService = deviceService;
 
             var testBench = (App.Benches.SODBench.Bench)testBechService.GetTestBench();
 
@@ -90,13 +98,13 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test
                 //    Posts.Add(postVm);
                 //}
 
-                if (Posts.Count <= 3) // Верстаем количество колонок по количеству постов
-                    PostsColumn = Posts.Count;
-                else // Верстаем количество колонок по количеству постов деленное на 2 и округленное в большую сторону
-                    PostsColumn = (int)Math.Ceiling(Posts.Count / 2.0);
+                //if (Posts.Count <= 3) // Верстаем количество колонок по количеству постов
+                //    PostsColumn = Posts.Count;
+                //else // Верстаем количество колонок по количеству постов деленное на 2 и округленное в большую сторону
+                //    PostsColumn = (int)Math.Ceiling(Posts.Count / 2.0);
             });
 
-            Commands = new CommandsViewModel(bus, dialogService);
+            Commands = new CommandsViewModel(bus, dialogService, _deviceService);
 
             GoBack = ReactiveCommand.Create(() =>
             {

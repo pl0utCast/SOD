@@ -36,14 +36,21 @@ using System.Net;
 using System.Drawing.Text;
 using SOD.App.Testing.Programms;
 using SOD.ViewModels.Testing.ManualCommandsBench;
+using ReactiveUI.Validation.Abstractions;
+using ReactiveUI.Validation.Helpers;
+using SOD.App.Commands;
+using SOD.App.Messages.Commands;
+using System.Threading;
 
 namespace SOD.ViewModels.Testing.SODBench
 {
     public class TestParametersViewModel : ReactiveObject, IActivatableViewModel
     {
         private IDevice device;
+        private IBus _bus;
         private Dictionary<string, IValueViewModel> parameters = new Dictionary<string, IValueViewModel>();
         private TestBenchSettings serviceParameters = new TestBenchSettings();
+
         public TestParametersViewModel(INavigationService navigationService,
                                        ITestBenchService testBenchService,
                                        ITestingService testingService,
@@ -55,6 +62,7 @@ namespace SOD.ViewModels.Testing.SODBench
         {
             var bench = (App.Benches.SODBench.Bench)testBenchService.GetTestBench();
             var testSettings = bench.Settings.SelectedTestSettings;
+            _bus = bus;
 
             Standarts = testingService.GetAllStandarts().ToList();
             SelectedStandart = Standarts.SingleOrDefault(u => u.Id == bench.Settings.SelectedBalloon?.StandartId);
@@ -82,11 +90,15 @@ namespace SOD.ViewModels.Testing.SODBench
             TenzoUnits = new Force().GetUnitTypeInfo();
             SelectedTenzoUnit = TenzoUnits.SingleOrDefault(u => u.UnitType.Equals(bench.Settings.TenzoUnit));
 
-            this.WhenAnyValue(x => x.SelectedBalloon).Subscribe(sb =>
-            {
-                IsKPG4 = sb?.BalloonTypes == BalloonTypes.KPG4;
-                Deformation = IsKPG4 ? 10 : 5;
-            });
+			ProgrammMethodics = new SelectProgrammMethodicsViewModel(bus, testingService, navigationService, /*valveService,*/
+				dialogService, testBenchService, localizationService);
+			ProgrammMethodics.Activator.Activate();
+
+			this.WhenAnyValue(x => x.SelectedBalloon).Subscribe(sb =>
+			{
+				IsKPG4 = sb?.BalloonTypes == BalloonTypes.KPG4;
+				Deformation = IsKPG4 ? 10 : 5;
+			});
 
             this.WhenAnyValue(x => x.MaxDeformation).Subscribe(md =>
             {
@@ -231,6 +243,11 @@ namespace SOD.ViewModels.Testing.SODBench
             navigationService.GoBack();
         }, canApply);
 
+            ExecuteCommand = ReactiveCommand.Create(() =>
+            {
+				var command = CommandsHelper.GetDefault(CommandCollectionType.ModbusSod, SelectedCommand);
+                _bus.Publish(new ExecuteTestCommand(command, true));
+            });
         }
 
         [Reactive]
@@ -257,6 +274,7 @@ namespace SOD.ViewModels.Testing.SODBench
         public ReactiveCommand<Unit, Unit> Cancel { get; set; }
         public ReactiveCommand<Unit, Unit> Apply { get; set; }
         public ReactiveCommand<Unit, Unit> ApplyController { get; set; }
+        public ReactiveCommand<Unit, Unit> ExecuteCommand { get; set; }
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
         [Reactive]
         public List<Balloon> Balloons { get; set; } = new List<Balloon>();
@@ -288,5 +306,7 @@ namespace SOD.ViewModels.Testing.SODBench
         public ISensor TenzoSensor { get; set; }
         [Reactive]
         public SelectProgrammMethodicsViewModel ProgrammMethodics { get; set; }
+        [Reactive]
+        public CommandType SelectedCommand { get; set; }
     }
 }

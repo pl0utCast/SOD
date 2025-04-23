@@ -150,24 +150,24 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.ProgrammMethodicsEditor
                         CanSave = checkSave();
                     }
                 }
-            }, this.WhenAny(x => x.SelectedCommand, x => x.Value != null)); // Добавление команды доступно только после создания испытания
-
-            AddTesting = ReactiveCommand.CreateFromTask(async () =>
-            {
-                //var tests = ((SOD.App.Benches.SODBench.Bench)testBenchService.GetTestBench()).Settings.Tests;
-                //var result = await dialogService.ShowDialogAsync("AddTesting", new AddTestDialogViewModel(dialogService, tests));
-                //if (result != null)
-                //{
-                //    if (TreeHelper.FindAllBranch(this).Count() == 0) ((TestProgrammConfig)result).Id = 1;
-                //    else ((TestProgrammConfig)result).Id = TreeHelper.FindAllBranch(this).Select(c => c.Id).Max() + 1;
-                //    var testingVM = new TestingViewModel((TestProgrammConfig)result, testingService.GetAllStandarts()
-                //        .Select(s => new Settings.Standarts.StandartViewModel(s)));
-                //    canSaveDisposables.Add(testingVM.Subscribe(cs => CanSave = checkSave()));
-                //    testingVM.Activator.Activate();
-                //    Childrens.Add(testingVM);
-                //    CanSave = checkSave();
-                //}
             });
+
+            //AddTesting = ReactiveCommand.CreateFromTask(async () =>
+            //{
+            //    var tests = ((SOD.App.Benches.SODBench.Bench)testBenchService.GetTestBench()).Settings.Tests;
+            //    var result = await dialogService.ShowDialogAsync("AddTesting", new AddTestDialogViewModel(dialogService, tests));
+            //    if (result != null)
+            //    {
+            //        if (TreeHelper.FindAllBranch(this).Count() == 0) ((TestProgrammConfig)result).Id = 1;
+            //        else ((TestProgrammConfig)result).Id = TreeHelper.FindAllBranch(this).Select(c => c.Id).Max() + 1;
+            //        var testingVM = new TestingViewModel((TestProgrammConfig)result, testingService.GetAllStandarts()
+            //            .Select(s => new Settings.Standarts.StandartViewModel(s)));
+            //        canSaveDisposables.Add(testingVM.Subscribe(cs => CanSave = checkSave()));
+            //        testingVM.Activator.Activate();
+            //        Childrens.Add(testingVM);
+            //        CanSave = checkSave();
+            //    }
+            //});
 
             this.WhenActivated(disposables =>
             {

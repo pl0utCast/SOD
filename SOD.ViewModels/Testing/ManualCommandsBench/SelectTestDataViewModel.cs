@@ -103,7 +103,7 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench
         public UnitTypeInfo SelectedPressureUnit { get; set; }
         public List<PostViewModel> Posts { get; set; } = new List<PostViewModel>();
         public int PostsColumn { get; set; }
-        public ValidationContext ValidationContext { get; } = new ValidationContext();
+        //public ValidationContext ValidationContext { get; } = new ValidationContext();
         public IEnumerable<IValueViewModel> Properties => parameters.Select(kv=>kv.Value);
 
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
