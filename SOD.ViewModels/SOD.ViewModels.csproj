@@ -9,9 +9,9 @@
 
   <ItemGroup>
     <PackageReference Include="MemBus" Version="4.0.1" />
-    <PackageReference Include="ReactiveUI" Version="20.1.1" />
+    <PackageReference Include="ReactiveUI" Version="20.1.63" />
     <PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
-    <PackageReference Include="ReactiveUI.WPF" Version="20.1.1" />
+    <PackageReference Include="ReactiveUI.WPF" Version="20.1.63" />
 	<PackageReference Include="SciChart" Version="6.3.0.13476" />
 	<PackageReference Include="System.Text.Json" Version="8.0.5" />
   </ItemGroup>

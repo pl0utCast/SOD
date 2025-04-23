@@ -1,11 +1,18 @@
 ﻿using MemBus;
+using NLog;
 using SOD.App.Benches.SODBench.Report;
+using SOD.App.Commands;
+using SOD.App.Commands.Modbus3Post;
+using SOD.App.Messages;
 using SOD.App.Messages.Commands;
 using SOD.App.Testing;
+using SOD.App.Testing.Programms;
 using SOD.App.Testing.Standarts;
 using SOD.App.Testing.Test;
 using SOD.Core.Balloons;
+using SOD.Core.Device.Modbus;
 using SOD.Core.Infrastructure;
+using SOD.Localization.Settings.DeviceAndSensors;
 using SOD.LocalizationService;
 using System.Drawing;
 
@@ -25,6 +32,9 @@ namespace SOD.App.Benches.SODBench
         private CancellationTokenSource cancellationTokenSource;
         private ITesting currentTest;
         private Timer registrationTimer;
+        private ProgrammMethodicsConfig programmMethodicsConfig;
+        private ModbusTcpDevice device;
+        private ModbusCommandsFactory modbusCommandsFactory;
         private readonly List<Post> posts = new List<Post>();
 
         public Bench(ISettingsService settingsService,
@@ -32,7 +42,8 @@ namespace SOD.App.Benches.SODBench
                      ITestingService testingService,
                      IBus bus,
                      IReportService reportService,
-                     ILocalizationService localizationService)
+                     ILocalizationService localizationService,
+                     IDeviceService deviceService)
         {
             _settingsService = settingsService;
             _sensorService = sensorService;
@@ -41,6 +52,9 @@ namespace SOD.App.Benches.SODBench
             _reportService = reportService;
             _localizationService = localizationService;
             Settings = settingsService?.GetSettings<Settings>(settingsKey, new Settings());
+
+            device = deviceService.GetAllDevice().FirstOrDefault(d => d is ModbusTcpDevice) as ModbusTcpDevice;
+            modbusCommandsFactory = new ModbusCommandsFactory(device, bus);
 
             posts.Add(new Post(1) { IsEnable = true, Name = "Post 1" });
 
@@ -67,7 +81,7 @@ namespace SOD.App.Benches.SODBench
             _settingsService.SaveSettings(settingsKey, Settings);
         }
 
-        public void StartTesting()
+        public async Task StartTestingAsync()
         {
             if (currentTest?.IsRun == true) return;
             var testSettings = Settings.SelectedTestSettings;
@@ -79,6 +93,32 @@ namespace SOD.App.Benches.SODBench
                 cancellationTokenSource = new CancellationTokenSource();
                 currentTest.Start(this);
                 currentTest.StartCollectData();
+            }
+
+            var programm = _testingService.CreateProgrammMethodics(ProgrammMethodicsConfig, TestingBalloon, modbusCommandsFactory, reportData);
+
+            try
+            {
+                foreach (var children in programm.Childrens)
+                {
+                    if (cancellationTokenSource.Token.IsCancellationRequested)
+                    {
+                        cancellationTokenSource.Token.ThrowIfCancellationRequested();
+                    }
+                    if (children is ICommand baseCommand)
+                    {
+                        _bus.Publish(new ExecuteTestCommand(baseCommand.CommandConfig, true));
+                        await baseCommand.ExecuteAsync(cancellationTokenSource.Token);
+                        _bus.Publish(new ExecuteTestCommand(baseCommand.CommandConfig, false));
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                currentTest?.Stop();
+                // посылаем контроллеру команду стоп
+                await device.WriteInt32(46, 2);
+                //logger.Error(e, $"Ошибка выполнения программной методики");
             }
         }
 
@@ -135,7 +175,7 @@ namespace SOD.App.Benches.SODBench
                     currentTest?.FillReport(chart);
                     //Settings.BalloonProperties.Insert(0, new Core.Balloons.Properties.BalloonProperty() { Name = _localizationService["Testing.SODBench.TestSettings.BalloonType"], Value = Settings.SelectedBalloon.Name });
                     //Settings.BalloonProperties.Insert(1, new Core.Balloons.Properties.BalloonProperty() { Name = _localizationService["Testing.SODBench.TestSettings.BalloonValue"], Value = Settings.SelectedBalloon.BalloonVolume.ToString() });
-                    //reportData.Fill(Settings.BalloonProperties);
+                    reportData.Fill(Settings.BalloonProperties);
                     reportData.Fill(TestingBalloon);
                     reportData.Fill(Settings.Parameters);
                     var report = await _reportService.CreateReportAsync(reportData, Settings.ReportPath);
@@ -144,7 +184,8 @@ namespace SOD.App.Benches.SODBench
                     {
                         report.Properties.Add(prop.Prefix, prop.Value.ToString());
                     }
-                    report.Properties.Add("balloon_type", TestingBalloon.BalloonType.ToString());
+                    if (TestingBalloon.BalloonType != null)
+                        report.Properties.Add("balloon_type", TestingBalloon.BalloonType.ToString());
                     report.Properties.Add("balloon_volume", TestingBalloon.BalloonVolume.ToString());
                 }
             });
@@ -165,6 +206,18 @@ namespace SOD.App.Benches.SODBench
                     reportData?.Fill(value);
                 }
                 testingBalloon = value;
+            }
+        }
+
+        public ProgrammMethodicsConfig ProgrammMethodicsConfig
+        {
+            get
+            {
+                return programmMethodicsConfig;
+            }
+            set
+            {
+                programmMethodicsConfig = value;
             }
         }
 

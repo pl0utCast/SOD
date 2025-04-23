@@ -8,6 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:lc="clr-namespace:SOD.LocalizationService;assembly=SOD.LocalizationService"
     xmlns:local="clr-namespace:SOD.View.Testing.SODBench"
+    xmlns:multi="clr-namespace:SOD.View.Testing.ManualCommandsBench"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:testing="clr-namespace:SOD.View.Testing"
@@ -35,7 +36,6 @@
                     <TextBlock 
                         Text="{lc:Localization Testing.SODBench.TestParameters.ParametersTest}"
                         FontSize="14"
-                        Foreground="#616273"
                         FontWeight="Medium"
                         VerticalAlignment="Center"/>
                 </TabItem.Header>
@@ -49,7 +49,7 @@
                             <ColumnDefinition Width="50*" />
                             <ColumnDefinition Width="50*" />
                         </Grid.ColumnDefinitions>
-                        
+
                         <StackPanel>
                             <TextBlock
                                 Margin="10"
@@ -126,6 +126,23 @@
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 Text="{Binding ExposureTime}"
                                 materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.ExposureTime}"/>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBox
+                                    FontSize="22"
+                                    Margin="10"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding Deformation}"
+                                    Visibility="{Binding IsKPG4, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.FullDeformation}"/>
+                                <TextBox                                  
+                                    FontSize="22"
+                                    Margin="10"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding Deformation}"
+                                    Visibility="{Binding IsKPG4, Converter={StaticResource ReverseBooleanToVisibilityConverter}}"
+                                    materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.Deformation}"/>
+                            </StackPanel>
                             <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
@@ -135,44 +152,13 @@
                                     <ColumnDefinition Width="85*"/>
                                     <ColumnDefinition Width="15*"/>
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0">
-                                    <TextBox
-                                        FontSize="22"
-                                        Margin="10"
-                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                        Text="{Binding Deformation}"
-                                        Visibility="{Binding IsKPG4, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                        materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.FullDeformation}"/>
-                                    <TextBox                                  
-                                        FontSize="22"
-                                        Margin="10"
-                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                        Text="{Binding Deformation}"
-                                        Visibility="{Binding IsKPG4, Converter={StaticResource ReverseBooleanToVisibilityConverter}}"
-                                        materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.Deformation}"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Grid.Column="1">
-                                    <ToggleButton Grid.Column="1"
-                                        Margin="10"
-                                        Content="{materialDesign:PackIcon Kind=Check, Size=20}"
-                                        IsChecked="{Binding IsConfirmed}"
-                                        Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                                        ToolTip="Подтвердите значение допустимой деформации" />
-                                    <materialDesign:PackIcon Grid.Column="1"
-                                        Width="10"
-                                        Height="10"
-                                        VerticalAlignment="Top"
-                                        Foreground="Red"
-                                        Kind="Asterisk"
-                                        Visibility="{Binding IsConfirmed, Converter={StaticResource ReverseBooleanToVisibilityConverter}}" />
-                                </StackPanel>
-                                <TextBox Grid.Row="1"
+                                <TextBox Grid.Row="0"
                                     Margin="10" 
                                     FontSize="22"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     Text="{Binding MaxDeformation}"
                                     materialDesign:HintAssist.Hint="{lc:Localization Testing.SODBench.TestSettings.MaxDeformation}"/>
-                                <materialDesign:PackIcon Grid.Row="1" Grid.Column="1"
+                                <materialDesign:PackIcon Grid.Row="0" Grid.Column="1"
                                     Margin="10" 
                                     Width="20"
                                     Height="20"
@@ -203,7 +189,7 @@
                                     SelectedValue="{Binding SelectedTenzoUnit}"
                                     Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                             </StackPanel>
-                            
+
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock
                                     Margin="10"
@@ -254,13 +240,93 @@
                     </Grid>
                 </controls:CustomScrollViewer>
             </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock 
+                        Text="АВТОМАТИЧЕСКОЕ УПРАВЛЕНИЕ"
+                        Margin="0,0,20,0"
+                        FontSize="14"
+                        FontWeight="Medium"
+                        VerticalAlignment="Center"/>
+                </TabItem.Header>
+                <Grid>
+                    <ScrollViewer Margin="0,25,0,0" Visibility="Visible">
+                        <multi:SelectProgrammMethodicsView Margin="0,10,0,0" DataContext="{Binding ProgrammMethodics}" />
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock 
+                        Text="РУЧНОЕ УПРАВЛЕНИЕ"
+                        Margin="0,0,20,0"
+                        FontSize="14"
+                        FontWeight="Medium"
+                        VerticalAlignment="Center"/>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="80*" />
+                    </Grid.RowDefinitions>
+
+                    <Button
+                        Grid.Row="0"
+                        Height="50"
+                        Margin="20 40 20 20"
+                        Command="{Binding ExecuteCommand}"
+                        FontSize="24" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                Kind="LinkVariant" />
+                            <TextBlock 
+                                Text="ВЫПОЛНИТЬ"
+                                VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <TextBlock 
+                        Grid.Row="1"
+                        Margin="20 0 0 0"
+                        Foreground="Gray"
+                        Text="{lc:Localization Testing.ManualCommandsBench.Command}" 
+                        Style="{StaticResource MaterialDesignHeadline5TextBlock}"/>
+                    
+                    <ScrollViewer Grid.Row="2" Margin="0,25,0,0" Visibility="Visible">
+                        <ListBox 
+                            Margin="10 0 0 0"
+                            FontSize="22"
+                            ItemsSource="{Binding Source={converters:CommandTypeConverter}, Path=Types}" 
+                            SelectedValue="{Binding SelectedCommand, Converter={converters:CommandTypeConverter}}">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Foreground" Value="ForestGreen" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+
             <TabItem>
                 <TabItem.Header>
                     <TextBlock 
                         Text="{lc:Localization Testing.SODBench.TestParameters.Information}"
                         Margin="0,0,20,0"
                         FontSize="14"
-                        Foreground="#616273"
                         FontWeight="Medium"
                         VerticalAlignment="Center"/>
                 </TabItem.Header>

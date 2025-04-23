@@ -14,6 +14,7 @@ namespace SOD.App.Benches.SODBench.Report
 
     public class TestReportItem
     {
+        public string Name { get; set; }
         public Image Chart { get; set; }
         //public Image QrChart { get; set; }
         public string Standart { get; set; }

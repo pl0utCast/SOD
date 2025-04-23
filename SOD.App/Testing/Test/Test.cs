@@ -145,7 +145,7 @@ namespace SOD.App.Testing.Test
                             registration.DropPressure.Add(new SensorResultValue<Pressure>(pressureSensor.Id, pressureSensor.Name, diffPressure));
 
                             // оцениваем результат по параметрам заданным оператором
-                            if (_parameters[0] is ControlType controlType)
+                            //if (_parameters[0] is ControlType controlType)
                             {
                                 if (post.Status == PostStatus.Valid)
                                     registration.Result = "Соответствует";

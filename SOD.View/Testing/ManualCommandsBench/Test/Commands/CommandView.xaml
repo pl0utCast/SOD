@@ -1,0 +1,53 @@
+﻿<UserControl
+    x:Class="SOD.View.Testing.ManualCommandsBench.Test.Commands.CommandView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:commandsVM="clr-namespace:SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands;assembly=SOD.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:commands="clr-namespace:SOD.View.Testing.ManualCommandsBench.Test.Commands"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <materialDesign:Card
+        MinWidth="280"
+        Height="80"
+        Padding="10"
+        HorizontalAlignment="Left">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <ContentPresenter Content="{Binding Command}">
+                <ContentPresenter.Resources>
+                    <DataTemplate DataType="{x:Type commandsVM:FillingBalloonCommandViewModel}">
+                        <commands:FillingBalloonCommandView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type commandsVM:EmptyingBalloonCommandViewModel}">
+                        <commands:EmptyingBalloonCommandView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type commandsVM:FillingCellCommandViewModel}">
+                        <commands:FillingCellCommandView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type commandsVM:EmptyingCellCommandViewModel}">
+                        <commands:EmptyingCellCommandView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type commandsVM:PressureSetCommandViewModel}">
+                        <commands:PressureSetCommandView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type commandsVM:PressureReleaseCommandViewModel}">
+                        <commands:PressureReleaseCommandView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type commandsVM:VerticalCellCommandViewModel}">
+                        <commands:VerticalCellCommandView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type commandsVM:HorizontalCellCommandViewModel}">
+                        <commands:HorizontalCellCommandView />
+                    </DataTemplate>
+                </ContentPresenter.Resources>
+            </ContentPresenter>
+            <ProgressBar Grid.Row="1" IsIndeterminate="{Binding IsExecute}" />
+        </Grid>
+
+    </materialDesign:Card>
+</UserControl>

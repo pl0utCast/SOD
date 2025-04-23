@@ -17,7 +17,8 @@ namespace SOD.View
 
             navigationService.RegisterView("Testing", "SODTest", new Testing.SODBench.TestingView(), typeof(ViewModels.Testing.SODBench.TestingViewModel));
             navigationService.RegisterView("Testing", "SODTestParameters", new Testing.SODBench.TestParametersView(), typeof(ViewModels.Testing.SODBench.TestParametersViewModel));
-            
+            navigationService.RegisterView("Testing", "EditProgrammMethodics", new Testing.ManualCommandsBench.ProgrammMethodicsEditor.EditProgrammMethodicsView(), null);
+
             // Settings
             navigationService.RegisterRoot("Settings", "SettingsView", new Settings.SettingsView(), typeof(ViewModels.Settings.SettingsViewModel));
             navigationService.RegisterView("Settings", "IPSettingsView", new Settings.IPSettings.IPSettingsView(), typeof(ViewModels.Settings.IPSettings.IPSettingsViewModel));

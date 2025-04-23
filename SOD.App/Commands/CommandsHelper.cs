@@ -12,25 +12,25 @@ namespace SOD.App.Commands
         {
             switch (commandCollectionType)
             {
-                case CommandCollectionType.Modbus3Post:
+                case CommandCollectionType.ModbusSod:
                     switch (commandType)
                     {
-                        case CommandType.TestMedium:
-                            return new CommandConfig() { Type = CommandType.TestMedium };
-                        case CommandType.Filling:
-                            return new CommandConfig() { Type = CommandType.Filling };
-                        case CommandType.PressurizedCavity:
-                            return new CommandConfig() { Type = CommandType.PressurizedCavity };
-                        case CommandType.LeakControlCavity:
-                            return new CommandConfig() { Type = CommandType.LeakControlCavity };
-                        case CommandType.SetPressure:
-                            return new CommandConfig() { Type = CommandType.SetPressure };
-                        case CommandType.Hold:
-                            return new CommandConfig() { Type = CommandType.Hold };
-                        case CommandType.Registartion:
-                            return new CommandConfig() { Type = CommandType.Registartion };
+                        case CommandType.FillingBalloon:
+                            return new CommandConfig() { Type = CommandType.FillingBalloon };
+                        case CommandType.EmptyingBalloon:
+                            return new CommandConfig() { Type = CommandType.EmptyingBalloon };
+                        case CommandType.FillingCell:
+                            return new CommandConfig() { Type = CommandType.FillingCell };
+                        case CommandType.EmptyingCell:
+                            return new CommandConfig() { Type = CommandType.EmptyingCell };
+                        case CommandType.PressureSet:
+                            return new CommandConfig() { Type = CommandType.PressureSet };
                         case CommandType.PressureRelease:
                             return new CommandConfig() { Type = CommandType.PressureRelease };
+                        case CommandType.VerticalCell:
+                            return new CommandConfig() { Type = CommandType.VerticalCell };
+                        case CommandType.HorizontalCell:
+                            return new CommandConfig() { Type = CommandType.HorizontalCell };
                         default:
                             return null;
                     }
@@ -43,22 +43,22 @@ namespace SOD.App.Commands
         {
             switch (commandType)
             {
-                case CommandType.TestMedium:
-                    return LocalizationExtension.LocaliztionService["Testing.MultiPostBench.TestMedium"];
-                case CommandType.Filling:
-                    return LocalizationExtension.LocaliztionService["Testing.MultiPostBench.Filling"];
-                case CommandType.PressurizedCavity:
-                    return LocalizationExtension.LocaliztionService["Testing.MultiPostBench.PressurizedCavity"];
-                case CommandType.LeakControlCavity:
-                    return LocalizationExtension.LocaliztionService["Testing.MultiPostBench.LeakControlCavity"];
-                case CommandType.SetPressure:
-                    return LocalizationExtension.LocaliztionService["Testing.MultiPostBench.SetPressure"];
-                case CommandType.Hold:
-                    return LocalizationExtension.LocaliztionService["Testing.MultiPostBench.Hold"];
-                case CommandType.Registartion:
-                    return LocalizationExtension.LocaliztionService["Testing.MultiPostBench.Registration"];
+                case CommandType.FillingBalloon:
+                    return LocalizationExtension.LocaliztionService["Testing.ManualCommandsBench.FillingBalloon"];
+                case CommandType.EmptyingBalloon:
+                    return LocalizationExtension.LocaliztionService["Testing.ManualCommandsBench.EmptyingBalloon"];
+                case CommandType.FillingCell:
+                    return LocalizationExtension.LocaliztionService["Testing.ManualCommandsBench.FillingCell"];
+                case CommandType.EmptyingCell:
+                    return LocalizationExtension.LocaliztionService["Testing.ManualCommandsBench.EmptyingCell"];
+                case CommandType.PressureSet:
+                    return LocalizationExtension.LocaliztionService["Testing.ManualCommandsBench.PressureSet"];
                 case CommandType.PressureRelease:
-                    return LocalizationExtension.LocaliztionService["Testing.MultiPostBench.PressureRelease"];
+                    return LocalizationExtension.LocaliztionService["Testing.ManualCommandsBench.PressureRelease"];
+                case CommandType.VerticalCell:
+                    return LocalizationExtension.LocaliztionService["Testing.ManualCommandsBench.VerticalCell"];
+                case CommandType.HorizontalCell:
+                    return LocalizationExtension.LocaliztionService["Testing.ManualCommandsBench.HorizontalCell"];
                 default:
                     return commandType.ToString();
             }
@@ -69,11 +69,11 @@ namespace SOD.App.Commands
             var result = string.Empty;
             foreach (var param in commandConfig.Parameters)
             {
-                if (param.Value is MediumType mediumType && commandConfig.Type==CommandType.TestMedium)
-                {
-                    if (mediumType == MediumType.Liquid) result += LocalizationExtension.LocaliztionService["MediumType.Water"];
-                    else return result += LocalizationExtension.LocaliztionService["MediumType.Air"];
-                }
+                //if (param.Value is MediumType mediumType && commandConfig.Type==CommandType.TestMedium)
+                //{
+                //    if (mediumType == MediumType.Liquid) result += LocalizationExtension.LocaliztionService["MediumType.Water"];
+                //    else return result += LocalizationExtension.LocaliztionService["MediumType.Air"];
+                //}
                 if (param.Value is double digs)
                 {
                     return result += digs.ToString();

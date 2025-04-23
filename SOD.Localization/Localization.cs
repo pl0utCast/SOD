@@ -85,6 +85,7 @@ namespace SOD.Localization
             public string ValveName { get; set; } = "Имя арматуры";
             public string ClearFilters { get; set; } = "Очистить фильтр";
             public SOD.Localization.Testing.SODBench.SODBench SODBench { get; set; } = new SOD.Localization.Testing.SODBench.SODBench();
+            public Testing.ManualCommandsBench.ManualCommandsBench ManualCommandsBench { get; set; } = new Testing.ManualCommandsBench.ManualCommandsBench();
             public Testing.Test Test { get; set; } = new Testing.Test();
         }
 
