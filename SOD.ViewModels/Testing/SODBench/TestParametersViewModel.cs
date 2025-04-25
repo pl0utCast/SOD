@@ -259,19 +259,11 @@ namespace SOD.ViewModels.Testing.SODBench
             });
         }
 
-        [Reactive]
         public ReactiveCommand<Unit,Unit> DropWeight_5kg { get; set; }
-        [Reactive]
         public ReactiveCommand<Unit, Unit> DropWeight_10kg { get; set; }
-        [Reactive]
         public ReactiveCommand<Unit, Unit> DropWeight_30kg { get; set; }
         public IEnumerable<IValueViewModel> Properties => parameters.Select(kv => kv.Value);
-        [Reactive]
-        public TestBenchSettings ServiceProperties
-        {
-            get => serviceParameters;
-            set => serviceParameters = value;
-        }
+        public TestBenchSettings ServiceProperties => serviceParameters;
         public IReadOnlyList<UnitTypeInfo> PressureUnits { get; set; }
         [Reactive]
         public UnitTypeInfo SelectedPressureUnit { get; set; }
