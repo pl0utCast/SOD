@@ -70,7 +70,6 @@ namespace SOD.ViewModels.Testing.SODBench
 			PressureSensors.Add(sensorService.GetAllSensors().Where(s => bench.Settings.Sensors.TryGetValue(s.Id, out var isEnable) && isEnable && s is IPressureSensor));
 			PressureSensor = PressureSensors.FirstOrDefault(x => x.Id == testSettings.PressureSensorId);
 			
-			IsModeAuto = testSettings.IsModeAuto;
 			TenzoSensors.Add(sensorService.GetAllSensors().Where(s => bench.Settings.Sensors.TryGetValue(s.Id, out var isEnable) && isEnable && s is ITenzoSensor));
 			TenzoSensor = TenzoSensors.FirstOrDefault(x => x.Id == testSettings.TenzoSensorId);
 
@@ -120,15 +119,11 @@ namespace SOD.ViewModels.Testing.SODBench
 				bench.Settings.SelectedBalloon.BalloonVolume = BalloonVolume;
 				bench.Settings.BalloonProperties = BalloonProperties.ToList();
 
-				if (!IsModeAuto)
-				{
-					testSettings.TenzoSensorId = TenzoSensor.Id;
-				}
+				testSettings.TenzoSensorId = TenzoSensor.Id;
 				testSettings.SetPressure = (Pressure)UnitsHelper.GetValue(WorkPressure.Value, WorkPressure.SelectedUnitInfo);
 				testSettings.Deformation = Deformation;
 				var t = int.TryParse(MaxDeformation, out var value);
 				testSettings.MaxDeformation = t ? value : null;
-				testSettings.IsModeAuto = IsModeAuto;
 				testSettings.Time = ExposureTime;
 				testSettings.PressureSensorId = PressureSensor?.Id;
 				
@@ -177,12 +172,12 @@ namespace SOD.ViewModels.Testing.SODBench
 		public UnitTypeInfo SelectedTenzoUnit { get; set; }
 		[Reactive]
 		public Balloon SelectedBalloon { get; set; }
+		[Reactive]
+		public List<Balloon> Balloons { get; set; } = new List<Balloon>();
 		public ReactiveCommand<Unit, Unit> Cancel { get; set; }
 		public ReactiveCommand<Unit, Unit> Apply { get; set; }
 		public ReactiveCommand<Unit, Unit> ExecuteCommand { get; set; }
 		public ViewModelActivator Activator { get; } = new ViewModelActivator();
-		[Reactive]
-		public List<Balloon> Balloons { get; set; } = new List<Balloon>();
 		[Reactive]
 		public IStandart SelectedStandart { get; set; }
 		public IEnumerable<IStandart> Standarts { get; set; }
@@ -199,8 +194,6 @@ namespace SOD.ViewModels.Testing.SODBench
 		public string MaxDeformation { get; set; }
 		[Reactive]
 		public bool IsKPG4 { get; set; }
-		[Reactive]
-		public bool IsModeAuto { get; set; }
 		[Reactive]
 		public bool IsConfirmed { get; set; }
 		public ObservableCollection<ISensor> PressureSensors { get; set; } = new ObservableCollection<ISensor>();

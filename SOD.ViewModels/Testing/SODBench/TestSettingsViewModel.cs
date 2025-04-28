@@ -53,7 +53,5 @@ namespace SOD.ViewModels.Testing.SODBench
         public ISensor PressureSensor { get; set; }
         public App.Benches.SODBench.Settings.TestSettings Settings { get; set; }
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
-        //???????
-        //public ValidationContext ValidationContext { get; } = new ValidationContext();
     }
 }

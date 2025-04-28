@@ -34,7 +34,6 @@ namespace SOD.App.Benches.SODBench
 			public int WorkPressure { get; set; }
 			public int Deformation { get; set; }
 			public int? MaxDeformation { get; set; }
-			public bool IsModeAuto { get; set; }
 			public int TenzoSensorId { get; set; }
 			public Pressure SetPressure { get; set; } = new Pressure(0, PressureUnit.Bar);
 		}

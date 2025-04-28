@@ -144,19 +144,15 @@ namespace SOD.App.Testing.Test
                             registration.StopPressure.Add(new SensorResultValue<Pressure>(pressureSensor.Id, pressureSensor.Name, stopPressure));
                             registration.DropPressure.Add(new SensorResultValue<Pressure>(pressureSensor.Id, pressureSensor.Name, diffPressure));
 
-                            // оцениваем результат по параметрам заданным оператором
-                            //if (_parameters[0] is ControlType controlType)
+                            if (post.Status == PostStatus.Valid)
+                                registration.Result = "Соответствует";
+                            else
                             {
-                                if (post.Status == PostStatus.Valid)
-                                    registration.Result = "Соответствует";
-                                else
-                                {
-                                    registration.Result = "Не соответствует";
-                                }
+                                registration.Result = "Не соответствует";
                             }
-                        }
 
-                        postResult.Registrations.Add(registration);
+                            postResult.Registrations.Add(registration);
+                        }
                     }
                 }
 
