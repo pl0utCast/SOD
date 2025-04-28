@@ -173,14 +173,12 @@ namespace SOD.App.Benches.SODBench
                 if (TestingBalloon != null)
                 {
                     currentTest?.FillReport(chart);
-                    //Settings.BalloonProperties.Insert(0, new Core.Balloons.Properties.BalloonProperty() { Name = _localizationService["Testing.SODBench.TestSettings.BalloonType"], Value = Settings.SelectedBalloon.Name });
-                    //Settings.BalloonProperties.Insert(1, new Core.Balloons.Properties.BalloonProperty() { Name = _localizationService["Testing.SODBench.TestSettings.BalloonValue"], Value = Settings.SelectedBalloon.BalloonVolume.ToString() });
                     reportData.Fill(Settings.BalloonProperties);
                     reportData.Fill(TestingBalloon);
                     reportData.Fill(Settings.Parameters);
                     var report = await _reportService.CreateReportAsync(reportData, Settings.ReportPath);
 
-                    foreach (var prop in TestingBalloon.Properties)
+                    foreach (var prop in Settings.BalloonProperties)
                     {
                         report.Properties.Add(prop.Prefix, prop.Value.ToString());
                     }
