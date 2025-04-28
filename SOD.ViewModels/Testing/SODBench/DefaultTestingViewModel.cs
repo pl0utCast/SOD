@@ -38,7 +38,7 @@ namespace SOD.ViewModels.Testing.SODBench
 		{
 			_bench = (App.Benches.SODBench.Bench)testBenchService.GetTestBench();
             _localizationService = localizationService;
-            PressureChart = new PressureChartViewModel(localizationService, _bench);
+            PressureChart = new PressureChartViewModel(localizationService, _bench, bus);
 			if (_bench.Settings.SelectedTestSettings != null /*&& _bench.TestingValve!=null*/) IsSelectedTest = true;
 			ExposureTime = "00:00:00";
 			TemperatureSensors = new TemperatureSensorsViewModel(sensorService, _bench);

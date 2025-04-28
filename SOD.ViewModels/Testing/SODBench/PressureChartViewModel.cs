@@ -29,6 +29,7 @@ using System.Globalization;
 using System.Diagnostics;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 using SOD.Core.Units;
+using MemBus;
 
 namespace SOD.ViewModels.Testing.SODBench
 {
@@ -43,8 +44,9 @@ namespace SOD.ViewModels.Testing.SODBench
         private readonly Bench bench;
         private NumericAxisViewModel yPressureAxis;
         private NumericAxisViewModel yTenzoAxis;
+        private TimeSpanAxisViewModel xTimeSpanAxis;
 
-        public PressureChartViewModel(ILocalizationService localizationService, SOD.App.Benches.SODBench.Bench bench)
+        public PressureChartViewModel(ILocalizationService localizationService, SOD.App.Benches.SODBench.Bench bench, IBus bus)
         {
             this.localizationService = localizationService;
             this.bench = bench;
@@ -58,13 +60,19 @@ namespace SOD.ViewModels.Testing.SODBench
                 IsEditable = false
             });
             ConfigureAxis();
-            
+            bus.Subscribe<App.Benches.SODBench.Messages.SelectedTestMessage>(m =>
+            {
+                XAxes.Remove(xTimeSpanAxis);
+                YAxes.Remove(yPressureAxis);
+                YAxes.Remove(yTenzoAxis);
+                ConfigureAxis();
+            });
         }
 
         public void ConfigureAxis()
         {
             // конфигурация Axes
-            var xTimeSpanAxis = new TimeSpanAxisViewModel
+            xTimeSpanAxis = new TimeSpanAxisViewModel
             {
                 AxisTitle = localizationService["Testing.SODBench.Time"],
                 AxisBandsFill = System.Windows.Media.Color.FromArgb(10, 10,10,10),

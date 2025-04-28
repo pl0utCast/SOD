@@ -90,15 +90,15 @@ namespace SOD.ViewModels.Testing.SODBench
             TenzoUnits = new Force().GetUnitTypeInfo();
             SelectedTenzoUnit = TenzoUnits.SingleOrDefault(u => u.UnitType.Equals(bench.Settings.TenzoUnit));
 
-			ProgrammMethodics = new SelectProgrammMethodicsViewModel(bus, testingService, navigationService, /*valveService,*/
-				dialogService, testBenchService, localizationService);
-			ProgrammMethodics.Activator.Activate();
+            ProgrammMethodics = new SelectProgrammMethodicsViewModel(bus, testingService, navigationService, /*valveService,*/
+                dialogService, testBenchService, localizationService);
+            ProgrammMethodics.Activator.Activate();
 
-			this.WhenAnyValue(x => x.SelectedBalloon).Subscribe(sb =>
-			{
-				IsKPG4 = sb?.BalloonTypes == BalloonTypes.KPG4;
-				Deformation = IsKPG4 ? 10 : 5;
-			});
+            this.WhenAnyValue(x => x.SelectedBalloon).Subscribe(sb =>
+            {
+                IsKPG4 = sb?.BalloonTypes == BalloonTypes.KPG4;
+                Deformation = IsKPG4 ? 10 : 5;
+            });
 
             this.WhenAnyValue(x => x.MaxDeformation).Subscribe(md =>
             {
@@ -154,7 +154,6 @@ namespace SOD.ViewModels.Testing.SODBench
                     {
                         ushort valueConverted = Convert.ToUInt16(value);
 
-                        //_ = modbusTcpDevice.WriteHoldingRegistersAsync(code, new ushort[] { valueConverted });
                         ModbusRegister modbusRegister = new ModbusRegister
                         {
                             Id = code,
@@ -166,7 +165,6 @@ namespace SOD.ViewModels.Testing.SODBench
                     return Unit.Default;
                 });
             }
-
 
             //Запись сервисных параметров в регистры контроллера
             ApplyController = ReactiveCommand.CreateFromTask(async () =>
@@ -254,12 +252,12 @@ namespace SOD.ViewModels.Testing.SODBench
 
             ExecuteCommand = ReactiveCommand.Create(() =>
             {
-				var command = CommandsHelper.GetDefault(CommandCollectionType.ModbusSod, SelectedCommand);
+                var command = CommandsHelper.GetDefault(CommandCollectionType.ModbusSod, SelectedCommand);
                 _bus.Publish(new ExecuteTestCommand(command, true));
             });
         }
 
-        public ReactiveCommand<Unit,Unit> DropWeight_5kg { get; set; }
+        public ReactiveCommand<Unit, Unit> DropWeight_5kg { get; set; }
         public ReactiveCommand<Unit, Unit> DropWeight_10kg { get; set; }
         public ReactiveCommand<Unit, Unit> DropWeight_30kg { get; set; }
         public IEnumerable<IValueViewModel> Properties => parameters.Select(kv => kv.Value);
