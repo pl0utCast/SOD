@@ -40,7 +40,7 @@ namespace SOD.App.Testing.Programms
                     var testProgramm = new TestProgramm() { Id = testProgrammConfig.Id };
                     if (testProgrammConfig.StandartId != null)
                         testProgramm.Standart = _standarts.SingleOrDefault(s => s.Id == testProgrammConfig.StandartId);
-                    testProgramm.Test = new Test.Test(reportData, localizationService, testProgramm.Standart, testProgrammConfig.Parameters.Select(kv => kv.Value).ToArray());
+                    testProgramm.Test = new Test.Test(testProgrammConfig.Name, reportData, localizationService, testProgramm.Standart, testProgrammConfig.Parameters.Select(kv => kv.Value).ToArray());
                     //switch (testProgrammConfig.TestType)
                     //{
                     //    case TestType.Strength:

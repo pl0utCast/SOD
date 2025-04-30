@@ -77,15 +77,14 @@ namespace SOD.ViewModels.Testing.SODBench
             SelectedBalloon = Balloons.FirstOrDefault(x => x.BalloonTypes == bench.Settings.SelectedBalloon.BalloonTypes);
             BalloonVolume = bench.Settings.SelectedBalloon.BalloonVolume;
 
-            ExposureTime = testSettings.Time;
-            MaxDeformation = testSettings.MaxDeformation.ToString();
-
-            PressureSensors.Add(sensorService.GetAllSensors().Where(s => bench.Settings.Sensors.TryGetValue(s.Id, out var isEnable) && isEnable && s is IPressureSensor));
-            PressureSensor = PressureSensors.FirstOrDefault(x => x.Id == testSettings.PressureSensorId);
-
-            IsModeAuto = testSettings.IsModeAuto;
-            TenzoSensors.Add(sensorService.GetAllSensors().Where(s => bench.Settings.Sensors.TryGetValue(s.Id, out var isEnable) && isEnable && s is ITenzoSensor));
-            TenzoSensor = TenzoSensors.FirstOrDefault(x => x.Id == testSettings.TenzoSensorId);
+			ExposureTime = testSettings.Time;
+			MaxDeformation = testSettings.MaxDeformation.ToString();
+			
+			PressureSensors.Add(sensorService.GetAllSensors().Where(s => bench.Settings.Sensors.TryGetValue(s.Id, out var isEnable) && isEnable && s is IPressureSensor));
+			PressureSensor = PressureSensors.FirstOrDefault(x => x.Id == testSettings.PressureSensorId);
+			
+			TenzoSensors.Add(sensorService.GetAllSensors().Where(s => bench.Settings.Sensors.TryGetValue(s.Id, out var isEnable) && isEnable && s is ITenzoSensor));
+			TenzoSensor = TenzoSensors.FirstOrDefault(x => x.Id == testSettings.TenzoSensorId);
 
             TenzoUnits = new Force().GetUnitTypeInfo();
             SelectedTenzoUnit = TenzoUnits.SingleOrDefault(u => u.UnitType.Equals(bench.Settings.TenzoUnit));
@@ -196,29 +195,26 @@ namespace SOD.ViewModels.Testing.SODBench
             bench.Settings.SelectedBalloon.BalloonVolume = BalloonVolume;
             bench.Settings.BalloonProperties = BalloonProperties.ToList();
 
-            //if (!IsModeAuto)
-            //{
-            //	testSettings.TenzoSensorId = TenzoSensor.Id;
-            //}
-            testSettings.SetPressure = (Pressure)UnitsHelper.GetValue(WorkPressure.Value, WorkPressure.SelectedUnitInfo);
-            testSettings.Deformation = Deformation;
-            var t = int.TryParse(MaxDeformation, out var value);
-            testSettings.MaxDeformation = t ? value : null;
-            testSettings.IsModeAuto = IsModeAuto;
-            testSettings.Time = ExposureTime;
-            testSettings.PressureSensorId = PressureSensor?.Id;
+				testSettings.TenzoSensorId = TenzoSensor.Id;
+				testSettings.SetPressure = (Pressure)UnitsHelper.GetValue(WorkPressure.Value, WorkPressure.SelectedUnitInfo);
+				testSettings.Deformation = Deformation;
+				var t = int.TryParse(MaxDeformation, out var value);
+				testSettings.MaxDeformation = t ? value : null;
+				testSettings.Time = ExposureTime;
+				testSettings.PressureSensorId = PressureSensor?.Id;
+				
 
-            if (reportService.CurrentReport != null && !reportService.CurrentReport.IsSave && reportService.CurrentReport.ReportData.IsFill)
-            {
-                var result = await dialogService.ShowDialogAsync("CreateNewReport", new YesNoDialogViewModel(dialogService));
-                if ((bool)result)
-                {
-                    reportService.Save(reportService.CurrentReport);
-                    bench.UpdateReport();
-                }
-            }
-            bench.TestingBalloon = SelectedBalloon;
-            bench.UpdatePosts();
+				if (reportService.CurrentReport != null && !reportService.CurrentReport.IsSave && reportService.CurrentReport.ReportData.IsFill)
+				{
+					var result = await dialogService.ShowDialogAsync("CreateNewReport", new YesNoDialogViewModel(dialogService));
+					if ((bool)result)
+					{
+						reportService.Save(reportService.CurrentReport);
+						bench.UpdateReport();
+					}
+				}
+				bench.TestingBalloon = SelectedBalloon;
+				bench.UpdatePosts();
 
             foreach (var param in parameters)
             {
@@ -257,52 +253,45 @@ namespace SOD.ViewModels.Testing.SODBench
             });
         }
 
-        public ReactiveCommand<Unit, Unit> DropWeight_5kg { get; set; }
-        public ReactiveCommand<Unit, Unit> DropWeight_10kg { get; set; }
-        public ReactiveCommand<Unit, Unit> DropWeight_30kg { get; set; }
-        public IEnumerable<IValueViewModel> Properties => parameters.Select(kv => kv.Value);
-        public TestBenchSettings ServiceProperties => serviceParameters;
-        public IReadOnlyList<UnitTypeInfo> PressureUnits { get; set; }
-        [Reactive]
-        public UnitTypeInfo SelectedPressureUnit { get; set; }
-        public IReadOnlyList<UnitTypeInfo> TenzoUnits { get; set; }
-        [Reactive]
-        public UnitTypeInfo SelectedTenzoUnit { get; set; }
-        [Reactive]
-        public Balloon SelectedBalloon { get; set; }
-        public ReactiveCommand<Unit, Unit> Cancel { get; set; }
-        public ReactiveCommand<Unit, Unit> Apply { get; set; }
-        public ReactiveCommand<Unit, Unit> ApplyController { get; set; }
-        public ReactiveCommand<Unit, Unit> ExecuteCommand { get; set; }
-        public ViewModelActivator Activator { get; } = new ViewModelActivator();
-        [Reactive]
-        public List<Balloon> Balloons { get; set; } = new List<Balloon>();
-        [Reactive]
-        public IStandart SelectedStandart { get; set; }
-        public IEnumerable<IStandart> Standarts { get; set; }
-        [Reactive]
-        public double BalloonVolume { get; set; }
-        public ObservableCollection<BalloonProperty> BalloonProperties { get; set; } = new ObservableCollection<BalloonProperty>();
-        [Reactive]
-        public UnitValueViewModel WorkPressure { get; set; }
-        [Reactive]
-        public int Deformation { get; set; }
-        [Reactive]
-        public int? ExposureTime { get; set; }
-        [Reactive]
-        public string MaxDeformation { get; set; }
-        [Reactive]
-        public bool IsKPG4 { get; set; }
-        [Reactive]
-        public bool IsModeAuto { get; set; }
-        [Reactive]
-        public bool IsConfirmed { get; set; }
-        public ObservableCollection<ISensor> PressureSensors { get; set; } = new ObservableCollection<ISensor>();
-        [Reactive]
-        public ISensor PressureSensor { get; set; }
-        public ObservableCollection<ISensor> TenzoSensors { get; set; } = new ObservableCollection<ISensor> { };
-        [Reactive]
-        public ISensor TenzoSensor { get; set; }
+		public IEnumerable<IValueViewModel> Properties => parameters.Select(kv => kv.Value);
+		public IReadOnlyList<UnitTypeInfo> PressureUnits { get; set; }
+		[Reactive]
+		public UnitTypeInfo SelectedPressureUnit { get; set; }
+		public IReadOnlyList<UnitTypeInfo> TenzoUnits { get; set; }
+		[Reactive]
+		public UnitTypeInfo SelectedTenzoUnit { get; set; }
+		[Reactive]
+		public Balloon SelectedBalloon { get; set; }
+		[Reactive]
+		public List<Balloon> Balloons { get; set; } = new List<Balloon>();
+		public ReactiveCommand<Unit, Unit> Cancel { get; set; }
+		public ReactiveCommand<Unit, Unit> Apply { get; set; }
+		public ReactiveCommand<Unit, Unit> ExecuteCommand { get; set; }
+		public ViewModelActivator Activator { get; } = new ViewModelActivator();
+		[Reactive]
+		public IStandart SelectedStandart { get; set; }
+		public IEnumerable<IStandart> Standarts { get; set; }
+		[Reactive]
+		public double BalloonVolume { get; set; }
+		public ObservableCollection<BalloonProperty> BalloonProperties { get; set; } = new ObservableCollection<BalloonProperty>();
+		[Reactive]
+		public UnitValueViewModel WorkPressure { get; set; }
+		[Reactive]
+		public int Deformation { get; set; }
+		[Reactive]
+		public int? ExposureTime { get; set; }
+		[Reactive]
+		public string MaxDeformation { get; set; }
+		[Reactive]
+		public bool IsKPG4 { get; set; }
+		[Reactive]
+		public bool IsConfirmed { get; set; }
+		public ObservableCollection<ISensor> PressureSensors { get; set; } = new ObservableCollection<ISensor>();
+		[Reactive]
+		public ISensor PressureSensor { get; set; }
+		public ObservableCollection<ISensor> TenzoSensors {  get; set; } = new ObservableCollection<ISensor> { };
+		[Reactive]
+		public ISensor TenzoSensor {  get; set; }
         [Reactive]
         public SelectProgrammMethodicsViewModel ProgrammMethodics { get; set; }
         [Reactive]

@@ -12,9 +12,10 @@ namespace SOD.App.Benches.SODBench
 	{
 		public TestSettings SelectedTestSettings { get; set; }
 		public Balloon SelectedBalloon { get; set; }
-		public PressureUnit PressureUnit { get; set; } = PressureUnit.Bar;
-		public ForceUnit TenzoUnit { get; set; } = ForceUnit.KilogramForce;
-		public List<BalloonProperty> BalloonProperties { get; set; } = new List<BalloonProperty>();
+		public PressureUnit PressureUnit { get; set; }
+		public ForceUnit TenzoUnit { get; set; }
+        public VolumeFlowUnit LeakageUnit { get; set; }
+        public List<BalloonProperty> BalloonProperties { get; set; } = new List<BalloonProperty>();
 		public List<Property> Parameters { get; set; } = new List<Property>();
 		public TestBenchSettings TestBenchSettings { get; set; } = new TestBenchSettings();
         public Dictionary<int, List<TestSettings>> Tests { get; set; } = new Dictionary<int, List<TestSettings>>();
@@ -30,12 +31,12 @@ namespace SOD.App.Benches.SODBench
 		//public string UrlForQr { get; set; } = string.Empty;
 		public class TestSettings
 		{
-			public int? Time { get; set; }
+            public string Name { get; set; }
+            public int? Time { get; set; }
 			public int? PressureSensorId { get; set; }
 			public int WorkPressure { get; set; }
 			public int Deformation { get; set; }
 			public int? MaxDeformation { get; set; }
-			public bool IsModeAuto { get; set; }
 			public int TenzoSensorId { get; set; }
 			public Pressure SetPressure { get; set; } = new Pressure(0, PressureUnit.Bar);
 		}

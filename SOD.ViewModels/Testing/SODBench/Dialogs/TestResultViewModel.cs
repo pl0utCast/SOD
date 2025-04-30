@@ -38,6 +38,7 @@ namespace SOD.ViewModels.Testing.SODBench.Dialogs
 		public string ClosePressure { get; set; }
 		public string ExpectedSetPressure { get; set; }
 		public string Accuracy { get; set; }
+		public string Leakage { get; set; }
 		[Reactive]
 		public bool Valid { get; set; } = true;
 		[Reactive]

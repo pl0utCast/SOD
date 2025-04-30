@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/21/2020 16:03:35" ReportInfo.Modified="04/22/2025 14:51:48" ReportInfo.CreatorVersion="2024.2.14.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/21/2020 16:03:35" ReportInfo.Modified="04/28/2025 15:17:57" ReportInfo.CreatorVersion="2024.2.14.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -86,6 +86,7 @@ namespace FastReport
             <Column Name="AirTemperature" DataType="System.String"/>
             <Column Name="WaterTemperature" DataType="System.String"/>
             <Column Name="PressureName" DataType="System.String"/>
+            <Column Name="Leakage" DataType="System.String"/>
           </BusinessObjectDataSource>
         </BusinessObjectDataSource>
         <Column Name="Standart" DataType="System.String"/>
@@ -99,14 +100,8 @@ namespace FastReport
       <Column Name="order_number" DataType="System.String"/>
       <Column Name="due_date" DataType="System.String"/>
     </TableDataSource>
-    <BusinessObjectDataSource Name="TestingBalloon" ReferenceName="TestingBalloon" DataType="System.Int32" Enabled="true">
-      <BusinessObjectDataSource Name="BusinessObjectDataSource4" Alias="Properties" DataType="System.Int32" PropName="Properties" Enabled="true">
-        <Column Name="Name" DataType="System.String"/>
-        <Column Name="Value" DataType="System.String"/>
-      </BusinessObjectDataSource>
-    </BusinessObjectDataSource>
     <BusinessObjectDataSource Name="Balloon" ReferenceName="Balloon" DataType="System.Collections.Generic.List`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]" Enabled="true">
-      <BusinessObjectDataSource Name="Properties" DataType="System.Collections.Generic.List`1[[SOD.App.Benches.SODBench.Report.ReportData+BalloonProperty, SOD.App, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+      <BusinessObjectDataSource Name="BusinessObjectDataSource4" Alias="Properties" DataType="System.Collections.Generic.List`1[[SOD.App.Benches.SODBench.Report.ReportData+BalloonProperty, SOD.App, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" PropName="Properties" Enabled="true">
         <Column Name="Name" DataType="System.String"/>
         <Column Name="Value" DataType="System.String"/>
       </BusinessObjectDataSource>
@@ -115,7 +110,7 @@ namespace FastReport
   </Dictionary>
   <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
     <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="179.55" CanGrow="true" CanShrink="true">
-      <TextObject Name="Text3" Top="9.45" Width="718.2" Height="28.35" CanGrow="true" Text="Отчет об испытаниях клапана" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 16pt, style=Bold"/>
+      <TextObject Name="Text3" Top="9.45" Width="718.2" Height="28.35" CanGrow="true" Text="ОТЧЁТ ОБ ИСПЫТНИЯХ КЛАПАНА" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 16pt, style=Bold"/>
       <TextObject Name="Text17" Left="9.45" Top="151.2" Width="699.3" Height="28.35" CanGrow="true" Text="ДАННЫЕ КЛАПАНА" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 14pt, style=Bold"/>
       <TextObject Name="Text4" Left="141.75" Top="103.95" Width="207.9" Height="18.9" Text="[Parameters.customer]" Font="Times New Roman, 12pt" Style="Стандартный"/>
       <TextObject Name="Text50" Left="9.45" Top="103.95" Width="132.3" Height="18.9" CanGrow="true" Text="Заказчик" Font="Times New Roman, 12pt" Style="Стандартный"/>
@@ -130,19 +125,19 @@ namespace FastReport
       <PictureObject Name="Picture2" Left="444.15" Top="9.45" Width="264.6" Height="94.5" SizeMode="StretchImage"/>
     </ReportTitleBand>
     <DataBand Name="Data2" Top="182.75" Width="359.1" Height="18.9" CanGrow="true" DataSource="BusinessObjectDataSource4" Columns.Count="2">
-      <TextObject Name="Text93" Left="9.45" Width="207.9" Height="18.9" CanGrow="true" CanShrink="true" Text="[TestingBalloon.Properties.Name]" Font="Times New Roman, 12pt" Style="Стандартный"/>
-      <TextObject Name="Text94" Left="217.35" Width="141.75" Height="18.9" CanGrow="true" CanShrink="true" Text="[TestingBalloon.Properties.Value]" Font="Times New Roman, 12pt" Style="Стандартный"/>
+      <TextObject Name="Text93" Left="9.45" Width="207.9" Height="18.9" CanGrow="true" CanShrink="true" Text="[Balloon.Properties.Name]" Font="Times New Roman, 12pt" Style="Стандартный"/>
+      <TextObject Name="Text94" Left="217.35" Width="141.75" Height="18.9" CanGrow="true" CanShrink="true" Text="[Balloon.Properties.Value]" Font="Times New Roman, 12pt" Style="Стандартный"/>
     </DataBand>
-    <DataBand Name="Data1" Top="236.4" Width="718.2" Height="28.35" CanGrow="true" CanShrink="true" BeforePrintEvent="Data1_BeforePrint" DataSource="BusinessObjectDataSource1" KeepTogether="true" KeepDetail="true">
-      <DataHeaderBand Name="DataHeader1" Top="204.85" Width="718.2" Height="28.35" CanShrink="true">
-        <TextObject Name="Text33" Left="9.45" Width="699.3" Height="28.35" CanGrow="true" Text="РЕЗУЛЬТАТ ИСПЫТАНИЙ" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 14pt, style=Bold"/>
+    <DataBand Name="Data1" Top="255.3" Width="718.2" Height="28.35" CanGrow="true" CanShrink="true" BeforePrintEvent="Data1_BeforePrint" DataSource="BusinessObjectDataSource1" KeepTogether="true" KeepDetail="true">
+      <DataHeaderBand Name="DataHeader1" Top="204.85" Width="718.2" Height="47.25" CanShrink="true">
+        <TextObject Name="Text33" Left="9.45" Top="18.9" Width="699.3" Height="28.35" CanGrow="true" Text="РЕЗУЛЬТАТ ИСПЫТАНИЙ" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 14pt, style=Bold"/>
       </DataHeaderBand>
-      <DataBand Name="Data3" Top="267.95" Width="718.2" Height="37.8" CanGrow="true" CanShrink="true" KeepTogether="true" KeepDetail="true">
+      <DataBand Name="Data3" Top="286.85" Width="718.2" Height="37.8" CanGrow="true" CanShrink="true" KeepTogether="true" KeepDetail="true">
         <TextObject Name="Text44" Left="283.5" Top="9.45" Width="160.65" Height="18.9" CanGrow="true" CanShrink="true" Text="[IIf([MainData.Tests.Standart]==&quot;&quot;,&quot;&quot;,&quot;Стандарт испытания&quot;)]" Font="Times New Roman, 12pt" Style="Стандартный"/>
         <TextObject Name="Text53" Left="444.15" Top="9.45" Width="245.7" Height="18.9" CanGrow="true" CanShrink="true" Text="[MainData.Tests.Standart]" AutoWidth="true" Font="Times New Roman, 12pt" Style="Стандартный"/>
         <TextObject Name="Text1" Left="9.45" Top="9.45" Width="274.05" Height="18.9" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[MainData.Tests.Name]" WordWrap="false" Font="Times New Roman, 14pt, style=Bold"/>
       </DataBand>
-      <DataBand Name="FuncionalTestData" Top="308.95" Width="718.2" Height="37.8" CanShrink="true" DataSource="BusinessObjectDataSource3">
+      <DataBand Name="FuncionalTestData" Top="327.85" Width="718.2" Height="37.8" CanShrink="true" DataSource="BusinessObjectDataSource3">
         <TextObject Name="Text79" Left="510.3" Width="179.55" Height="18.9" CanGrow="true" CanShrink="true" Text="Давление закрытия [MainData.Tests.Posts.Registrations.FuncionalTest.ClosePressure]" Font="Times New Roman, 12pt" Style="Стандартный"/>
         <TextObject Name="Text80" Left="9.45" Width="85.05" Height="18.9" CanGrow="true" CanShrink="true" Text="Давление" Font="Times New Roman, 12pt" Style="Стандартный"/>
         <TextObject Name="Text81" Left="94.5" Width="189" Height="18.9" CanGrow="true" CanShrink="true" Text="Ожидаемое [MainData.Tests.Posts.Registrations.FuncionalTest.ExpectedSetPressure]" Font="Times New Roman, 12pt" Style="Стандартный"/>
@@ -150,25 +145,26 @@ namespace FastReport
         <TextObject Name="Text68" Left="9.45" Top="18.9" Width="85.05" Height="18.9" CanGrow="true" CanShrink="true" Text="Результат" Font="Times New Roman, 12pt" Style="Стандартный"/>
         <TextObject Name="Text69" Left="94.5" Top="18.9" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="[MainData.Tests.Posts.Registrations.Result]" Font="Times New Roman, 12pt, style=Bold"/>
       </DataBand>
-      <DataBand Name="StrengthTestData" Top="349.95" Width="718.2" Height="37.8" CanGrow="true" CanShrink="true" DataSource="BusinessObjectDataSource3">
+      <DataBand Name="StrengthTestData" Top="368.85" Width="718.2" Height="37.8" CanGrow="true" CanShrink="true" DataSource="BusinessObjectDataSource3">
         <TextObject Name="Text38" Left="519.75" Top="18.9" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="Падение [MainData.Tests.Posts.Registrations.DropPressure]" Font="Times New Roman, 12pt" Style="Стандартный"/>
         <TextObject Name="Text70" Left="9.45" Width="680.4" Height="18.9" CanGrow="true" CanShrink="true" Text="Выдержка: [Row#]" Font="Times New Roman, 12pt, style=Italic"/>
         <TextObject Name="Text71" Left="9.45" Top="18.9" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="Давление" Font="Times New Roman, 12pt" Style="Стандартный"/>
         <TextObject Name="Text75" Left="179.55" Top="18.9" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="Старт [MainData.Tests.Posts.Registrations.StartPressure]" Font="Times New Roman, 12pt" Style="Стандартный"/>
         <TextObject Name="Text76" Left="349.65" Top="18.9" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="Стоп [MainData.Tests.Posts.Registrations.StopPressue]" Font="Times New Roman, 12pt" Style="Стандартный"/>
-        <DataBand Name="LeakageTestData" Top="390.95" Width="718.2" Height="18.9" CanShrink="true">
-          <TextObject Name="Text89" Left="9.45" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="Протечка" Font="Times New Roman, 12pt" Style="Стандартный"/>
+        <DataBand Name="LeakageTestData" Top="409.85" Width="718.2" Height="18.9" CanShrink="true">
+          <TextObject Name="Text89" Left="9.45" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="[IIf([MainData.Tests.Posts.Registrations.Leakage]==&quot;&quot;,&quot;&quot;,&quot;Протечка&quot;)]" Font="Times New Roman, 12pt" Style="Стандартный"/>
+          <TextObject Name="Text90" Left="179.55" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="[MainData.Tests.Posts.Registrations.Leakage]" Font="Arial, 12pt"/>
         </DataBand>
-        <DataBand Name="ResultTestData" Top="413.05" Width="718.2" Height="18.9">
+        <DataBand Name="ResultTestData" Top="431.95" Width="718.2" Height="18.9">
           <TextObject Name="Text91" Left="9.45" Width="85.05" Height="18.9" CanGrow="true" CanShrink="true" Text="Результат" Font="Times New Roman, 12pt" Style="Стандартный"/>
           <TextObject Name="Text92" Left="94.5" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" Text="[MainData.Tests.Posts.Registrations.Result]" Font="Times New Roman, 12pt, style=Bold"/>
         </DataBand>
       </DataBand>
-      <DataBand Name="Data4" Top="435.15" Width="718.2" Height="189" CanGrow="true" CanShrink="true" KeepTogether="true" KeepDetail="true">
+      <DataBand Name="Data4" Top="454.05" Width="718.2" Height="189" CanGrow="true" CanShrink="true" KeepTogether="true" KeepDetail="true">
         <PictureObject Name="Picture1" Left="9.45" Width="604.8" Height="189" DataColumn="MainData.Tests.Chart" SizeMode="StretchImage"/>
       </DataBand>
     </DataBand>
-    <ReportSummaryBand Name="ReportSummary1" Top="627.35" Width="718.2" Height="56.7" PrintOnBottom="true">
+    <ReportSummaryBand Name="ReportSummary1" Top="646.25" Width="718.2" Height="56.7" PrintOnBottom="true">
       <TextObject Name="Text13" Width="113.4" Height="18.9" Text="Исполнитель:" Font="Times New Roman, 12pt"/>
       <TextObject Name="Text74" Left="113.4" Width="283.5" Height="18.9" Text="___________________________________" Font="Arial, 10pt"/>
       <TextObject Name="Text14" Top="18.9" Width="113.4" Height="18.9" Text="Подпись:" Font="Times New Roman, 12pt"/>
@@ -176,7 +172,7 @@ namespace FastReport
       <TextObject Name="Text47" Top="37.8" Width="113.4" Height="18.9" Text="Дата:" Font="Times New Roman, 12pt"/>
       <TextObject Name="Text48" Left="113.4" Top="37.8" Width="94.5" Height="18.9" Text="[Date]" Font="Times New Roman, 12pt"/>
     </ReportSummaryBand>
-    <PageFooterBand Name="PageFooter1" Top="687.25" Width="718.2" Height="66.15">
+    <PageFooterBand Name="PageFooter1" Top="706.15" Width="718.2" Height="66.15">
       <TextObject Name="Text5" Left="585.9" Width="122.85" Height="18.9" CanGrow="true" Text="Страница [Page#] из [TotalPages#]" Font="Times New Roman, 10pt"/>
     </PageFooterBand>
   </ReportPage>

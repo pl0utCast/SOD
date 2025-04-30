@@ -190,26 +190,8 @@
                                     Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="10"
-                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                                    FontSize="22" 
-                                    Text="{lc:Localization Testing.SODBench.TestSettings.Mode}" />
-                                <RadioButton
-                                    FontSize="22"
-                                    Content="{lc:Localization Testing.SODBench.TestSettings.ManualMode}"
-                                    IsChecked="{Binding IsModeAuto, Converter={StaticResource InvertBooleanConverter}}"
-                                    Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
-                                <RadioButton
-                                    FontSize="22" 
-                                    Content="{lc:Localization Testing.SODBench.TestSettings.AutoMode}"
-                                    IsChecked="{Binding IsModeAuto}"
-                                    Style="{StaticResource MaterialDesignTabRadioButtonBottom}" />
-                            </StackPanel>
                             <StackPanel 
-                                Orientation="Horizontal"
-                                Visibility="{Binding IsModeAuto, Converter={StaticResource ReverseBooleanToVisibilityConverter}}">
+                                Orientation="Horizontal">
                                 <TextBlock
                                     Margin="10 20 0 10"
                                     FontSize="22"

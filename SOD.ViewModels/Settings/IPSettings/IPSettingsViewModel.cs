@@ -119,7 +119,7 @@ namespace SOD.ViewModels.Settings.IPSettings
                         var ip = ni.GetIPProperties().UnicastAddresses.FirstOrDefault();
                         var gates = ni.GetIPProperties().GatewayAddresses;
 
-                        if (ip.Address.AddressFamily == AddressFamily.InterNetwork && ni.Name == EthernetName)
+                        if (ip?.Address.AddressFamily == AddressFamily.InterNetwork && ni.Name == EthernetName)
                         {
                             IpAddress = ip.Address.ToString();
                             Subnet = ip.IPv4Mask.ToString();

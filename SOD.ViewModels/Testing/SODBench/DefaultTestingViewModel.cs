@@ -54,35 +54,35 @@ namespace SOD.ViewModels.Testing.SODBench
                 UpdateSensors();
             });
 
-            StartTest = ReactiveCommand.CreateFromTask(async () =>
-            {
-                if (IsRunTest)
-                {
-                    bus.Publish(new App.Messages.ProgrammMethodicsStatus(App.Messages.ProgrammStatus.Stop));
-                    if (IsExposure)
-                    {
-                        IsExposure = false;
-                        timer.Dispose();
-                    }
-                    _bench.StopTesting();
-                    if (exposureCounter > 0)
-                    {
-                        IsTestResultFill = true;
-                    }
-                    else
-                    {
-                        IsTestResultFill = false;
-                    }
-                    isAddTestToReport = IsTestResultFill;
-                    PressureChart.StopChart();
-                    var chart = PressureChart.PressureSeries.FirstOrDefault().DataSeries.ParentSurface.ExportToBitmapSource().GetBitmap();
-                }
-                else
-                {
-                    exposureCounter = 0;
-                    ExposureTime = "00:00:00";
-                    bus.Publish(new App.Messages.ProgrammMethodicsStatus(App.Messages.ProgrammStatus.Run));
-                    await _bench.StartTestingAsync();
+			StartTest = ReactiveCommand.CreateFromTask(async () =>
+			{
+				if (IsRunTest)
+				{
+					bus.Publish(new App.Messages.ProgrammMethodicsStatus(App.Messages.ProgrammStatus.Stop));
+					if (IsExposure)
+					{
+						IsExposure = false;
+						timer.Dispose();
+					}
+					_bench.StopTesting();
+					if (exposureCounter > 0)
+					{
+						IsTestResultFill = true;
+					}
+					else
+					{
+						IsTestResultFill = false;
+					}
+					isAddTestToReport = IsTestResultFill;
+					PressureChart.StopChart();
+					var chart = PressureChart.PressureSeries.FirstOrDefault().DataSeries.ParentSurface.ExportToBitmapSource().GetBitmap();
+				}
+				else
+				{
+					exposureCounter = 0;
+					ExposureTime = "00:00:00";
+					bus.Publish(new App.Messages.ProgrammMethodicsStatus(App.Messages.ProgrammStatus.Run));
+					_bench.StartTesting();
                     UpdateChart();
                     PressureChart.StartChart();
                 }

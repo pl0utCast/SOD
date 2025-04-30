@@ -34,6 +34,7 @@ namespace SOD.App.Benches.SODBench.Report
             public string PressureName { get; set; }
             public string AirTemperature { get; set; }
             public string WaterTemperature { get; set; }
+            public string Leakage { get; set; }
             public FuncionalReportTest FuncionalTest { get; set; } = new FuncionalReportTest();
             public string Result { get; set; }
             public class FuncionalReportTest

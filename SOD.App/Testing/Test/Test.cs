@@ -24,11 +24,13 @@ namespace SOD.App.Testing.Test
         protected IEnumerable<IPost> _posts;
         private Timer timer;
 
-        public Test(BaseReportData baseReportData,
+        public Test(string name,
+                    BaseReportData baseReportData,
                     ILocalizationService localizationService,
                     IStandart standart,
                     params object[] parameters)
         {
+            Name = name;
             _reportData = baseReportData;
             _parameters = parameters;
             _standart = standart;
@@ -115,6 +117,7 @@ namespace SOD.App.Testing.Test
         public void CalculateResult()
         {
             TestResult.Clear();
+            TestResult.Name = Name;
             TestResult.Standart = _standart != null ? _standart.Name : string.Empty;
             // на каждую регистрацию предполагается 2 маркера, старт и стоп
             foreach (var post in _testBench.Posts)
@@ -144,19 +147,13 @@ namespace SOD.App.Testing.Test
                             registration.StopPressure.Add(new SensorResultValue<Pressure>(pressureSensor.Id, pressureSensor.Name, stopPressure));
                             registration.DropPressure.Add(new SensorResultValue<Pressure>(pressureSensor.Id, pressureSensor.Name, diffPressure));
 
-                            // оцениваем результат по параметрам заданным оператором
-                            //if (_parameters[0] is ControlType controlType)
-                            {
-                                if (post.Status == PostStatus.Valid)
-                                    registration.Result = "Соответствует";
-                                else
-                                {
-                                    registration.Result = "Не соответствует";
-                                }
-                            }
-                        }
+                            if (post.Status == PostStatus.Valid)
+                                registration.Result = "Соответствует";
+                            else
+                                registration.Result = "Не соответствует";
 
-                        postResult.Registrations.Add(registration);
+                            postResult.Registrations.Add(registration);
+                        }
                     }
                 }
 
@@ -282,6 +279,7 @@ namespace SOD.App.Testing.Test
         protected List<int> registrationMarkers { get; set; } = new List<int>();
         public TestType TestType => TestType.Functional;
         public ITestingResult Result => TestResult;
+        public string Name { get; set; }
         public bool IsRun { get; private set; }
     }
 }

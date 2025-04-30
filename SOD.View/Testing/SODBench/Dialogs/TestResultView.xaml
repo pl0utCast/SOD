@@ -5,10 +5,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:lc="clr-namespace:SOD.LocalizationService;assembly=SOD.LocalizationService"
     xmlns:local="clr-namespace:SOD.View.Testing.SODBench.Dialogs"
+    xmlns:converters="clr-namespace:SOD.View.Converters"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SOD.ViewModels.Testing.SODBench.Dialogs;assembly=SOD.ViewModels"
     mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <converters:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
+    </UserControl.Resources>
 
     <materialDesign:Card>
         <Grid>
@@ -27,53 +32,60 @@
                 Margin="10"
                 HorizontalAlignment="Center">
                 <StackPanel
-    Grid.Row="1"
-    Margin="5"
-    HorizontalAlignment="Center">
+                    Grid.Row="1"
+                    Margin="5"
+                    HorizontalAlignment="Center">
                     <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" Text="{lc:Localization Testing.SODBench.Pressure}" />
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="{lc:Localization Testing.SODBench.ExpectedSetPressure}" />
                         <TextBlock
-            Margin="5,0,0,0"
-            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-            Text="{Binding ExpectedSetPressure}" />
+                            Margin="5,0,0,0"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            Text="{Binding ExpectedSetPressure}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="{lc:Localization Testing.SODBench.OpenPressure}" />
                         <TextBlock
-            Margin="5,0,0,0"
-            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-            Text="{Binding OpenPressure}" />
+                            Margin="5,0,0,0"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            Text="{Binding OpenPressure}" />
                         <TextBlock
-            Margin="5,0,0,0"
-            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-            Text="{Binding Accuracy, StringFormat=(\{0\} %)}" />
+                            Margin="5,0,0,0"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            Text="{Binding Accuracy, StringFormat=(\{0\} %)}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="{lc:Localization Testing.SODBench.ClosePressure}" />
                         <TextBlock
-            Margin="5,0,0,0"
-            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-            Text="{Binding ClosePressure}" />
+                            Margin="5,0,0,0"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            Text="{Binding ClosePressure}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding Leakage, Converter={StaticResource NullVisibilityConverter}}">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="{lc:Localization Testing.SODBench.Leakage}" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            Text="{Binding Leakage}" />
                     </StackPanel>
                     <StackPanel
-        Margin="10"
-        HorizontalAlignment="Center"
-        Orientation="Horizontal">
+                        Margin="10"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
                         <RadioButton
-            Height="50"
-            MinWidth="200"
-            Content="{lc:Localization Testing.SODBench.Valid}"
-            FontSize="24"
-            IsChecked="{Binding Valid}"
-            Style="{StaticResource MaterialDesignTabRadioButton}" />
+                            Height="50"
+                            MinWidth="200"
+                            Content="{lc:Localization Testing.SODBench.Valid}"
+                            FontSize="24"
+                            IsChecked="{Binding Valid}"
+                            Style="{StaticResource MaterialDesignTabRadioButton}" />
                         <RadioButton
-            Height="50"
-            MinWidth="200"
-            Content="{lc:Localization Testing.SODBench.UnValid}"
-            FontSize="24"
-            IsChecked="{Binding UnValid}"
-            Style="{StaticResource MaterialDesignTabRadioButton}" />
+                            Height="50"
+                            MinWidth="200"
+                            Content="{lc:Localization Testing.SODBench.UnValid}"
+                            FontSize="24"
+                            IsChecked="{Binding UnValid}"
+                            Style="{StaticResource MaterialDesignTabRadioButton}" />
                     </StackPanel>
                 </StackPanel>
                 <StackPanel
