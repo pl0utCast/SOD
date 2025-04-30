@@ -16,7 +16,8 @@ namespace SOD.App.Testing.Test
 			//QrChart?.Dispose();
 			PostResults.Clear();
 		}
-		public Image Chart { get; set; }
+        public string Name { get; set; }
+        public Image Chart { get; set; }
 		//public Image QrChart { get; set; }
 		public List<PostResult> PostResults { get; set; } = new List<PostResult>();
 		public string Standart { get; set; }

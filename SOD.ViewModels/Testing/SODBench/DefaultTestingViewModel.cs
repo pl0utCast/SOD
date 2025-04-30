@@ -82,7 +82,7 @@ namespace SOD.ViewModels.Testing.SODBench
 					exposureCounter = 0;
 					ExposureTime = "00:00:00";
 					bus.Publish(new App.Messages.ProgrammMethodicsStatus(App.Messages.ProgrammStatus.Run));
-					await _bench.StartTestingAsync();
+					_bench.StartTesting();
                     UpdateChart();
 					PressureChart.StartChart();
 				}

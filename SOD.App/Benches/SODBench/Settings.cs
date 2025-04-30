@@ -30,7 +30,8 @@ namespace SOD.App.Benches.SODBench
 		//public string UrlForQr { get; set; } = string.Empty;
 		public class TestSettings
 		{
-			public int? Time { get; set; }
+            public string Name { get; set; }
+            public int? Time { get; set; }
 			public int? PressureSensorId { get; set; }
 			public int WorkPressure { get; set; }
 			public int Deformation { get; set; }

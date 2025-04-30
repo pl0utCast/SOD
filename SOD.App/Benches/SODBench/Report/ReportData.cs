@@ -39,7 +39,7 @@ namespace SOD.App.Benches.SODBench.Report
         private void Fill(Testing.Test.Result result)
         {
             var test = new TestReportItem();
-            test.Name = "Испытание";
+            test.Name = result.Name;
             test.Chart = result.Chart;
             //if (LocalizationExtension.LocaliztionService.CurrentCulture.Name == "ru-RU")
             //	test.QrChart = result.QrChart;

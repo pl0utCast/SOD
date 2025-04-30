@@ -81,13 +81,13 @@ namespace SOD.App.Benches.SODBench
             _settingsService.SaveSettings(settingsKey, Settings);
         }
 
-        public async Task StartTestingAsync()
+        public void StartTesting()
         {
             if (currentTest?.IsRun == true) return;
             var testSettings = Settings.SelectedTestSettings;
 
             Standart = _testingService.GetAllStandarts().SingleOrDefault(s => s.Id == Settings.SelectedBalloon.StandartId);
-            currentTest = new Testing.Test.Test(reportData, _localizationService, Standart, testSettings.SetPressure);
+            currentTest = new Testing.Test.Test(ProgrammMethodicsConfig.Name, reportData, _localizationService, Standart, testSettings.SetPressure);
             if (currentTest != null)
             {
                 cancellationTokenSource = new CancellationTokenSource();
@@ -97,29 +97,32 @@ namespace SOD.App.Benches.SODBench
 
             var programm = _testingService.CreateProgrammMethodics(ProgrammMethodicsConfig, TestingBalloon, modbusCommandsFactory, reportData);
 
-            try
+            Task.Run(async () =>
             {
-                foreach (var children in programm.Childrens)
+                try
                 {
-                    if (cancellationTokenSource.Token.IsCancellationRequested)
+                    foreach (var children in programm.Childrens)
                     {
-                        cancellationTokenSource.Token.ThrowIfCancellationRequested();
-                    }
-                    if (children is ICommand baseCommand)
-                    {
-                        _bus.Publish(new ExecuteTestCommand(baseCommand.CommandConfig, true));
-                        await baseCommand.ExecuteAsync(cancellationTokenSource.Token);
-                        _bus.Publish(new ExecuteTestCommand(baseCommand.CommandConfig, false));
+                        if (cancellationTokenSource.Token.IsCancellationRequested)
+                        {
+                            cancellationTokenSource.Token.ThrowIfCancellationRequested();
+                        }
+                        if (children is ICommand baseCommand)
+                        {
+                            _bus.Publish(new ExecuteTestCommand(baseCommand.CommandConfig, true));
+                            await baseCommand.ExecuteAsync(cancellationTokenSource.Token);
+                            _bus.Publish(new ExecuteTestCommand(baseCommand.CommandConfig, false));
+                        }
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                currentTest?.Stop();
-                // посылаем контроллеру команду стоп
-                await device.WriteInt32(46, 2);
-                //logger.Error(e, $"Ошибка выполнения программной методики");
-            }
+                catch (Exception e)
+                {
+                    currentTest?.Stop();
+                    // посылаем контроллеру команду стоп
+                    await device.WriteInt32(46, 2);
+                    //logger.Error(e, $"Ошибка выполнения программной методики");
+                }
+            });
         }
 
         public void StartRegistration()
