@@ -57,7 +57,8 @@ namespace SOD.ViewModels.Testing.SODBench
                 StrokeThickness = 1,
                 Y1 = 0,
                 X1 = 0,
-                IsEditable = false
+                IsEditable = false,
+                YAxisId = "yPressureAxis"
             });
             ConfigureAxis();
             bus.Subscribe<App.Benches.SODBench.Messages.SelectedTestMessage>(m =>
@@ -124,7 +125,7 @@ namespace SOD.ViewModels.Testing.SODBench
         }
             
 
-        public void SetPressureSensor(IPressureSensor pressureSensor)
+        public void SetPressureSensor(IPressureSensor pressureSensor, ITenzoSensor tenzoSensor)
         {
             if (pressureSensor == null) throw new ArgumentNullException(nameof(pressureSensor));
 
@@ -174,14 +175,22 @@ namespace SOD.ViewModels.Testing.SODBench
             if (!pressureSeries.ContainsKey(pressureSensor.Id))
             {
                 var pressSeries = new XyDataSeries<TimeSpan, double>();
-                PressureSeries.Add(new LineRenderableSeriesViewModel() { DataSeries = pressSeries, AntiAliasing = true, Stroke = Colors.Red, StrokeThickness = 2 });
+                //var tenzoSeries = new XyDataSeries<TimeSpan, double>();
+                PressureSeries.Add(new LineRenderableSeriesViewModel() { DataSeries = pressSeries, AntiAliasing = true, Stroke = Colors.Red, StrokeThickness = 2, YAxisId = "yPressureAxis" });
                 pressureSeries.Add(pressureSensor.Id, pressSeries);
+                //PressureSeries.Add(new LineRenderableSeriesViewModel() { DataSeries = tenzoSeries, AntiAliasing = true, Stroke = Colors.Brown, StrokeThickness = 2, YAxisId = "yTenzoAxis" });
+                //pressureSeries.Add(tenzoSensor.Id, tenzoSeries);
             }
         }
 
         public void StartChart()
         {
             if (isStartChart) return;
+
+            foreach (var series in pressureSeries.Values)
+            {
+                series.Clear();
+            }
 
             pressureUpdater = Observable.Timer(TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(100))
                                         .Subscribe(time =>
@@ -219,6 +228,7 @@ namespace SOD.ViewModels.Testing.SODBench
                 Y1 = 0,
                 X1 = 0,
                 IsEditable = false,
+                YAxisId = "yPressureAxis"
             });
             pressureSeries.Clear();
             pressureSensors.Clear();
@@ -238,7 +248,7 @@ namespace SOD.ViewModels.Testing.SODBench
                 LabelPlacement = LabelPlacement.Bottom,
                 StrokeThickness = 2,
                 X1 = totalTime,
-                IsEditable = false
+                IsEditable = false,
             });      
         }
 

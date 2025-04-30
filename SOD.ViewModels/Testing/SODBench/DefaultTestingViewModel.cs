@@ -22,190 +22,211 @@ using SensorViewModel = SOD.ViewModels.Testing.SODBench.Sensors.SensorViewModel;
 
 namespace SOD.ViewModels.Testing.SODBench
 {
-	public class DefaultTestingViewModel : ReactiveObject, IActivatableViewModel
-	{
-		private App.Benches.SODBench.Bench _bench;
+    public class DefaultTestingViewModel : ReactiveObject, IActivatableViewModel
+    {
+        private App.Benches.SODBench.Bench _bench;
         private ILocalizationService _localizationService;
         private IDisposable timer;
-		private bool isAddTestToReport = false;
-		private int exposureCounter = 0;
-		public DefaultTestingViewModel(INavigationService navigationService,
-										ITestBenchService testBenchService,
-										IBus bus,
-										IDialogService dialogService,
-										ISensorService sensorService,
-										ILocalizationService localizationService)
-		{
-			_bench = (App.Benches.SODBench.Bench)testBenchService.GetTestBench();
+        private bool isAddTestToReport = false;
+        private int exposureCounter = 0;
+        public DefaultTestingViewModel(INavigationService navigationService,
+                                        ITestBenchService testBenchService,
+                                        IBus bus,
+                                        IDialogService dialogService,
+                                        ISensorService sensorService,
+                                        ILocalizationService localizationService)
+        {
+            _bench = (App.Benches.SODBench.Bench)testBenchService.GetTestBench();
             _localizationService = localizationService;
             PressureChart = new PressureChartViewModel(localizationService, _bench, bus);
-			if (_bench.Settings.SelectedTestSettings != null /*&& _bench.TestingValve!=null*/) IsSelectedTest = true;
-			ExposureTime = "00:00:00";
-			TemperatureSensors = new TemperatureSensorsViewModel(sensorService, _bench);
-			UpdateChart();
-			UpdateSensors();
-			InfoMessage = localizationService["Testing.SODBench.Step1"];
+            if (_bench.Settings.SelectedTestSettings != null /*&& _bench.TestingValve!=null*/) IsSelectedTest = true;
+            ExposureTime = "00:00:00";
+            TemperatureSensors = new TemperatureSensorsViewModel(sensorService, _bench);
+            UpdateChart();
+            UpdateSensors();
+            InfoMessage = localizationService["Testing.SODBench.Step1"];
 
-			bus.Subscribe<App.Benches.SODBench.Messages.SelectedTestMessage>(m =>
-			{
-				IsTestResultFill = false;
-				IsSelectedTest = true;
-				UpdateChart();
-				UpdateSensors();
-			});
+            bus.Subscribe<App.Benches.SODBench.Messages.SelectedTestMessage>(m =>
+            {
+                IsTestResultFill = false;
+                IsSelectedTest = true;
+                UpdateChart();
+                UpdateSensors();
+            });
 
-			StartTest = ReactiveCommand.CreateFromTask(async () =>
-			{
-				if (IsRunTest)
-				{
-					bus.Publish(new App.Messages.ProgrammMethodicsStatus(App.Messages.ProgrammStatus.Stop));
-					if (IsExposure)
-					{
-						IsExposure = false;
-						timer.Dispose();
-					}
-					_bench.StopTesting();
-					if (exposureCounter > 0)
-					{
-						IsTestResultFill = true;
-					}
-					else
-					{
-						IsTestResultFill = false;
-					}
-					isAddTestToReport = IsTestResultFill;
-					PressureChart.StopChart();
-					var chart = PressureChart.PressureSeries.FirstOrDefault().DataSeries.ParentSurface.ExportToBitmapSource().GetBitmap();
-				}
-				else
-				{
-					exposureCounter = 0;
-					ExposureTime = "00:00:00";
-					bus.Publish(new App.Messages.ProgrammMethodicsStatus(App.Messages.ProgrammStatus.Run));
-					await _bench.StartTestingAsync();
+            StartTest = ReactiveCommand.CreateFromTask(async () =>
+            {
+                if (IsRunTest)
+                {
+                    bus.Publish(new App.Messages.ProgrammMethodicsStatus(App.Messages.ProgrammStatus.Stop));
+                    if (IsExposure)
+                    {
+                        IsExposure = false;
+                        timer.Dispose();
+                    }
+                    _bench.StopTesting();
+                    if (exposureCounter > 0)
+                    {
+                        IsTestResultFill = true;
+                    }
+                    else
+                    {
+                        IsTestResultFill = false;
+                    }
+                    isAddTestToReport = IsTestResultFill;
+                    PressureChart.StopChart();
+                    var chart = PressureChart.PressureSeries.FirstOrDefault().DataSeries.ParentSurface.ExportToBitmapSource().GetBitmap();
+                }
+                else
+                {
+                    exposureCounter = 0;
+                    ExposureTime = "00:00:00";
+                    bus.Publish(new App.Messages.ProgrammMethodicsStatus(App.Messages.ProgrammStatus.Run));
+                    await _bench.StartTestingAsync();
                     UpdateChart();
-					PressureChart.StartChart();
-				}
-				IsRunTest = !IsRunTest;
-			}, this.WhenAnyValue(x => x.IsExposure, x => x.IsSelectedTest, x => x.ProgrammMethodicsConfig,
-					(isExposure, isSelectedTest, selectedProgrammMethodics) => 
-						!isExposure && isSelectedTest && ProgrammMethodicsConfig != null));
+                    PressureChart.StartChart();
+                }
+                IsRunTest = !IsRunTest;
+            }, this.WhenAnyValue(x => x.IsExposure, x => x.IsSelectedTest, x => x.ProgrammMethodicsConfig,
+                    (isExposure, isSelectedTest, selectedProgrammMethodics) =>
+                        !isExposure && isSelectedTest && ProgrammMethodicsConfig != null));
 
-			Exposure = ReactiveCommand.Create(() =>
-			{
-				if (!IsExposure && exposureCounter < 3)
-				{
-					exposureCounter++;
-					IsExposure = true;
-					_bench.StartRegistration();
-				}
-				else if (IsExposure && exposureCounter <= 3)
-				{
-					IsExposure = false;
-					_bench.StopRegistartion();
-				}
-			}, this.WhenAnyValue(x => x.IsRunTest));
-			GoParameters = ReactiveCommand.Create(() =>
-			{
-				navigationService.NavigateTo("SODTestParameters");
-			}, this.WhenAnyValue(x => x.IsRunTest).Select(isRun => !isRun));
+            Exposure = ReactiveCommand.Create(() =>
+            {
+                if (!IsExposure && exposureCounter < 3)
+                {
+                    exposureCounter++;
+                    IsExposure = true;
+                    _bench.StartRegistration();
+                }
+                else if (IsExposure && exposureCounter <= 3)
+                {
+                    IsExposure = false;
+                    _bench.StopRegistartion();
+                }
+            }, this.WhenAnyValue(x => x.IsRunTest));
+            GoParameters = ReactiveCommand.Create(() =>
+            {
+                navigationService.NavigateTo("SODTestParameters");
+            }, this.WhenAnyValue(x => x.IsRunTest).Select(isRun => !isRun));
 
 
-			var canResult = this.WhenAnyValue(x => x.IsRunTest, x => x.IsTestResultFill,
-				(isRunTest, isTestResultFill) => !isRunTest && isTestResultFill);
+            var canResult = this.WhenAnyValue(x => x.IsRunTest, x => x.IsTestResultFill,
+                (isRunTest, isTestResultFill) => !isRunTest && isTestResultFill);
 
-			Result = ReactiveCommand.CreateFromTask(async () =>
-			{
-				var vm = new Dialogs.TestResultViewModel(((App.Testing.Test.Test)_bench.CurrentTest).TestResult.PostResults.FirstOrDefault(), localizationService, dialogService, Observable.Return(isAddTestToReport));
+            Result = ReactiveCommand.CreateFromTask(async () =>
+            {
+                var vm = new Dialogs.TestResultViewModel(((App.Testing.Test.Test)_bench.CurrentTest).TestResult.PostResults.FirstOrDefault(), localizationService, dialogService, Observable.Return(isAddTestToReport));
 
-				var result = await dialogService.ShowDialogAsync("SODBenchTestResult", vm);
-				if (result != null)
-				{
-					isAddTestToReport = false;
-					_bench.UpdateReport(PressureChart.PressureSeries.FirstOrDefault().DataSeries.ParentSurface.ExportToBitmapSource().GetBitmap());
-				}
-			}, canResult);
+                var result = await dialogService.ShowDialogAsync("SODBenchTestResult", vm);
+                if (result != null)
+                {
+                    isAddTestToReport = false;
+                    _bench.UpdateReport(PressureChart.PressureSeries.FirstOrDefault().DataSeries.ParentSurface.ExportToBitmapSource().GetBitmap());
+                }
+            }, canResult);
 
-			this.WhenActivated(dis =>
-			{
-				bus.Subscribe<App.Messages.Commands.RegistrationMessage>(m =>
-				{
-					Application.Current.Dispatcher.Invoke(() =>
-					{
-						timer?.Dispose();
-						if (m.Status == App.Messages.Commands.RegistartionStatus.Start)
-						{
-							var exposureTime = TimeSpan.FromSeconds(_bench.Settings.SelectedTestSettings.Time.Value);
-							timer = Observable.Timer(TimeSpan.FromMilliseconds(1000), TimeSpan.FromMilliseconds(1000))
-									  .Subscribe(t => ExposureTime = (exposureTime - TimeSpan.FromSeconds(t + 1)).ToString("hh\\:mm\\:ss"))
-									  .DisposeWith(dis);
-						}
-						else if (m.Status == App.Messages.Commands.RegistartionStatus.End)
-						{
-							IsExposure = false;
-						}
-						PressureChart.SetAnnotation();
-					});
-				})
-				.DisposeWith(dis);
+            this.WhenActivated(dis =>
+            {
+                bus.Subscribe<App.Messages.Commands.RegistrationMessage>(m =>
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        timer?.Dispose();
+                        if (m.Status == App.Messages.Commands.RegistartionStatus.Start)
+                        {
+                            var exposureTime = TimeSpan.FromSeconds(_bench.Settings.SelectedTestSettings.Time.Value);
+                            timer = Observable.Timer(TimeSpan.FromMilliseconds(1000), TimeSpan.FromMilliseconds(1000))
+                                      .Subscribe(t => ExposureTime = (exposureTime - TimeSpan.FromSeconds(t + 1)).ToString("hh\\:mm\\:ss"))
+                                      .DisposeWith(dis);
+                        }
+                        else if (m.Status == App.Messages.Commands.RegistartionStatus.End)
+                        {
+                            IsExposure = false;
+                        }
+                        PressureChart.SetAnnotation();
+                    });
+                })
+                .DisposeWith(dis);
 
-				bus.Subscribe<App.Messages.Reports.ReportSaveMessage>(m =>
-				{
-					IsTestResultFill = false;
-				}).DisposeWith(dis);
-				bus.Subscribe<App.Messages.Reports.CreateNewReportMessage>(m =>
-				{
-					IsTestResultFill = false;
-				}).DisposeWith(dis);
+                bus.Subscribe<App.Messages.Reports.ReportSaveMessage>(m =>
+                {
+                    IsTestResultFill = false;
+                }).DisposeWith(dis);
+                bus.Subscribe<App.Messages.Reports.CreateNewReportMessage>(m =>
+                {
+                    IsTestResultFill = false;
+                }).DisposeWith(dis);
 
                 bus.Subscribe<SelectProgrammMethodicsConfigMessage>(m =>
                 {
                     ProgrammMethodicsConfig = m.ProgrammMethodicsConfig;
                 })
-				.DisposeWith(dis);
+                .DisposeWith(dis);
             });
-		}
+        }
 
-		private void UpdateChart()
-		{
-			PressureChart.ClearChart();
-			foreach (var pSensor in _bench.Sensors.Where(s => s.Sensor is IPressureSensor).Select(s => s.Sensor))
-			{
-				PressureChart.SetPressureSensor((IPressureSensor)pSensor);
-			}
-		}
+        private void UpdateChart()
+        {
+            //PressureChart.ClearChart();
+            //foreach (var pSensor in _bench.Sensors.Where(s => s.Sensor is IPressureSensor).Select(s => s.Sensor))
+            //{
+            //	//PressureChart.SetPressureSensor((IPressureSensor)pSensor);
+            //}
+            //         foreach (var tSensor in _bench.Sensors.Where(s => s.Sensor is ITenzoSensor).Select(s => s.Sensor))
+            //         {
+            //             PressureChart.SetPressureSensor((IPressureSensor)pSensor);
+            //         }
 
-		private void UpdateSensors()
-		{
-			Sensors.Clear();
-			Sensors.AddRange(_bench.Sensors.Where(s => s.Sensor is IPressureSensor)
-										   .Select(s => new PressureSensorViewModel((IPressureSensor)s.Sensor, _bench.Settings.PressureUnit, _localizationService)));
-			Sensors.AddRange(_bench.Sensors.Where(s => s.Sensor is ITenzoSensor)
-										   .Select(s => new TenzoSensorViewModel((ITenzoSensor)s.Sensor, _bench.Settings.TenzoUnit, _localizationService)));
-		}
+            var pressureSensors = _bench.Sensors
+            .Select(s => s.Sensor)
+            .OfType<IPressureSensor>();
 
-		[Reactive]
-		public bool IsTestResultFill { get; set; }
-		[Reactive]
-		public bool IsExposure { get; set; }
-		[Reactive]
-		public bool IsSelectedTest { get; set; }
-		[Reactive]
-		public bool IsRunTest { get; set; }
-		[Reactive]
-		public string ExposureTime { get; set; }
-		[Reactive]
-		public string InfoMessage { get; set; }
-		[Reactive]
+            var tenzoSensors = _bench.Sensors
+                .Select(s => s.Sensor)
+                .OfType<ITenzoSensor>();
+
+            foreach (var pSensor in pressureSensors)
+            {
+                foreach (var tSensor in tenzoSensors)
+                {
+                    PressureChart.SetPressureSensor((IPressureSensor)pSensor, (ITenzoSensor)tSensor);
+                }
+            }
+
+        }
+
+        private void UpdateSensors()
+        {
+            Sensors.Clear();
+            Sensors.AddRange(_bench.Sensors.Where(s => s.Sensor is IPressureSensor)
+                                           .Select(s => new PressureSensorViewModel((IPressureSensor)s.Sensor, _bench.Settings.PressureUnit, _localizationService)));
+            Sensors.AddRange(_bench.Sensors.Where(s => s.Sensor is ITenzoSensor)
+                                           .Select(s => new TenzoSensorViewModel((ITenzoSensor)s.Sensor, _bench.Settings.TenzoUnit, _localizationService)));
+        }
+
+        [Reactive]
+        public bool IsTestResultFill { get; set; }
+        [Reactive]
+        public bool IsExposure { get; set; }
+        [Reactive]
+        public bool IsSelectedTest { get; set; }
+        [Reactive]
+        public bool IsRunTest { get; set; }
+        [Reactive]
+        public string ExposureTime { get; set; }
+        [Reactive]
+        public string InfoMessage { get; set; }
+        [Reactive]
         public ProgrammMethodicsConfig ProgrammMethodicsConfig { get; set; }
-		public ObservableCollectionExtended<SensorViewModel> Sensors { get; set; } = new ObservableCollectionExtended<SensorViewModel>();
-		public PressureChartViewModel PressureChart { get; set; }
-		public TemperatureSensorsViewModel TemperatureSensors { get; set; }
-		public ReactiveCommand<Unit, Unit> GoParameters { get; set; }
-		public ReactiveCommand<Unit, Unit> StartTest { get; set; }
-		public ReactiveCommand<Unit, Unit> Exposure { get; set; }
-		public ReactiveCommand<Unit, Unit> Result { get; set; }
+        public ObservableCollectionExtended<SensorViewModel> Sensors { get; set; } = new ObservableCollectionExtended<SensorViewModel>();
+        public PressureChartViewModel PressureChart { get; set; }
+        public TemperatureSensorsViewModel TemperatureSensors { get; set; }
+        public ReactiveCommand<Unit, Unit> GoParameters { get; set; }
+        public ReactiveCommand<Unit, Unit> StartTest { get; set; }
+        public ReactiveCommand<Unit, Unit> Exposure { get; set; }
+        public ReactiveCommand<Unit, Unit> Result { get; set; }
 
-		public ViewModelActivator Activator { get; } = new ViewModelActivator();
-	}
+        public ViewModelActivator Activator { get; } = new ViewModelActivator();
+    }
 }
