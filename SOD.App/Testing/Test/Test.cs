@@ -19,6 +19,7 @@ namespace SOD.App.Testing.Test
         private readonly IStandart _standart;
         private List<Pressure> pressures = new List<Pressure>();
         private IDisposable pressureUpdaterDisposable;
+        private ILocalizationService _localizationService;
         private List<Action> sensorValueUpdaters;
         private ITestBench _testBench;
         protected IEnumerable<IPost> _posts;
@@ -31,6 +32,7 @@ namespace SOD.App.Testing.Test
                     params object[] parameters)
         {
             Name = name;
+            _localizationService = localizationService;
             _reportData = baseReportData;
             _parameters = parameters;
             _standart = standart;
@@ -148,9 +150,9 @@ namespace SOD.App.Testing.Test
                             registration.DropPressure.Add(new SensorResultValue<Pressure>(pressureSensor.Id, pressureSensor.Name, diffPressure));
 
                             if (post.Status == PostStatus.Valid)
-                                registration.Result = "Соответствует";
+                                registration.Result = _localizationService["Testing.Test.Valid"];
                             else
-                                registration.Result = "Не соответствует";
+                                registration.Result = _localizationService["Testing.Test.UnValid"];
 
                             postResult.Registrations.Add(registration);
                         }

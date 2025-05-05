@@ -11,7 +11,6 @@
         Width="60"
         Height="60"
         Command="{Binding Edit}"
-        Content="{materialDesign:PackIcon Kind=Edit,
-                                          Size=40}"
-        Style="{StaticResource MaterialDesignToolForegroundButton}" />
+        Content="{materialDesign:PackIcon Kind=Edit, Size=40}"
+        Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}" />
 </UserControl>

@@ -12,6 +12,7 @@ namespace SOD.View.Converters
     public class CommandTypeConverter : MarkupExtension, IValueConverter
     {
         public List<string> Types { get; set; } = new List<string>();
+        public List<string> TypesAuto { get; set; } = new List<string>();
         private Dictionary<string, CommandType> names = new Dictionary<string, CommandType>();
         public CommandType Type { get; set; }
 
@@ -30,6 +31,7 @@ namespace SOD.View.Converters
         {
             names = Enum.GetValues(typeof(CommandType)).Cast<CommandType>().ToDictionary(ct => ct.GetCommandName());
             Types = Enum.GetValues(typeof(CommandType)).Cast<CommandType>().Select(ct=>ct.GetCommandName()).ToList();
+            TypesAuto = Enum.GetValues(typeof(CommandTypeAuto)).Cast<CommandType>().Select(ct=>ct.GetCommandName()).ToList();
             return this;
         }
     }
