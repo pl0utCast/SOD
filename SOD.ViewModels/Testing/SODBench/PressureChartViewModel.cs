@@ -30,6 +30,7 @@ using System.Diagnostics;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 using SOD.Core.Units;
 using MemBus;
+using SciChart.Charting.Visuals.Axes.LabelProviders;
 
 namespace SOD.ViewModels.Testing.SODBench
 {
@@ -76,6 +77,8 @@ namespace SOD.ViewModels.Testing.SODBench
             ConfigureAxis();
             bus.Subscribe<App.Benches.SODBench.Messages.SelectedTestMessage>(m =>
             {
+                PressureSeries[0].DataSeries.SeriesName = localizationService["Testing.SODBench.Pressure"] + ", " + Pressure.GetAbbreviation(bench.Settings.PressureUnit, new CultureInfo(localizationService.CurrentCulture.Name));
+                PressureSeries[1].DataSeries.SeriesName = localizationService["Testing.SODBench.Tenzo"] + ", " + Force.GetAbbreviation(bench.Settings.TenzoUnit, new CultureInfo(localizationService.CurrentCulture.Name));
                 XAxes.Remove(xTimeSpanAxis);
                 YAxes.Remove(yPressureAxis);
                 YAxes.Remove(yTenzoAxis);
@@ -194,7 +197,10 @@ namespace SOD.ViewModels.Testing.SODBench
             }
             if (!pressureSeries.ContainsKey(pressureSensor.Id))
             {
-                var pressSeries = new XyDataSeries<TimeSpan, double>();
+                var pressSeries = new XyDataSeries<TimeSpan, double>()
+                {
+                    SeriesName = localizationService["Testing.SODBench.Pressure"] + ", " + Pressure.GetAbbreviation(bench.Settings.PressureUnit, new CultureInfo(localizationService.CurrentCulture.Name)),
+                };
 
                 PressureSeries.Add(new LineRenderableSeriesViewModel()
                 {
@@ -202,7 +208,7 @@ namespace SOD.ViewModels.Testing.SODBench
                     AntiAliasing = true,
                     Stroke = Colors.Red,
                     StrokeThickness = 2,
-                    YAxisId = "yPressureAxis"
+                    YAxisId = "yPressureAxis",
                 });
                 pressureSeries.Add(pressureSensor.Id, pressSeries);
             }
@@ -213,7 +219,10 @@ namespace SOD.ViewModels.Testing.SODBench
             }
             if (!tenzoSeries.ContainsKey(tenzoSensor.Id))
             {
-                var tenzSeries = new XyDataSeries<TimeSpan, double>();
+                var tenzSeries = new XyDataSeries<TimeSpan, double>()
+                {
+                    SeriesName = localizationService["Testing.SODBench.Tenzo"] + ", " + Force.GetAbbreviation(bench.Settings.TenzoUnit, new CultureInfo(localizationService.CurrentCulture.Name)),
+                };
 
                 PressureSeries.Add(new LineRenderableSeriesViewModel()
                 {
