@@ -36,7 +36,9 @@ namespace SOD.ViewModels.Testing.SODBench
     public class PressureChartViewModel : ReactiveObject
     {
         private Dictionary<int, XyDataSeries<TimeSpan, double>> pressureSeries = new Dictionary<int, XyDataSeries<TimeSpan, double>>();
+        private Dictionary<int, XyDataSeries<TimeSpan, double>> tenzoSeries = new Dictionary<int, XyDataSeries<TimeSpan, double>>();
         private List<IPressureSensor> pressureSensors = new List<IPressureSensor>();
+        private List<ITenzoSensor> tenzoSensors = new List<ITenzoSensor>();
         private TimeSpan totalTime;
         private IDisposable pressureUpdater;
         private bool isStartChart;
@@ -60,6 +62,17 @@ namespace SOD.ViewModels.Testing.SODBench
                 IsEditable = false,
                 YAxisId = "yPressureAxis"
             });
+            Annotations.Add(new HorizontalLineAnnotationViewModel
+            {
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Stroke = Colors.Blue,
+                StrokeThickness = 1,
+                Y1 = 0,
+                X1 = 0,
+                IsEditable = false,
+                YAxisId = "yTenzoAxis"
+            });
+
             ConfigureAxis();
             bus.Subscribe<App.Benches.SODBench.Messages.SelectedTestMessage>(m =>
             {
@@ -76,7 +89,7 @@ namespace SOD.ViewModels.Testing.SODBench
             xTimeSpanAxis = new TimeSpanAxisViewModel
             {
                 AxisTitle = localizationService["Testing.SODBench.Time"],
-                AxisBandsFill = System.Windows.Media.Color.FromArgb(10, 10,10,10),
+                AxisBandsFill = System.Windows.Media.Color.FromArgb(10, 10, 10, 10),
                 DrawMajorBands = true,
                 DrawMinorGridLines = false,
                 AxisAlignment = AxisAlignment.Bottom,
@@ -98,8 +111,8 @@ namespace SOD.ViewModels.Testing.SODBench
                 AxisAlignment = AxisAlignment.Left,
                 StyleKey = "PressureAxisStyle",
                 HasZoomPanModifier = false,
-                BorderThickness= new Thickness(0,0,2,0),
-                BorderBrush=System.Windows.Media.Brushes.Green,
+                BorderThickness = new Thickness(0, 0, 2, 0),
+                BorderBrush = System.Windows.Media.Brushes.Green,
                 Id = "yPressureAxis"
             };
             YAxes.Add(yPressureAxis);
@@ -121,13 +134,14 @@ namespace SOD.ViewModels.Testing.SODBench
                 Id = "yTenzoAxis"
             };
             YAxes.Add(yTenzoAxis);
-            
+
         }
-            
+
 
         public void SetPressureSensor(IPressureSensor pressureSensor, ITenzoSensor tenzoSensor)
         {
             if (pressureSensor == null) throw new ArgumentNullException(nameof(pressureSensor));
+            if (tenzoSensor == null) throw new ArgumentNullException(nameof(tenzoSensor));
 
             Pressure step = new Pressure();
             var maxValue = pressureSensor.MaxValue;
@@ -164,9 +178,15 @@ namespace SOD.ViewModels.Testing.SODBench
             else if (maxValue.Bars > 600.0)
                 step = new Pressure(200, UnitsNet.Units.PressureUnit.Bar);
 
-            yPressureAxis.VisibleRange = new DoubleRange(pressureSensor.MinValue.ToUnit(bench.Settings.PressureUnit).Value, pressureSensor.MaxValue.ToUnit(bench.Settings.PressureUnit).Value * 1.1);
+            yPressureAxis.VisibleRange = new DoubleRange(pressureSensor.MinValue.ToUnit(bench.Settings.PressureUnit).Value,
+                                                          pressureSensor.MaxValue.ToUnit(bench.Settings.PressureUnit).Value * 1.1);
             yPressureAxis.MajorDelta = step.ToUnit(bench.Settings.PressureUnit).Value;
-            yPressureAxis.MinorDelta = step.ToUnit(bench.Settings.PressureUnit).Value/10.0;
+            yPressureAxis.MinorDelta = step.ToUnit(bench.Settings.PressureUnit).Value / 10.0;
+
+            //yPressureAxis.VisibleRange = new DoubleRange(pressureSensor.MinValue.ToUnit(bench.Settings.PressureUnit).Value,
+            //                                              pressureSensor.MaxValue.ToUnit(bench.Settings.PressureUnit).Value * 1.1);
+            //yPressureAxis.MajorDelta = step.ToUnit(bench.Settings.PressureUnit).Value;
+            //yPressureAxis.MinorDelta = step.ToUnit(bench.Settings.PressureUnit).Value / 10.0;
 
             if (!pressureSensors.Contains(pressureSensor))
             {
@@ -175,11 +195,35 @@ namespace SOD.ViewModels.Testing.SODBench
             if (!pressureSeries.ContainsKey(pressureSensor.Id))
             {
                 var pressSeries = new XyDataSeries<TimeSpan, double>();
-                //var tenzoSeries = new XyDataSeries<TimeSpan, double>();
-                PressureSeries.Add(new LineRenderableSeriesViewModel() { DataSeries = pressSeries, AntiAliasing = true, Stroke = Colors.Red, StrokeThickness = 2, YAxisId = "yPressureAxis" });
+
+                PressureSeries.Add(new LineRenderableSeriesViewModel()
+                {
+                    DataSeries = pressSeries,
+                    AntiAliasing = true,
+                    Stroke = Colors.Red,
+                    StrokeThickness = 2,
+                    YAxisId = "yPressureAxis"
+                });
                 pressureSeries.Add(pressureSensor.Id, pressSeries);
-                //PressureSeries.Add(new LineRenderableSeriesViewModel() { DataSeries = tenzoSeries, AntiAliasing = true, Stroke = Colors.Brown, StrokeThickness = 2, YAxisId = "yTenzoAxis" });
-                //pressureSeries.Add(tenzoSensor.Id, tenzoSeries);
+            }
+
+            if (!tenzoSensors.Contains(tenzoSensor))
+            {
+                tenzoSensors.Add(tenzoSensor);
+            }
+            if (!tenzoSeries.ContainsKey(tenzoSensor.Id))
+            {
+                var tenzSeries = new XyDataSeries<TimeSpan, double>();
+
+                PressureSeries.Add(new LineRenderableSeriesViewModel()
+                {
+                    DataSeries = tenzSeries,
+                    AntiAliasing = true,
+                    Stroke = Colors.Brown,
+                    StrokeThickness = 2,
+                    YAxisId = "yTenzoAxis"
+                });
+                tenzoSeries.Add(tenzoSensor.Id, tenzSeries);
             }
         }
 
@@ -192,17 +236,32 @@ namespace SOD.ViewModels.Testing.SODBench
                 series.Clear();
             }
 
+            foreach (var series in tenzoSeries.Values)
+            {
+                series.Clear();
+            }
+
             pressureUpdater = Observable.Timer(TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(100))
                                         .Subscribe(time =>
                                         {
-                                            totalTime = TimeSpan.FromMilliseconds(time*100);
+                                            totalTime = TimeSpan.FromMilliseconds(time * 100);
                                             foreach (var pressureSensor in pressureSensors.ToList())
                                             {
                                                 double currentPressure = Math.Round(pressureSensor.Pressure.ToUnit(bench.Settings.PressureUnit).Value, 2);
                                                 pressureSeries[pressureSensor.Id].Append(totalTime, currentPressure);
 
+                                                if(bench.Settings.AutoRange)
+                                                yPressureAxis.VisibleRange = new DoubleRange(PressureSeries[0].DataSeries.YMin.ToDouble() - Math.Abs(PressureSeries[0].DataSeries.YMin.ToDouble() * 5 / 100), PressureSeries[0].DataSeries.YMax.ToDouble() + Math.Abs(PressureSeries[0].DataSeries.YMax.ToDouble() * 5 / 100));
+                                                //yPressureAxis.VisibleRange = new DoubleRange(PressureSeries[0].DataSeries.YMin.ToDouble(), PressureSeries[0].DataSeries.YMin.ToDouble())
+                                            }
+                                            foreach (var tenzoSensor in tenzoSensors.ToList())
+                                            {
+                                                double currentTenzo = Math.Round(tenzoSensor.Force.ToUnit(bench.Settings.TenzoUnit).Value, 2);
+                                                tenzoSeries[tenzoSensor.Id].Append(totalTime, currentTenzo);
+
                                                 if (bench.Settings.AutoRange)
-                                                    yPressureAxis.VisibleRange = new DoubleRange(PressureSeries[0].DataSeries.YMin.ToDouble() - Math.Abs(PressureSeries[0].DataSeries.YMin.ToDouble() * 5 / 100), PressureSeries[0].DataSeries.YMax.ToDouble() + Math.Abs(PressureSeries[0].DataSeries.YMax.ToDouble() * 5 / 100));
+                                                yTenzoAxis.VisibleRange = new DoubleRange(PressureSeries[1].DataSeries.YMin.ToDouble() - Math.Abs(PressureSeries[1].DataSeries.YMin.ToDouble() * 5 / 100), PressureSeries[1].DataSeries.YMax.ToDouble() + Math.Abs(PressureSeries[1].DataSeries.YMax.ToDouble() * 5 / 100));
+
                                             }
                                         });
             isStartChart = true;
@@ -230,8 +289,24 @@ namespace SOD.ViewModels.Testing.SODBench
                 IsEditable = false,
                 YAxisId = "yPressureAxis"
             });
+
+            Annotations.Add(new HorizontalLineAnnotationViewModel
+            {
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Stroke = Colors.Yellow,
+                StrokeThickness = 1,
+                Y1 = 0,
+                X1 = 0,
+                IsEditable = false,
+                YAxisId = "yTenzoAxis"
+            });
+
             pressureSeries.Clear();
             pressureSensors.Clear();
+
+            tenzoSeries.Clear();
+            tenzoSensors.Clear();
+
             PressureSeries.Clear();
         }
 
@@ -249,7 +324,7 @@ namespace SOD.ViewModels.Testing.SODBench
                 StrokeThickness = 2,
                 X1 = totalTime,
                 IsEditable = false,
-            });      
+            });
         }
 
         public ObservableCollection<IAnnotationViewModel> Annotations { get; set; } = new ObservableCollection<IAnnotationViewModel>();
