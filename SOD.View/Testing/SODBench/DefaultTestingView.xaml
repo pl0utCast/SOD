@@ -24,7 +24,8 @@
                     </Style>
                 </Setter.Value>
             </Setter>
-            <Setter Property="TickTextBrush" Value="Black" />
+            <Setter Property="TickTextBrush" Value="Red" />
+            <Setter Property="TitleFontSize" Value="14"/>
         </Style>
         <Style x:Key="TimeAxisStyle" TargetType="{x:Type s:TimeSpanAxis}">
             <Setter Property="MajorGridLineStyle">
@@ -46,7 +47,8 @@
                     </Style>
                 </Setter.Value>
             </Setter>
-            <Setter Property="TickTextBrush" Value="Black" />
+            <Setter Property="TickTextBrush" Value="Blue" />
+            <Setter Property="TitleFontSize" Value="14"/>
         </Style>
     </UserControl.Resources>
     <Grid>

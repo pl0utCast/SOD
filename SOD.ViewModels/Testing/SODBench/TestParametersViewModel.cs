@@ -151,13 +151,13 @@ namespace SOD.ViewModels.Testing.SODBench
                 {
                     if (device is ModbusTcpDevice modbusTcpDevice && device.GetStatus() == DeviceStatus.Online)
                     {
-                        ushort valueConverted = Convert.ToUInt16(value);
+                        //ushort valueConverted = Convert.ToUInt16(value);
 
                         //_ = modbusTcpDevice.WriteHoldingRegistersAsync(code, new ushort[] { valueConverted });
                         ModbusRegister modbusRegister = new ModbusRegister
                         {
                             Id = code,
-                            Value = value,
+                            Value = (float)value,
                             DataType = ChannelDataType.FLOAT
                         };
                         modbusTcpDevice.WriteHoldingRegister(modbusRegister);
