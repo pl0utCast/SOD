@@ -20,7 +20,7 @@ namespace SOD.ViewModels.Testing.SODBench.Dialogs
 			OpenPressure = result.OpenPressure.ToString("f2");
 			ClosePressure = result.ClosePressure.ToString("f2");
 			ExpectedSetPressure = result.ExpectedSetPressure.ToString("f2");
-			Accuracy = result.Accuracy.ToString("f1");
+			//Accuracy = result.Accuracy.ToString("f1");
 
 			Add = ReactiveCommand.Create(() =>
 			{

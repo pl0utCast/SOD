@@ -15,6 +15,7 @@ using SOD.Core.Infrastructure;
 using SOD.Localization.Settings.DeviceAndSensors;
 using SOD.LocalizationService;
 using System.Drawing;
+using UnitsNet;
 
 namespace SOD.App.Benches.SODBench
 {
@@ -87,7 +88,7 @@ namespace SOD.App.Benches.SODBench
             var testSettings = Settings.SelectedTestSettings;
 
             Standart = _testingService.GetAllStandarts().SingleOrDefault(s => s.Id == Settings.SelectedBalloon.StandartId);
-            currentTest = new Testing.Test.Test(ProgrammMethodicsConfig.Name, reportData, _localizationService, Standart, testSettings.SetPressure);
+            currentTest = new Testing.Test.Test(ProgrammMethodicsConfig.Name, reportData, _localizationService, Standart, testSettings.SetPressure, 3.0, new Pressure(1, UnitsNet.Units.PressureUnit.Bar), 10);
             if (currentTest != null)
             {
                 cancellationTokenSource = new CancellationTokenSource();

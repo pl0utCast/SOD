@@ -38,101 +38,87 @@ namespace SOD.App.Testing.Test
             _standart = standart;
         }
 
-        //public void CalculateResult()
-        //{
-        //          TestResult.Standart = _standart != null ? _standart.Name : string.Empty;
-
-        //	//var expectedSetPressure = (Pressure)_parameters[0];
-        //	//var slumpDiffPressure = ((Pressure)_parameters[2]).Bars;
-        //	//var sensitivity = (int)_parameters[3];
-
-        //	int slumpIndex = 0;
-        //	int closingIndex = 0;
-        //	var isSlump = false;
-        //	if (pressures.Count > 0)
-        //	{
-        //		var data = pressures.Select(p => p.Bars).ToArray();
-        //		isSlump = true;
-        //		slumpIndex = FindMaximum(data, 0, data.Count() - 1);
-        //		closingIndex = FindMinimum(data, 0, data.Count() - 1);
-        //		//var minDP = double.MaxValue;
-        //		//for (slumpIndex = 0; slumpIndex < pressures.Count && !isSlump; slumpIndex++)
-        //		//{
-        //		//	var dp = 0.0;
-
-        //		//	for (var i = 0; i < sensitivity; i++)
-        //		//	{
-        //		//		var pressure = data[slumpIndex - i];
-        //		//		var prevPressure = data[slumpIndex - i - 1];
-
-        //		//		dp += pressure - prevPressure;
-
-        //		//		isSlump = -dp > slumpDiffPressure;
-
-        //		//		if (dp >= minDP) continue;
-
-        //		//		minDP = dp;
-        //		//		//DebugTools.DebugWrite("index = " + slumpIndex + "; ");
-        //		//		//DebugTools.DebugWriteLine("dp = " + dp);
-        //		//	}
-        //		//}
-
-        //		//if (isSlump)
-        //		//{
-        //		//	slumpIndex = FindMaximum(data, slumpIndex - sensitivity, slumpIndex);
-        //		//	if (slumpIndex < 0) slumpIndex = 0;
-
-        //		//	var isClosed = false;
-        //		//	closingIndex = slumpIndex;
-        //		//	var minSensitivity = 50;
-
-        //		//	for (; closingIndex < pressures.Count && !isClosed; closingIndex++)
-        //		//	{
-        //		//		var dp = 0.0;
-
-        //		//		for (var j = 1; j < minSensitivity && closingIndex + j < pressures.Count; j++)
-        //		//		{
-        //		//			var pressure = data[closingIndex + j];
-        //		//			var prevPressure = data[closingIndex];
-
-        //		//			dp += pressure - prevPressure;
-        //		//		}
-
-        //		//		isClosed = dp > 0F;
-        //		//	}
-
-        //		//	var start = closingIndex - minSensitivity;
-        //		//	if (start < slumpIndex) start = slumpIndex;
-        //		//	closingIndex = FindMinimum(data, start, closingIndex);
-        //		//}
-        //	}
-
-        //	var postResult = new Result.PostResult();
-        //	postResult.OpenPressure = isSlump ? pressures[slumpIndex] : new Pressure(0, UnitsNet.Units.PressureUnit.Bar);
-        //	postResult.ClosePressure = isSlump ? pressures[closingIndex] : new Pressure(0, UnitsNet.Units.PressureUnit.Bar);
-        //	//postResult.OpenPoint = isSlump ? slumpIndex : 0;
-        //	//postResult.ClosePoint = isSlump ? closingIndex : 0;
-        //	postResult.ExpectedSetPressure = new Pressure(100, UnitsNet.Units.PressureUnit.Bar);
-        //          TestResult.PostResults.Add(postResult);
-        //}
-
         public void CalculateResult()
         {
             TestResult.Clear();
             TestResult.Name = Name;
             TestResult.Standart = _standart != null ? _standart.Name : string.Empty;
+
+            var expectedSetPressure = (Pressure)_parameters[0];
+            var slumpDiffPressure = ((Pressure)_parameters[2]).Bars;
+            var sensitivity = (int)_parameters[3];
+
+            int slumpIndex = 0;
+            int closingIndex = 0;
+            var isSlump = false;
+
+            //Находим точку открытия
+            if (pressures.Count > sensitivity)
+            {
+                var data = pressures.Select(p => p.Bars).ToArray();
+
+                var minDP = double.MaxValue;
+                for (slumpIndex = sensitivity; slumpIndex < pressures.Count && !isSlump; slumpIndex++)
+                {
+                    var dp = 0.0;
+
+                    for (var i = 0; i < sensitivity; i++)
+                    {
+                        var pressure = data[slumpIndex - i];
+                        var prevPressure = data[slumpIndex - i - 1];
+
+                        dp += pressure - prevPressure;
+
+                        isSlump = -dp > slumpDiffPressure;
+
+                        if (dp >= minDP) continue;
+
+                        minDP = dp;
+                    }
+                }
+
+                if (isSlump)
+                {
+                    slumpIndex = FindMaximum(data, slumpIndex - sensitivity, slumpIndex);
+                    if (slumpIndex < 0) slumpIndex = 0;
+
+                    var isClosed = false;
+                    closingIndex = slumpIndex;
+                    var minSensitivity = 50;
+
+                    for (; closingIndex < pressures.Count && !isClosed; closingIndex++)
+                    {
+                        var dp = 0.0;
+
+                        for (var j = 1; j < minSensitivity && closingIndex + j < pressures.Count; j++)
+                        {
+                            var pressure = data[closingIndex + j];
+                            var prevPressure = data[closingIndex];
+
+                            dp += pressure - prevPressure;
+                        }
+
+                        isClosed = dp > 0F;
+                    }
+
+                    var start = closingIndex - minSensitivity;
+                    if (start < slumpIndex) start = slumpIndex;
+                    closingIndex = FindMinimum(data, start, closingIndex);
+                }
+            }
+
+            var postResult = new Result.PostResult();
+            postResult.OpenPressure = isSlump ? pressures[slumpIndex] : new Pressure(0, UnitsNet.Units.PressureUnit.Bar);
+            postResult.ClosePressure = isSlump ? pressures[closingIndex] : new Pressure(0, UnitsNet.Units.PressureUnit.Bar);
+            postResult.OpenPoint = isSlump ? slumpIndex : 0;
+            postResult.ClosePoint = isSlump ? closingIndex : 0;
+            postResult.ExpectedSetPressure = expectedSetPressure;
+
             // на каждую регистрацию предполагается 2 маркера, старт и стоп
             foreach (var post in _testBench.Posts)
             {
                 if (!post.IsEnable) continue;
                 if (registrationMarkers.Count % 2.0 != 0) return;
-                var postResult = new Result.PostResult();
-
-                //postResult.OpenPressure = isSlump ? pressures[slumpIndex] : new Pressure(0, UnitsNet.Units.PressureUnit.Bar);
-                //postResult.ClosePressure = isSlump ? pressures[closingIndex] : new Pressure(0, UnitsNet.Units.PressureUnit.Bar);
-                //postResult.OpenPoint = isSlump ? slumpIndex : 0;
-                //postResult.ClosePoint = isSlump ? closingIndex : 0;
-                //postResult.ExpectedSetPressure = expectedSetPressure;
 
                 for (int i = 0; i < registrationMarkers.Count - 1; i += 2)
                 {
@@ -161,11 +147,6 @@ namespace SOD.App.Testing.Test
 
                 TestResult.PostResults.Add(postResult);
             }
-        }
-
-        public void Dispose()
-        {
-            TestResult?.Clear();
         }
 
         public void FillReport(Bitmap chartImage)
