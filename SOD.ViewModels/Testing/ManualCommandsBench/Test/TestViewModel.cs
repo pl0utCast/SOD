@@ -31,6 +31,7 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test
     {
         private ITestBenchService testBechService;
         private IDeviceService _deviceService;
+        private ILocalizationService _localizationService;
 
         public TestViewModel(INavigationService navigationService, 
                              ITestBenchService testBechService, 
@@ -43,6 +44,7 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test
 
             this.testBechService = testBechService;
             _deviceService = deviceService;
+            _localizationService = localizationService;
 
             var testBench = (App.Benches.SODBench.Bench)testBechService.GetTestBench();
 
@@ -104,7 +106,7 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test
                 //    PostsColumn = (int)Math.Ceiling(Posts.Count / 2.0);
             });
 
-            Commands = new CommandsViewModel(bus, dialogService, _deviceService);
+            Commands = new CommandsViewModel(bus, dialogService, _deviceService, _localizationService);
 
             GoBack = ReactiveCommand.Create(() =>
             {

@@ -1,22 +1,19 @@
 ﻿using MemBus;
-using SOD.Core.Device.Modbus;
-using SOD.Core.Valves;
-using SOD.App.Testing.Standarts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using SOD.Core.Balloons;
+using SOD.Core.Device.Modbus;
+using SOD.LocalizationService;
 
 namespace SOD.App.Commands.Modbus3Post
 {
     public class ModbusCommandsFactory : CommandsFactory
     {
         private ModbusTcpDevice _modbusTcpDevice;
+        private readonly ILocalizationService _localizationService;
         private readonly IBus _bus;
-        public ModbusCommandsFactory(ModbusTcpDevice modbusTcpDevice, IBus bus)
+        public ModbusCommandsFactory(ModbusTcpDevice modbusTcpDevice, IBus bus, ILocalizationService localizationService)
         {
             _modbusTcpDevice = modbusTcpDevice;
+            _localizationService = localizationService;
             _bus = bus;
         }
         public override ICommand Create(CommandConfig commandConfig, Balloon valve)
@@ -25,21 +22,21 @@ namespace SOD.App.Commands.Modbus3Post
             switch (commandConfig.Type)
             {
                 case CommandType.FillingBalloon:
-                    return new FillingBalloonCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                    return new FillingBalloonCommand(_modbusTcpDevice, _bus, commandConfig, _localizationService, parameters);
                 case CommandType.EmptyingBalloon:
-                    return new EmptyingBalloonCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                    return new EmptyingBalloonCommand(_modbusTcpDevice, _bus, commandConfig, _localizationService, parameters);
                 case CommandType.FillingCell:
-                    return new FillingCellCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                    return new FillingCellCommand(_modbusTcpDevice, _bus, commandConfig, _localizationService, parameters);
                 case CommandType.EmptyingCell:
-                    return new EmptyingCellCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                    return new EmptyingCellCommand(_modbusTcpDevice, _bus, commandConfig, _localizationService, parameters);
                 case CommandType.PressureSet:
-                    return new PressureSetCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                    return new PressureSetCommand(_modbusTcpDevice, _bus, commandConfig, _localizationService, parameters);
                 case CommandType.PressureRelease:
-                    return new PressureReleaseCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                    return new PressureReleaseCommand(_modbusTcpDevice, _bus, commandConfig, _localizationService, parameters);
                 case CommandType.VerticalCell:
-                    return new VerticalCellCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                    return new VerticalCellCommand(_modbusTcpDevice, _bus, commandConfig, _localizationService, parameters);
                 case CommandType.HorizontalCell:
-                    return new HorizontalCellCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                    return new HorizontalCellCommand(_modbusTcpDevice, _bus, commandConfig, _localizationService, parameters);
                 default:
                     break;
             }

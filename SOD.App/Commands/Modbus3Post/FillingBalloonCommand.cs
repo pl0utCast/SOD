@@ -1,19 +1,31 @@
 ﻿using MemBus;
 using SOD.Core.Device.Modbus;
+using SOD.LocalizationService;
 
 namespace SOD.App.Commands.Modbus3Post
 {
     public class FillingBalloonCommand : BaseCommand
     {
         private readonly ModbusTcpDevice _modbusTcpDevice;
-        public FillingBalloonCommand(ModbusTcpDevice modbusTcpDevice, IBus bus, CommandConfig commandConfig, params object[] param) : base(modbusTcpDevice, commandConfig)
+        private readonly ILocalizationService _localizationService;
+        private readonly IBus _bus;
+
+        public FillingBalloonCommand(ModbusTcpDevice modbusTcpDevice,
+                                     IBus bus,
+                                     CommandConfig commandConfig,
+                                     ILocalizationService localizationService,
+                                     params object[] param) : base(modbusTcpDevice, commandConfig)
         {
             _modbusTcpDevice = modbusTcpDevice;
+            _bus = bus;
+            _localizationService = localizationService;
             Type = CommandType.FillingBalloon;
         }
 
         public override async Task ExecuteAsync(CancellationToken cancellationToken, object[] parameters)
         {
+            _bus.Publish(new App.Benches.SODBench.Messages.InfoMessage(_localizationService["Testing.ManualCommandsBench.FillingBalloon"]));
+
             // запуск команды
             await _modbusTcpDevice.WriteInt32(40, 1);
             await Start();

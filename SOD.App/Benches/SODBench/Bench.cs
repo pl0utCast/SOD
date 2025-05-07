@@ -55,7 +55,7 @@ namespace SOD.App.Benches.SODBench
             Settings = settingsService?.GetSettings<Settings>(settingsKey, new Settings());
 
             device = deviceService.GetAllDevice().FirstOrDefault(d => d is ModbusTcpDevice) as ModbusTcpDevice;
-            modbusCommandsFactory = new ModbusCommandsFactory(device, bus);
+            modbusCommandsFactory = new ModbusCommandsFactory(device, bus, _localizationService);
 
             posts.Add(new Post(1) { IsEnable = true, Name = "Post 1" });
 
