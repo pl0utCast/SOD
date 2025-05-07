@@ -79,10 +79,12 @@ namespace SOD.ViewModels.Testing.SODBench
             {
                 PressureSeries[0].DataSeries.SeriesName = localizationService["Testing.SODBench.Pressure"] + ", " + Pressure.GetAbbreviation(bench.Settings.PressureUnit, new CultureInfo(localizationService.CurrentCulture.Name));
                 PressureSeries[1].DataSeries.SeriesName = localizationService["Testing.SODBench.Tenzo"] + ", " + Force.GetAbbreviation(bench.Settings.TenzoUnit, new CultureInfo(localizationService.CurrentCulture.Name));
-                XAxes.Remove(xTimeSpanAxis);
-                YAxes.Remove(yPressureAxis);
-                YAxes.Remove(yTenzoAxis);
-                ConfigureAxis();
+                yPressureAxis.AxisTitle = localizationService["Testing.SODBench.Pressure"] + ", " + Pressure.GetAbbreviation(bench.Settings.PressureUnit, new CultureInfo(localizationService.CurrentCulture.Name));
+                yTenzoAxis.AxisTitle = localizationService["Testing.SODBench.Tenzo"] + ", " + Force.GetAbbreviation(bench.Settings.TenzoUnit, new CultureInfo(localizationService.CurrentCulture.Name));
+                //XAxes.Remove(xTimeSpanAxis);
+                //YAxes.Remove(yPressureAxis);
+                //YAxes.Remove(yTenzoAxis);
+                //ConfigureAxis();
             });
         }
 
@@ -183,9 +185,10 @@ namespace SOD.ViewModels.Testing.SODBench
 
             yPressureAxis.VisibleRange = new DoubleRange(pressureSensor.MinValue.ToUnit(bench.Settings.PressureUnit).Value,
                                                           pressureSensor.MaxValue.ToUnit(bench.Settings.PressureUnit).Value * 1.1);
-            yPressureAxis.MajorDelta = step.ToUnit(bench.Settings.PressureUnit).Value;
-            yPressureAxis.MinorDelta = step.ToUnit(bench.Settings.PressureUnit).Value / 10.0;
+            //yPressureAxis.MajorDelta = step.ToUnit(bench.Settings.PressureUnit).Value;
+            //yPressureAxis.MinorDelta = step.ToUnit(bench.Settings.PressureUnit).Value / 10.0;
 
+            yTenzoAxis.VisibleRange = new DoubleRange(-2, 20);
             //yPressureAxis.VisibleRange = new DoubleRange(pressureSensor.MinValue.ToUnit(bench.Settings.PressureUnit).Value,
             //                                              pressureSensor.MaxValue.ToUnit(bench.Settings.PressureUnit).Value * 1.1);
             //yPressureAxis.MajorDelta = step.ToUnit(bench.Settings.PressureUnit).Value;
@@ -260,14 +263,14 @@ namespace SOD.ViewModels.Testing.SODBench
                                             double currentPressure = Math.Round(pressureSensor.Pressure.ToUnit(bench.Settings.PressureUnit).Value, 2);
                                             pressureSeries[pressureSensor.Id].Append(totalTime, currentPressure);
 
-                                            if (bench.Settings.AutoRange)
+                                            if (!bench.Settings.AutoRange)
                                                 yPressureAxis.VisibleRange = new DoubleRange(PressureSeries[0].DataSeries.YMin.ToDouble() - Math.Abs(PressureSeries[0].DataSeries.YMin.ToDouble() * 5 / 100), PressureSeries[0].DataSeries.YMax.ToDouble() + Math.Abs(PressureSeries[0].DataSeries.YMax.ToDouble() * 5 / 100));
 
                                             var tenzoSensor = tenzoSensors.FirstOrDefault();
                                             double currentTenzo = Math.Round(tenzoSensor.Force.ToUnit(bench.Settings.TenzoUnit).Value, 2);
                                             tenzoSeries[tenzoSensor.Id].Append(totalTime, currentTenzo);
 
-                                            if (bench.Settings.AutoRange)
+                                            if (!bench.Settings.AutoRange)
                                                 yTenzoAxis.VisibleRange = new DoubleRange(PressureSeries[1].DataSeries.YMin.ToDouble() - Math.Abs(PressureSeries[1].DataSeries.YMin.ToDouble() * 5 / 100), PressureSeries[1].DataSeries.YMax.ToDouble() + Math.Abs(PressureSeries[1].DataSeries.YMax.ToDouble() * 5 / 100));
                                         });
             isStartChart = true;
