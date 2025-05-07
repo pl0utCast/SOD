@@ -34,14 +34,14 @@ using SciChart.Charting.Visuals.Axes.LabelProviders;
 
 namespace SOD.ViewModels.Testing.SODBench
 {
-    public class PressureChartViewModel : ReactiveObject
+    public class ChartViewModel : ReactiveObject
     {
         private Dictionary<int, XyDataSeries<TimeSpan, double>> pressureSeries = new Dictionary<int, XyDataSeries<TimeSpan, double>>();
         private Dictionary<int, XyDataSeries<TimeSpan, double>> tenzoSeries = new Dictionary<int, XyDataSeries<TimeSpan, double>>();
         private List<IPressureSensor> pressureSensors = new List<IPressureSensor>();
         private List<ITenzoSensor> tenzoSensors = new List<ITenzoSensor>();
         private TimeSpan totalTime;
-        private IDisposable pressureUpdater;
+        private IDisposable Updater;
         private bool isStartChart;
         private readonly ILocalizationService localizationService;
         private readonly Bench bench;
@@ -49,7 +49,7 @@ namespace SOD.ViewModels.Testing.SODBench
         private NumericAxisViewModel yTenzoAxis;
         private TimeSpanAxisViewModel xTimeSpanAxis;
 
-        public PressureChartViewModel(ILocalizationService localizationService, SOD.App.Benches.SODBench.Bench bench, IBus bus)
+        public ChartViewModel(ILocalizationService localizationService, SOD.App.Benches.SODBench.Bench bench, IBus bus)
         {
             this.localizationService = localizationService;
             this.bench = bench;
@@ -77,8 +77,8 @@ namespace SOD.ViewModels.Testing.SODBench
             ConfigureAxis();
             bus.Subscribe<App.Benches.SODBench.Messages.SelectedTestMessage>(m =>
             {
-                PressureSeries[0].DataSeries.SeriesName = localizationService["Testing.SODBench.Pressure"] + ", " + Pressure.GetAbbreviation(bench.Settings.PressureUnit, new CultureInfo(localizationService.CurrentCulture.Name));
-                PressureSeries[1].DataSeries.SeriesName = localizationService["Testing.SODBench.Tenzo"] + ", " + Force.GetAbbreviation(bench.Settings.TenzoUnit, new CultureInfo(localizationService.CurrentCulture.Name));
+                Series[0].DataSeries.SeriesName = localizationService["Testing.SODBench.Pressure"] + ", " + Pressure.GetAbbreviation(bench.Settings.PressureUnit, new CultureInfo(localizationService.CurrentCulture.Name));
+                Series[1].DataSeries.SeriesName = localizationService["Testing.SODBench.Tenzo"] + ", " + Force.GetAbbreviation(bench.Settings.TenzoUnit, new CultureInfo(localizationService.CurrentCulture.Name));
                 yPressureAxis.AxisTitle = localizationService["Testing.SODBench.Pressure"] + ", " + Pressure.GetAbbreviation(bench.Settings.PressureUnit, new CultureInfo(localizationService.CurrentCulture.Name));
                 yTenzoAxis.AxisTitle = localizationService["Testing.SODBench.Tenzo"] + ", " + Force.GetAbbreviation(bench.Settings.TenzoUnit, new CultureInfo(localizationService.CurrentCulture.Name));
                 //XAxes.Remove(xTimeSpanAxis);
@@ -205,7 +205,7 @@ namespace SOD.ViewModels.Testing.SODBench
                     SeriesName = localizationService["Testing.SODBench.Pressure"] + ", " + Pressure.GetAbbreviation(bench.Settings.PressureUnit, new CultureInfo(localizationService.CurrentCulture.Name)),
                 };
 
-                PressureSeries.Add(new LineRenderableSeriesViewModel()
+                Series.Add(new LineRenderableSeriesViewModel()
                 {
                     DataSeries = pressSeries,
                     AntiAliasing = true,
@@ -226,7 +226,7 @@ namespace SOD.ViewModels.Testing.SODBench
                     SeriesName = localizationService["Testing.SODBench.Tenzo"] + ", " + Force.GetAbbreviation(bench.Settings.TenzoUnit, new CultureInfo(localizationService.CurrentCulture.Name)),
                 };
 
-                PressureSeries.Add(new LineRenderableSeriesViewModel()
+                Series.Add(new LineRenderableSeriesViewModel()
                 {
                     DataSeries = tenzSeries,
                     AntiAliasing = true,
@@ -254,7 +254,7 @@ namespace SOD.ViewModels.Testing.SODBench
 
             ClearSeries();
 
-            pressureUpdater = Observable.Timer(TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(100))
+            Updater = Observable.Timer(TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(100))
                                         .Subscribe(time =>
                                         {
                                             totalTime = TimeSpan.FromMilliseconds(time * 100);
@@ -263,15 +263,15 @@ namespace SOD.ViewModels.Testing.SODBench
                                             double currentPressure = Math.Round(pressureSensor.Pressure.ToUnit(bench.Settings.PressureUnit).Value, 2);
                                             pressureSeries[pressureSensor.Id].Append(totalTime, currentPressure);
 
-                                            if (!bench.Settings.AutoRange)
-                                                yPressureAxis.VisibleRange = new DoubleRange(PressureSeries[0].DataSeries.YMin.ToDouble() - Math.Abs(PressureSeries[0].DataSeries.YMin.ToDouble() * 5 / 100), PressureSeries[0].DataSeries.YMax.ToDouble() + Math.Abs(PressureSeries[0].DataSeries.YMax.ToDouble() * 5 / 100));
+                                            if (bench.Settings.AutoRange)
+                                                yPressureAxis.VisibleRange = new DoubleRange(Series[0].DataSeries.YMin.ToDouble() - Math.Abs(Series[0].DataSeries.YMin.ToDouble() * 5 / 100), Series[0].DataSeries.YMax.ToDouble() + Math.Abs(Series[0].DataSeries.YMax.ToDouble() * 5 / 100));
 
                                             var tenzoSensor = tenzoSensors.FirstOrDefault();
                                             double currentTenzo = Math.Round(tenzoSensor.Force.ToUnit(bench.Settings.TenzoUnit).Value, 2);
                                             tenzoSeries[tenzoSensor.Id].Append(totalTime, currentTenzo);
 
-                                            if (!bench.Settings.AutoRange)
-                                                yTenzoAxis.VisibleRange = new DoubleRange(PressureSeries[1].DataSeries.YMin.ToDouble() - Math.Abs(PressureSeries[1].DataSeries.YMin.ToDouble() * 5 / 100), PressureSeries[1].DataSeries.YMax.ToDouble() + Math.Abs(PressureSeries[1].DataSeries.YMax.ToDouble() * 5 / 100));
+                                            if (bench.Settings.AutoRange)
+                                                yTenzoAxis.VisibleRange = new DoubleRange(Series[1].DataSeries.YMin.ToDouble() - Math.Abs(Series[1].DataSeries.YMin.ToDouble() * 5 / 100), Series[1].DataSeries.YMax.ToDouble() + Math.Abs(Series[1].DataSeries.YMax.ToDouble() * 5 / 100));
                                         });
             isStartChart = true;
         }
@@ -283,7 +283,7 @@ namespace SOD.ViewModels.Testing.SODBench
                 return;
             }
 
-            pressureUpdater?.Dispose();
+            Updater?.Dispose();
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
             isStartChart = false;
         }
@@ -319,7 +319,7 @@ namespace SOD.ViewModels.Testing.SODBench
             tenzoSeries.Clear();
             tenzoSensors.Clear();
 
-            PressureSeries.Clear();
+            Series.Clear();
         }
 
         public void SetAnnotation()
@@ -340,7 +340,7 @@ namespace SOD.ViewModels.Testing.SODBench
         }
 
         public ObservableCollection<IAnnotationViewModel> Annotations { get; set; } = new ObservableCollection<IAnnotationViewModel>();
-        public ObservableCollection<IRenderableSeriesViewModel> PressureSeries { get; set; } = new ObservableCollection<IRenderableSeriesViewModel>();
+        public ObservableCollection<IRenderableSeriesViewModel> Series { get; set; } = new ObservableCollection<IRenderableSeriesViewModel>();
         public ObservableCollection<IAxisViewModel> XAxes { get; set; } = new ObservableCollection<IAxisViewModel>();
         public ObservableCollection<IAxisViewModel> YAxes { get; set; } = new ObservableCollection<IAxisViewModel>();
     }

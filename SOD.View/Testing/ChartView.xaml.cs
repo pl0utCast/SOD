@@ -16,9 +16,9 @@ namespace SOD.View.Testing
     /// <summary>
     /// Логика взаимодействия для PressureChartView.xaml
     /// </summary>
-    public partial class PressureChartView : UserControl
+    public partial class ChartView : UserControl
     {
-        public PressureChartView()
+        public ChartView()
         {
             InitializeComponent();
         }

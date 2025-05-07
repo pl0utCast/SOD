@@ -23,11 +23,10 @@ namespace SOD.Core.Sensor.PressureSensor.CodeBased
             Id = id;
             this.channelBasedDevice = channelBasedDevice;
             _settingsService = settingsService;
-            Settings = _settingsService.GetSettings(SETTINGS_KEY + id, new Settings());
+            Settings = _settingsService.GetSettings(SETTINGS_KEY + id, new PressureSensorSettings());
             LastUpadateSensorSettings = _settingsService.GetSettings(SETTINGS_LAST_UPDATE_KEY, new LastUpadateSensorSettings());
             filter = new DigitalFilter() { Coeffecient = Settings.FilterCoef };
             Connect();
-            
         }
         public Pressure Pressure { get; private set; }
 
@@ -80,7 +79,7 @@ namespace SOD.Core.Sensor.PressureSensor.CodeBased
             disposable?.Dispose();
         }
 
-        public Settings Settings { get; set; }
+        public PressureSensorSettings Settings { get; set; }
         public LastUpadateSensorSettings LastUpadateSensorSettings { get; set; }
 
         public Pressure MaxValue => Settings.MaxValue;

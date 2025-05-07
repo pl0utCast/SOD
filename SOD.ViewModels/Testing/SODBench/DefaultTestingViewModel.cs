@@ -38,7 +38,7 @@ namespace SOD.ViewModels.Testing.SODBench
         {
             _bench = (App.Benches.SODBench.Bench)testBenchService.GetTestBench();
             _localizationService = localizationService;
-            PressureChart = new PressureChartViewModel(localizationService, _bench, bus);
+            PressureChart = new ChartViewModel(localizationService, _bench, bus);
             if (_bench.Settings.SelectedTestSettings != null /*&& _bench.TestingValve!=null*/) IsSelectedTest = true;
             ExposureTime = "00:00:00";
             TemperatureSensors = new TemperatureSensorsViewModel(sensorService, _bench);
@@ -75,7 +75,7 @@ namespace SOD.ViewModels.Testing.SODBench
 					}
 					isAddTestToReport = IsTestResultFill;
 					PressureChart.StopChart();
-					var chart = PressureChart.PressureSeries.FirstOrDefault().DataSeries.ParentSurface.ExportToBitmapSource().GetBitmap();
+					var chart = PressureChart.Series.FirstOrDefault().DataSeries.ParentSurface.ExportToBitmapSource().GetBitmap();
 				}
 				else
 				{
@@ -122,7 +122,7 @@ namespace SOD.ViewModels.Testing.SODBench
                 if (result != null)
                 {
                     isAddTestToReport = false;
-                    _bench.UpdateReport(PressureChart.PressureSeries.FirstOrDefault().DataSeries.ParentSurface.ExportToBitmapSource().GetBitmap());
+                    _bench.UpdateReport(PressureChart.Series.FirstOrDefault().DataSeries.ParentSurface.ExportToBitmapSource().GetBitmap());
                 }
             }, canResult);
 
@@ -220,7 +220,7 @@ namespace SOD.ViewModels.Testing.SODBench
         [Reactive]
         public ProgrammMethodicsConfig ProgrammMethodicsConfig { get; set; }
         public ObservableCollectionExtended<SensorViewModel> Sensors { get; set; } = new ObservableCollectionExtended<SensorViewModel>();
-        public PressureChartViewModel PressureChart { get; set; }
+        public ChartViewModel PressureChart { get; set; }
         public TemperatureSensorsViewModel TemperatureSensors { get; set; }
         public ReactiveCommand<Unit, Unit> GoParameters { get; set; }
         public ReactiveCommand<Unit, Unit> StartTest { get; set; }

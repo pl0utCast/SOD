@@ -25,7 +25,7 @@ namespace SOD.Core.Sensor.TenzoSensor.CodeBased
 			Id = id;
 			this.channelBasedDevice = channelBasedDevice;
 			_settingsService = settingsService;
-			Settings = _settingsService.GetSettings(SETTINGS_KEY + id, new Settings());
+			Settings = _settingsService.GetSettings(SETTINGS_KEY + id, new TenzoSensorSettings());
 			LastUpadateSensorSettings = _settingsService.GetSettings(SETTINGS_LAST_UPDATE_KEY, new LastUpadateSensorSettings());
 			Connect();
 		}
@@ -87,9 +87,11 @@ namespace SOD.Core.Sensor.TenzoSensor.CodeBased
             return Settings.Coefficients.ElementAt(el).SavedCode;
         }
 
-        public Settings Settings { get; set; }
+        public TenzoSensorSettings Settings { get; set; }
 		public LastUpadateSensorSettings LastUpadateSensorSettings { get; set; }
-		public string Accaury => Settings.Accaury;
+        public Force MaxValue => Settings.MaxValue;
+        public Force MinValue => Settings.MinValue;
+        public string Accaury => Settings.Accaury;
 		public string SensorHint => Settings.SensorHint;
 	}
 }

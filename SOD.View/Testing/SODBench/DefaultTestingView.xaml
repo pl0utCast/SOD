@@ -115,7 +115,7 @@
                     Annotations="{s:AnnotationsBinding Annotations}"
                     Background="White"
                     DataContext="{Binding PressureChart}"
-                    RenderableSeries="{s:SeriesBinding PressureSeries}"
+                    RenderableSeries="{s:SeriesBinding Series}"
                     XAxes="{s:AxesBinding XAxes}"
                     YAxes="{s:AxesBinding YAxes}">
                     <s:SciChartSurface.ChartModifier>

@@ -10,9 +10,9 @@ using UnitsNet.Units;
 namespace SOD.Core.Sensor.PressureSensor.CodeBased
 {
     [SensorSettings]
-    public class Settings
+    public class PressureSensorSettings
     {
-        public Settings()
+        public PressureSensorSettings()
         {
             MinValue = UnitsNet.Pressure.FromBars(0);
             MaxValue = UnitsNet.Pressure.FromBars(100);
