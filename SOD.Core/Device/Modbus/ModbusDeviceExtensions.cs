@@ -29,6 +29,29 @@ namespace SOD.Core.Device.Modbus
             }
         }
 
+        public static async Task CreateFloatTriggerAsync(this ModbusTcpDevice modbusTcpDevice, ushort regId, Func<float, bool> condition, Action<float> afterAction, CancellationToken cancellationToken)
+        {
+            var waiting = true;
+            while (waiting)
+            {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                }
+                var regData = await modbusTcpDevice.ReadHoldingRegistersAsync(regId, 2);
+                if (regData == null) return;
+
+                float val = BitConverter.ToSingle(BitConverter.GetBytes(regData[0]).Concat(BitConverter.GetBytes(regData[1])).ToArray(), 0);
+
+                waiting = !condition(val);
+                if (waiting == false)
+                {
+                    afterAction(val);
+                }
+                await Task.Delay(500, cancellationToken);
+            }
+        }
+
         public static async Task WriteInt32(this ModbusTcpDevice modbusTcpDevice, ushort regId, int data)
         {
             var bytes = BitConverter.GetBytes(data);

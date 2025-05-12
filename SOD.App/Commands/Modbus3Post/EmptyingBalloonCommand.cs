@@ -9,6 +9,7 @@ namespace SOD.App.Commands.Modbus3Post
         private ModbusTcpDevice _modbusTcpDevice;
         private readonly ILocalizationService _localizationService;
         private readonly IBus _bus;
+        private static ushort stopReg = 6118;
 
         public EmptyingBalloonCommand(ModbusTcpDevice modbusTcpDevice, 
                                       IBus bus, 
@@ -28,14 +29,15 @@ namespace SOD.App.Commands.Modbus3Post
 
             await _modbusTcpDevice.WriteInt32(40, 2);
             await Start();
+
             // ожидаем окончание выполнения команды
-            //await _modbusTcpDevice.CreateTriggerAsync(48, data => data[0] == 1,
-            //    async data =>
-            //    {
-            //        logger.Trace("Команда выдержка выполнена!");
-            //        await ExecuteEnd();
-            //    },
-            //    cancellationToken);
+            await _modbusTcpDevice.CreateFloatTriggerAsync(stopReg, data => data == 1,
+                async data =>
+                {
+                    logger.Trace("Команда выдержка выполнена!");
+                    //await ExecuteEnd();
+                },
+                cancellationToken);
         }
     }
 }
