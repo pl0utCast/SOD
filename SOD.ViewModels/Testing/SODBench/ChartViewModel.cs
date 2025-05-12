@@ -36,8 +36,8 @@ namespace SOD.ViewModels.Testing.SODBench
 {
     public class ChartViewModel : ReactiveObject
     {
-        private Dictionary<int, XyDataSeries<TimeSpan, double>> pressureSeries = new Dictionary<int, XyDataSeries<TimeSpan, double>>();
-        private Dictionary<int, XyDataSeries<TimeSpan, double>> tenzoSeries = new Dictionary<int, XyDataSeries<TimeSpan, double>>();
+        private Dictionary<int, XyDataSeries<TimeSpan, double>> pressureSeriesDict = new Dictionary<int, XyDataSeries<TimeSpan, double>>();
+        private Dictionary<int, XyDataSeries<TimeSpan, double>> tenzoSeriesDict = new Dictionary<int, XyDataSeries<TimeSpan, double>>();
         private List<IPressureSensor> pressureSensors = new List<IPressureSensor>();
         private List<ITenzoSensor> tenzoSensors = new List<ITenzoSensor>();
         private TimeSpan totalTime;
@@ -144,133 +144,133 @@ namespace SOD.ViewModels.Testing.SODBench
             if (pressureSensor == null) throw new ArgumentNullException(nameof(pressureSensor));
             if (tenzoSensor == null) throw new ArgumentNullException(nameof(tenzoSensor));
 
-            Pressure pStep = new Pressure();
-            var pMaxValue = pressureSensor.MaxValue;
-            if (pMaxValue.Bars < 1.0)
-                pStep = new Pressure(0.2, UnitsNet.Units.PressureUnit.Bar);
-            else if (pMaxValue.Bars > 1.0 && pMaxValue.Bars <= 1.6)
-                pStep = new Pressure(0.2, UnitsNet.Units.PressureUnit.Bar);
-            else if (pMaxValue.Bars > 1.6 && pMaxValue.Bars <= 2.5)
-                pStep = new Pressure(0.5, UnitsNet.Units.PressureUnit.Bar);
-            else if (pMaxValue.Bars > 2.5 && pMaxValue.Bars <= 4.0)
-                pStep = new Pressure(0.5, UnitsNet.Units.PressureUnit.Bar);
-            else if (pMaxValue.Bars > 4.0 && pMaxValue.Bars <= 6.0)
-                pStep = new Pressure(1, UnitsNet.Units.PressureUnit.Bar);
-            else if (pMaxValue.Bars > 6.0 && pMaxValue.Bars <= 10.0)
-                pStep = new Pressure(2, UnitsNet.Units.PressureUnit.Bar);
-            else if (pMaxValue.Bars > 10.0 && pMaxValue.Bars <= 16.0)
-                pStep = new Pressure(2, UnitsNet.Units.PressureUnit.Bar);
-            else if (pMaxValue.Bars > 16.0 && pMaxValue.Bars <= 25.0)
-                pStep = new Pressure(5, UnitsNet.Units.PressureUnit.Bar);
-            else if (pMaxValue.Bars > 25.0 && pMaxValue.Bars <= 40.0)
-                pStep = new Pressure(5, UnitsNet.Units.PressureUnit.Bar);
-            else if (pMaxValue.Bars > 40.0 && pMaxValue.Bars <= 60.0)
-                pStep = new Pressure(10, UnitsNet.Units.PressureUnit.Bar);
-            else if (pMaxValue.Bars > 60.0 && pMaxValue.Bars <= 100.0)
-                pStep = new Pressure(20, UnitsNet.Units.PressureUnit.Bar);
-            else if (pMaxValue.Bars > 100.0 && pMaxValue.Bars <= 160.0)
-                pStep = new Pressure(20, UnitsNet.Units.PressureUnit.Bar);
-            else if (pMaxValue.Bars > 160.0 && pMaxValue.Bars <= 250.0)
-                pStep = new Pressure(50, UnitsNet.Units.PressureUnit.Bar);
-            else if (pMaxValue.Bars > 250.0 && pMaxValue.Bars <= 400.0)
-                pStep = new Pressure(50, UnitsNet.Units.PressureUnit.Bar);
-            else if (pMaxValue.Bars > 400.0 && pMaxValue.Bars <= 600.0)
-                pStep = new Pressure(100, UnitsNet.Units.PressureUnit.Bar);
-            else if (pMaxValue.Bars > 600.0)
-                pStep = new Pressure(200, UnitsNet.Units.PressureUnit.Bar);
+            Pressure pressureStep = new Pressure();
+            var pressureMaxValue = pressureSensor.MaxValue;
+            if (pressureMaxValue.Bars < 1.0)
+                pressureStep = new Pressure(0.2, UnitsNet.Units.PressureUnit.Bar);
+            else if (pressureMaxValue.Bars > 1.0 && pressureMaxValue.Bars <= 1.6)
+                pressureStep = new Pressure(0.2, UnitsNet.Units.PressureUnit.Bar);
+            else if (pressureMaxValue.Bars > 1.6 && pressureMaxValue.Bars <= 2.5)
+                pressureStep = new Pressure(0.5, UnitsNet.Units.PressureUnit.Bar);
+            else if (pressureMaxValue.Bars > 2.5 && pressureMaxValue.Bars <= 4.0)
+                pressureStep = new Pressure(0.5, UnitsNet.Units.PressureUnit.Bar);
+            else if (pressureMaxValue.Bars > 4.0 && pressureMaxValue.Bars <= 6.0)
+                pressureStep = new Pressure(1, UnitsNet.Units.PressureUnit.Bar);
+            else if (pressureMaxValue.Bars > 6.0 && pressureMaxValue.Bars <= 10.0)
+                pressureStep = new Pressure(2, UnitsNet.Units.PressureUnit.Bar);
+            else if (pressureMaxValue.Bars > 10.0 && pressureMaxValue.Bars <= 16.0)
+                pressureStep = new Pressure(2, UnitsNet.Units.PressureUnit.Bar);
+            else if (pressureMaxValue.Bars > 16.0 && pressureMaxValue.Bars <= 25.0)
+                pressureStep = new Pressure(5, UnitsNet.Units.PressureUnit.Bar);
+            else if (pressureMaxValue.Bars > 25.0 && pressureMaxValue.Bars <= 40.0)
+                pressureStep = new Pressure(5, UnitsNet.Units.PressureUnit.Bar);
+            else if (pressureMaxValue.Bars > 40.0 && pressureMaxValue.Bars <= 60.0)
+                pressureStep = new Pressure(10, UnitsNet.Units.PressureUnit.Bar);
+            else if (pressureMaxValue.Bars > 60.0 && pressureMaxValue.Bars <= 100.0)
+                pressureStep = new Pressure(20, UnitsNet.Units.PressureUnit.Bar);
+            else if (pressureMaxValue.Bars > 100.0 && pressureMaxValue.Bars <= 160.0)
+                pressureStep = new Pressure(20, UnitsNet.Units.PressureUnit.Bar);
+            else if (pressureMaxValue.Bars > 160.0 && pressureMaxValue.Bars <= 250.0)
+                pressureStep = new Pressure(50, UnitsNet.Units.PressureUnit.Bar);
+            else if (pressureMaxValue.Bars > 250.0 && pressureMaxValue.Bars <= 400.0)
+                pressureStep = new Pressure(50, UnitsNet.Units.PressureUnit.Bar);
+            else if (pressureMaxValue.Bars > 400.0 && pressureMaxValue.Bars <= 600.0)
+                pressureStep = new Pressure(100, UnitsNet.Units.PressureUnit.Bar);
+            else if (pressureMaxValue.Bars > 600.0)
+                pressureStep = new Pressure(200, UnitsNet.Units.PressureUnit.Bar);
 
-            Force tStep = new Force();
-            var tMaxValue = tenzoSensor.MaxValue;
-            if (tMaxValue.KilogramsForce < 1.0)
-                tStep = new Force(0.2, UnitsNet.Units.ForceUnit.KilogramForce);
-            else if (tMaxValue.KilogramsForce > 1.0 && tMaxValue.KilogramsForce <= 1.6)
-                tStep = new Force(0.2, UnitsNet.Units.ForceUnit.KilogramForce);
-            else if (tMaxValue.KilogramsForce > 1.6 && tMaxValue.KilogramsForce <= 2.5)
-                tStep = new Force(0.5, UnitsNet.Units.ForceUnit.KilogramForce);
-            else if (tMaxValue.KilogramsForce > 2.5 && tMaxValue.KilogramsForce <= 4.0)
-                tStep = new Force(0.5, UnitsNet.Units.ForceUnit.KilogramForce);
-            else if (tMaxValue.KilogramsForce > 4.0 && tMaxValue.KilogramsForce <= 6.0)
-                tStep = new Force(1, UnitsNet.Units.ForceUnit.KilogramForce);
-            else if (tMaxValue.KilogramsForce > 6.0 && tMaxValue.KilogramsForce <= 10.0)
-                tStep = new Force(2, UnitsNet.Units.ForceUnit.KilogramForce);
-            else if (tMaxValue.KilogramsForce > 10.0 && tMaxValue.KilogramsForce <= 16.0)
-                tStep = new Force(2, UnitsNet.Units.ForceUnit.KilogramForce);
-            else if (tMaxValue.KilogramsForce > 16.0 && tMaxValue.KilogramsForce <= 25.0)
-                tStep = new Force(5, UnitsNet.Units.ForceUnit.KilogramForce);
-            else if (tMaxValue.KilogramsForce > 25.0 && tMaxValue.KilogramsForce <= 40.0)
-                tStep = new Force(5, UnitsNet.Units.ForceUnit.KilogramForce);
-            else if (tMaxValue.KilogramsForce > 40.0 && tMaxValue.KilogramsForce <= 60.0)
-                tStep = new Force(10, UnitsNet.Units.ForceUnit.KilogramForce);
-            else if (tMaxValue.KilogramsForce > 60.0 && tMaxValue.KilogramsForce <= 100.0)
-                tStep = new Force(20, UnitsNet.Units.ForceUnit.KilogramForce);
-            else if (tMaxValue.KilogramsForce > 100.0 && tMaxValue.KilogramsForce <= 160.0)
-                tStep = new Force(20, UnitsNet.Units.ForceUnit.KilogramForce);
-            else if (tMaxValue.KilogramsForce > 160.0 && tMaxValue.KilogramsForce <= 250.0)
-                tStep = new Force(50, UnitsNet.Units.ForceUnit.KilogramForce);
-            else if (tMaxValue.KilogramsForce > 250.0 && tMaxValue.KilogramsForce <= 400.0)
-                tStep = new Force(50, UnitsNet.Units.ForceUnit.KilogramForce);
-            else if (tMaxValue.KilogramsForce > 400.0 && tMaxValue.KilogramsForce <= 600.0)
-                tStep = new Force(100, UnitsNet.Units.ForceUnit.KilogramForce);
-            else if (tMaxValue.KilogramsForce > 600.0)
-                tStep = new Force(200, UnitsNet.Units.ForceUnit.KilogramForce);
+            Force tenzoStep = new Force();
+            var tenzoMaxValue = tenzoSensor.MaxValue;
+            if (tenzoMaxValue.KilogramsForce < 1.0)
+                tenzoStep = new Force(0.2, UnitsNet.Units.ForceUnit.KilogramForce);
+            else if (tenzoMaxValue.KilogramsForce > 1.0 && tenzoMaxValue.KilogramsForce <= 1.6)
+                tenzoStep = new Force(0.2, UnitsNet.Units.ForceUnit.KilogramForce);
+            else if (tenzoMaxValue.KilogramsForce > 1.6 && tenzoMaxValue.KilogramsForce <= 2.5)
+                tenzoStep = new Force(0.5, UnitsNet.Units.ForceUnit.KilogramForce);
+            else if (tenzoMaxValue.KilogramsForce > 2.5 && tenzoMaxValue.KilogramsForce <= 4.0)
+                tenzoStep = new Force(0.5, UnitsNet.Units.ForceUnit.KilogramForce);
+            else if (tenzoMaxValue.KilogramsForce > 4.0 && tenzoMaxValue.KilogramsForce <= 6.0)
+                tenzoStep = new Force(1, UnitsNet.Units.ForceUnit.KilogramForce);
+            else if (tenzoMaxValue.KilogramsForce > 6.0 && tenzoMaxValue.KilogramsForce <= 10.0)
+                tenzoStep = new Force(2, UnitsNet.Units.ForceUnit.KilogramForce);
+            else if (tenzoMaxValue.KilogramsForce > 10.0 && tenzoMaxValue.KilogramsForce <= 16.0)
+                tenzoStep = new Force(2, UnitsNet.Units.ForceUnit.KilogramForce);
+            else if (tenzoMaxValue.KilogramsForce > 16.0 && tenzoMaxValue.KilogramsForce <= 25.0)
+                tenzoStep = new Force(5, UnitsNet.Units.ForceUnit.KilogramForce);
+            else if (tenzoMaxValue.KilogramsForce > 25.0 && tenzoMaxValue.KilogramsForce <= 40.0)
+                tenzoStep = new Force(5, UnitsNet.Units.ForceUnit.KilogramForce);
+            else if (tenzoMaxValue.KilogramsForce > 40.0 && tenzoMaxValue.KilogramsForce <= 60.0)
+                tenzoStep = new Force(10, UnitsNet.Units.ForceUnit.KilogramForce);
+            else if (tenzoMaxValue.KilogramsForce > 60.0 && tenzoMaxValue.KilogramsForce <= 100.0)
+                tenzoStep = new Force(20, UnitsNet.Units.ForceUnit.KilogramForce);
+            else if (tenzoMaxValue.KilogramsForce > 100.0 && tenzoMaxValue.KilogramsForce <= 160.0)
+                tenzoStep = new Force(20, UnitsNet.Units.ForceUnit.KilogramForce);
+            else if (tenzoMaxValue.KilogramsForce > 160.0 && tenzoMaxValue.KilogramsForce <= 250.0)
+                tenzoStep = new Force(50, UnitsNet.Units.ForceUnit.KilogramForce);
+            else if (tenzoMaxValue.KilogramsForce > 250.0 && tenzoMaxValue.KilogramsForce <= 400.0)
+                tenzoStep = new Force(50, UnitsNet.Units.ForceUnit.KilogramForce);
+            else if (tenzoMaxValue.KilogramsForce > 400.0 && tenzoMaxValue.KilogramsForce <= 600.0)
+                tenzoStep = new Force(100, UnitsNet.Units.ForceUnit.KilogramForce);
+            else if (tenzoMaxValue.KilogramsForce > 600.0)
+                tenzoStep = new Force(200, UnitsNet.Units.ForceUnit.KilogramForce);
 
             yPressureAxis.VisibleRange = new DoubleRange(pressureSensor.MinValue.ToUnit(bench.Settings.PressureUnit).Value, pressureSensor.MaxValue.ToUnit(bench.Settings.PressureUnit).Value * 1.1);
-            yPressureAxis.MajorDelta = pStep.ToUnit(bench.Settings.PressureUnit).Value;
-            yPressureAxis.MinorDelta = pStep.ToUnit(bench.Settings.PressureUnit).Value / 10.0;
+            yPressureAxis.MajorDelta = pressureStep.ToUnit(bench.Settings.PressureUnit).Value;
+            yPressureAxis.MinorDelta = pressureStep.ToUnit(bench.Settings.PressureUnit).Value / 10.0;
 
             yTenzoAxis.VisibleRange = new DoubleRange(tenzoSensor.MinValue.ToUnit(bench.Settings.TenzoUnit).Value, tenzoSensor.MaxValue.ToUnit(bench.Settings.TenzoUnit).Value * 1.1);
-            yTenzoAxis.MajorDelta = tStep.ToUnit(bench.Settings.TenzoUnit).Value;
-            yTenzoAxis.MinorDelta = tStep.ToUnit(bench.Settings.TenzoUnit).Value / 10.0;
+            yTenzoAxis.MajorDelta = tenzoStep.ToUnit(bench.Settings.TenzoUnit).Value;
+            yTenzoAxis.MinorDelta = tenzoStep.ToUnit(bench.Settings.TenzoUnit).Value / 10.0;
 
             if (!pressureSensors.Contains(pressureSensor))
             {
                 pressureSensors.Add(pressureSensor);
             }
-            if (!pressureSeries.ContainsKey(pressureSensor.Id))
+            if (!pressureSeriesDict.ContainsKey(pressureSensor.Id))
             {
-                var pressSeries = new XyDataSeries<TimeSpan, double>()
+                var pressureSeries = new XyDataSeries<TimeSpan, double>()
                 {
                     SeriesName = localizationService["Testing.SODBench.Pressure"] + ", " + Pressure.GetAbbreviation(bench.Settings.PressureUnit, new CultureInfo(localizationService.CurrentCulture.Name)),
                 };
 
                 Series.Add(new LineRenderableSeriesViewModel()
                 {
-                    DataSeries = pressSeries,
+                    DataSeries = pressureSeries,
                     AntiAliasing = true,
                     Stroke = Colors.Red,
                     StrokeThickness = 2,
                     YAxisId = "yPressureAxis",
                 });
-                pressureSeries.Add(pressureSensor.Id, pressSeries);
+                pressureSeriesDict.Add(pressureSensor.Id, pressureSeries);
             }
 
             if (!tenzoSensors.Contains(tenzoSensor)) 
                 tenzoSensors.Add(tenzoSensor);
 
-            if (!tenzoSeries.ContainsKey(tenzoSensor.Id))
+            if (!tenzoSeriesDict.ContainsKey(tenzoSensor.Id))
             {
-                var tenzSeries = new XyDataSeries<TimeSpan, double>()
+                var tenzoSeries = new XyDataSeries<TimeSpan, double>()
                 {
                     SeriesName = localizationService["Testing.SODBench.Tenzo"] + ", " + Force.GetAbbreviation(bench.Settings.TenzoUnit, new CultureInfo(localizationService.CurrentCulture.Name)),
                 };
 
                 Series.Add(new LineRenderableSeriesViewModel()
                 {
-                    DataSeries = tenzSeries,
+                    DataSeries = tenzoSeries,
                     AntiAliasing = true,
                     Stroke = Colors.Blue,
                     StrokeThickness = 2,
                     YAxisId = "yTenzoAxis"
                 });
-                tenzoSeries.Add(tenzoSensor.Id, tenzSeries);
+                tenzoSeriesDict.Add(tenzoSensor.Id, tenzoSeries);
             }
         }
 
         private void ClearSeries()
         {
-            pressureSeries.Values.FirstOrDefault().Clear();
+            pressureSeriesDict.Values.FirstOrDefault().Clear();
 
-            tenzoSeries.Values.FirstOrDefault().Clear();
+            tenzoSeriesDict.Values.FirstOrDefault().Clear();
         }
 
         public void StartChart()
@@ -289,14 +289,14 @@ namespace SOD.ViewModels.Testing.SODBench
 
                                             var pressureSensor = pressureSensors.FirstOrDefault();
                                             double currentPressure = Math.Round(pressureSensor.Pressure.ToUnit(bench.Settings.PressureUnit).Value, 2);
-                                            pressureSeries[pressureSensor.Id].Append(totalTime, currentPressure);
+                                            pressureSeriesDict[pressureSensor.Id].Append(totalTime, currentPressure);
 
                                             if (bench.Settings.AutoRange)
                                                 yPressureAxis.VisibleRange = new DoubleRange(Series[0].DataSeries.YMin.ToDouble() - Math.Abs(Series[0].DataSeries.YMin.ToDouble() * 5 / 100), Series[0].DataSeries.YMax.ToDouble() + Math.Abs(Series[0].DataSeries.YMax.ToDouble() * 5 / 100));
 
                                             var tenzoSensor = tenzoSensors.FirstOrDefault();
                                             double currentTenzo = Math.Round(tenzoSensor.Force.ToUnit(bench.Settings.TenzoUnit).Value, 2);
-                                            tenzoSeries[tenzoSensor.Id].Append(totalTime, currentTenzo);
+                                            tenzoSeriesDict[tenzoSensor.Id].Append(totalTime, currentTenzo);
 
                                             if (bench.Settings.AutoRange)
                                                 yTenzoAxis.VisibleRange = new DoubleRange(Series[1].DataSeries.YMin.ToDouble() - Math.Abs(Series[1].DataSeries.YMin.ToDouble() * 5 / 100), Series[1].DataSeries.YMax.ToDouble() + Math.Abs(Series[1].DataSeries.YMax.ToDouble() * 5 / 100));
@@ -341,10 +341,10 @@ namespace SOD.ViewModels.Testing.SODBench
                 YAxisId = "yTenzoAxis"
             });
 
-            pressureSeries.Clear();
+            pressureSeriesDict.Clear();
             pressureSensors.Clear();
 
-            tenzoSeries.Clear();
+            tenzoSeriesDict.Clear();
             tenzoSensors.Clear();
 
             Series.Clear();

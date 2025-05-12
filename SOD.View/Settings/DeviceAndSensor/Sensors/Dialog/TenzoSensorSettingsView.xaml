@@ -34,20 +34,20 @@
                 <TextBlock Margin="5,0,0,5" FontSize="16" Text="{Binding Id, StringFormat=Id: {0}}" />
                 <TextBox
                     Grid.Row="1"
-                    Margin="5,0,0,5"
+                    Margin="5,0,0,10"
                     materialDesign:HintAssist.Hint="{lc:Localization Settings.DeviceAndSensor.Sensor.Name}"
                     FontSize="22"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBox
                     Grid.Row="2"
-                    Margin="5,0,0,5"
+                    Margin="5,0,0,10"
                     materialDesign:HintAssist.Hint="{lc:Localization Settings.DeviceAndSensor.Sensor.ChannelNumber}"
                     FontSize="22"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Text="{Binding ChannelId, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBox
-                    Margin="5,0,0,5"
+                    Margin="5,0,0,10"
                     materialDesign:HintAssist.Hint="{lc:Localization Settings.DeviceAndSensor.Sensor.Accaury}"
                     FontSize="22"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -58,7 +58,7 @@
                     DataContext="{Binding MaxValue}"
                     FieldName="{lc:Localization Settings.DeviceAndSensor.Sensor.MaxValue}"/>
                 <controls:UnitValueView
-                    Margin="5 10 0 0"
+                    Margin="5 10 0 5"
                     FontSize="22"
                     DataContext="{Binding MinValue}"
                     FieldName="{lc:Localization Settings.DeviceAndSensor.Sensor.MinValue}"/>
