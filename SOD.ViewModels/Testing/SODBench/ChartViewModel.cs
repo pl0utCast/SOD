@@ -214,13 +214,11 @@ namespace SOD.ViewModels.Testing.SODBench
             else if (tMaxValue.KilogramsForce > 600.0)
                 tStep = new Force(200, UnitsNet.Units.ForceUnit.KilogramForce);
 
-            yPressureAxis.VisibleRange = new DoubleRange(pressureSensor.MinValue.ToUnit(bench.Settings.PressureUnit).Value,
-                                                          pressureSensor.MaxValue.ToUnit(bench.Settings.PressureUnit).Value * 1.1);
+            yPressureAxis.VisibleRange = new DoubleRange(pressureSensor.MinValue.ToUnit(bench.Settings.PressureUnit).Value, pressureSensor.MaxValue.ToUnit(bench.Settings.PressureUnit).Value * 1.1);
             yPressureAxis.MajorDelta = pStep.ToUnit(bench.Settings.PressureUnit).Value;
             yPressureAxis.MinorDelta = pStep.ToUnit(bench.Settings.PressureUnit).Value / 10.0;
 
-            yTenzoAxis.VisibleRange = new DoubleRange(pressureSensor.MinValue.ToUnit(bench.Settings.PressureUnit).Value,
-                                                          pressureSensor.MaxValue.ToUnit(bench.Settings.PressureUnit).Value * 1.1);
+            yTenzoAxis.VisibleRange = new DoubleRange(tenzoSensor.MinValue.ToUnit(bench.Settings.TenzoUnit).Value, tenzoSensor.MaxValue.ToUnit(bench.Settings.TenzoUnit).Value * 1.1);
             yTenzoAxis.MajorDelta = tStep.ToUnit(bench.Settings.TenzoUnit).Value;
             yTenzoAxis.MinorDelta = tStep.ToUnit(bench.Settings.TenzoUnit).Value / 10.0;
 

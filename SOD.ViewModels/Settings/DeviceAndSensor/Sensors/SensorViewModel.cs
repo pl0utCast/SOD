@@ -165,6 +165,8 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Sensors
                     vm.Name = codeBasedTenzoSensor.Name;
                     vm.Accaury = codeBasedTenzoSensor.Settings.Accaury;
                     vm.ChannelId = codeBasedTenzoSensor.Settings.ChannelId;
+                    vm.MaxValue = new Controls.UnitValueViewModel(codeBasedTenzoSensor.Settings.MaxValue);
+                    vm.MinValue = new Controls.UnitValueViewModel(codeBasedTenzoSensor.Settings.MinValue);
                     vm.UnitTypes = new Force().GetUnitTypeInfo();
                     vm.UnitType = vm.UnitTypes.SingleOrDefault(ut => ut.UnitType.ToString() == codeBasedTenzoSensor.Settings.Unit.ToString());
                     vm.SensorHint = codeBasedTenzoSensor.Settings.SensorHint;
@@ -174,6 +176,8 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Sensors
                         codeBasedTenzoSensor.Settings.Name = vm.Name;
                         codeBasedTenzoSensor.Settings.ChannelId = vm.ChannelId;
                         codeBasedTenzoSensor.Settings.Accaury = vm.Accaury;
+                        codeBasedTenzoSensor.Settings.MaxValue = (Force)vm.MaxValue.GetValue();
+                        codeBasedTenzoSensor.Settings.MinValue = (Force)vm.MinValue.GetValue();
                         codeBasedTenzoSensor.Settings.Unit = (ForceUnit)vm.UnitType?.UnitType;
                         codeBasedTenzoSensor.Settings.SensorHint = vm.SensorHint;
                         codeBasedTenzoSensor.Settings.Coefficients = codeBasedTenzoSensor.Settings.Coefficients;

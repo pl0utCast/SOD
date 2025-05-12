@@ -7,6 +7,7 @@ using SOD.ViewModels.Controls;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using UnitsNet;
 
 namespace SOD.ViewModels.Settings.DeviceAndSensor.Sensors.Dialog
 {
@@ -39,6 +40,9 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Sensors.Dialog
         public int Code { get; set; }
         [Reactive]
         public string Value { get; set; }
+        [Reactive]
+        public UnitValueViewModel MaxValue { get; set; }
+        public UnitValueViewModel MinValue { get; set; }
         public string Accaury { get; set; }
         public string SensorHint { get; set; }
         public IEnumerable<UnitTypeInfo> UnitTypes { get; set; }
