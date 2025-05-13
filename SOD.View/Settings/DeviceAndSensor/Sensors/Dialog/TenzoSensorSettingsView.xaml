@@ -53,15 +53,15 @@
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Text="{Binding Accaury, UpdateSourceTrigger=PropertyChanged}" />
                 <controls:UnitValueView
-                    Margin="5 10 0 0"
-                    FontSize="22"
-                    DataContext="{Binding MaxValue}"
-                    FieldName="{lc:Localization Settings.DeviceAndSensor.Sensor.MaxValue}"/>
-                <controls:UnitValueView
                     Margin="5 10 0 5"
                     FontSize="22"
                     DataContext="{Binding MinValue}"
                     FieldName="{lc:Localization Settings.DeviceAndSensor.Sensor.MinValue}"/>
+                <controls:UnitValueView
+                    Margin="5 10 0 0"
+                    FontSize="22"
+                    DataContext="{Binding MaxValue}"
+                    FieldName="{lc:Localization Settings.DeviceAndSensor.Sensor.MaxValue}"/>
                 <ComboBox
                     Margin="5 0 0 5"
                     materialDesign:HintAssist.Hint="{lc:Localization Settings.DeviceAndSensor.Sensor.UnitType}"

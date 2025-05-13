@@ -31,6 +31,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 using SOD.Core.Units;
 using MemBus;
 using SciChart.Charting.Visuals.Axes.LabelProviders;
+using SciChart.Charting.ChartModifiers;
 
 namespace SOD.ViewModels.Testing.SODBench
 {
@@ -268,9 +269,9 @@ namespace SOD.ViewModels.Testing.SODBench
 
         private void ClearSeries()
         {
-            pressureSeriesDict.Values.FirstOrDefault().Clear();
+            pressureSeriesDict.Values.FirstOrDefault()?.Clear();
 
-            tenzoSeriesDict.Values.FirstOrDefault().Clear();
+            tenzoSeriesDict.Values.FirstOrDefault()?.Clear();
         }
 
         public void StartChart()

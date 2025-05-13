@@ -207,6 +207,7 @@ namespace SOD.ViewModels.Testing.SODBench
                 testSettings.MaxDeformation = t ? value : null;
                 testSettings.Time = ExposureTime;
                 testSettings.PressureSensorId = PressureSensor?.Id;
+                testSettings.TenzoSensorId = TenzoSensor.Id;
 
                 if (reportService.CurrentReport != null && !reportService.CurrentReport.IsSave && reportService.CurrentReport.ReportData.IsFill)
                 {

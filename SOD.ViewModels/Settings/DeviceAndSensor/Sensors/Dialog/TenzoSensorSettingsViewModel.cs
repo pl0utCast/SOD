@@ -40,7 +40,6 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Sensors.Dialog
         public int Code { get; set; }
         [Reactive]
         public string Value { get; set; }
-        [Reactive]
         public UnitValueViewModel MaxValue { get; set; }
         public UnitValueViewModel MinValue { get; set; }
         public string Accaury { get; set; }
