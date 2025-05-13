@@ -1,5 +1,6 @@
 ﻿using MemBus;
 using SOD.Core.Device.Modbus;
+using SOD.Localization.Settings.DeviceAndSensors;
 using SOD.LocalizationService;
 
 namespace SOD.App.Commands.Modbus3Post
@@ -27,17 +28,20 @@ namespace SOD.App.Commands.Modbus3Post
         {
             _bus.Publish(new App.Benches.SODBench.Messages.InfoMessage(_localizationService["Testing.ManualCommandsBench.EmptyingBalloon"]));
 
-            await _modbusTcpDevice.WriteInt32(40, 2);
-            await Start();
+            ushort reg = 4127;
+            ushort mask = (1 << 1); // Выставляем единицу в бит по счету (1 << 7)
+
+            await _modbusTcpDevice.SetMaskWord(reg, mask);
 
             // ожидаем окончание выполнения команды
-            await _modbusTcpDevice.CreateFloatTriggerAsync(stopReg, data => data == 1,
-                async data =>
-                {
-                    logger.Trace("Команда выдержка выполнена!");
-                    //await ExecuteEnd();
-                },
-                cancellationToken);
+            //await _modbusTcpDevice.CreateFloatTriggerAsync(stopReg, data => data == 1,
+            //    async data =>
+            //    {
+            //        await ExecuteEnd();
+            //    },
+            //    cancellationToken);
+
+            logger.Trace("Команда опустошение баллона выполнена!");
         }
     }
 }

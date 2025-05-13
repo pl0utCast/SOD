@@ -58,7 +58,7 @@
                     <TextBox
                         Grid.Column="2"
                         Margin="5"
-                        materialDesign:HintAssist.Hint="Salve Id"
+                        materialDesign:HintAssist.Hint="Slave Id"
                         FontSize="24"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding SlaveId, UpdateSourceTrigger=PropertyChanged}" />
@@ -103,6 +103,7 @@
                         <DataGridTextColumn Binding="{Binding Id}" Header="Modbus Id" />
                         <DataGridTextColumn Binding="{Binding DataType}" Header="Data Type" />
                         <DataGridTextColumn Binding="{Binding Value}" Header="Value" />
+                        <DataGridTextColumn Binding="{Binding BinValue}" Header="Bin" />
                         <DataGridTextColumn Binding="{Binding Description}" Header="Description" />
                     </DataGrid.Columns>
                 </DataGrid>

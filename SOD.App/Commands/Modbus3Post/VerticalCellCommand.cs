@@ -26,9 +26,11 @@ namespace SOD.App.Commands.Modbus3Post
         {
             _bus.Publish(new App.Benches.SODBench.Messages.InfoMessage(_localizationService["Testing.ManualCommandsBench.VerticalCell"]));
 
-            // запускаем команду
-            await _modbusTcpDevice.WriteInt32(40, 7);
-            await Start();
+            ushort reg = 4126;
+            ushort mask = (1 << 13); // Выставляем единицу в бит по счету (1 << 7)
+
+            await _modbusTcpDevice.SetMaskWord(reg, mask);
+
             //await _modbusTcpDevice.CreateTriggerAsync(48, data => data[0] == 1,
             //    async data =>
             //    {
@@ -36,6 +38,8 @@ namespace SOD.App.Commands.Modbus3Post
             //        await ExecuteEnd();
             //    },
             //    cancellationToken);
+
+            logger.Trace("Команда установки камеры в вертикальное положение выполнена!");
         }
     }
 }

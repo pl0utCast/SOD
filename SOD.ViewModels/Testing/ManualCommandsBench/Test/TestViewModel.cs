@@ -92,18 +92,6 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test
                     ProgrammMethodicsConfig = m.ProgrammMethodicsConfig;
                 })
                 .DisposeWith(dis);
-
-                //foreach (var post in testBench.Posts)
-                //{
-                //    var postVm = new PostViewModel(testBench, (App.Benches.SODBench.Post)post, bus);
-                //    postVm.Activator.Activate().DisposeWith(dis);
-                //    Posts.Add(postVm);
-                //}
-
-                //if (Posts.Count <= 3) // Верстаем количество колонок по количеству постов
-                //    PostsColumn = Posts.Count;
-                //else // Верстаем количество колонок по количеству постов деленное на 2 и округленное в большую сторону
-                //    PostsColumn = (int)Math.Ceiling(Posts.Count / 2.0);
             });
 
             Commands = new CommandsViewModel(bus, dialogService, _deviceService, _localizationService);

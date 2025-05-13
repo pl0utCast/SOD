@@ -26,16 +26,19 @@ namespace SOD.App.Commands.Modbus3Post
         {
             _bus.Publish(new App.Benches.SODBench.Messages.InfoMessage(_localizationService["Testing.ManualCommandsBench.PressureSet"]));
 
-            // запускаем команду
-            await _modbusTcpDevice.WriteInt32(40, 5);
-            await Start();
+            ushort reg = 4127;
+            ushort mask = (1 << 4); // Выставляем единицу в бит по счету (1 << 7)
+
+            await _modbusTcpDevice.SetMaskWord(reg, mask);
+
             //await _modbusTcpDevice.CreateTriggerAsync(48, data => data[0] == 1,
             //    async data =>
             //    {
-            //        logger.Trace("Команда выбор полости контроля утечки, выполнена!");
             //        await ExecuteEnd();
             //    },
             //    cancellationToken);
+
+            logger.Trace("Команда набор давления выполнена!");
         }
     }
 }

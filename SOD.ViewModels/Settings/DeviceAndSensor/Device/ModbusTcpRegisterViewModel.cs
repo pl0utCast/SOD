@@ -26,6 +26,12 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Device
                         if (dc.Id == Id)
                         {
                             Value = dc.Value.ToString();
+
+                            // Преобразуем значение в двоичное
+                            if (dc.DataType == ChannelDataType.UINT16)
+                                BinValue = Convert.ToString((ushort)dc.Value, 2);
+                            else if (dc.DataType == ChannelDataType.INT16)
+                                BinValue = Convert.ToString((short)dc.Value, 2);
                         }
                     }).DisposeWith(disposables);
                 }
@@ -47,6 +53,8 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Device
         public ChannelDataType DataType { get; set; }
         [Reactive]
         public string Value { get; set; }
+        [Reactive]
+        public string BinValue { get; set; }
         public ModbusRegister Register { get; set; }
         [Reactive]
         public string Description { get; set; }

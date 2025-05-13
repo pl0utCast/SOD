@@ -26,16 +26,19 @@ namespace SOD.App.Commands.Modbus3Post
         {
             _bus.Publish(new App.Benches.SODBench.Messages.InfoMessage(_localizationService["Testing.ManualCommandsBench.HorizontalCell"]));
 
-            // запуск команды
-            await _modbusTcpDevice.WriteInt32(40, 8);
-            await Start();
+            ushort reg = 4126;
+            ushort mask = (1 << 14); // Выставляем единицу в бит по счету (1 << 7)
+
+            await _modbusTcpDevice.SetMaskWord(reg, mask);
+
             //await _modbusTcpDevice.CreateTriggerAsync(48, data => data[0] == 1,
             //    async data =>
             //    {
-            //        logger.Trace("Команда выбора полости подачи давления, выполнена!");
             //        await ExecuteEnd();
             //    },
             //    cancellationToken);
+            
+            logger.Trace("Команда установки камеры в горизонтальное положение выполнена!");
         }
     }
 }
