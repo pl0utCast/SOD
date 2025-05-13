@@ -58,7 +58,7 @@
                     DataContext="{Binding MinValue}"
                     FieldName="{lc:Localization Settings.DeviceAndSensor.Sensor.MinValue}"/>
                 <controls:UnitValueView
-                    Margin="5 10 0 0"
+                    Margin="5 10 0 10"
                     FontSize="22"
                     DataContext="{Binding MaxValue}"
                     FieldName="{lc:Localization Settings.DeviceAndSensor.Sensor.MaxValue}"/>

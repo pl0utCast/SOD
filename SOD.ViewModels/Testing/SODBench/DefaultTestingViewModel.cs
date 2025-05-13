@@ -2,6 +2,8 @@
 using MemBus;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using SciChart.Charting.ChartModifiers;
+using SciChart.Charting.Visuals;
 using SOD.App.Benches;
 using SOD.App.Benches.SODBench;
 using SOD.App.Messages;
@@ -38,7 +40,7 @@ namespace SOD.ViewModels.Testing.SODBench
         {
             _bench = (App.Benches.SODBench.Bench)testBenchService.GetTestBench();
             _localizationService = localizationService;
-            PressureChart = new ChartViewModel(localizationService, _bench, bus);
+            Chart = new ChartViewModel(localizationService, _bench, bus);
             if (_bench.Settings.SelectedTestSettings != null /*&& _bench.TestingValve!=null*/) IsSelectedTest = true;
             ExposureTime = "00:00:00";
             TemperatureSensors = new TemperatureSensorsViewModel(sensorService, _bench);
@@ -74,8 +76,8 @@ namespace SOD.ViewModels.Testing.SODBench
 						IsTestResultFill = false;
 					}
 					isAddTestToReport = IsTestResultFill;
-					PressureChart.StopChart();
-					var chart = PressureChart.Series.FirstOrDefault().DataSeries.ParentSurface.ExportToBitmapSource().GetBitmap();
+					Chart.StopChart();
+					var chart = Chart.Series.FirstOrDefault().DataSeries.ParentSurface.ExportToBitmapSource().GetBitmap();
 				}
 				else
 				{
@@ -84,7 +86,7 @@ namespace SOD.ViewModels.Testing.SODBench
 					bus.Publish(new App.Messages.ProgrammMethodicsStatus(App.Messages.ProgrammStatus.Run));
 					_bench.StartTesting();
                     UpdateChart();
-                    PressureChart.StartChart();
+                    Chart.StartChart();
                 }
                 IsRunTest = !IsRunTest;
             }, this.WhenAnyValue(x => x.IsExposure, x => x.IsSelectedTest, x => x.ProgrammMethodicsConfig,
@@ -122,7 +124,7 @@ namespace SOD.ViewModels.Testing.SODBench
                 if (result != null)
                 {
                     isAddTestToReport = false;
-                    _bench.UpdateReport(PressureChart.Series.FirstOrDefault().DataSeries.ParentSurface.ExportToBitmapSource().GetBitmap());
+                    _bench.UpdateReport(Chart.Series.FirstOrDefault().DataSeries.ParentSurface.ExportToBitmapSource().GetBitmap());
                 }
             }, canResult);
 
@@ -144,7 +146,7 @@ namespace SOD.ViewModels.Testing.SODBench
                         {
                             IsExposure = false;
                         }
-                        PressureChart.SetAnnotation();
+                        Chart.SetAnnotations();
                     });
                 })
                 .DisposeWith(dis);
@@ -190,7 +192,7 @@ namespace SOD.ViewModels.Testing.SODBench
             {
                 foreach (var tSensor in tenzoSensors)
                 {
-                    PressureChart.SetPressureSensor((IPressureSensor)pSensor, (ITenzoSensor)tSensor);
+                    Chart.SetSensors((IPressureSensor)pSensor, (ITenzoSensor)tSensor);
                 }
             }
 
@@ -220,7 +222,7 @@ namespace SOD.ViewModels.Testing.SODBench
         [Reactive]
         public ProgrammMethodicsConfig ProgrammMethodicsConfig { get; set; }
         public ObservableCollectionExtended<SensorViewModel> Sensors { get; set; } = new ObservableCollectionExtended<SensorViewModel>();
-        public ChartViewModel PressureChart { get; set; }
+        public ChartViewModel Chart { get; set; }
         public TemperatureSensorsViewModel TemperatureSensors { get; set; }
         public ReactiveCommand<Unit, Unit> GoParameters { get; set; }
         public ReactiveCommand<Unit, Unit> StartTest { get; set; }

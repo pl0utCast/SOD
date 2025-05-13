@@ -114,13 +114,14 @@
                     x:Name="sciChartSurface"
                     Annotations="{s:AnnotationsBinding Annotations}"
                     Background="White"
-                    DataContext="{Binding PressureChart}"
+                    DataContext="{Binding Chart}"
                     RenderableSeries="{s:SeriesBinding Series}"
                     XAxes="{s:AxesBinding XAxes}"
                     YAxes="{s:AxesBinding YAxes}">
                     <s:SciChartSurface.ChartModifier>
                         <s:ModifierGroup>
-                            <s:LegendModifier ShowLegend="True"
+                            <s:LegendModifier x:Name="ChartLegend"
+                                ShowLegend="True"
                                 ShowVisibilityCheckboxes="True"
                                 ShowSeriesMarkers="True"
                                 LegendPlacement="Inside"
