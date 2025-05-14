@@ -125,7 +125,9 @@
                                 ShowVisibilityCheckboxes="True"
                                 ShowSeriesMarkers="True"
                                 LegendPlacement="Inside"
-                                Orientation="Vertical" />
+                                Orientation="Vertical"
+                                Background="#90000000">
+                            </s:LegendModifier>
                         </s:ModifierGroup>
                     </s:SciChartSurface.ChartModifier>
                 </s:SciChartSurface>
@@ -193,7 +195,6 @@
                     <TextBlock HorizontalAlignment="Center" Text="{lc:Localization Testing.SODBench.Exposure}" />
                     <ProgressBar IsIndeterminate="True" Visibility="{Binding IsExposure, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 </StackPanel>
-
             </Button>
             <Button
                 Height="100"

@@ -188,11 +188,11 @@ namespace SOD.ViewModels.Testing.SODBench
                 .Select(s => s.Sensor)
                 .OfType<ITenzoSensor>();
 
-            foreach (var pSensor in pressureSensors)
+            foreach (var pressureSensor in pressureSensors)
             {
-                foreach (var tSensor in tenzoSensors)
+                foreach (var tenzoSensor in tenzoSensors)
                 {
-                    Chart.SetSensors((IPressureSensor)pSensor, (ITenzoSensor)tSensor);
+                    Chart.SetSensors((IPressureSensor)pressureSensor, (ITenzoSensor)tenzoSensor);
                 }
             }
 

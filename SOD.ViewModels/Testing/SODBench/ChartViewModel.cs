@@ -272,9 +272,11 @@ namespace SOD.ViewModels.Testing.SODBench
 
         private void ClearChartLines()
         {
-            pressureTimeSeriesDict.Values.FirstOrDefault()?.Clear();
+            foreach (var series in pressureTimeSeriesDict.Values)
+                series.Clear();
 
-            tenzoTimeSeriesDict.Values.FirstOrDefault()?.Clear();
+            foreach (var series in tenzoTimeSeriesDict.Values)
+                series.Clear();
         }
 
         private void SetAutoRangeIfEnabled(IDataSeries dataSeries, NumericAxisViewModel yAxis, bool isAutoRange)
