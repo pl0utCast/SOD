@@ -4,6 +4,7 @@
   },
   "SODBenchSettings": {
     "SelectedTestSettings": {
+      "Name": null,
       "Time": 30,
       "PressureSensorId": 4,
       "WorkPressure": 0,
@@ -35,12 +36,12 @@
     ],
     "TestBenchSettings": {
       "OwnerDeviceId": 0,
-      "PressureClampSensorId": 1,
-      "PressuriseSensorId": 0,
-      "AmbientTemparatureSensorId": 15,
+      "PressureClampSensorId": 0,
+      "PressureSensorId": 0,
+      "AmbientTemperatureSensorId": 0,
       "Parameters": [],
-      "PressureUnit": 2,
-      "LeakageUnit": 8,
+      "PressureUnit": 0,
+      "LeakageUnit": 0,
       "PressureVelocity": 11.0,
       "HydraulicPressureCoef": 75.0,
       "MaxAllowablePressure": 370.0,
@@ -66,6 +67,7 @@
     "Tests": {
       "1": [
         {
+          "Name": null,
           "Time": 120,
           "PressureSensorId": 1,
           "WorkPressure": 0,
@@ -78,6 +80,7 @@
           }
         },
         {
+          "Name": null,
           "Time": 180,
           "PressureSensorId": 2,
           "WorkPressure": 0,
@@ -92,6 +95,7 @@
       ],
       "2": [
         {
+          "Name": null,
           "Time": 10,
           "PressureSensorId": 0,
           "WorkPressure": 0,
@@ -104,6 +108,7 @@
           }
         },
         {
+          "Name": null,
           "Time": 10,
           "PressureSensorId": 0,
           "WorkPressure": 0,
@@ -116,6 +121,7 @@
           }
         },
         {
+          "Name": null,
           "Time": 30,
           "PressureSensorId": 0,
           "WorkPressure": 0,
@@ -133,23 +139,23 @@
     "LiquidTemperatureSensorId": 13,
     "IsEnableGasTemperatureSensor": true,
     "IsEnableLiquidTemperatureSensor": true,
-    "ManualLocation": false,
-    "AutoRange": false,
+    "ManualLocation": true,
+    "AutoRange": true,
     "Sensors": {
       "0": true,
       "1": true,
       "2": true,
       "3": true,
       "4": true,
-      "5": false,
-      "6": false,
-      "7": false,
-      "8": false,
-      "9": false,
-      "10": false,
-      "11": false,
-      "12": false,
-      "13": false,
+      "5": true,
+      "6": true,
+      "7": true,
+      "8": true,
+      "9": true,
+      "10": true,
+      "11": true,
+      "12": true,
+      "13": true,
       "14": true,
       "15": true,
       "16": true,
@@ -162,7 +168,16 @@
       "1": true,
       "2": true
     },
-    "ReportPath": "D:\\Source codes\\SOD\\SOD.View\\bin\\Debug\\net9.0-windows\\reports_template\\report_template_sod.frx"
+    "ReportPath": "C:\\Users\\boriskin\\Source\\Repos\\SOD\\SOD.View\\bin\\Debug\\net9.0-windows\\reports_template\\report_template_sod.frx"
+  },
+  "TestBenchSettings": {
+    "OwnerDeviceId": 0,
+    "PressureClampSensorId": 1,
+    "PressuriseSensorId": 0,
+    "AmbientTemparatureSensorId": 15,
+    "Parameters": [],
+    "PressureUnit": 2,
+    "LeakageUnit": 8
   },
   "LocalizationService": {
     "Langs": [

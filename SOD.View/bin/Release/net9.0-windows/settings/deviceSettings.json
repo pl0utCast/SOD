@@ -3,7 +3,6 @@
     "Name": "Oven MB110-224.4ТД",
     "SerialPort": "COM6",
     "UsedBaudRate": 9600,
-    "UseDigitalSensors": false,
     "RequestChannels": [
       {
         "Address": 62,
@@ -27,14 +26,14 @@
   "ModbusTcpDevice_1": {
     "DeviceName": "ModbusTCP",
     "Id": 1,
-    "HostOrIp": "192.168.1.5",
-    "Port": 502,
+    "HostOrIp": "127.0.0.1",
+    "Port": 504,
     "SlaveAddress": 1,
     "Registers": [
       {
         "RegisterId": 6096,
         "Id": 6096,
-        "DataType": 0,
+        "DataType": 7,
         "ByteCount": 0,
         "Description": "Давление X3"
       },
@@ -48,7 +47,7 @@
       {
         "RegisterId": 6098,
         "Id": 6098,
-        "DataType": 0,
+        "DataType": 7,
         "ByteCount": 0,
         "Description": "Вода X7"
       },
@@ -58,6 +57,34 @@
         "DataType": 1,
         "ByteCount": 0,
         "Description": "биты в SOD"
+      },
+      {
+        "RegisterId": 6116,
+        "Id": 6116,
+        "DataType": 0,
+        "ByteCount": 0,
+        "Description": null
+      },
+      {
+        "RegisterId": 6106,
+        "Id": 6106,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": null
+      },
+      {
+        "RegisterId": 6100,
+        "Id": 6100,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": null
+      },
+      {
+        "RegisterId": 6102,
+        "Id": 6102,
+        "DataType": 0,
+        "ByteCount": 0,
+        "Description": null
       }
     ],
     "ReadWriteRegisters": [
