@@ -51,26 +51,26 @@ namespace SOD.App.Benches.SODBench
         public int PressureUnit { get; set; }
         public int LeakageUnit { get; set; }
 
-        public double PressureVelocity { get; set; } = 11.0;
-        public double HydraulicPressureCoef { get; set; } = 75.0;
-        public double MaxAllowablePressure { get; set; } = 370.0;
-        public double ThrottleActivationPercentage { get; set; } = 90.0;
-        public double ThrottleDeactivationPercentage { get; set; } = 80.0;
-        public double OverpressureAllowancePercentage { get; set; } = 1.0;
-        public double NominalPressureValue { get; set; } = 600.0;
-        public double Reserve1 { get; set; } = 100.0;
-        public double Reserve2 { get; set; } = 100.0;
-        public double VesselEmergencyLevel_5kg { get; set; } = 4500.0;
-        public double VesselEmergencyLevel_10kg { get; set; } = 9000.0;
-        public double VesselEmergencyLevel_30kg { get; set; } = 28000.0;
-        public double KpPID { get; set; } = 0.0;
-        public double KiPID { get; set; } = 3.0;
-        public double KdPID { get; set; } = 0.0;
-        public double dwePID { get; set; } = 0.0;
-        public double tfPID { get; set; } = 0.3;
-        public double MaxOutputConst { get; set; } = 100.0;
-        public double ErrorZonePID { get; set; } = 0.0;
-        public double MinOutputConst { get; set; } = 0.0;
-        public double CyclePID { get; set; } = 2.0;
+        public float PressureVelocity { get; set; } = 11.0F;
+        public float HydraulicPressureCoef { get; set; } = 75.0F;
+        public float MaxAllowablePressure { get; set; } = 370.0F;
+        public float ThrottleActivationPercentage { get; set; } = 90.0F;
+        public float ThrottleDeactivationPercentage { get; set; } = 80.0F;
+        public float OverpressureAllowancePercentage { get; set; } = 1.0F;
+        public float NominalPressureValue { get; set; } = 600.0F;
+        public float Reserve1 { get; set; } = 100.0F;
+        public float Reserve2 { get; set; } = 100.0F;
+        public float VesselEmergencyLevel_5kg { get; set; } = 4500.0F;
+        public float VesselEmergencyLevel_10kg { get; set; } = 9000.0F;
+        public float VesselEmergencyLevel_30kg { get; set; } = 28000.0F;
+        public float KpPID { get; set; } = 0.0F;
+        public float KiPID { get; set; } = 3.0F;
+        public float KdPID { get; set; } = 0.0F;
+        public float dwePID { get; set; } = 0.0F;
+        public float tfPID { get; set; } = 0.3F;
+        public float MaxOutputConst { get; set; } = 100.0F;
+        public float ErrorZonePID { get; set; } = 0.0F;
+        public float MinOutputConst { get; set; } = 0.0F;
+        public float CyclePID { get; set; } = 2.0F;
     }
 }
