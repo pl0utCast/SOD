@@ -1,33 +1,41 @@
 {
   "TenzoSensorCodeBased_Id_0": {
     "Name": "100 kg",
-    "ChannelId": 6096,
-    "Unit": 4,
-    "MinValue": {
-      "Unit": "ForceUnit.KilogramForce",
-      "Value": 0.0
-    },
-    "MaxValue": {
-      "Unit": "ForceUnit.KilogramForce",
-      "Value": 100.0
-    },
+    "ChannelId": 62,
+    "Unit": 3,
     "Accaury": "F2",
     "SensorHint": "",
     "Coefficients": [
       {
         "Id": 1,
-        "SavedCode": 1573,
+        "SavedCode": 125,
         "InitialValue": {
           "Unit": "ForceUnit.KilogramForce",
-          "Value": 0.0
+          "Value": 11.5
         }
       },
       {
         "Id": 2,
-        "SavedCode": 7899,
+        "SavedCode": 564,
         "InitialValue": {
           "Unit": "ForceUnit.KilogramForce",
-          "Value": 20.0
+          "Value": 55.2
+        }
+      },
+      {
+        "Id": 3,
+        "SavedCode": 986,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 87.6
+        }
+      },
+      {
+        "Id": 4,
+        "SavedCode": 1028,
+        "InitialValue": {
+          "Unit": "ForceUnit.KilogramForce",
+          "Value": 94.9
         }
       }
     ]
@@ -36,14 +44,6 @@
     "Name": "500 kg",
     "ChannelId": 64,
     "Unit": 3,
-    "MinValue": {
-      "Unit": "ForceUnit.KilogramForce",
-      "Value": 0.0
-    },
-    "MaxValue": {
-      "Unit": "ForceUnit.KilogramForce",
-      "Value": 500.0
-    },
     "Accaury": "F2",
     "SensorHint": "",
     "Coefficients": [
@@ -85,14 +85,6 @@
     "Name": "5000 kg",
     "ChannelId": 66,
     "Unit": 3,
-    "MinValue": {
-      "Unit": "ForceUnit.KilogramForce",
-      "Value": 0.0
-    },
-    "MaxValue": {
-      "Unit": "ForceUnit.KilogramForce",
-      "Value": 5000.0
-    },
     "Accaury": "F2",
     "SensorHint": "",
     "Coefficients": [
@@ -134,14 +126,6 @@
     "Name": "10000 kg",
     "ChannelId": 68,
     "Unit": 3,
-    "MinValue": {
-      "Unit": "ForceUnit.KilogramForce",
-      "Value": 0.0
-    },
-    "MaxValue": {
-      "Unit": "ForceUnit.KilogramForce",
-      "Value": 10000.0
-    },
     "Accaury": "F2",
     "SensorHint": "",
     "Coefficients": [
@@ -181,7 +165,7 @@
   },
   "CodeBasedPressureSensor_Id_4": {
     "Name": "10 bar",
-    "ChannelId": 6116,
+    "ChannelId": 0,
     "MaxCode": 7899,
     "MinCode": 1573,
     "MinValue": {
@@ -199,7 +183,7 @@
   },
   "CodeBasedPressureSensor_Id_5": {
     "Name": "400 bar",
-    "ChannelId": 6102,
+    "ChannelId": 1,
     "MaxCode": 7980,
     "MinCode": 1576,
     "MinValue": {
@@ -235,8 +219,8 @@
   },
   "CodeBasedPressureSensor_Id_7": {
     "Name": "10 bar",
-    "ChannelId": 6096,
-    "MaxCode": 7899,
+    "ChannelId": 11,
+    "MaxCode": 7891,
     "MinCode": 1573,
     "MinValue": {
       "Unit": "PressureUnit.Bar",
@@ -325,7 +309,7 @@
   },
   "CodeBasedTemperatureSensor_Id_12": {
     "Name": "air temp",
-    "ChannelId": 6096,
+    "ChannelId": 5,
     "MaxCode": 60000,
     "MinCode": 14,
     "MinValue": {
@@ -339,11 +323,12 @@
     "Unit": "DegreeCelsius",
     "Accaury": "F2",
     "FilterCoef": 0.0,
+    "ZeroTolerance": 0.0,
     "SensorHint": ""
   },
   "CodeBasedTemperatureSensor_Id_13": {
     "Name": "water temp",
-    "ChannelId": 6096,
+    "ChannelId": 5,
     "MaxCode": 60000,
     "MinCode": 14,
     "MinValue": {
@@ -357,6 +342,7 @@
     "Unit": "DegreeCelsius",
     "Accaury": "F2",
     "FilterCoef": 0.0,
+    "ZeroTolerance": 0.0,
     "SensorHint": ""
   },
   "CodeBasedPressureSensor_Id_14": {
@@ -429,6 +415,7 @@
     "Unit": "CubicCentimeterPerMinute",
     "Accaury": "F2",
     "FilterCoef": 0.0,
+    "ZeroTolerance": 0.2,
     "SensorHint": "ET44"
   },
   "CodeBasedLeakageSensor_Id_18": {
@@ -447,6 +434,7 @@
     "Unit": "CubicCentimeterPerMinute",
     "Accaury": "F2",
     "FilterCoef": 0.0,
+    "ZeroTolerance": 0.2,
     "SensorHint": "ET45"
   },
   "CodeBasedTemperatureSensor_Id_19": {
@@ -468,6 +456,6 @@
     "SensorHint": "ET46"
   },
   "LastUpdate": {
-    "LastUpdateDate": "2025-05-14T16:15:30.0556842+03:00"
+    "LastUpdateDate": "2025-03-18T11:43:27.7048855+03:00"
   }
 }
