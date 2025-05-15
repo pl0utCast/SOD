@@ -1,4 +1,5 @@
 ﻿using MemBus;
+using SOD.App.Messages.Commands;
 using SOD.Core.Device.Modbus;
 using SOD.LocalizationService;
 
@@ -29,14 +30,9 @@ namespace SOD.App.Commands.Modbus3Post
             ushort reg = 4127;
             ushort mask = (1 << 3); // Выставляем единицу в бит по счету (1 << 7)
 
-            await _modbusTcpDevice.SetMaskWord(reg, mask);
+            await _modbusTcpDevice.SetMaskWord(reg, mask, cancellationToken);
 
-            //await _modbusTcpDevice.CreateTriggerAsync(48, data => data[0] == 1,
-            //    async data =>
-            //    {
-            //        await ExecuteEnd();
-            //    },
-            //    cancellationToken);
+            _bus.Publish(new StopExecuteCommand(false));
 
             logger.Trace("Команда опорожнения камеры выполнена!");
         }

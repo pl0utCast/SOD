@@ -156,11 +156,19 @@ namespace SOD.ViewModels.Testing.SODBench
 				navigationService.GoBack();
 			}, canApply);
 
+            bus.Subscribe<StopExecuteCommand>(m =>
+            {
+                IsExecute = m.IsExecute;
+            });
+
+            var canExecute = this.WhenAnyValue(x => x.IsExecute, (isExecute) => !isExecute);
+
             ExecuteCommand = ReactiveCommand.Create(() =>
             {
+				IsExecute = true;
 				var command = CommandsHelper.GetDefault(CommandCollectionType.ModbusSod, SelectedCommand);
                 _bus.Publish(new ExecuteTestCommand(command, true));
-            });
+            }, canExecute);
         }
 
 		public IEnumerable<IValueViewModel> Properties => parameters.Select(kv => kv.Value);
@@ -195,8 +203,8 @@ namespace SOD.ViewModels.Testing.SODBench
 		[Reactive]
 		public bool IsKPG4 { get; set; }
 		[Reactive]
-		public bool IsConfirmed { get; set; }
-		public ObservableCollection<ISensor> PressureSensors { get; set; } = new ObservableCollection<ISensor>();
+		public bool IsExecute { get; set; }
+        public ObservableCollection<ISensor> PressureSensors { get; set; } = new ObservableCollection<ISensor>();
 		[Reactive]
 		public ISensor PressureSensor { get; set; }
 		public ObservableCollection<ISensor> TenzoSensors {  get; set; } = new ObservableCollection<ISensor> { };

@@ -115,20 +115,24 @@ namespace SOD.Core.Device.Modbus
         /// <para>D31.7 - Запомнить вес тары 10кг</para>
         /// <para>D31.8 - Запомнить вес тары 30кг</para>
         /// </summary>
-        public static async Task SetMaskWord(this ModbusTcpDevice modbusTcpDevice, ushort reg, ushort mask)
+        public static async Task SetMaskWord(this ModbusTcpDevice modbusTcpDevice, ushort reg, ushort mask, CancellationToken cancellationToken)
         {
             ushort[] regData = await modbusTcpDevice.ReadHoldingRegistersAsync(reg, 1);
 
-            while (regData == null)
-            {
-                regData = await modbusTcpDevice.ReadHoldingRegistersAsync(reg, 1);
-                await Task.Delay(500);
-            }
+            if (regData == null) return;
 
             ushort val = regData[0];
             val |= mask; // Делаем OR(выставляем только в единицы или только нули)
 
             await modbusTcpDevice.WriteHoldingRegistersAsync(reg, [val]);
+
+            // Ожидаем от контроллера в бите с маской обнуления
+            await modbusTcpDevice.CreateTriggerAsync(reg, data => (data[0] & mask) == 0,
+                async data =>
+                {
+                    //await ExecuteEnd();
+                },
+                cancellationToken);
         }
     }
 }

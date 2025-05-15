@@ -1,4 +1,5 @@
 ﻿using MemBus;
+using SOD.App.Messages.Commands;
 using SOD.Core.Device.Modbus;
 using SOD.Localization.Settings.DeviceAndSensors;
 using SOD.LocalizationService;
@@ -31,15 +32,9 @@ namespace SOD.App.Commands.Modbus3Post
             ushort reg = 4127;
             ushort mask = (1 << 1); // Выставляем единицу в бит по счету (1 << 7)
 
-            await _modbusTcpDevice.SetMaskWord(reg, mask);
+            await _modbusTcpDevice.SetMaskWord(reg, mask, cancellationToken);
 
-            // ожидаем окончание выполнения команды
-            //await _modbusTcpDevice.CreateFloatTriggerAsync(stopReg, data => data == 1,
-            //    async data =>
-            //    {
-            //        await ExecuteEnd();
-            //    },
-            //    cancellationToken);
+            _bus.Publish(new StopExecuteCommand(false));
 
             logger.Trace("Команда опустошение баллона выполнена!");
         }
