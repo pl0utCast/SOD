@@ -179,6 +179,7 @@ namespace SOD.ViewModels.Testing.SODBench
             //         {
             //             PressureChart.SetPressureSensor((IPressureSensor)pSensor);
             //         }
+            Chart.ClearChart();
 
             var pressureSensors = _bench.Sensors
             .Select(s => s.Sensor)

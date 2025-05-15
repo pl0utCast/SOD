@@ -41,11 +41,14 @@ using ReactiveUI.Validation.Helpers;
 using SOD.App.Commands;
 using SOD.App.Messages.Commands;
 using System.Threading;
+using System.Diagnostics;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace SOD.ViewModels.Testing.SODBench
 {
     public class TestParametersViewModel : ReactiveObject, IActivatableViewModel
     {
+        private Bench? bench;
         private IDevice device;
         private IBus _bus;
         private Dictionary<string, IValueViewModel> parameters = new Dictionary<string, IValueViewModel>();
@@ -60,8 +63,8 @@ namespace SOD.ViewModels.Testing.SODBench
                                        IDialogService dialogService,
                                        IReportService reportService)
         {
-            var bench = (App.Benches.SODBench.Bench)testBenchService.GetTestBench();
-            var testSettings = bench.Settings.SelectedTestSettings;
+            bench = (App.Benches.SODBench.Bench)testBenchService.GetTestBench();
+            App.Benches.SODBench.Settings.TestSettings testSettings = bench.Settings.SelectedTestSettings;
             _bus = bus;
 
             Standarts = testingService.GetAllStandarts().ToList();
@@ -141,31 +144,9 @@ namespace SOD.ViewModels.Testing.SODBench
 			var canApply = this.WhenAnyValue(x => x.SelectedStandart, x => x.IsConfirmed,
 				(selectedSt, isConf) => selectedSt != null && isConf);
 #endif
-            DropWeight_5kg = SendToControllerNumeric((ushort)RegAdresses.DropWeight_5kg, 1);
-            DropWeight_10kg = SendToControllerNumeric((ushort)RegAdresses.DropWeight_10kg, 1);
-            DropWeight_30kg = SendToControllerNumeric((ushort)RegAdresses.DropWeight_30kg, 1);
-
-            ReactiveCommand<Unit, Unit> SendToControllerNumeric(ushort code, object value)
-            {
-                return ReactiveCommand.Create(() =>
-                {
-                    if (device is ModbusTcpDevice modbusTcpDevice && device.GetStatus() == DeviceStatus.Online)
-                    {
-                        //ushort valueConverted = Convert.ToUInt16(value);
-
-                        //_ = modbusTcpDevice.WriteHoldingRegistersAsync(code, new ushort[] { valueConverted });
-                        ModbusRegister modbusRegister = new ModbusRegister
-                        {
-                            Id = code,
-                            Value = (float)value,
-                            DataType = ChannelDataType.FLOAT
-                        };
-                        modbusTcpDevice.WriteHoldingRegister(modbusRegister);
-                    }
-                    return Unit.Default;
-                });
-            }
-
+            DropWeight_5kg = ReactiveCommand.Create(() => SendToController((ushort)RegAdresses.DropWeight_5kg, 1));
+            DropWeight_10kg = ReactiveCommand.Create(() => SendToController((ushort)RegAdresses.DropWeight_10kg, 1));
+            DropWeight_30kg = ReactiveCommand.Create(() => SendToController((ushort)RegAdresses.DropWeight_30kg, 1));
 
             //Запись сервисных параметров в регистры контроллера
             ApplyController = ReactiveCommand.CreateFromTask(async () =>
@@ -182,7 +163,7 @@ namespace SOD.ViewModels.Testing.SODBench
                         var value = property.GetValue(settings);
                         if (value != null)
                         {
-                            SendToControllerNumeric((ushort)address, value);
+                            SendToController((ushort)address, (float)value);
                         }
                     }
                 }
@@ -190,65 +171,25 @@ namespace SOD.ViewModels.Testing.SODBench
 
             Apply = ReactiveCommand.CreateFromTask(async () =>
             {
-                bench.Settings.PressureUnit = (PressureUnit)SelectedPressureUnit?.UnitType;
-                bench.Settings.TenzoUnit = (ForceUnit)SelectedTenzoUnit?.UnitType;
-                bench.Settings.SelectedBalloon = SelectedBalloon;
-                bench.Settings.SelectedBalloon.StandartId = SelectedStandart.Id;
-                bench.Settings.SelectedBalloon.BalloonVolume = BalloonVolume;
-                bench.Settings.BalloonProperties = BalloonProperties.ToList();
 
-                //if (!IsModeAuto)
-                //{
-                //	testSettings.TenzoSensorId = TenzoSensor.Id;
-                //}
-                testSettings.SetPressure = (Pressure)UnitsHelper.GetValue(WorkPressure.Value, WorkPressure.SelectedUnitInfo);
-                testSettings.Deformation = Deformation;
-                var t = int.TryParse(MaxDeformation, out var value);
-                testSettings.MaxDeformation = t ? value : null;
-                testSettings.Time = ExposureTime;
-                testSettings.PressureSensorId = PressureSensor?.Id;
-                testSettings.TenzoSensorId = TenzoSensor.Id;
+                WriteBenchSettingsParameters();
 
-                if (reportService.CurrentReport != null && !reportService.CurrentReport.IsSave && reportService.CurrentReport.ReportData.IsFill)
-                {
-                    var result = await dialogService.ShowDialogAsync("CreateNewReport", new YesNoDialogViewModel(dialogService));
-                    if ((bool)result)
-                    {
-                        reportService.Save(reportService.CurrentReport);
-                        bench.UpdateReport();
-                    }
-                }
-                bench.TestingBalloon = SelectedBalloon;
+                WriteTestSettingsParameters(testSettings);
+
+                await UpdateBenchReportAsync(reportService, dialogService);
+
+                WriteInfoParameters();
+
+                WriteServiceParameters();
+
                 bench.UpdatePosts();
-
-                foreach (var param in parameters)
-                {
-                    var parameter = bench.Settings.Parameters.SingleOrDefault(p => p.Alias == param.Key);
-                    if (parameter != null)
-                    {
-                        parameter.Value = param.Value.GetValue();
-                    }
-                }
-
-                //Запись сервисных параметров
-                PropertyInfo?[] sourceProps = serviceParameters.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
-                PropertyInfo?[] destinationProps = bench.Settings.TestBenchSettings.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
-
-                foreach (PropertyInfo? sProp in sourceProps)
-                {
-                    PropertyInfo? destProp = destinationProps.SingleOrDefault(p => p.Name == sProp.Name);
-                    if (destProp != null)
-                    {
-                        object? val = sProp.GetValue(serviceParameters);
-                        destProp.SetValue(bench.Settings.TestBenchSettings, val);
-                    }
-                }
 
                 bench.SaveSettings();
 
                 bus.Publish(new App.Benches.SODBench.Messages.SelectedTestMessage());
 
                 navigationService.GoBack();
+
             }, canApply);
 
             ExecuteCommand = ReactiveCommand.Create(() =>
@@ -258,9 +199,98 @@ namespace SOD.ViewModels.Testing.SODBench
             });
         }
 
+        private void SendToController(ushort regId, float value)
+        {
+            SendToControllerCommand = ReactiveCommand.CreateFromTask(async () =>
+                {
+                    if (device is ModbusTcpDevice modbusTcpDevice && device.GetStatus() == DeviceStatus.Online)
+                    {
+                        byte[]? valueByBytes = BitConverter.GetBytes(value);
+                        var sendArray = new ushort[]
+                        {
+                        BitConverter.ToUInt16(valueByBytes, 0),
+                        BitConverter.ToUInt16(valueByBytes, 2)
+                        };
+                        await modbusTcpDevice.WriteHoldingRegistersAsync(regId, sendArray);
+                    }
+                });
+        }
+
+        private void WriteBenchSettingsParameters()
+        {
+            bench.Settings.PressureUnit = (PressureUnit)SelectedPressureUnit?.UnitType;
+            bench.Settings.TenzoUnit = (ForceUnit)SelectedTenzoUnit?.UnitType;
+            bench.Settings.SelectedBalloon = SelectedBalloon;
+            bench.Settings.SelectedBalloon.StandartId = SelectedStandart.Id;
+            bench.Settings.SelectedBalloon.BalloonVolume = BalloonVolume;
+            bench.Settings.BalloonProperties = BalloonProperties.ToList();
+            bench.TestingBalloon = SelectedBalloon;
+        }
+
+        private void WriteTestSettingsParameters(App.Benches.SODBench.Settings.TestSettings testSettings)
+        {
+            //if (!IsModeAuto)
+            //{
+            //	testSettings.TenzoSensorId = TenzoSensor.Id;
+            //}
+            testSettings.SetPressure = (Pressure)UnitsHelper.GetValue(WorkPressure.Value, WorkPressure.SelectedUnitInfo);
+            testSettings.Deformation = Deformation;
+            var t = int.TryParse(MaxDeformation, out var value);
+            testSettings.MaxDeformation = t ? value : null;
+            testSettings.Time = ExposureTime;
+            testSettings.PressureSensorId = PressureSensor?.Id;
+            testSettings.TenzoSensorId = TenzoSensor.Id;
+        }
+
+        private async Task UpdateBenchReportAsync(IReportService reportService, IDialogService dialogService)
+        {
+            if (reportService.CurrentReport != null && !reportService.CurrentReport.IsSave && reportService.CurrentReport.ReportData.IsFill)
+            {
+                var result = await dialogService.ShowDialogAsync("CreateNewReport", new YesNoDialogViewModel(dialogService));
+                if ((bool)result)
+                {
+                    reportService.Save(reportService.CurrentReport);
+                    bench.UpdateReport();
+                }
+            }
+        }
+
+        private void WriteInfoParameters()
+        {
+            foreach (var param in parameters)
+            {
+                var parameter = bench.Settings.Parameters.SingleOrDefault(p => p.Alias == param.Key);
+                if (parameter != null)
+                {
+                    parameter.Value = param.Value.GetValue();
+                }
+            }
+        }
+
+        private void WriteServiceParameters()
+        {
+            PropertyInfo?[] sourceProps = serviceParameters.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            PropertyInfo?[] destinationProps = bench.Settings.TestBenchSettings.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+
+            foreach (PropertyInfo? sProp in sourceProps)
+            {
+                PropertyInfo? destProp = destinationProps.SingleOrDefault(p => p.Name == sProp.Name);
+                if (destProp != null)
+                {
+                    object? val = sProp.GetValue(serviceParameters);
+                    destProp.SetValue(bench.Settings.TestBenchSettings, val);
+                }
+            }
+        }
+
         public ReactiveCommand<Unit, Unit> DropWeight_5kg { get; set; }
         public ReactiveCommand<Unit, Unit> DropWeight_10kg { get; set; }
         public ReactiveCommand<Unit, Unit> DropWeight_30kg { get; set; }
+        public ReactiveCommand<Unit, Unit> SendToControllerCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> Cancel { get; set; }
+        public ReactiveCommand<Unit, Unit> Apply { get; set; }
+        public ReactiveCommand<Unit, Unit> ApplyController { get; set; }
+        public ReactiveCommand<Unit, Unit> ExecuteCommand { get; set; }
         public IEnumerable<IValueViewModel> Properties => parameters.Select(kv => kv.Value);
         public TestBenchSettings ServiceProperties => serviceParameters;
         public IReadOnlyList<UnitTypeInfo> PressureUnits { get; set; }
@@ -271,10 +301,6 @@ namespace SOD.ViewModels.Testing.SODBench
         public UnitTypeInfo SelectedTenzoUnit { get; set; }
         [Reactive]
         public Balloon SelectedBalloon { get; set; }
-        public ReactiveCommand<Unit, Unit> Cancel { get; set; }
-        public ReactiveCommand<Unit, Unit> Apply { get; set; }
-        public ReactiveCommand<Unit, Unit> ApplyController { get; set; }
-        public ReactiveCommand<Unit, Unit> ExecuteCommand { get; set; }
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
         [Reactive]
         public List<Balloon> Balloons { get; set; } = new List<Balloon>();
