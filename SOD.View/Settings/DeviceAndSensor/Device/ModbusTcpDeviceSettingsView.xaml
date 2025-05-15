@@ -102,8 +102,8 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Id}" Header="Modbus Id" />
                         <DataGridTextColumn Binding="{Binding DataType}" Header="Data Type" />
-                        <DataGridTextColumn Binding="{Binding Value}" Header="Value" />
-                        <DataGridTextColumn Binding="{Binding BinValue}" Header="Bin" />
+                        <DataGridTextColumn Binding="{Binding Value}" Header="Value" MinWidth="100"/>
+                        <DataGridTextColumn Binding="{Binding BinValue}" Header="Bin" MinWidth="150"/>
                         <DataGridTextColumn Binding="{Binding Description}" Header="Description" />
                     </DataGrid.Columns>
                 </DataGrid>

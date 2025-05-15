@@ -3,7 +3,7 @@ using SOD.Core.Balloons;
 using SOD.Core.Device.Modbus;
 using SOD.LocalizationService;
 
-namespace SOD.App.Commands.Modbus3Post
+namespace SOD.App.Commands.ModbusCommands
 {
     public class ModbusCommandsFactory : CommandsFactory
     {

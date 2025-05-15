@@ -2,7 +2,7 @@
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using SOD.App.Commands;
-using SOD.App.Commands.Modbus3Post;
+using SOD.App.Commands.ModbusCommands;
 using SOD.App.Messages.Commands;
 using SOD.Core.Device.Modbus;
 using SOD.Core.Infrastructure;
