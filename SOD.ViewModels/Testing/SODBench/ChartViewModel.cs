@@ -195,13 +195,13 @@ namespace SOD.ViewModels.Testing.SODBench
                                     double currentPressure = Math.Round(pressureSensor.Pressure.ToUnit(bench.Settings.PressureUnit).Value, 2);
                                     pressureTimeSeriesDict[pressureSensor.Id].Append(totalTime, currentPressure);
 
-                                    SetAutoRangeIfEnabled(Series[0].DataSeries, yPressureAxis, bench.Settings.AutoRange);
+                                    SetAutoRangeIfEnabled(Series[0].DataSeries, yPressureAxis);
 
                                     var tenzoSensor = tenzoSensors.FirstOrDefault();
                                     double currentTenzo = Math.Round(tenzoSensor.Force.ToUnit(bench.Settings.TenzoUnit).Value, 2);
                                     tenzoTimeSeriesDict[tenzoSensor.Id].Append(totalTime, currentTenzo);
 
-                                    SetAutoRangeIfEnabled(Series[1].DataSeries, yTenzoAxis, bench.Settings.AutoRange);
+                                    SetAutoRangeIfEnabled(Series[1].DataSeries, yTenzoAxis);
                                 });
             isStartChart = true;
         }
@@ -279,9 +279,9 @@ namespace SOD.ViewModels.Testing.SODBench
                 series.Clear();
         }
 
-        private void SetAutoRangeIfEnabled(IDataSeries dataSeries, NumericAxisViewModel yAxis, bool isAutoRange)
+        private void SetAutoRangeIfEnabled(IDataSeries dataSeries, NumericAxisViewModel yAxis)
         {
-            if (isAutoRange)
+            if (bench.Settings.AutoRange)
             {
                 var yAxisMinValue = dataSeries.YMin.ToDouble() - Math.Abs(dataSeries.YMin.ToDouble() * 5 / 100);
                 var yAxisMaxValue = dataSeries.YMax.ToDouble() + Math.Abs(dataSeries.YMax.ToDouble() * 5 / 100);

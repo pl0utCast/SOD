@@ -44,6 +44,14 @@
     "Name": "500 kg",
     "ChannelId": 64,
     "Unit": 3,
+    "MinValue": {
+      "Unit": "ForceUnit.KilogramForce",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "ForceUnit.KilogramForce",
+      "Value": 500.0
+    },
     "Accaury": "F2",
     "SensorHint": "",
     "Coefficients": [
@@ -85,6 +93,14 @@
     "Name": "5000 kg",
     "ChannelId": 66,
     "Unit": 3,
+    "MinValue": {
+      "Unit": "ForceUnit.KilogramForce",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "ForceUnit.KilogramForce",
+      "Value": 5000.0
+    },
     "Accaury": "F2",
     "SensorHint": "",
     "Coefficients": [
@@ -126,6 +142,14 @@
     "Name": "10000 kg",
     "ChannelId": 68,
     "Unit": 3,
+    "MinValue": {
+      "Unit": "ForceUnit.KilogramForce",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "ForceUnit.KilogramForce",
+      "Value": 10000.0
+    },
     "Accaury": "F2",
     "SensorHint": "",
     "Coefficients": [
@@ -456,6 +480,6 @@
     "SensorHint": "ET46"
   },
   "LastUpdate": {
-    "LastUpdateDate": "2025-03-18T11:43:27.7048855+03:00"
+    "LastUpdateDate": "2025-05-15T14:37:16.8224787+03:00"
   }
 }
