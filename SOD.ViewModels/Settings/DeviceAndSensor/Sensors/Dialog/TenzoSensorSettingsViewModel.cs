@@ -13,7 +13,7 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Sensors.Dialog
 {
     public class TenzoSensorSettingsViewModel : YesNoDialogViewModel, IActivatableViewModel
     {
-        public TenzoSensorSettingsViewModel(IDialogService dialogService, object codeBasedTenzoSensor, Func<string> valueUpdater, Func<int> codeUpdater) : base(dialogService)
+        public TenzoSensorSettingsViewModel(IDialogService dialogService, object codeBasedTenzoSensor, Func<string> valueUpdater, Func<double> codeUpdater) : base(dialogService)
         {
             CoefCalibr = ReactiveCommand.Create(() =>
             {
@@ -37,7 +37,7 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Sensors.Dialog
         [Reactive]
         public string Name { get; set; }
         [Reactive]
-        public int Code { get; set; }
+        public double Code { get; set; }
         [Reactive]
         public string Value { get; set; }
         public UnitValueViewModel MaxValue { get; set; }

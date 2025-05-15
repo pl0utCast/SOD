@@ -14,7 +14,7 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Sensors.Dialog
 {
     public class CodeBasedSensorSettingsViewModel : YesNoDialogViewModel, IActivatableViewModel
     {
-        public CodeBasedSensorSettingsViewModel(IDialogService dialogService, Func<string> valueUpdater, Func<int> codeUpdater) : base(dialogService)
+        public CodeBasedSensorSettingsViewModel(IDialogService dialogService, Func<string> valueUpdater, Func<double> codeUpdater) : base(dialogService)
         {
             SetMinCode = ReactiveCommand.Create(() =>
             {
@@ -41,11 +41,11 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Sensors.Dialog
         [Reactive]
         public string Name { get; set; }
         [Reactive]
-        public int MinCode { get; set; }
+        public double MinCode { get; set; }
         [Reactive]
-        public int MaxCode { get; set; }
+        public double MaxCode { get; set; }
         [Reactive]
-        public int Code { get; set; }
+        public double Code { get; set; }
         [Reactive]
         public string Value { get; set; }
         public UnitValueViewModel MinValue { get; set; }

@@ -37,7 +37,7 @@ namespace SOD.Core.Sensor.TenzoSensor.CodeBased
         }
 
         public int Id { get; set; } = 0;
-        public int SavedCode { get; set; }
+        public double SavedCode { get; set; }
         public Force InitialValue { get; set; } = Force.FromKilogramsForce(0);
     }
 }

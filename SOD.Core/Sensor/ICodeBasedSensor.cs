@@ -6,6 +6,6 @@ namespace SOD.Core.Sensor
 {
     public interface ICodeBasedSensor
     {
-        public int Code { get; }
+        public double Code { get; }
     }
 }

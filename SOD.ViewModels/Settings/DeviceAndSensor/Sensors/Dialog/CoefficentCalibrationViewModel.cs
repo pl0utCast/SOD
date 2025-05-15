@@ -104,7 +104,7 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Sensors.Dialog
         public ReactiveCommand<Unit, Unit> Delete { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; set; }
         [Reactive]
-        public int Code { get; set; }
+        public double Code { get; set; }
         [Reactive]
         public ObservableCollection<ReactiveCommand<BusinessButtonData, Unit>> Buttons { get; set; } = new();
         [Reactive]

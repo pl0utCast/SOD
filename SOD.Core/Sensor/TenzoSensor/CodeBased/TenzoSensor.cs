@@ -16,7 +16,7 @@ namespace SOD.Core.Sensor.TenzoSensor.CodeBased
 		private readonly ISettingsService _settingsService;
 		private const string SETTINGS_KEY = "TenzoSensorCodeBased_Id_";
 		private string SETTINGS_LAST_UPDATE_KEY = "LastUpdate";
-		private int code;
+		private double code;
 		private IDisposable disposable;
 		private DigitalFilter filter;
 
@@ -32,7 +32,7 @@ namespace SOD.Core.Sensor.TenzoSensor.CodeBased
         public Force Force { get; private set; }
         public int Id { get; private set; }
 		public string Name => Settings.Name;
-		public int Code => code;
+		public double Code => code;
 
 		public void SaveSettings()
 		{
@@ -82,7 +82,7 @@ namespace SOD.Core.Sensor.TenzoSensor.CodeBased
             return Settings.Coefficients.ElementAt(el).InitialValue.KilogramsForce;
         }
 
-        public int GetCode(int el)
+        public double GetCode(int el)
         {
             return Settings.Coefficients.ElementAt(el).SavedCode;
         }

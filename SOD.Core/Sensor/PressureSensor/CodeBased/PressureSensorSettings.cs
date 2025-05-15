@@ -21,8 +21,8 @@ namespace SOD.Core.Sensor.PressureSensor.CodeBased
         }
         public string Name { get; set; }
         public int ChannelId { get; set; }
-        public int MaxCode { get; set; }
-        public int MinCode { get; set; }
+        public double MaxCode { get; set; }
+        public double MinCode { get; set; }
         [JsonConverter(typeof(UnitsNetIQuantityJsonConverter))]
         public UnitsNet.Pressure MinValue { get; set; }
         [JsonConverter(typeof(UnitsNetIQuantityJsonConverter))]

@@ -75,7 +75,7 @@ namespace SOD.Core.Sensor.TemperatureSensor.CodeBased
         public string Name => Settings.Name;
         public string SensorHint => Settings.SensorHint;
 
-        public int Code { get; private set; }
+        public double Code { get; private set; }
         public Settings Settings { get; set; }
         public LastUpadateSensorSettings LastUpadateSensorSettings { get; set; }
 

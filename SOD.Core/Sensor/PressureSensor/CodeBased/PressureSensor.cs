@@ -13,7 +13,7 @@ namespace SOD.Core.Sensor.PressureSensor.CodeBased
         private readonly ISettingsService _settingsService;
         private const string SETTINGS_KEY = "CodeBasedPressureSensor_Id_";
         private string SETTINGS_LAST_UPDATE_KEY = "LastUpdate";
-        private int code;
+        private double code;
         private IDisposable disposable;
         private DigitalFilter filter;
         //private double oldValue;
@@ -34,7 +34,7 @@ namespace SOD.Core.Sensor.PressureSensor.CodeBased
 
         public string Name => Settings.Name;
 
-        public int Code => code;
+        public double Code => code;
 
         public void SaveSettings()
         {

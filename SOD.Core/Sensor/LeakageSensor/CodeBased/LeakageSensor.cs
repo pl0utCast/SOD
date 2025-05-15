@@ -14,7 +14,7 @@ namespace SOD.Core.Sensor.LeakageSensor.CodeBased
         private string SETTINGS_LAST_UPDATE_KEY = "LastUpdate";
         private readonly IChannelBasedDevice channelBasedDevice;
         private readonly ISettingsService _settingsService;
-        private int code;
+        private double code;
         private TimeSpan time;
         private Stopwatch stopwatch = new Stopwatch();
         private Object locker = new object();
@@ -58,7 +58,7 @@ namespace SOD.Core.Sensor.LeakageSensor.CodeBased
                 if (dc.Id == Settings.ChannelId && (dc.DataType == ChannelDataType.INT || dc.DataType == ChannelDataType.INT16))
                 {
                     time += stopwatch.Elapsed;
-                    code = Convert.ToInt32(dc.Value);
+                    code = Convert.ToDouble(dc.Value);
                     var rawValue = this.CodeToValue(Settings.MinValue.CubicCentimetersPerMinute, Settings.MaxValue.CubicCentimetersPerMinute, Settings.MinCode, Settings.MaxCode, code);
 
                     var k = Settings.MaxValue.CubicCentimetersPerMinute * 2 / 100;
@@ -93,7 +93,7 @@ namespace SOD.Core.Sensor.LeakageSensor.CodeBased
         public string Name => Settings.Name;
         public string SensorHint => Settings.SensorHint;
 
-        public int Code => code;
+        public double Code => code;
         public Settings Settings { get; set; }
         public LastUpadateSensorSettings LastUpadateSensorSettings { get; set; }
 
