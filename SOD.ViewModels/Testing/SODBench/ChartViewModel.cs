@@ -270,6 +270,23 @@ namespace SOD.ViewModels.Testing.SODBench
             });
         }
 
+        public void SetExposureLine()
+        {
+            Annotations.Add(new VerticalLineAnnotationViewModel
+            {
+                VerticalAlignment = VerticalAlignment.Stretch,
+                YAxisId = "tenzoSeries",
+                FontSize = 12,
+                FontWeight = FontWeights.Bold,
+                ShowLabel = false,
+                Stroke = Colors.Green,
+                LabelValue = "Stop",
+                LabelPlacement = LabelPlacement.Bottom,
+                StrokeThickness = 2,
+                X1 = totalTime,
+                IsEditable = false
+            });
+        }
         private void ClearChartLines()
         {
             foreach (var series in pressureTimeSeriesDict.Values)

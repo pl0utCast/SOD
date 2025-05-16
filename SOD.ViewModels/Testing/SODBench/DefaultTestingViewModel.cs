@@ -99,6 +99,7 @@ namespace SOD.ViewModels.Testing.SODBench
                 {
                     exposureCounter++;
                     IsExposure = true;
+                    Chart.SetExposureLine();
                     _bench.StartRegistration();
                 }
                 else if (IsExposure && exposureCounter <= 3)
@@ -107,6 +108,7 @@ namespace SOD.ViewModels.Testing.SODBench
                     _bench.StopRegistartion();
                 }
             }, this.WhenAnyValue(x => x.IsRunTest));
+
             GoParameters = ReactiveCommand.Create(() =>
             {
                 navigationService.NavigateTo("SODTestParameters");
@@ -139,14 +141,14 @@ namespace SOD.ViewModels.Testing.SODBench
                         {
                             var exposureTime = TimeSpan.FromSeconds(_bench.Settings.SelectedTestSettings.Time.Value);
                             timer = Observable.Timer(TimeSpan.FromMilliseconds(1000), TimeSpan.FromMilliseconds(1000))
-                                      .Subscribe(t => ExposureTime = (exposureTime - TimeSpan.FromSeconds(t + 1)).ToString("hh\\:mm\\:ss"))
-                                      .DisposeWith(dis);
+                                        .Subscribe(t => ExposureTime = (exposureTime - TimeSpan.FromSeconds(t + 1)).ToString("hh\\:mm\\:ss"))
+                                        .DisposeWith(dis);
                         }
                         else if (m.Status == App.Messages.Commands.RegistartionStatus.End)
                         {
                             IsExposure = false;
                         }
-                        Chart.SetAnnotations();
+                        Chart.SetExposureLine();
                     });
                 })
                 .DisposeWith(dis);
