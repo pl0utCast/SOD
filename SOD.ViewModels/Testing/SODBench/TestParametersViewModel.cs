@@ -61,11 +61,14 @@ namespace SOD.ViewModels.Testing.SODBench
                                        ILocalizationService localizationService,
                                        IBus bus,
                                        IDialogService dialogService,
-                                       IReportService reportService)
+                                       IReportService reportService,
+                                       IDeviceService deviceService)
         {
             bench = (App.Benches.SODBench.Bench)testBenchService.GetTestBench();
             App.Benches.SODBench.Settings.TestSettings testSettings = bench.Settings.SelectedTestSettings;
             _bus = bus;
+
+            device = deviceService.GetAllDevice().FirstOrDefault(d => d is ModbusTcpDevice) as ModbusTcpDevice;
 
             Standarts = testingService.GetAllStandarts().ToList();
             SelectedStandart = Standarts.SingleOrDefault(u => u.Id == bench.Settings.SelectedBalloon?.StandartId);
@@ -144,9 +147,9 @@ namespace SOD.ViewModels.Testing.SODBench
 			var canApply = this.WhenAnyValue(x => x.SelectedStandart, x => x.IsConfirmed,
 				(selectedSt, isConf) => selectedSt != null && isConf);
 #endif
-            DropWeight_5kg = ReactiveCommand.Create(() => SendToController((ushort)RegAdresses.DropWeight_5kg, 1));
-            DropWeight_10kg = ReactiveCommand.Create(() => SendToController((ushort)RegAdresses.DropWeight_10kg, 1));
-            DropWeight_30kg = ReactiveCommand.Create(() => SendToController((ushort)RegAdresses.DropWeight_30kg, 1));
+            DropWeight_5kg = ReactiveCommand.CreateFromTask(() => SendToControllerAsync((ushort)RegAdresses.DropWeight_5kg, 1));
+            DropWeight_10kg = ReactiveCommand.CreateFromTask(() => SendToControllerAsync((ushort)RegAdresses.DropWeight_10kg, 1));
+            DropWeight_30kg = ReactiveCommand.CreateFromTask(() => SendToControllerAsync((ushort)RegAdresses.DropWeight_30kg, 1));
 
             //Запись сервисных параметров в регистры контроллера
             ApplyController = ReactiveCommand.CreateFromTask(async () =>
@@ -163,7 +166,7 @@ namespace SOD.ViewModels.Testing.SODBench
                         var value = property.GetValue(settings);
                         if (value != null)
                         {
-                            SendToController((ushort)address, (float)value);
+                            SendToControllerAsync((ushort)address, (float)value);
                         }
                     }
                 }
@@ -199,21 +202,18 @@ namespace SOD.ViewModels.Testing.SODBench
             });
         }
 
-        private void SendToController(ushort regId, float value)
+        private async Task SendToControllerAsync(ushort regId, float value)
         {
-            SendToControllerCommand = ReactiveCommand.CreateFromTask(async () =>
+            if (device is ModbusTcpDevice modbusTcpDevice && device.GetStatus() == DeviceStatus.Online)
+            {
+                byte[]? valueByBytes = BitConverter.GetBytes(value);
+                var sendArray = new ushort[]
                 {
-                    if (device is ModbusTcpDevice modbusTcpDevice && device.GetStatus() == DeviceStatus.Online)
-                    {
-                        byte[]? valueByBytes = BitConverter.GetBytes(value);
-                        var sendArray = new ushort[]
-                        {
-                        BitConverter.ToUInt16(valueByBytes, 0),
-                        BitConverter.ToUInt16(valueByBytes, 2)
-                        };
-                        await modbusTcpDevice.WriteHoldingRegistersAsync(regId, sendArray);
-                    }
-                });
+                BitConverter.ToUInt16(valueByBytes, 0),
+                BitConverter.ToUInt16(valueByBytes, 2)
+                };
+                await modbusTcpDevice.WriteHoldingRegistersAsync(regId, sendArray);
+            }
         }
 
         private void WriteBenchSettingsParameters()
