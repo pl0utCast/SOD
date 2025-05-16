@@ -45,9 +45,12 @@ namespace SOD.Core.Sensor.TenzoSensor.CodeBased
 		{
             disposable = channelBasedDevice.DataComplite.Subscribe(dc =>
             {
-                if (dc.Id == Settings.ChannelId && dc.DataType == ChannelDataType.FLOAT)
+                if (dc.Id == Settings.ChannelId && (dc.DataType == ChannelDataType.INT16 ||
+                                                    dc.DataType == ChannelDataType.INT ||
+                                                    dc.DataType == ChannelDataType.FLOAT ||
+                                                    dc.DataType == ChannelDataType.DOUBLE))
                 {
-                    code = Convert.ToInt32((float)dc.Value);
+                    code = Math.Round(Convert.ToDouble(dc.Value), 3);
 
                     if (Settings.Coefficients.Count > 0)
                     {

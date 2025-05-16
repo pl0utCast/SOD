@@ -55,10 +55,13 @@ namespace SOD.Core.Sensor.LeakageSensor.CodeBased
         {
             disposable = channelBasedDevice.DataComplite.Subscribe(dc =>
             {
-                if (dc.Id == Settings.ChannelId && (dc.DataType == ChannelDataType.INT || dc.DataType == ChannelDataType.INT16))
+                if (dc.Id == Settings.ChannelId && (dc.DataType == ChannelDataType.INT16 ||
+                                                    dc.DataType == ChannelDataType.INT ||
+                                                    dc.DataType == ChannelDataType.FLOAT ||
+                                                    dc.DataType == ChannelDataType.DOUBLE))
                 {
                     time += stopwatch.Elapsed;
-                    code = Convert.ToDouble(dc.Value);
+                    code = Math.Round(Convert.ToDouble(dc.Value), 3);
                     var rawValue = this.CodeToValue(Settings.MinValue.CubicCentimetersPerMinute, Settings.MaxValue.CubicCentimetersPerMinute, Settings.MinCode, Settings.MaxCode, code);
 
                     var k = Settings.MaxValue.CubicCentimetersPerMinute * 2 / 100;
