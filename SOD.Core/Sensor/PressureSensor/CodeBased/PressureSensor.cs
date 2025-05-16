@@ -49,11 +49,14 @@ namespace SOD.Core.Sensor.PressureSensor.CodeBased
         {
             disposable = channelBasedDevice.DataComplite.Subscribe(dc =>
             {
-                if (dc.Id == Settings.ChannelId && (dc.DataType == ChannelDataType.INT16 || dc.DataType == ChannelDataType.INT))
+                if (dc.Id == Settings.ChannelId && (dc.DataType == ChannelDataType.INT16 || 
+                                                    dc.DataType == ChannelDataType.INT || 
+                                                    dc.DataType == ChannelDataType.FLOAT || 
+                                                    dc.DataType == ChannelDataType.DOUBLE))
                 {
                     //Random rnd = new Random();
                     //code = rnd.Next(1560, 1620);
-                    code = Convert.ToInt32(dc.Value);
+                    code = Math.Round(Convert.ToDouble(dc.Value), 3);
                     var rawValue = this.CodeToValue(Settings.MinValue.Bars, Settings.MaxValue.Bars, Settings.MinCode, Settings.MaxCode, code);
                     rawValue = filter.Filtering(rawValue); // Фильтруем значение
 
