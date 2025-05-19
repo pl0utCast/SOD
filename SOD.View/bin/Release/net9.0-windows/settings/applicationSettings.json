@@ -8,7 +8,7 @@
       "PressureSensorId": 4,
       "WorkPressure": 0,
       "Deformation": 5,
-      "MaxDeformation": null,
+      "MaxDeformation": 1,
       "TenzoSensorId": 0,
       "SetPressure": {
         "Unit": "PressureUnit.Bar",
@@ -27,7 +27,24 @@
     "PressureUnit": 2,
     "TenzoUnit": 3,
     "LeakageUnit": 0,
-    "BalloonProperties": [],
+    "BalloonProperties": [
+      {
+        "Id": 0,
+        "Prefix": "n",
+        "Name": "b",
+        "Value": "45",
+        "Type": 7,
+        "SerializedValue": null
+      },
+      {
+        "Id": 1,
+        "Prefix": "g",
+        "Name": "f",
+        "Value": "60",
+        "Type": 7,
+        "SerializedValue": null
+      }
+    ],
     "Parameters": [
       "{\r\n  \"Id\": 0,\r\n  \"Name\": \"Сustomer\",\r\n  \"Alias\": \"customer\",\r\n  \"SerializedValue\": \"\\\"\\\"\",\r\n  \"Type\": 7\r\n}",
       "{\r\n  \"Id\": 0,\r\n  \"Name\": \"Order number\",\r\n  \"Alias\": \"order_number\",\r\n  \"SerializedValue\": \"\\\"111\\\"\",\r\n  \"Type\": 7\r\n}",
@@ -134,14 +151,14 @@
     "IsEnableGasTemperatureSensor": true,
     "IsEnableLiquidTemperatureSensor": true,
     "ManualLocation": false,
-    "AutoRange": false,
+    "AutoRange": true,
     "Sensors": {
       "0": true,
       "1": true,
       "2": true,
       "3": true,
       "4": true,
-      "5": false,
+      "5": true,
       "6": false,
       "7": false,
       "8": false,
@@ -150,19 +167,19 @@
       "11": false,
       "12": false,
       "13": false,
-      "14": true,
-      "15": true,
-      "16": true,
-      "17": true,
-      "18": true,
-      "19": true
+      "14": false,
+      "15": false,
+      "16": false,
+      "17": false,
+      "18": false,
+      "19": false
     },
     "DevicesUnits": {
       "0": true,
       "1": true,
       "2": true
     },
-    "ReportPath": "D:\\Source codes\\SOD\\SOD.View\\bin\\Debug\\net9.0-windows\\reports_template\\report_template_sod.frx"
+    "ReportPath": "D:\\Source codes\\SOD\\SOD.View\\bin\\Release\\net9.0-windows\\reports_template\\report_template_sod_RU.frx"
   },
   "LocalizationService": {
     "Langs": [

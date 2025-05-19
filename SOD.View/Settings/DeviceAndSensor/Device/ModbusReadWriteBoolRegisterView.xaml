@@ -29,7 +29,7 @@
         <ToggleButton
             Grid.Column="1"
             Width="60"
-            Height="60"
+            Height="35"
             IsChecked="{Binding Value}" />
         <TextBlock
             Grid.Column="2"

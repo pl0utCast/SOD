@@ -62,7 +62,7 @@ namespace SOD.ViewModels.Testing.SODBench
 				}).DisposeWith(dis);
 			});
 
-            Commands = new CommandsViewModel(bus, dialogService, deviceService);
+            Commands = new CommandsViewModel(bus, dialogService, deviceService, _localizationService);
         }
 
 		[Reactive]

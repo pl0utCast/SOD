@@ -32,43 +32,469 @@
     "SlaveAddress": 1,
     "Registers": [
       {
+        "RegisterId": 4098,
+        "Id": 4098,
+        "DataType": 0,
+        "ByteCount": 0,
+        "Description": "D2 Массив битов для сообщений"
+      },
+      {
+        "RegisterId": 4099,
+        "Id": 4099,
+        "DataType": 0,
+        "ByteCount": 0,
+        "Description": "D3 Рецепт корректен"
+      },
+      {
+        "RegisterId": 4100,
+        "Id": 4100,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D4 Значение для графика деформации"
+      },
+      {
+        "RegisterId": 4104,
+        "Id": 4104,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D8 E1 P испытания в SCADA"
+      },
+      {
+        "RegisterId": 4106,
+        "Id": 4106,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D10 Масса вытесненной воды"
+      },
+      {
+        "RegisterId": 4108,
+        "Id": 4108,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D12 Объем воды в баллоне"
+      },
+      {
+        "RegisterId": 4110,
+        "Id": 4110,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D14 Температура испытательной среды"
+      },
+      {
+        "RegisterId": 4112,
+        "Id": 4112,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D16 Температура окружающей среды"
+      },
+      {
+        "RegisterId": 4114,
+        "Id": 4114,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D18 Объем воды в камере"
+      },
+      {
+        "RegisterId": 4116,
+        "Id": 4116,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D20 Максимальное значение по тесту"
+      },
+      {
+        "RegisterId": 4118,
+        "Id": 4118,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D22 Объем остаточной деформации"
+      },
+      {
+        "RegisterId": 4122,
+        "Id": 4122,
+        "DataType": 0,
+        "ByteCount": 0,
+        "Description": "D26 Открытие колб"
+      },
+      {
+        "RegisterId": 4126,
+        "Id": 4126,
+        "DataType": 0,
+        "ByteCount": 0,
+        "Description": "D30 Управление"
+      },
+      {
+        "RegisterId": 4127,
+        "Id": 4127,
+        "DataType": 0,
+        "ByteCount": 0,
+        "Description": "D31 Команды и вес тар"
+      },
+      {
+        "RegisterId": 4130,
+        "Id": 4130,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D34 Код команды"
+      },
+      {
+        "RegisterId": 4132,
+        "Id": 4132,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D36 Время выдержки"
+      },
+      {
+        "RegisterId": 4134,
+        "Id": 4134,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D38 Допустимый объем расширения при испытаниях"
+      },
+      {
+        "RegisterId": 4136,
+        "Id": 4136,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D40 Давление набора задано"
+      },
+      {
+        "RegisterId": 4138,
+        "Id": 4138,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D42 Объем баллона по паспорту"
+      },
+      {
+        "RegisterId": 4140,
+        "Id": 4140,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D44 Критическое объемное расширение"
+      },
+      {
+        "RegisterId": 4148,
+        "Id": 4148,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D52 Тензодатчик 3 - 30кг"
+      },
+      {
+        "RegisterId": 4150,
+        "Id": 4150,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D54 Тензодатчик 1 - 5кг"
+      },
+      {
+        "RegisterId": 4152,
+        "Id": 4152,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D56 Счетчик PC1_1"
+      },
+      {
+        "RegisterId": 4154,
+        "Id": 4154,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D58 Счетчик PC5_1"
+      },
+      {
+        "RegisterId": 4166,
+        "Id": 4166,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D70 Тензодатчик 2 - 10кг"
+      },
+      {
+        "RegisterId": 4168,
+        "Id": 4168,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D72 Счетчик PC1_2"
+      },
+      {
+        "RegisterId": 4176,
+        "Id": 4176,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D80 MV_KR1"
+      },
+      {
+        "RegisterId": 4196,
+        "Id": 4196,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D100 P уставки по E1 (с учетом скорости)"
+      },
+      {
+        "RegisterId": 4198,
+        "Id": 4198,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D102 Zero_Volum_W"
+      },
+      {
+        "RegisterId": 4200,
+        "Id": 4200,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D104 Count_PC1_1_float"
+      },
+      {
+        "RegisterId": 4202,
+        "Id": 4202,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D106 Speed_InkP_Fact"
+      },
+      {
+        "RegisterId": 4204,
+        "Id": 4204,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D108 W1_ET_float"
+      },
+      {
+        "RegisterId": 4206,
+        "Id": 4206,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D110 W2_ET_float"
+      },
+      {
+        "RegisterId": 4208,
+        "Id": 4208,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D112 W3_ET_float"
+      },
+      {
+        "RegisterId": 4210,
+        "Id": 4210,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D114 Счетчик PC1_2"
+      },
+      {
+        "RegisterId": 4230,
+        "Id": 4230,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D134 Выход KR1 в ручном режиме"
+      },
+      {
+        "RegisterId": 7096,
+        "Id": 7096,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3000 Скорость набора давления"
+      },
+      {
+        "RegisterId": 7098,
+        "Id": 7098,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3002 Коэффициент мультипликации гидро"
+      },
+      {
+        "RegisterId": 7100,
+        "Id": 7100,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3004 Допустимое значение датчика давления"
+      },
+      {
+        "RegisterId": 7102,
+        "Id": 7102,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3006 % включения дросселирования"
+      },
+      {
+        "RegisterId": 7104,
+        "Id": 7104,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3008 % отключения дросселирования"
+      },
+      {
+        "RegisterId": 7106,
+        "Id": 7106,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3010 % превышения максимально допустимого давления"
+      },
+      {
+        "RegisterId": 7108,
+        "Id": 7108,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3012 Номинальное значение датчика давления, бар"
+      },
+      {
+        "RegisterId": 7110,
+        "Id": 7110,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3014 Резерв 2"
+      },
+      {
+        "RegisterId": 7112,
+        "Id": 7112,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3016 Резерв 3"
+      },
+      {
+        "RegisterId": 7114,
+        "Id": 7114,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3018 Аварийный уровень в колбе 5кг"
+      },
+      {
+        "RegisterId": 7116,
+        "Id": 7116,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3020 Аварийный уровень в колбе 10кг"
+      },
+      {
+        "RegisterId": 7118,
+        "Id": 7118,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3022 Аварийный уровень в колбе 30кг"
+      },
+      {
+        "RegisterId": 7120,
+        "Id": 7120,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3024 Kp ПИД регулятора KP1"
+      },
+      {
+        "RegisterId": 7122,
+        "Id": 7122,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3026 Ki ПИД регулятора KP1"
+      },
+      {
+        "RegisterId": 7124,
+        "Id": 7124,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3028 Kd ПИД регулятора KP1"
+      },
+      {
+        "RegisterId": 7126,
+        "Id": 7126,
+        "DataType": 0,
+        "ByteCount": 0,
+        "Description": "D3030 dwe ПИД регулятора KP1"
+      },
+      {
+        "RegisterId": 7128,
+        "Id": 7128,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3032 tf ПИД регулятора KP1"
+      },
+      {
+        "RegisterId": 7130,
+        "Id": 7130,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3034 Максимальная выходная константа"
+      },
+      {
+        "RegisterId": 7132,
+        "Id": 7132,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3036 Зона ошибок ПИД регулятора KP1"
+      },
+      {
+        "RegisterId": 7134,
+        "Id": 7134,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3038 Минимальная выходная константа"
+      },
+      {
+        "RegisterId": 7136,
+        "Id": 7136,
+        "DataType": 0,
+        "ByteCount": 0,
+        "Description": "D3040 Цикл ПИД регулятора KP1"
+      },
+      {
+        "RegisterId": 7308,
+        "Id": 7308,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3212 Weight_tara_5kg"
+      },
+      {
+        "RegisterId": 7310,
+        "Id": 7310,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3214 Weight_tara_10kg"
+      },
+      {
+        "RegisterId": 7398,
+        "Id": 7398,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3302 Volum_Cylinder_save"
+      },
+      {
+        "RegisterId": 7400,
+        "Id": 7400,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3304 Объем воды в баллоне"
+      },
+      {
+        "RegisterId": 7402,
+        "Id": 7402,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D3306 Объем воды в камере"
+      },
+      {
+        "RegisterId": 32098,
+        "Id": 32098,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D28002 E1 P испытания"
+      },
+      {
+        "RegisterId": 32100,
+        "Id": 32100,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D28004 T воздуха"
+      },
+      {
+        "RegisterId": 32102,
+        "Id": 32102,
+        "DataType": 7,
+        "ByteCount": 0,
+        "Description": "D28006 T испытательной среды"
+      },
+      {
         "RegisterId": 6096,
         "Id": 6096,
-        "DataType": 0,
-        "ByteCount": 0,
-        "Description": "Давление X3"
-      },
-      {
-        "RegisterId": 6097,
-        "Id": 6097,
-        "DataType": 0,
-        "ByteCount": 0,
-        "Description": "Воздух X4"
-      },
-      {
-        "RegisterId": 6098,
-        "Id": 6098,
-        "DataType": 0,
-        "ByteCount": 0,
-        "Description": "Вода X7"
-      },
-      {
-        "RegisterId": 6101,
-        "Id": 6101,
-        "DataType": 1,
-        "ByteCount": 0,
-        "Description": "биты в SOD"
-      }
-    ],
-    "ReadWriteRegisters": [
-      {
-        "RegisterId": 6102,
-        "Id": 6102,
-        "DataType": 1,
+        "DataType": 7,
         "ByteCount": 0,
         "Description": "биты в плк"
       }
     ],
+    "ReadWriteRegisters": [],
     "ReadHoldingRegisters": [],
     "SensorHint": "Modbus"
   },

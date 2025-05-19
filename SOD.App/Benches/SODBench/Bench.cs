@@ -2,7 +2,7 @@
 using NLog;
 using SOD.App.Benches.SODBench.Report;
 using SOD.App.Commands;
-using SOD.App.Commands.Modbus3Post;
+using SOD.App.Commands.ModbusCommands;
 using SOD.App.Messages;
 using SOD.App.Messages.Commands;
 using SOD.App.Testing;
@@ -15,6 +15,7 @@ using SOD.Core.Infrastructure;
 using SOD.Localization.Settings.DeviceAndSensors;
 using SOD.LocalizationService;
 using System.Drawing;
+using UnitsNet;
 
 namespace SOD.App.Benches.SODBench
 {
@@ -54,7 +55,7 @@ namespace SOD.App.Benches.SODBench
             Settings = settingsService?.GetSettings<Settings>(settingsKey, new Settings());
 
             device = deviceService.GetAllDevice().FirstOrDefault(d => d is ModbusTcpDevice) as ModbusTcpDevice;
-            modbusCommandsFactory = new ModbusCommandsFactory(device, bus);
+            modbusCommandsFactory = new ModbusCommandsFactory(device, bus, _localizationService);
 
             posts.Add(new Post(1) { IsEnable = true, Name = "Post 1" });
 
@@ -87,7 +88,7 @@ namespace SOD.App.Benches.SODBench
             var testSettings = Settings.SelectedTestSettings;
 
             Standart = _testingService.GetAllStandarts().SingleOrDefault(s => s.Id == Settings.SelectedBalloon.StandartId);
-            currentTest = new Testing.Test.Test(ProgrammMethodicsConfig.Name, reportData, _localizationService, Standart, testSettings.SetPressure);
+            currentTest = new Testing.Test.Test(ProgrammMethodicsConfig.Name, reportData, _localizationService, Standart, testSettings.SetPressure, 3.0, new Pressure(1, UnitsNet.Units.PressureUnit.Bar), 10);
             if (currentTest != null)
             {
                 cancellationTokenSource = new CancellationTokenSource();

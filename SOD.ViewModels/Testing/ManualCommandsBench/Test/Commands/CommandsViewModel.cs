@@ -2,11 +2,12 @@
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using SOD.App.Commands;
-using SOD.App.Commands.Modbus3Post;
+using SOD.App.Commands.ModbusCommands;
 using SOD.App.Messages.Commands;
 using SOD.Core.Device.Modbus;
 using SOD.Core.Infrastructure;
 using SOD.Dialogs;
+using SOD.LocalizationService;
 using System.Reactive.Disposables;
 
 namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
@@ -15,13 +16,18 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
     {
         private readonly IBus _bus;
         private readonly IDialogService _dialogService;
+        private readonly ILocalizationService _localizationService;
         private readonly ModbusTcpDevice _modbusTcpDevice;
         private CancellationTokenSource cancellationTokenSource;
 
-        public CommandsViewModel(IBus bus, IDialogService dialogService, IDeviceService deviceService)
+        public CommandsViewModel(IBus bus, 
+                                 IDialogService dialogService, 
+                                 IDeviceService deviceService,
+                                 ILocalizationService localizationService)
         {
             _bus = bus;
             _dialogService = dialogService;
+            _localizationService = localizationService;
             _modbusTcpDevice = deviceService.GetAllDevice().FirstOrDefault(d => d is ModbusTcpDevice) as ModbusTcpDevice;
             cancellationTokenSource = new CancellationTokenSource();
 
@@ -57,21 +63,21 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
             switch (commandConfig.Type)
             {
                 case CommandType.FillingBalloon:
-                    return new FillingBalloonCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                    return new FillingBalloonCommand(_modbusTcpDevice, _bus, commandConfig, _localizationService, parameters);
                 case CommandType.EmptyingBalloon:
-                    return new EmptyingBalloonCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                    return new EmptyingBalloonCommand(_modbusTcpDevice, _bus, commandConfig, _localizationService, parameters);
                 case CommandType.FillingCell:
-                    return new FillingCellCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                    return new FillingCellCommand(_modbusTcpDevice, _bus, commandConfig, _localizationService, parameters);
                 case CommandType.EmptyingCell:
-                    return new EmptyingCellCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                    return new EmptyingCellCommand(_modbusTcpDevice, _bus, commandConfig, _localizationService, parameters);
                 case CommandType.PressureSet:
-                    return new PressureSetCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                    return new PressureSetCommand(_modbusTcpDevice, _bus, commandConfig, _localizationService, parameters);
                 case CommandType.PressureRelease:
-                    return new PressureReleaseCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                    return new PressureReleaseCommand(_modbusTcpDevice, _bus, commandConfig, _localizationService, parameters);
                 case CommandType.VerticalCell:
-                    return new VerticalCellCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                    return new VerticalCellCommand(_modbusTcpDevice, _bus, commandConfig, _localizationService, parameters);
                 case CommandType.HorizontalCell:
-                    return new HorizontalCellCommand(_modbusTcpDevice, _bus, commandConfig, parameters);
+                    return new HorizontalCellCommand(_modbusTcpDevice, _bus, commandConfig, _localizationService, parameters);
                 default:
                     break;
             }

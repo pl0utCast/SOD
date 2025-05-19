@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SOD.App.Commands.Modbus3Post
+namespace SOD.App.Commands.ModbusCommands
 {
     public abstract class BaseCommand : ICommand
     {

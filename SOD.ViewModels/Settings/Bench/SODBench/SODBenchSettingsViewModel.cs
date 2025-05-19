@@ -26,7 +26,7 @@ namespace SOD.ViewModels.Settings.Bench.SODBench
 		private readonly ILocalizationService _localizationService;
         private readonly IDeviceService _deviceService;
         private readonly App.Benches.SODBench.Bench _bench;
-		private readonly string findReportLocation = Path.Combine(Directory.GetCurrentDirectory()) + @"\reports_template\report_template_sod.frx";
+		private readonly string findReportLocation = Path.Combine(Directory.GetCurrentDirectory()) + @"\reports_template\report_template_sod_RU.frx";
 		int i = 0;
 		public SODBenchSettingsViewModel(IDialogService dialogService,
 										 ISensorService sensorService,

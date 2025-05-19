@@ -113,7 +113,7 @@
                                                 </StackPanel>
                                             </DataTemplate>
                                             <DataTemplate DataType="{x:Type System:String}">
-                                                <TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="{Binding}" />
+                                                <TextBlock FontSize="18" Style="{StaticResource MaterialDesignTextBlock}" Text="{Binding}" />
                                             </DataTemplate>
                                         </ItemsControl.Resources>
                                     </ItemsControl>
