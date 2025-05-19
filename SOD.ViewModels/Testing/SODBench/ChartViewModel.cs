@@ -279,7 +279,7 @@ namespace SOD.ViewModels.Testing.SODBench
                 FontSize = 12,
                 FontWeight = FontWeights.Bold,
                 ShowLabel = false,
-                Stroke = Colors.Green,
+                Stroke = Colors.Blue,
                 LabelValue = "Stop",
                 LabelPlacement = LabelPlacement.Bottom,
                 StrokeThickness = 2,
