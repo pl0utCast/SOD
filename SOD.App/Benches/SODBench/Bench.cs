@@ -111,7 +111,7 @@ namespace SOD.App.Benches.SODBench
                         if (children is ICommand baseCommand)
                         {
                             _bus.Publish(new ExecuteTestCommand(baseCommand.CommandConfig, true));
-                            await baseCommand.ExecuteAsync(cancellationTokenSource.Token);
+                            await baseCommand.ExecuteAsync(cancellationTokenSource.Token, true);
                             _bus.Publish(new ExecuteTestCommand(baseCommand.CommandConfig, false));
                         }
                     }

@@ -29,9 +29,9 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Device
 
                             // Преобразуем значение в двоичное
                             if (dc.DataType == ChannelDataType.UINT16)
-                                BinValue = Convert.ToString((ushort)dc.Value, 2);
+                                BinValue = Convert.ToString((ushort)dc.Value, 2).PadLeft(16, '0');
                             else if (dc.DataType == ChannelDataType.INT16)
-                                BinValue = Convert.ToString((short)dc.Value, 2);
+                                BinValue = Convert.ToString((short)dc.Value, 2).PadLeft(16, '0');
                         }
                     }).DisposeWith(disposables);
                 }

@@ -53,7 +53,7 @@ namespace SOD.App.Commands.ModbusCommands
             await device.WriteHoldingRegistersAsync(48, new ushort[] { 0 });
         }
 
-        public abstract Task ExecuteAsync(CancellationToken cancellationToken, params object[] parameters);
+        public abstract Task ExecuteAsync(CancellationToken cancellationToken, bool isAuto, params object[] parameters);
         public CommandConfig CommandConfig { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace SOD.App.Commands
     public interface ICommand : ITestItem
     {
         public CommandConfig CommandConfig { get; set; }
-        Task ExecuteAsync(CancellationToken cancellationToken, params object[] parameters);
+        Task ExecuteAsync(CancellationToken cancellationToken, bool isAuto, params object[] parameters);
         CommandType Type { get; }
     }
 }

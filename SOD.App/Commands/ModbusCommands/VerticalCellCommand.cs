@@ -23,14 +23,14 @@ namespace SOD.App.Commands.ModbusCommands
             Type = CommandType.VerticalCell;
         }
 
-        public override async Task ExecuteAsync(CancellationToken cancellationToken, object[] parameters)
+        public override async Task ExecuteAsync(CancellationToken cancellationToken, bool isAuto, object[] parameters)
         {
             _bus.Publish(new App.Benches.SODBench.Messages.InfoMessage(_localizationService["Testing.ManualCommandsBench.VerticalCell"]));
 
             ushort reg = 4126;
             ushort mask = (1 << 13); // Выставляем единицу в бит по счету (1 << 7)
 
-            await _modbusTcpDevice.SetMaskWord(reg, mask);
+            await _modbusTcpDevice.SetOneMaskWord(reg, mask);
 
             // Ожидаем от контроллера в бите с маской обнуления
             await _modbusTcpDevice.CreateTriggerAsync(reg, data => (data[0] & mask) == 0,

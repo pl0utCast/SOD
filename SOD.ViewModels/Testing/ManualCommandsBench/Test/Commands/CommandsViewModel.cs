@@ -43,7 +43,7 @@ namespace SOD.ViewModels.Testing.ManualCommandsBench.Test.Commands
                         }
 
                         Command = CreateCommand(m.CommandConfig);
-                        await Command.ExecuteAsync(cancellationTokenSource.Token);
+                        await Command.ExecuteAsync(cancellationTokenSource.Token, false);
 
                         //Command = CreateCommandViewModel(m.CommandConfig);
                         //Command.Activator.Activate();

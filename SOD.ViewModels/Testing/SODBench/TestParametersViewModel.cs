@@ -140,13 +140,7 @@ namespace SOD.ViewModels.Testing.SODBench
             {
                 navigationService.GoBack();
             });
-#if DEBUG
-            var canApply = this.WhenAny(x => x.SelectedStandart,
-                (selectedSt) => selectedSt != null);
-#else
-			var canApply = this.WhenAnyValue(x => x.SelectedStandart, x => x.IsConfirmed,
-				(selectedSt, isConf) => selectedSt != null && isConf);
-#endif
+
             DropWeight_5kg = ReactiveCommand.CreateFromTask(() => SendToControllerAsync((ushort)RegAdresses.DropWeight_5kg, 1));
             DropWeight_10kg = ReactiveCommand.CreateFromTask(() => SendToControllerAsync((ushort)RegAdresses.DropWeight_10kg, 1));
             DropWeight_30kg = ReactiveCommand.CreateFromTask(() => SendToControllerAsync((ushort)RegAdresses.DropWeight_30kg, 1));
@@ -171,6 +165,8 @@ namespace SOD.ViewModels.Testing.SODBench
                     }
                 }
             });
+
+            var canApply = this.WhenAny(x => x.SelectedStandart, (selectedSt) => selectedSt != null);
 
             Apply = ReactiveCommand.CreateFromTask(async () =>
             {
