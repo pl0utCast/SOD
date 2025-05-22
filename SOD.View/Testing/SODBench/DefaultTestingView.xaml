@@ -80,6 +80,33 @@
                 </StackPanel>
             </materialDesign:Card>
 
+            <materialDesign:Card Margin="2" Padding="5">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Opacity="0.6"
+                        Text="Полная деф. баллона"/>
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Text="{Binding TotalDefBalloon, StringFormat=\{0\}\,\ литр}" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Opacity="0.6"
+                        Text="Остаточная деф. баллона" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Text="{Binding ResidualDefBalloon}" />
+                </StackPanel>
+            </materialDesign:Card>
+
             <ItemsControl ItemsSource="{Binding Sensors}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

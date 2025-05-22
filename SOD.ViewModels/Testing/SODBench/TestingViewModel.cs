@@ -24,7 +24,6 @@ namespace SOD.ViewModels.Testing.SODBench
 		private readonly IDialogService _dialogService;
 		private readonly ISettingsService _settingsService;
 		private readonly ILocalizationService _localizationService;
-		private readonly ILogger logger = LogManager.GetCurrentClassLogger();
 		private string SETTINGS_LAST_UPDATE_KEY = "LastUpdate";
 
 		public TestingViewModel(INavigationService navigationService,

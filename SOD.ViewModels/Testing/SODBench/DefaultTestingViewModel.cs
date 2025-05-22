@@ -9,6 +9,7 @@ using SOD.App.Benches.SODBench;
 using SOD.App.Messages;
 using SOD.App.Testing.Programms;
 using SOD.Core;
+using SOD.Core.Device.Modbus;
 using SOD.Core.Infrastructure;
 using SOD.Core.Sensor;
 using SOD.Dialogs;
@@ -87,6 +88,7 @@ namespace SOD.ViewModels.Testing.SODBench
 					_bench.StartTesting();
                     UpdateChart();
                     Chart.StartChart();
+                    WaitingDefBalloon();
                 }
                 IsRunTest = !IsRunTest;
             }, this.WhenAnyValue(x => x.IsExposure, x => x.IsSelectedTest, x => x.ProgrammMethodicsConfig,
@@ -210,6 +212,52 @@ namespace SOD.ViewModels.Testing.SODBench
                                            .Select(s => new TenzoSensorViewModel((ITenzoSensor)s.Sensor, _bench.Settings.TenzoUnit, _localizationService)));
         }
 
+        /// <summary>
+        /// Ожидаем остаточное давлен
+        /// </summary>
+        public void WaitingDefBalloon()
+        {
+            // Запоминаем старые значения
+            //OldTotalDefBalloon = TotalDefBalloon;
+            //OldResidualDefBalloon = ResidualDefBalloon;
+            TotalDefBalloon = 0;
+            ResidualDefBalloon = 0;
+
+            Task.Run(async () =>
+            {
+                if (_bench.modbusTcpDevice is ModbusTcpDevice modbusTcpDevice)
+                {
+                    ushort reg = 4116;
+                    CancellationToken cancellationToken = new();
+
+                    // Ожидаем от контроллера
+                    await _bench.modbusTcpDevice.CreateFloatTriggerAsync(reg, data => data != 0 /*&& data != OldTotalDefBalloon*/,
+                        async data =>
+                        {
+                            TotalDefBalloon = data;
+                        },
+                        cancellationToken);
+                }
+            });
+
+            Task.Run(async () =>
+            {
+                if (_bench.modbusTcpDevice is ModbusTcpDevice modbusTcpDevice)
+                {
+                    ushort reg1 = 4118;
+                    CancellationToken cancellationToken1 = new();
+
+                    // Ожидаем от контроллера
+                    await _bench.modbusTcpDevice.CreateFloatTriggerAsync(reg1, data => data != 0 /*&& data != OldResidualDefBalloon*/,
+                        async data =>
+                        {
+                            ResidualDefBalloon = data;
+                        },
+                        cancellationToken1);
+                }
+            });
+        }
+
         [Reactive]
         public bool IsTestResultFill { get; set; }
         [Reactive]
@@ -222,6 +270,12 @@ namespace SOD.ViewModels.Testing.SODBench
         public string ExposureTime { get; set; }
         [Reactive]
         public string InfoMessage { get; set; }
+        [Reactive]
+        public float TotalDefBalloon { get; set; } = 0;
+        [Reactive]
+        public float ResidualDefBalloon { get; set; } = 0;
+        //public float OldTotalDefBalloon { get; set; }
+        //public float OldResidualDefBalloon { get; set; }
         [Reactive]
         public ProgrammMethodicsConfig ProgrammMethodicsConfig { get; set; }
         public ObservableCollectionExtended<SensorViewModel> Sensors { get; set; } = new ObservableCollectionExtended<SensorViewModel>();

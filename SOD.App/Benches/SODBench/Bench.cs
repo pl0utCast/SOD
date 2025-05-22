@@ -34,7 +34,7 @@ namespace SOD.App.Benches.SODBench
         private ITesting currentTest;
         private Timer registrationTimer;
         private ProgrammMethodicsConfig programmMethodicsConfig;
-        private ModbusTcpDevice device;
+        public ModbusTcpDevice modbusTcpDevice;
         private ModbusCommandsFactory modbusCommandsFactory;
         private readonly List<Post> posts = new List<Post>();
 
@@ -54,8 +54,8 @@ namespace SOD.App.Benches.SODBench
             _localizationService = localizationService;
             Settings = settingsService?.GetSettings<Settings>(settingsKey, new Settings());
 
-            device = deviceService.GetAllDevice().FirstOrDefault(d => d is ModbusTcpDevice) as ModbusTcpDevice;
-            modbusCommandsFactory = new ModbusCommandsFactory(device, bus, _localizationService);
+            modbusTcpDevice = deviceService.GetAllDevice().FirstOrDefault(d => d is ModbusTcpDevice) as ModbusTcpDevice;
+            modbusCommandsFactory = new ModbusCommandsFactory(modbusTcpDevice, bus, _localizationService);
 
             posts.Add(new Post(1) { IsEnable = true, Name = "Post 1" });
 
@@ -120,7 +120,7 @@ namespace SOD.App.Benches.SODBench
                 {
                     currentTest?.Stop();
                     // посылаем контроллеру команду стоп
-                    await device.WriteInt32(46, 2);
+                    await modbusTcpDevice.WriteInt32(46, 2);
                     //logger.Error(e, $"Ошибка выполнения программной методики");
                 }
             });
