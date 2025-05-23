@@ -3,6 +3,14 @@
     "Name": "100 kg",
     "ChannelId": 62,
     "Unit": 3,
+    "MinValue": {
+      "Unit": "ForceUnit.KilogramForce",
+      "Value": 0.0
+    },
+    "MaxValue": {
+      "Unit": "ForceUnit.KilogramForce",
+      "Value": 100.0
+    },
     "Accaury": "F2",
     "SensorHint": "",
     "Coefficients": [

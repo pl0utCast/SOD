@@ -87,23 +87,35 @@
                         VerticalAlignment="Center"
                         FontSize="16"
                         Opacity="0.6"
-                        Text="Полная деф. баллона"/>
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="15"
-                        Text="{Binding TotalDefBalloon, StringFormat=\{0\}\,\ литр}" />
+                        Text="{lc:Localization Testing.SODBench.TotalDefBalloon}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock
+                            FontSize="15"
+                            Text="{Binding TotalDefBalloon}" />
+                        <TextBlock
+                            FontSize="15"
+                            Text=", " />
+                        <TextBlock
+                            FontSize="15"
+                            Text="{lc:Localization Testing.SODBench.Liter}" />
+                    </StackPanel>
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontSize="16"
                         Opacity="0.6"
-                        Text="Остаточная деф. баллона" />
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="15"
-                        Text="{Binding ResidualDefBalloon}" />
+                        Text="{lc:Localization Testing.SODBench.ResidualDefBalloon}" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock
+                            FontSize="15"
+                            Text="{Binding ResidualDefBalloon}" />
+                        <TextBlock
+                            FontSize="15"
+                            Text=", " />
+                        <TextBlock
+                            FontSize="15"
+                            Text="{lc:Localization Testing.SODBench.Liter}" />
+                    </StackPanel>
                 </StackPanel>
             </materialDesign:Card>
 

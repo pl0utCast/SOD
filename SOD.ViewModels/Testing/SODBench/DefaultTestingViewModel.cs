@@ -47,7 +47,7 @@ namespace SOD.ViewModels.Testing.SODBench
             TemperatureSensors = new TemperatureSensorsViewModel(sensorService, _bench);
             UpdateChart();
             UpdateSensors();
-            InfoMessage = localizationService["Testing.SODBench.Step1"];
+            //InfoMessage = localizationService["Testing.SODBench.Step1"];
 
             bus.Subscribe<App.Benches.SODBench.Messages.SelectedTestMessage>(m =>
             {
