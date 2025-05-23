@@ -34,7 +34,7 @@
 				<Name>D2</Name>
 				<Addr>4098</Addr>
 				<BitAddr>0</BitAddr>
-				<vType>2</vType>
+				<vType>18</vType>
 				<Description>
 				</Description>
 				<mSpace>0</mSpace>
@@ -48,14 +48,14 @@
 				<Period>100</Period>
 				<RegFullName>Сервер.Устройство.D2</RegFullName>
 				<RegsCount>1</RegsCount>
-				<Value>0</Value>
-				<DefValue>0</DefValue>
+				<Value>512</Value>
+				<DefValue>128</DefValue>
 			</Register>
 			<Register>
 				<Name>D3</Name>
 				<Addr>4099</Addr>
 				<BitAddr>0</BitAddr>
-				<vType>2</vType>
+				<vType>18</vType>
 				<Description>
 				</Description>
 				<mSpace>0</mSpace>
@@ -286,7 +286,7 @@
 				<Name>D30</Name>
 				<Addr>4126</Addr>
 				<BitAddr>0</BitAddr>
-				<vType>2</vType>
+				<vType>18</vType>
 				<Description>
 				</Description>
 				<mSpace>0</mSpace>
@@ -307,7 +307,7 @@
 				<Name>D31</Name>
 				<Addr>4127</Addr>
 				<BitAddr>0</BitAddr>
-				<vType>2</vType>
+				<vType>18</vType>
 				<Description>
 				</Description>
 				<mSpace>0</mSpace>
@@ -328,7 +328,7 @@
 				<Name>D34</Name>
 				<Addr>4130</Addr>
 				<BitAddr>0</BitAddr>
-				<vType>4</vType>
+				<vType>3</vType>
 				<Description>
 				</Description>
 				<mSpace>0</mSpace>
@@ -1414,7 +1414,7 @@
 				<Period>100</Period>
 				<RegFullName>Сервер.Устройство.L_нуля</RegFullName>
 				<RegsCount>2</RegsCount>
-				<Value>146</Value>
+				<Value>1241</Value>
 				<DefValue>0</DefValue>
 			</Register>
 		</Device>

@@ -32,6 +32,8 @@ namespace SOD.ViewModels.Settings.DeviceAndSensor.Device
                                 BinValue = Convert.ToString((ushort)dc.Value, 2).PadLeft(16, '0');
                             else if (dc.DataType == ChannelDataType.INT16)
                                 BinValue = Convert.ToString((short)dc.Value, 2).PadLeft(16, '0');
+                            else if (dc.DataType == ChannelDataType.UINT)
+                                BinValue = Convert.ToString((short)dc.Value, 2).PadLeft(16, '0');
                         }
                     }).DisposeWith(disposables);
                 }

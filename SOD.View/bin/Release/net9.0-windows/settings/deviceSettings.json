@@ -34,14 +34,14 @@
       {
         "RegisterId": 4098,
         "Id": 4098,
-        "DataType": 0,
+        "DataType": 1,
         "ByteCount": 0,
         "Description": "D2 Массив битов для сообщений"
       },
       {
         "RegisterId": 4099,
         "Id": 4099,
-        "DataType": 0,
+        "DataType": 1,
         "ByteCount": 0,
         "Description": "D3 Рецепт корректен"
       },
@@ -111,28 +111,28 @@
       {
         "RegisterId": 4122,
         "Id": 4122,
-        "DataType": 0,
+        "DataType": 1,
         "ByteCount": 0,
         "Description": "D26 Открытие колб"
       },
       {
         "RegisterId": 4126,
         "Id": 4126,
-        "DataType": 0,
+        "DataType": 1,
         "ByteCount": 0,
         "Description": "D30 Управление"
       },
       {
         "RegisterId": 4127,
         "Id": 4127,
-        "DataType": 0,
+        "DataType": 1,
         "ByteCount": 0,
         "Description": "D31 Команды и вес тар"
       },
       {
         "RegisterId": 4130,
         "Id": 4130,
-        "DataType": 7,
+        "DataType": 2,
         "ByteCount": 0,
         "Description": "D34 Код команды"
       },
@@ -391,7 +391,7 @@
       {
         "RegisterId": 7126,
         "Id": 7126,
-        "DataType": 0,
+        "DataType": 1,
         "ByteCount": 0,
         "Description": "D3030 dwe ПИД регулятора KP1"
       },
@@ -426,7 +426,7 @@
       {
         "RegisterId": 7136,
         "Id": 7136,
-        "DataType": 0,
+        "DataType": 1,
         "ByteCount": 0,
         "Description": "D3040 Цикл ПИД регулятора KP1"
       },
@@ -491,7 +491,7 @@
         "Id": 6096,
         "DataType": 7,
         "ByteCount": 0,
-        "Description": "биты в плк"
+        "Description": null
       }
     ],
     "ReadWriteRegisters": [],

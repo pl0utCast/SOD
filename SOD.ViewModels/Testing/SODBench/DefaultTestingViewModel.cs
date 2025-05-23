@@ -47,7 +47,12 @@ namespace SOD.ViewModels.Testing.SODBench
             TemperatureSensors = new TemperatureSensorsViewModel(sensorService, _bench);
             UpdateChart();
             UpdateSensors();
-            //InfoMessage = localizationService["Testing.SODBench.Step1"];
+            GetErrorsList();
+
+            bus.Subscribe<App.Benches.SODBench.Messages.InfoMessage>(m =>
+            {
+                InfoMessage = m.Message;
+            });
 
             bus.Subscribe<App.Benches.SODBench.Messages.SelectedTestMessage>(m =>
             {
@@ -213,7 +218,7 @@ namespace SOD.ViewModels.Testing.SODBench
         }
 
         /// <summary>
-        /// Ожидаем остаточное давлен
+        /// Ожидаем остаточное давление
         /// </summary>
         public void WaitingDefBalloon()
         {
@@ -258,6 +263,78 @@ namespace SOD.ViewModels.Testing.SODBench
             });
         }
 
+        public void GetErrorsList()
+        {
+            _bench.modbusTcpDevice.DataComplite.Subscribe(dc =>
+            {
+                int val = Convert.ToInt32(dc.Value);
+
+                if (dc.Id == 4098 && val >= 0)
+                {
+                    ErrorsMessage = null;
+
+                    string[] localizationKeys =
+                    {
+                        "AlAirKip",         // D2.0
+                        "AlStopDropP",      // D2.1
+                        "AlStop",           // D2.2
+                        "AlE1",             // D2.3
+                        "AlDiscET7026",     // D2.4
+                        "AlDiscET7026_1",   // D2.5
+                        "AlDiscET7026_2",   // D2.6
+                        "AlPDown",          // D2.7
+                        "AlNomP",           // D2.8
+                        "AlMaxP",           // D2.9
+                        "AlLongTimeStable", // D2.10
+                        "AlLevelHight",     // D2.11
+                        "AlHi5kg",          // D2.12
+                        "AlHi10kg",         // D2.13
+                        "AlHi30kg"          // D2.14
+                    };
+
+                    // Преобразуем значение dc.Value в двоичное представление
+                    string binaryValue = Convert.ToString(val, 2).PadLeft(16, '0');
+
+                    for (int i = 0; i < binaryValue.Length - 1; i++) // Минус один потому что последнего элемента нет
+                    {
+                        if (binaryValue[binaryValue.Length - 1 - i] == '1')
+                        {
+                            ErrorsMessage += _localizationService["Testing.SODBench." + localizationKeys[i]] + "; ";
+                        }
+                    }
+                }
+                else if (dc.Id == 4099 && val >= 0)
+                {
+                    string[] localizationKeys =
+                    {
+                        "MessReseptOk",     // D3.0    
+                        "MessTestOk",       // D3.1
+                        "MessPDecrOk",      // D3.2
+                        "MessGoodCylinder", // D3.3
+                        "MessBadCylinder",  // D3.4
+                        "RefreshC"          // D3.15
+                    };
+
+                    // Преобразуем значение dc.Value в двоичное представление
+                    string binaryValue = Convert.ToString(val, 2).PadLeft(16, '0');
+
+                    for (int i = 0; i < 5; i++)
+                    {
+                        if (binaryValue[binaryValue.Length - 1 - i] == '1')
+                        {
+                            ErrorsMessage += _localizationService["Testing.SODBench." + localizationKeys[i]] + "; ";
+                        }
+                    }
+
+                    // Отдельная штука т.к. регистр не по порядку
+                    if (binaryValue[1] == '1')
+                    {
+                        ErrorsMessage += _localizationService["Testing.SODBench." + localizationKeys[5]];
+                    }
+                }
+            });
+        }
+
         [Reactive]
         public bool IsTestResultFill { get; set; }
         [Reactive]
@@ -270,6 +347,8 @@ namespace SOD.ViewModels.Testing.SODBench
         public string ExposureTime { get; set; }
         [Reactive]
         public string InfoMessage { get; set; }
+        [Reactive]
+        public string ErrorsMessage { get; set; }
         [Reactive]
         public float TotalDefBalloon { get; set; } = 0;
         [Reactive]
