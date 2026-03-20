@@ -197,7 +197,7 @@ namespace SOD.ViewModels.Testing.SODBench
                 _bus.Publish(new ExecuteTestCommand(command, true));
             });
         }
-
+        //Изменения
         private async Task SendToControllerAsync(ushort regId, float value)
         {
             if (device is ModbusTcpDevice modbusTcpDevice && device.GetStatus() == DeviceStatus.Online)
