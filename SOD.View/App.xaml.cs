@@ -43,14 +43,14 @@ namespace SOD.View
             }
             if (Process.GetProcessesByName("SOD.View").Length == 2) App.Current.Shutdown();
             // Set this code once in App.xaml.cs or application startup
-            SciChartSurface.SetRuntimeLicenseKey("+5suntkQPltZ7dODAzZXB/PJb085uFn4fnrxMf3IGTmlUjPYebkn1" +
-                "PN16pAUIcDs1dqjxz0/LUYGinRFR+mAKH+X1T3iK5VlJlhzJirAIvkDEWausIe0jPZ5uw1dKesYsywwZrk4VFb" +
-                "htjT+McYGy8BK0eWvQoDHOOIWgp0nyoedeoDqMunV1r238O/qX8vNBABue0AXhytKU+pI/IBTSjK+MtiGc2Zx3" +
-                "lHw8Sdas/AcApUXaCs06RyIlgvNjksApM83uQG7mbsYnXMMDnvnrXpvZiXZeaWhWHl4ANnucrI3X8F8tyCUW5b" +
-                "N67mDCtLcGThGbcdPuPPvd9Y02gQ9h/+X12jaInSdghfMk+hgaeygsL7FmDv5JKNgIDfmMLlcUiwBZdjn1ACqa" +
-                "Chxn20f+43E/Tgj4ZDC9Md2r5l54lvEo6kbT5JR+PHuKQPoY/QoY1g1Fah+CiRTyOWuiOtIXKNzGi3GRpMN2aH" +
-                "vyK9F12GKSnXENxUX4ioQyATsW0uRrL9AwJKRCAc5l5J9cFnMxI+K33u0RhOmYS8xj2e8KgpQX4wegBSzn4NVO" +
-                "wHLhPU6SYKUuV/RIgRnvCdjpd4s1nvc0qjX1Qso0C+sgMuW");
+            //SciChartSurface.SetRuntimeLicenseKey("+5suntkQPltZ7dODAzZXB/PJb085uFn4fnrxMf3IGTmlUjPYebkn1" +
+            //    "PN16pAUIcDs1dqjxz0/LUYGinRFR+mAKH+X1T3iK5VlJlhzJirAIvkDEWausIe0jPZ5uw1dKesYsywwZrk4VFb" +
+            //    "htjT+McYGy8BK0eWvQoDHOOIWgp0nyoedeoDqMunV1r238O/qX8vNBABue0AXhytKU+pI/IBTSjK+MtiGc2Zx3" +
+            //    "lHw8Sdas/AcApUXaCs06RyIlgvNjksApM83uQG7mbsYnXMMDnvnrXpvZiXZeaWhWHl4ANnucrI3X8F8tyCUW5b" +
+            //    "N67mDCtLcGThGbcdPuPPvd9Y02gQ9h/+X12jaInSdghfMk+hgaeygsL7FmDv5JKNgIDfmMLlcUiwBZdjn1ACqa" +
+            //    "Chxn20f+43E/Tgj4ZDC9Md2r5l54lvEo6kbT5JR+PHuKQPoY/QoY1g1Fah+CiRTyOWuiOtIXKNzGi3GRpMN2aH" +
+            //    "vyK9F12GKSnXENxUX4ioQyATsW0uRrL9AwJKRCAc5l5J9cFnMxI+K33u0RhOmYS8xj2e8KgpQX4wegBSzn4NVO" +
+            //    "wHLhPU6SYKUuV/RIgRnvCdjpd4s1nvc0qjX1Qso0C+sgMuW");
             if (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor == 1)
             {
                 if (!VisualXcceleratorEngine.UseAlternativeFillSource)
@@ -126,6 +126,15 @@ namespace SOD.View
                     }
                 }
             });
+
+            SciChartSurface.SetRuntimeLicenseKey("+5suntkQPltZ7dODAzZXB/PJb085uFn4fnrxMf3IGTmlUjPYebkn1" +
+                "PN16pAUIcDs1dqjxz0/LUYGinRFR+mAKH+X1T3iK5VlJlhzJirAIvkDEWausIe0jPZ5uw1dKesYsywwZrk4VFb" +
+                "htjT+McYGy8BK0eWvQoDHOOIWgp0nyoedeoDqMunV1r238O/qX8vNBABue0AXhytKU+pI/IBTSjK+MtiGc2Zx3" +
+                "lHw8Sdas/AcApUXaCs06RyIlgvNjksApM83uQG7mbsYnXMMDnvnrXpvZiXZeaWhWHl4ANnucrI3X8F8tyCUW5b" +
+                "N67mDCtLcGThGbcdPuPPvd9Y02gQ9h/+X12jaInSdghfMk+hgaeygsL7FmDv5JKNgIDfmMLlcUiwBZdjn1ACqa" +
+                "Chxn20f+43E/Tgj4ZDC9Md2r5l54lvEo6kbT5JR+PHuKQPoY/QoY1g1Fah+CiRTyOWuiOtIXKNzGi3GRpMN2aH" +
+                "vyK9F12GKSnXENxUX4ioQyATsW0uRrL9AwJKRCAc5l5J9cFnMxI+K33u0RhOmYS8xj2e8KgpQX4wegBSzn4NVO" +
+                "wHLhPU6SYKUuV/RIgRnvCdjpd4s1nvc0qjX1Qso0C+sgMuW");
 
         }
 

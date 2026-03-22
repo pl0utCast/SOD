@@ -4,6 +4,7 @@
   },
   "SODBenchSettings": {
     "SelectedTestSettings": {
+      "Name": null,
       "Time": 30,
       "PressureSensorId": 4,
       "WorkPressure": 0,
@@ -53,8 +54,8 @@
     "TestBenchSettings": {
       "OwnerDeviceId": 0,
       "PressureClampSensorId": 1,
-      "PressuriseSensorId": 0,
-      "AmbientTemparatureSensorId": 15,
+      "PressureSensorId": 0,
+      "AmbientTemperatureSensorId": 0,
       "Parameters": [],
       "PressureUnit": 2,
       "LeakageUnit": 8,
@@ -83,6 +84,7 @@
     "Tests": {
       "1": [
         {
+          "Name": null,
           "Time": 120,
           "PressureSensorId": 1,
           "WorkPressure": 0,
@@ -95,6 +97,7 @@
           }
         },
         {
+          "Name": null,
           "Time": 180,
           "PressureSensorId": 2,
           "WorkPressure": 0,
@@ -109,6 +112,7 @@
       ],
       "2": [
         {
+          "Name": null,
           "Time": 10,
           "PressureSensorId": 0,
           "WorkPressure": 0,
@@ -121,6 +125,7 @@
           }
         },
         {
+          "Name": null,
           "Time": 10,
           "PressureSensorId": 0,
           "WorkPressure": 0,
@@ -133,6 +138,7 @@
           }
         },
         {
+          "Name": null,
           "Time": 30,
           "PressureSensorId": 0,
           "WorkPressure": 0,
